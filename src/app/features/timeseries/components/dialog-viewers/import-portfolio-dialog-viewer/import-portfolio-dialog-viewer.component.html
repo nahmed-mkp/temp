@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <mat-toolbar class="mat-toolbar-dialog">
+        <span class="toolbar-heading"> Open Existing Timeseries Portfolio </span>
+    </mat-toolbar>
+
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        
+        <!-- This is the tree node template for nodes with no children -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+          
+          <!-- If root node with no children -->
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name"  *ngIf="isPersonalOrShared(node)">
+            <mat-icon class="mat-icon-rtl-mirror" >
+              chevron_right
+            </mat-icon>
+          </button>
+          <span *ngIf="isPersonalOrShared(node)" style="cursor:pointer;">{{node.name}}</span> 
+
+          <!-- If leaf node -->
+          <div class="portfolio-rows-wrap" >
+            <div style="display:flex;align-items: center;justify-content: center;">
+              <mat-icon *ngIf="!isPersonalOrShared(node)" (click)="handlePortfolioSelect(node)">folder</mat-icon>
+              <span *ngIf="!isPersonalOrShared(node)" class="folder-pointer" (click)="handlePortfolioSelect(node)"> {{node.name}} </span> 
+            </div>
+            <div class="portfolio-options-wrap">
+              <mat-icon matTooltip="Rename Portfolio" *ngIf="!isPersonalOrShared(node)" (click)="handlePortfolioRename(node)">edit</mat-icon>
+              <mat-icon matTooltip="Delete Portfolio" *ngIf="!isPersonalOrShared(node)" (click)="handlePortfolioDelete(node)">delete</mat-icon>
+            </div>
+          </div>
+        </mat-tree-node>
+        
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>        
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" >
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <span style="cursor:pointer;">
+              {{node.name}}
+          </span>        
+        </mat-tree-node>
+      
+    </mat-tree>
+</div>

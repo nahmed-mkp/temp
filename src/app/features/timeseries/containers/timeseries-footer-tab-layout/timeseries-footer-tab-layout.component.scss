@@ -1,0 +1,12 @@
+.tab{
+    margin-top:2px;
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cancel-btn{
+    width: 30px;
+    margin-left: 3px;
+}

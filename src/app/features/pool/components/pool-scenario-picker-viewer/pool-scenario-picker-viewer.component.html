@@ -1,0 +1,18 @@
+<!-- <p>
+  pool-scenario-picker-viewer works!
+</p> -->
+<div class="vertical-align-center">
+  <mat-form-field appearance="outline" class="outline-shrink" style="margin-right: 10px">
+    <mat-label>Cusip</mat-label>
+    <input matInput placeholder="Cusip"  name="Cusip">
+  </mat-form-field>
+  <button mat-button class="mat-button-shrink" color="primary"><i class="material-icons">search</i></button>
+</div>
+
+<app-base-grid
+  style="margin-top: 0.5rem"
+  [gridItems]="[]"
+  [customGridOption]="customGridOption"
+  [extraOption]="{}">
+</app-base-grid>
+

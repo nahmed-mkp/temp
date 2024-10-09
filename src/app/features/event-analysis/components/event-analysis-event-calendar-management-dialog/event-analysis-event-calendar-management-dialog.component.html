@@ -1,0 +1,63 @@
+<!-- <p>
+  event-analysis-event-calender-management-dialog works!
+</p> -->
+
+<!-- [ngClass]='{"new-window-viewing": newWindowViewing$ | async}' -->
+<div class="tool-bar-section" >
+  <h4>Event Calender Management</h4>
+  <div class="action-section">
+    <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Grouping Mode" [ngStyle]="{'opacity': treeMode ? 1 : 0.3}" (click)="onModeSwitch()">
+      <mat-icon>account_tree</mat-icon>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Detail Mode" [ngStyle]="{'opacity': treeMode ? 0.3 : 1}" (click)="onModeSwitch()">
+      <mat-icon>view_headline</mat-icon>
+    </button>&nbsp;&nbsp;
+    <!-- <button mat-icon-button class="mat-button-shrink" color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" color="primary">
+      <mat-icon>save_alt</mat-icon>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" color="warn">
+      <mat-icon>delete_</mat-icon>
+    </button> -->
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="width: 12rem; margin-right: 1rem">
+      <input type="text" matInput placeholder="MM/DD/YYYY"  name="new_date" [(ngModel)]="newDate" (keyup)="handleKeyUpEvent($event)">
+      <button mat-button matSuffix (click)="onAddNewDate();" class="tiny-icon-button" style="left: 0.4rem; top: -0.2rem">
+        <i class="material-icons">add</i>
+      </button>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" [disabled]="!activeCalendar" (click)="onApplyNewCalenderName()">Apply</button>
+  </div>
+</div>
+
+<div style="flex: 1 0 0; display: flex;">
+  <app-base-grid
+    style="flex: 4 0 0"
+    *ngIf="treeMode"
+    [gridItems]="formatedTreeCalenderData"
+    [customGridOption]="customGridOption_treeMode"
+    [extraOption]="extraOption_treeMode"
+    [customGridCallBack]="customGridCallBack">
+  </app-base-grid>
+  <app-base-grid
+    style="flex: 4 0 0"
+    *ngIf="!treeMode"
+    [gridItems]="formatedTreeCalenderData"
+    [customGridOption]="customGridOption_detailMode"
+    [extraOption]="extraOption_detailMode"
+    [customGridCallBack]="customGridCallBack">
+  </app-base-grid>
+
+  <app-base-grid
+    style="flex: 1 0 0; margin-left: 1rem"
+    [gridItems]="formatedCalenderDate"
+    [customGridOption]="customGridOption_date"
+    [extraOption]="extraOption_treeMode">
+  </app-base-grid>
+
+
+</div>
+

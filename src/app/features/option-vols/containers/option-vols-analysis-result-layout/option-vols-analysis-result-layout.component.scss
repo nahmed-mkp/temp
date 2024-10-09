@@ -1,0 +1,40 @@
+app-option-vols-equity-result-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.instruction {
+    opacity: 1;
+    font-size: 0.8rem;
+}
+
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    mat-progress-bar {
+        width: 85%;
+    }
+    span {
+        width: 83%;
+        font-size: 0.7rem;
+        opacity: 0.6;
+        max-height: 8rem;
+        overflow: auto;
+    }
+}
+
+.floating-guid {
+    text-align: center;
+    background: #00000066;
+    color: white;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.text-icon {
+    position: relative;
+    top: -3px;
+}

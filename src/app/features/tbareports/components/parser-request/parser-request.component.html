@@ -1,0 +1,49 @@
+<!-- Step 0: Check missing dates --> 
+<div class="row" *ngIf="currentStep.name === 'Check Missing Dates'">
+    <div class="col-lg-12" style="overflow:hidden">
+        <app-tbareports-missing-dates [missingDates]="missingDates"></app-tbareports-missing-dates>
+    </div>
+</div>
+
+<!-- Step 1: Parse PDF -->
+<div class="row" *ngIf="currentStep.name === 'Parse PDF'">
+    <div class="col-lg-12" style="overflow:hidden">
+        <app-iframe [src]="'http://riskappsmain.mkpcap.com:8080/'" [height]="'500px'"></app-iframe>
+    </div>
+</div>
+
+<!-- Step 2: Upload CSV -->
+<div class="row" *ngIf="currentStep.name === 'Upload CSV'">
+    <div class="col-lg-12" style="overflow:hidden">
+        <app-uploader
+            [showQueue]="false"
+            [url]="'http://prizm-map.mkpcap.com/api/v1/parsers/tba/upload'"
+            (onFailedItem)="uploadFailure($event)"
+            (onSuccessItem)="uploadSuccess($event)">
+        </app-uploader>
+    </div>
+</div>
+
+<!-- Step 3: Validate Results -->
+<div class="row" *ngIf="currentStep.name === 'Validate'">
+    <div class="col-lg-12">
+        <app-tbareports-parser-results [results]="results"></app-tbareports-parser-results>                    
+    </div>
+</div>
+
+<!-- Step 4: Save Results -->
+<div class="row" *ngIf="currentStep.name === 'Save'">
+    <div class="col-lg-12">
+        <app-tbareports-parser-saver 
+            [results]="results"
+            (onSaveResults)="saveResults($event)"></app-tbareports-parser-saver>                    
+    </div>
+</div>
+
+<!-- Step 5: Refresh Cache --> 
+<div class="row" *ngIf="currentStep.name === 'Refresh Cache'">
+    <div class="col-lg-12">
+        <app-tbareports-timeseries-cacher (refreshCache)="refreshCache($event)"></app-tbareports-timeseries-cacher>
+    </div>
+</div>
+

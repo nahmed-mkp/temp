@@ -1,0 +1,29 @@
+<mat-toolbar>
+    <span class="toolbar-heading">TRADENAMES MANAGEMENT</span>
+</mat-toolbar>
+
+<mat-tab-group (selectedTabChange)="onSelectedTabChange($event)">
+    <mat-tab label="Open Taxlots">
+        <app-tradename-helper-taxlots style="display: block;height:100%"
+            [taxLots]="taxLots$ | async"
+            [taxLotsLoading]="taxLotsLoading$ | async"
+            [taxLotsLoaded]="taxLotsLoaded$ | async"
+            [taxLotsError]="taxLotsError$ | async"></app-tradename-helper-taxlots>
+    </mat-tab>
+    <mat-tab label="All Tradenames">
+        <app-tradename-helper-tradenames style="display: block;height:100%"
+            [tradeNames]="tradeNames$ | async"
+            [tradeNamesLoading]="tradeNamesLoading$ | async"
+            [tradeNamesLoaded]="tradeNamesLoaded$ | async"
+            [tradeNamesError]="tradeNamesError$ | async"
+            (reinstateTradeName)="reinstateTradeName($event)"
+            (changeTradeName)="changeTradeName($event)"></app-tradename-helper-tradenames>
+    </mat-tab>
+    <mat-tab label="Most Recent TradeNames">
+        <app-tradename-helper-counters style="display: block;height:100%" 
+            [tradeNameCounters]="tradeNameCounters$ | async"
+            [tradeNameCountersLoading]="tradeNameCountersLoading$ | async"
+            [tradeNameCountersLoaded]="tradeNameCountersLoaded$ | async"
+            [tradeNameCountersError]="tradeNameCountersError$ | async"></app-tradename-helper-counters>
+    </mat-tab>
+</mat-tab-group>

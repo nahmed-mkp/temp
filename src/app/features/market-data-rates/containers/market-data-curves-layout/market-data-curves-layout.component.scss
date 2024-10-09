@@ -1,0 +1,12 @@
+app-market-data-curves-viewer  {
+    min-width: 32.8%;
+    width: 32.8%;
+    max-width: 32.8%;
+    height: 30rem;
+    flex: 1 0 0;
+    margin: 0.25rem
+}
+
+app-market-data-curves-viewer:last-child {
+    //max-width: 33%;
+}

@@ -1,0 +1,165 @@
+<div class="vertical-flex-full-height">
+   <app-rate-card-toolbar-layout
+      [startDate]="startDate$ | async"
+      [endDate]="endDate$ | async"
+      [currencies]="currencies$ | async"
+      [secTypes]="secTypes$ | async"
+      [selectedCurrencies]="selectedCurrencies$ | async"
+      [selectedSecTypes]="selectedSecTypes$ | async"
+      [activeTab]="activeTab"
+   >
+   </app-rate-card-toolbar-layout>
+   
+   <mat-tab-group animationDuration="0ms" style="flex: 1 0 0" (selectedTabChange)="onTabChanged($event)">   
+      
+      <mat-tab [label]="'RateCard'">
+         <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+               Rate Card
+            </span>
+         </ng-template>
+         <div class="vertical-flex-full-height mat-card" style="height:98%;flex-direction:row;">
+            <app-rate-card-viewer 
+               class="vertical-flex-full-height" 
+               style="flex:3;" 
+               [data]="rateCard$ | async"
+               [dataLoading]="rateCardLoading$ | async"
+               [selectedCurrencies]="selectedCurrencies$ | async"
+               [selectedSecTypes]="selectedSecTypes$ | async"
+               (requestRateTimeseriesData)="onRequestRateTimeseriesData($event)">
+            </app-rate-card-viewer>
+            <div class="mat-card" style="flex:3" >
+               <app-rate-card-timeseries-viewer
+                  [secName]="rateCardTimeseriesSecName$ | async"
+                  [data]="rateCardTimeseriesData$ | async"
+                  [dataLoading]="rateCardTimeseriesDataLoading$ | async"
+               >
+               </app-rate-card-timeseries-viewer>
+            </div>
+         </div>
+      </mat-tab>
+
+      <mat-tab [label]="'FundingCharges'">
+         <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+               Funding Charges
+            </span>
+         </ng-template>
+         <div class="vertical-flex-full-height mat-card" style="height:98%;">
+            <app-funding-charges-viewer 
+               class="vertical-flex-full-height" 
+               [data]="fundingCharges$ | async" 
+               [dataLoading]="fundingChargesLoading$ | async"
+               [selectedCurrencies]="selectedCurrencies$ | async"
+               [selectedSecTypes]="selectedSecTypes$ | async">
+            </app-funding-charges-viewer>
+         </div>
+      </mat-tab>
+
+      <mat-tab [label]="'Admin'">
+         <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+               Admin
+            </span>
+         </ng-template>
+
+         <div class="vertical-flex-full-height mat-card" style="height: 99%;">
+
+            <div style="flex:4">
+               <div style="margin-left:5px;">
+                  <strong style="font-size:small">BY FUND & SECURITY</strong>
+               </div>
+               <div style="display:flex; flex-direction:row; height: 90%" class="vertical-flex-full-height">
+                  <app-rate-by-fund-sec-viewer 
+                     class="vertical-flex-full-height" 
+                     style="flex:3;" 
+                     [editable]="editable"
+                     [data]="ratesByFundAndSecurity$ | async" [dataLoading]="ratesByFundAndSecurityLoading$ | async"
+                     [selectedCurrencies]="selectedCurrencies$ | async" [selectedSecTypes]="selectedSecTypes$ | async"
+                     (saveFundSecurityRateOverride)="onSaveFundSecurityRateOverride($event)"
+                     (requestRateAdminTimeseriesData)="onRequestRateAdminFundSecTimeseriesData($event)"
+                  >         
+                  </app-rate-by-fund-sec-viewer>
+                  <div style="flex:3;height: 95%" class="mat-card vertical-flex-full-height" >
+                     <app-rate-card-timeseries-viewer
+                        style="height: 100%"
+                        [secName]="rateCardAdminFundSecName$ | async"
+                        [data]="rateCardAdminFundSecTimeseriesData$ | async"
+                        [dataLoading]="rateCardAdminFundSecTimeseriesDataLoading$ | async"
+                     >
+                     </app-rate-card-timeseries-viewer>
+                  </div>
+               </div>
+            </div>
+           
+            <div style="flex:4;">
+               <div style="margin-left:5px">
+                  <strong style="font-size:small">BY FUND & FINANCING BUCKET</strong>
+               </div>
+               <div style="display:flex; flex-direction:row; height: 90%" class="vertical-flex-full-height">
+                  <app-rate-by-fund-bucket-viewer 
+                     class="vertical-flex-full-height" 
+                     style="flex:3;" 
+                     [editable]="editable"
+                     [data]="ratesByFundAndBucket$ | async" [dataLoading]="ratesByFundAndBucketLoading$ | async"
+                     [selectedCurrencies]="selectedCurrencies$ | async" [selectedSecTypes]="selectedSecTypes$ | async"
+                     (saveFundBucketRateOverride)="onSaveFundBucketRateOverride($event)"
+                     (requestRateAdminTimeseriesData)="onRequestRateAdminFundBucketTimeseriesData($event)"   
+                  >
+                  </app-rate-by-fund-bucket-viewer>
+                  <div style="flex:3;height: 95%" class="mat-card vertical-flex-full-height" >
+                     <app-rate-card-timeseries-viewer
+                        style="height: 100%"
+                        [secName]="rateCardAdminFundBucketSecName$ | async"
+                        [data]="rateCardAdminFundBucketTimeseriesData$ | async"
+                        [dataLoading]="rateCardAdminFundBucketTimeseriesData$ | async"
+                     >
+                     </app-rate-card-timeseries-viewer>
+                  </div>
+               </div>
+            </div>
+
+            <div style="flex:4;">
+               <div style="margin-left:5px;width: 50%; display:flex;flex-direction:row; align-items:center;justify-content:space-between">
+                  <span> <strong style="font-size:small">BY EQUITY</strong> </span>
+                      
+                  <span class="group-icon-buttons" style="margin-left:1em;margin-top: 4px;">
+                     <mat-slide-toggle [checked]="true" (change)="onLongShortToggle($event)" > 
+                        <span class="slide-toggle-label">
+                          Toggle Long / Short (Default: Long)
+                        </span>
+                     </mat-slide-toggle>
+               </span>
+               </div>
+               <div style="display:flex; flex-direction:row; height: 90%" class="vertical-flex-full-height">
+                  <app-rate-by-sec-equity-viewer 
+                     class="vertical-flex-full-height" 
+                     style="flex:3;" 
+                     [longShortToggle]="longShortToggle"
+                     [editable]="editable"
+                     [data]="ratesByEquity$ | async" 
+                     [dataLoading]="ratesByEquityLoading$ | async"
+                     [selectedCurrencies]="selectedCurrencies$ | async" [selectedSecTypes]="selectedSecTypes$ | async"
+                     (saveSecurityEquityRateOverride)="onSaveSecurityEquityRateOverride($event)"
+                     (requestRateAdminTimeseriesData)="onRequestSecurityEquityTimeseriesData($event)"   
+                  >
+                  </app-rate-by-sec-equity-viewer >
+                  <div style="flex:3;height: 95%" class="mat-card vertical-flex-full-height" >
+                     <app-rate-card-timeseries-viewer
+                        style="height: 100%"
+                        [secName]="ratesByEquityTimeseriesSecName$ | async"
+                        [data]="ratesByEquityTimeseriesData$ | async"
+                        [dataLoading]="ratesByEquityTimeseriesDataLoading$ | async"
+                     >
+                     </app-rate-card-timeseries-viewer>
+                  </div>
+               </div>
+            </div>
+           
+
+         </div>
+      </mat-tab>
+
+   </mat-tab-group>
+   
+</div>

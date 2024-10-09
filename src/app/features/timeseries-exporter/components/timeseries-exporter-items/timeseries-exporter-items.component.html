@@ -1,0 +1,14 @@
+<div style="margin:5px;" class="vertical-flex-full-height-99">
+    <strong>{{monitor?.name}}</strong><br />
+    
+    <div class="vertical-flex-full-height" *ngIf="monitor; else loading;">
+        <app-base-grid style="height:100%" [gridItems]="monitor?.marketData" [customGridOption]="customGridOption"
+            [extraOption]="extraOption" [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </div>
+    <ng-template #loading>
+        <div style="color:#8d8d8d;font-weight:bold;margin-left:5px;margin-right:5px;">
+            Please make a selection from the list above
+        </div>
+    </ng-template>
+</div>

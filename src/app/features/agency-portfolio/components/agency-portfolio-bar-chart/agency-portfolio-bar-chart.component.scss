@@ -1,0 +1,14 @@
+#sort-mode-button {
+    position: absolute;
+    z-index: 10;
+}
+
+button.mat-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mat-icon {
+        margin-right: 0;
+        opacity: 0.5;
+    }
+}

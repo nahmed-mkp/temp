@@ -1,0 +1,36 @@
+<div class="vertical-flex-full-height">
+
+  <app-execution-tagging-toolbar-layout
+    [startDate]="startDate$ | async"
+    [endDate]="endDate$ | async"
+    [portfolioManagers]="portfolioManagers$ | async"
+
+    (startDateChanged)="startDateChanged($event)"
+    (endDateChanged)="endDateChanged($event)"
+    (portfolioManagerChanged)="portfolioManagerChanged($event)"
+    (toggleReasonEditor)="toggleReasonEditor()"
+  >
+  </app-execution-tagging-toolbar-layout>
+  <div style="flex: 1 0 0" class="horizontal-flex">
+    <app-execution-tagging-grid-viewer
+      class="vertical-flex-full-height"
+      style="flex: 3 0 0;"
+      [data]="executionTaggingData$ | async"
+      [loading]="executionTaggingDataLoading$ | async"
+      [reasons]="reasons$ | async"
+      [showReasonEditor]="showReasonEditor$ | async"
+      (onTagUpdated)="tagUpdated($event)"
+    >  
+    </app-execution-tagging-grid-viewer>
+    <div style="flex: 1 0 0" class="vertical-flex-full-height"  *ngIf="(showReasonEditor$ | async)">
+        <app-execution-tagging-reason-editor-viewer
+          class="vertical-flex-full-height"
+          style="padding:10px"
+          [data]="reasons$ | async"
+          [loading]="reasonsLoading$ | async"
+          (onReasonUpdated)="reasonUpdated($event)"
+        >
+        </app-execution-tagging-reason-editor-viewer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- <div class="card-action">
+    <i class="material-icons" (click)="onclose()">arrow_right</i>
+</div> -->
+
+<div style="display: flex; border-bottom: 1px solid #80808038">
+    <button mat-flat-button style="padding: 0;min-width: 0rem;border-right: 1px solid grey;opacity: 0.3;" 
+        (click)="onclose()" disableRipple><mat-icon>arrow_right</mat-icon></button>
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple
+        (click)="mode = 'configuration'" [ngStyle]="{'background': mode==='configuration' ? 'white' : '#80808029'}">CONFIGURATION</button>
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple
+        (click)="mode = 'reports'" [ngStyle]="{'background': mode==='reports' ? 'white' : '#80808029'}">REPORTS</button>
+</div>
+
+<app-risk-span-request
+    *ngIf="mode==='configuration'"
+    [dataSets]="availableDataSets$ | async"
+    [filters]="availableFilters$ | async"
+    [buckets]="availableBuckets$ | async"
+    [loading]="schemaLoading$ | async"
+    [loaded]="schemaLoaded$ | async"
+    [error]="schemaError$ | async"
+    [request]="request$ | async"
+
+    (addRequest)="addRequest($event)"
+    (updateDataSet)="updateDataSet($event)"
+    (submitRequest)="submitRequest($event)">
+</app-risk-span-request>

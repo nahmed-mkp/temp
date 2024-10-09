@@ -1,0 +1,21 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="dialog-padding">
+    <div class="tool-bar-section">
+      <h4>Layout Management</h4>
+    </div>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="margin-bottom: 0.7rem">
+      <mat-label *ngIf="data.type==='save'">New Layout Name</mat-label>
+      <mat-label *ngIf="data.type==='update'">Layout Name</mat-label>
+      <input type="text" matInput placeholder="Eg.Position Layout" [(ngModel)]="layoutName">
+    </mat-form-field>
+
+    <div mat-dialog-actions class="dialog-action">
+      <button mat-button color="primary" *ngIf="data.type==='save'" (click)="onSave()">Save</button>
+      <button mat-button color="accent" *ngIf="data.type==='update'" (click)="onUpdate()">Update</button>
+      <button mat-button color="warn" *ngIf="data.type==='update'" (click)="onUpdate()">Delete</button>
+    </div>
+</div>

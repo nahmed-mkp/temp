@@ -1,0 +1,13 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="app-benchmark-trades-uploader">
+    <h5>Upload Benchmark FX Trades</h5>
+    <app-uploader
+        [url]="'http://prizm-map.mkpcap.com/api/v1/bip/fxtrades/upload'"
+        [showQueue]="false"
+        [allowMultiple]="false"
+        (onFailedItem)="uploadFailure($event)"
+        (onSuccessItem)="uploadSuccess($event)"></app-uploader>
+</div>

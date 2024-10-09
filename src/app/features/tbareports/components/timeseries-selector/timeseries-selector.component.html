@@ -1,0 +1,63 @@
+<!-- <div class="selector-container">
+    <span>Please select a series: </span>
+    <dx-select-box
+        class="series-list"
+        [items]="series"
+        [value]="selectedSeries"
+        displayExpr="description"
+        (onValueChanged)="changeSeries($event)">
+    </dx-select-box>
+
+    <dx-radio-group
+        class="oas-choice"
+        [dataSource]="plotTypes"
+        [layout]="'horizontal'"
+        (onValueChanged)="changePlotType($event)"
+        [value]="plotTypes[0]">
+    </dx-radio-group>
+</div> -->
+
+<div class="selector-container" style="margin-left:1rem">
+
+    <!-- <mat-slide-toggle [ngClass]="{'active-toggle': trackerTypeMode, 'disactive-toggle': !trackerTypeMode}" [checked]="false" (click)="changeTrackerTypeMode()">TBA Tracker</mat-slide-toggle> -->
+
+    <mat-form-field appearance="outline">
+        <mat-label>Mode</mat-label>
+        <mat-select [(ngModel)]="mode" name="selectedSeries" (ngModelChange)="changeMode()">
+            <mat-option [value]="'regularTypeMode'">TBA Dealer</mat-option>
+            <mat-option [value]="'trackerTypeMode'">TBA Trackers</mat-option>
+            <mat-option [value]="'dialedTypeMode'">TBA Trackers Dialed</mat-option>
+            <mat-option [value]="'v99TypeMode'">TBA Trackers V99</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="outline">
+        <mat-label>Current Series</mat-label>
+        <mat-select placeholder="Please select a series"  [(ngModel)]="selectedSeries" name="selectedSeries" (ngModelChange)="changeSeries($event)">
+            <mat-option *ngFor="let item of series" [value]="item" 
+                [disabled]="((mode==='v99TypeMode' || mode==='regularTypeMode' ) && item.description.indexOf('CC')!==-1) || 
+                            (mode==='dialedTypeMode' && item.description.indexOf('CC')!==-1 && item.description.indexOf('Dialed') ===-1) || 
+                            (mode==='trackerTypeMode' && item.description.indexOf('Dialed')!==-1)">
+                {{item.description}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>  
+    
+    <div [ngClass]="{'metric': mode === 'trackerTypeMode' || mode === 'dialedTypeMode' || mode==='v99TypeMode', 'regular': mode==='regularTypeMode'}" >
+        <mat-form-field appearance="outline" id="plot-type">
+            <mat-label>Current Plot Type</mat-label>
+            <mat-select placeholder="Please select plot type"  [(ngModel)]="selectedPlotType" name="selectedPlotType" (ngModelChange)="changePlotType($event)">
+                <mat-option *ngFor="let type of plotTypes" [value]="type">{{type === "TSYOAS" ? "Treasury OAS" : type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" id="metric-plot-type">
+            <mat-label>Current Metric Type</mat-label>
+            <mat-select placeholder="Please select Metric type"  [(ngModel)]="selectedMetricType" name="selectedMetricType" (ngModelChange)="changePlotType($event)">
+                <mat-option *ngFor="let type of metricTypes" [value]="type.mnemonic">{{type.metricName}}</mat-option>
+            </mat-select>
+        </mat-form-field>        
+    </div>
+</div>

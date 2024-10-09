@@ -1,0 +1,30 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="dialog-padding">
+    <div class="tool-bar-section">
+      <h4>Risk Free Rate Update</h4>
+    </div>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="margin-bottom: 0.7rem">
+      <mat-label>Current Risk Free Rate</mat-label>
+      <input type="number" matInput placeholder="Risk Free Rate" disabled [value]="data?.riskFreeRate | async">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Target Risk Free Rate</mat-label>
+      <input type="number" matInput placeholder="Risk Free Rate" [(ngModel)]="riskFreeRate">
+    </mat-form-field>
+    <p><i>
+      <small>*NOTE: It will take couple minutes to update the risk free rate factor, 
+        please re-boot RCPM if updated value is not displayed after 10 minutes</small>
+    </i></p>
+
+    <div mat-dialog-actions class="dialog-action">
+      <button mat-button color="primary" (click)="onUpdate()">Update</button>
+      <button mat-button (click)="onClose()">Close</button>
+    </div>
+</div>
+
+

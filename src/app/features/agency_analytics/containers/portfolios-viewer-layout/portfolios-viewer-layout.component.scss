@@ -1,0 +1,46 @@
+.top-tool-bar-start {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.row-edited {
+    background-color: #c7c7c7 !important;
+    font-style: italic !important;
+}
+
+.search-form {
+    width: 450px;
+}
+
+.loading-screen-local {
+    position: absolute;
+    top: 20;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b1b1b1;
+    z-index: 10;
+}
+
+.mat-tab-body-wrapper {
+    flex-grow: 1;
+}
+
+.mat-button-toggle-group {
+    height: 32px;
+    align-items: center;
+}
+
+.mat-button-toggle-left-group {
+    height: 32px;
+    align-items: left;
+}
+
+.ag-pivot-off .ag-header-group-cell {
+    font-size: 20px;
+    font-weight:bold;
+}

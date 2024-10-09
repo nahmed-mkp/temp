@@ -1,0 +1,31 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <span style="margin-left:10px;color:white;" *ngIf="!(selectedDialSubject$ | async)?.dialName">Manage Dials </span>
+    <span style="margin-left:10px;color:white;" *ngIf="(selectedDialSubject$ | async)?.dialName">Manage Dials - {{(selectedDialSubject$ | async)?.dialName}} </span>
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="dialog-padding">
+    <div class="tool-bar-section">
+        <mat-form-field style="flex: 1 0 0;">
+            <mat-label>Select a Prepayment Dial</mat-label>
+            <mat-select (selectionChange)="onDialSelected($event)" [ngModel]="(selectedDialSubject$ | async)?.dialId">
+                <mat-option [value]="'default'">Create New Dial</mat-option>
+                <mat-option [value]="dial['dialId']" *ngFor="let dial of (dials$ | async)">{{dial['dialName']}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div style="display:block;height:30rem">
+        <app-agency-dials-viewer
+            [dialId]="selectedDialId$ | async"
+            [dialDetail]="selectedDialDetail$ | async"
+            [dialLoading]="selectedDialLoading$ | async"
+            [dialLoaded]="selectedDialLoaded$ | async"
+            [dialError]="selectedDialError$ | async"
+            (createDial)="onCreateDial($event)"
+            (cloneDial)="onCloneDial($event)"
+            (updateDial)="onUpdateDial($event)"
+            (deleteDial)="onDeleteDial($event)"
+        ></app-agency-dials-viewer>
+    </div>
+</div>

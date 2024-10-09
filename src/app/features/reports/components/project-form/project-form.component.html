@@ -1,0 +1,64 @@
+<!-- <structured-layout>
+
+    <div header>
+        <ul class="breadcrumb">
+            <li><a href="#" [routerLink]="['./../']">External Reports</a></li>
+            <li>
+                <span *ngIf="projectForm.value.name; else newProject">
+                    {{projectForm.value.name}} - <small>{{projectForm.value.description}}</small>
+                </span>
+                <ng-template #newProject>
+                    New Project
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+
+    <div content style="padding: 0.5em;">
+        <div class="alert alert-success" *ngIf="updateStatus">
+            <strong>Success!</strong> - {{ updateStatus }}
+        </div>
+        <div class="alert alert-danger" *ngIf="error">
+            <strong>Failed!</strong> - {{ error }}
+        </div>
+        <form novalidate 
+            [formGroup]="projectForm" 
+            class="form-horizontal">
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Name *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Project Name..." formControlName="name">
+                    <div class="form-error" *ngIf="projectForm.get('name').hasError('required') && projectForm.get('name').touched">
+                        Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Description *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Project Description..." formControlName="description">
+                    <div class="form-error" *ngIf="projectForm.get('description').hasError('required') && projectForm.get('description').touched">
+                        Description is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Short Code *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Short Code..." formControlName="shortCode">
+                    <div class="form-error" *ngIf="projectForm.get('shortCode').hasError('required') && projectForm.get('shortCode').touched">
+                        Short code is required
+                    </div>
+                </div>
+            </div>
+        </form>
+        <small><i>* indicates required fields</i></small>
+    </div>
+
+    <div footer style="padding-bottom:10px;">
+        <div class="link-row">
+            <button type="submit" [disabled]="projectForm.invalid" class="btn btn-sm btn-success" (click)="submitForm(projectForm)"><i class="fa fa-save"></i> Save</button>
+            <button type="submit" class="btn btn-sm btn-danger" (click)="cancel($event)"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+    </div>
+</structured-layout> -->

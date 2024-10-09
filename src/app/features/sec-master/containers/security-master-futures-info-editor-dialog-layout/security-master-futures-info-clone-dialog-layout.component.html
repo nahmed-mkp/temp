@@ -1,0 +1,16 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Select a future root to clone</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<form class="horizontal-flex" style="flex: 1 0 0; padding: 0rem 1rem 0 1rem;">
+    <div class="vertical-flex" style="flex: 1 0 0; padding-top: 1rem;">
+        <mat-form-field>
+            <mat-select required name="future_root" placeholder="Future Root ..." (selectionChange)="onRootSelected($event)">
+                <mat-option *ngFor="let future of futures" [value]="future">
+                    <strong>{{future.root}}&nbsp;{{future.blbg_suffix}}</strong> | {{future.name}} | {{future.rm_long_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>         
+</form>

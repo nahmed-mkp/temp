@@ -1,0 +1,65 @@
+<mat-toolbar>
+  <span class="toolbar-heading"> PORTFOLIO ANALYSIS </span>
+</mat-toolbar>
+
+<div style="width: 99vw; display:flex; flex-direction:row; height: 94%; ">
+
+  <div class="content-section" style="width: 70%">
+    <app-portfolio-analysis-timeseries-viewer class="material-card"
+      [portfolioAnalysisTimeseries]="portfolioAnalysisTimeseries$ | async" 
+    ></app-portfolio-analysis-timeseries-viewer>
+
+    <div class="flex-row">
+        <app-portfolio-analysis-stats-viewer class="material-card"
+          [portfolioAnalysisStats]="portfolioAnalysisStats$ | async"
+        ></app-portfolio-analysis-stats-viewer>
+        <app-portfolio-analysis-corr-matrix-viewer class="material-card"
+          [portfolioAnalysisCorrMatrix]="portfolioAnalysisCorrMatrix$ | async"
+        ></app-portfolio-analysis-corr-matrix-viewer>
+    </div>
+
+  </div>
+
+  <div class="input-section material-card" style="width:30%">
+    <h3>Portfolio Analysis Options</h3>
+
+    <mat-form-field style="width: 95%">
+      <input matInput placeholder="Start Date (mm/dd/year)" [(ngModel)]="portfolioAnalysisRequest.start_date" name="start_date" [matDatepicker]="startDp" [max]="portfolioAnalysisRequest.end_date">
+      <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+      <mat-datepicker #startDp></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field style="width: 95%">
+      <input matInput placeholder="End Date (mm/dd/year)" [(ngModel)]="portfolioAnalysisRequest.end_date" name="end_date" [matDatepicker]="endDp" [min]="portfolioAnalysisRequest.start_date">
+      <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+      <mat-datepicker #endDp></mat-datepicker>
+    </mat-form-field>
+
+    <br><br>
+    <h4>Securities and Sensitivity</h4>
+
+    <mat-form-field style="width: 95%">
+      <input type="text" matInput placeholder="Select Security"  [(ngModel)]="newSecurity" name="securityName"  [matAutocomplete]="auto" [formControl]="myControl">
+      <button mat-flat-button color="primary" matSuffix (click)="addNewSecurity()">Add</button>
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let security of filteredPortfolioAnalysisSecurityList$ | async" [value]="security">{{security.Name}}</mat-option>
+    </mat-autocomplete>
+
+    <mat-list>
+      <mat-list-item *ngFor="let item of portfolioAnalysisRequest.definition; let i = index">
+        <span>{{item.name}}</span>
+        
+        <div style="display: flex; align-items: center">
+          <input matInput placeholder="Sensitivity" [(ngModel)]="item.factor" type="number">
+          <button mat-button mat-icon-button aria-label="Delete" (click)="deleteSecurity(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>  
+    <!-- {{portfolioAnalysisRequest | json}} -->
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+  </div>
+
+</div>

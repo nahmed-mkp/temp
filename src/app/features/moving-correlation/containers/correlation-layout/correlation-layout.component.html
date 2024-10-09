@@ -1,0 +1,95 @@
+<mat-toolbar style="width: 100vw">
+  <span class="toolbar-heading"> CORRELATION </span>
+</mat-toolbar>
+
+<div style="width: 99vw; display:flex; flex-direction:row; height: 94%">
+
+  <div class="content-section">
+    <app-correlation-timeseries-viewer class="material-card"
+      [correlationTimeseries]="correlationTimeseries"
+      [correlationLoadingStatus]="correlationLoadingStatus$ | async"
+      [correlationLoadedStatus]="correlationLoadedStatus$ | async"
+      [correlationResponseError]="correlationResponseError$ | async">
+    </app-correlation-timeseries-viewer>
+  
+    <app-correlation-windows-viewer class="material-card"
+      [movingWindowsCorrelation]="movingWindowsCorrelation"
+      [correlationLoadingStatus]="correlationLoadingStatus$ | async"
+      [correlationLoadedStatus]="correlationLoadedStatus$ | async"
+      [correlationResponseError]="correlationResponseError$ | async">
+    </app-correlation-windows-viewer>
+  </div>
+  
+  <div class="input-section material-card">
+    <h3>Correlation Options</h3>
+    <!-- <mat-form-field>
+      <mat-select placeholder="Security One..." [(value)]="correlationRequest.sec_x" name="sec_x" (ngModelChange)="onSecuritySelection($event,'sec_x')">
+        <mat-option [value]="security" *ngFor="let security of avaliableSecurityListX">{{security}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field>
+      <input type="text" matInput placeholder="Security One..."  [(ngModel)]="correlationRequest.sec_x" name="sec_x"  [matAutocomplete]="auto1" [formControl]="securityOneFormControl">
+    </mat-form-field>
+    <mat-autocomplete #auto1="matAutocomplete">
+      <mat-option *ngFor="let security of filteredSecurityListOne$ | async" [value]="security">{{security}}</mat-option>
+    </mat-autocomplete>  
+    <mat-button-toggle-group name="sec_x_method" [(ngModel)]="correlationRequest.sec_x_method">
+      <mat-button-toggle value="pct">PCT</mat-button-toggle>
+      <mat-button-toggle value="diff">DIFF</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br>
+  
+    <!-- <mat-form-field>
+      <mat-select placeholder="Security Two..." [(value)]="correlationRequest.sec_y" name="sec_y" (ngModelChange)="onSecuritySelection($event,'sec_y')">
+        <mat-option [value]="security" *ngFor="let security of avaliableSecurityListY">{{security}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field>
+      <input type="text" matInput placeholder="Security Two..."  [(ngModel)]="correlationRequest.sec_y" name="sec_y"  [matAutocomplete]="auto2" [formControl]="securityTwoFormControl">
+    </mat-form-field>
+    <mat-autocomplete #auto2="matAutocomplete">
+      <mat-option *ngFor="let security of filteredSecurityListTwo$ | async" [value]="security">{{security}}</mat-option>
+    </mat-autocomplete>  
+    <mat-button-toggle-group name="sec_y_method" [(ngModel)]="correlationRequest.sec_y_method">
+      <mat-button-toggle value="pct">PCT</mat-button-toggle>
+      <mat-button-toggle value="diff">DIFF</mat-button-toggle>
+    </mat-button-toggle-group><br>
+  
+    <mat-form-field>
+      <input matInput placeholder="Start Date (mm/dd/year)" [(ngModel)]="correlationRequest.start_date" name="start_date" [matDatepicker]="startDp" [max]="correlationRequest.end_date">
+      <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+      <mat-datepicker #startDp></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="End Date (mm/dd/year)" [(ngModel)]="correlationRequest.end_date" name="end_date" [matDatepicker]="endDp" [min]="correlationRequest.start_date">
+      <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+      <mat-datepicker #endDp></mat-datepicker>
+    </mat-form-field>
+  
+  
+  
+    <br><br>
+    <h4>Moving Windows</h4>
+    <mat-form-field matTooltip="{{!allowNewWindow ? 'Reach Maximum Allowable Windows' : undefined}}">
+      <input matInput placeholder="Add New Windows" [(ngModel)]="newWindow" type="number" [disabled]="!allowNewWindow">
+      <button mat-flat-button color="primary" matSuffix (click)="addNewWindow()" [disabled]="!allowNewWindow">Add</button>
+    </mat-form-field>
+  
+    <mat-list>
+      <mat-list-item *ngFor="let window of correlationRequest.window; let i = index">
+        {{window}}
+        <div>
+          <button mat-button mat-icon-button aria-label="Delete" (click)="deleteWindow(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+      </div>
+      </mat-list-item>
+    </mat-list>
+  
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+  </div>
+  
+  
+  
+</div>

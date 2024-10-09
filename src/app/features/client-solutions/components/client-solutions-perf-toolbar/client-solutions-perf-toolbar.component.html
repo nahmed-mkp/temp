@@ -1,0 +1,59 @@
+<mat-toolbar>
+    <span class="toolbar-heading">FUND PERFORMANCE ATTRIBUTION</span>
+
+    <span class="toolbar-spacer"></span>
+
+    <mat-form-field appearance="outline" class="fund-form-field-large">
+        <mat-label>Fund*</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedFund" (ngModelChange)="onFundChanged()">
+                <mat-option *ngFor="let fund of funds" [value]="fund">
+                    {{fund.description}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 14rem;margin-left: 0.5rem;" floatLabel="always">
+        <mat-label> Benchmarks </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedBenchmark" placeholder="Select ..." multiple (ngModelChange)="onSelectedBenchmarkChange_debounce()">
+                <mat-option *ngFor="let benchmark of benchmarks" [value]="benchmark">
+                    {{benchmark.description}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 0.5rem;">
+        <mat-label>Start Date*</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 0.5rem;">
+        <mat-label>End Date*</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker2" placeholder="To Date" [(ngModel)]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" 
+        style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;" 
+        (click)="onRun()">
+        Run Analysis 
+        <mat-icon>play_arrow</mat-icon>
+    </button> 
+
+    <button mat-raised-button color="primary" (click)="onOpenAddReturn()"
+        style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;">
+        Add Return
+        <mat-icon>note_add</mat-icon>
+    </button> 
+
+</mat-toolbar>

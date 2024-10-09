@@ -1,0 +1,45 @@
+<div style="background-color: white;padding: 10px;height: 900px;width: 100%;">
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 1rem;">
+        <mat-label> Country Filter </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(value)]="selectedFilter" (selectionChange)="onSelectionChanged($event)">
+                <mat-option *ngFor="let country of assetTargetsData.countries" [value]="country">{{country}}</mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 1rem;">
+        <mat-label> Scenario Set </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select  placeholder="Asset Type" [value]="editorAssetTargetType" (selectionChange)="onEditorAssetTargetTypeChanged($event)">
+                <mat-option [value]="'fv'">Fair Value</mat-option>
+                <mat-option [value]="'st'">Short Term</mat-option>
+            </mat-select>  
+        </div>          
+    </mat-form-field>
+
+    <br>
+    
+    <div style="height: 250px"> 
+        <app-asset-target-scenario-probability-viewer
+            [inputData]="probabilityDashboardData$ | async"
+            [filter]="selectedFilter"
+            (onEditing)="handleProbabilityDashboardDataChange($event)"
+        >
+        </app-asset-target-scenario-probability-viewer>
+    </div>
+    
+    
+    <div style="height: 500px; margin-top: 2rem"> 
+        <app-asset-target-scenario-target-viewer
+            [inputData]="targetDashboardData$ | async"
+            [limitedAccessLevel]="accessVal"
+            [filter]="selectedFilter"
+            (onEditing)="handleTargetDashboardDataChange($event)"
+        >
+        </app-asset-target-scenario-target-viewer>
+    </div>
+    
+</div>
+

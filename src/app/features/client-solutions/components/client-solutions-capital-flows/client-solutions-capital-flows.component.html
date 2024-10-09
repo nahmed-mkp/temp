@@ -1,0 +1,48 @@
+<mat-card style="height:98%;margin:0.3rem" class="horizontal-flex-full-height">    
+    <mat-tab-group class="horizontal-flex-full-height" id="wrapper" headerPosition="below" #tabs>
+        <mat-tab label="AllActivity">
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    Capital Activity
+                </span>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-base-grid style="height:90%;width:100%;" 
+                    [gridItems]="capitalFlows" 
+                    [customGridOption]="customGridOption"
+                    [extraOption]="extraOption" 
+                    [customGridCallBack]="customGridCallBack"
+                >
+                </app-base-grid>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Summaries">
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    Monthly Summaries
+                </span>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-cs-capital-flow-stats
+                    [dateRange]="dateRange"
+                    [capitalFlowStats]="capitalFlowStats"></app-cs-capital-flow-stats>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="ProjectedAUM">
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    Projected AUM
+                </span>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-cs-projected-aum
+                    [projectedAUM]="projectedAUM"
+                    [projectedAUMLoading]="projectedAUMLoading"
+                    [projectedAUMLoaded]="projectedAUMLoaded"
+                    [projectedAUMError]="projectedAUMError"></app-cs-projected-aum>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>    
+</mat-card>
+
+

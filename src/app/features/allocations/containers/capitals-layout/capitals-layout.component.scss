@@ -1,0 +1,78 @@
+div.bottom-tool-bar {
+  position: absolute;
+  bottom: 0rem;
+  button.mat-flat-button {
+    // padding: 1rem 0.2rem;
+    margin: 0.2rem 0.2rem 0 0.2rem;
+    min-width: 0;
+    // background: #bdc3c7;
+    line-height: normal;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+    opacity: 0.8;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+#flows-button {
+  position: absolute;
+  right: -6px;
+  top: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+#history-button {
+  position: absolute;
+  right: -6px;
+  top: 7.6rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+#matrix-button {
+  position: absolute;
+  right: -6px;
+  top: 15.3rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+#allocation-button {
+  position: absolute;
+  right: -6px;
+  top: 22.7rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+app-capital-flows, app-capital-history, app-fund-matrix {
+  padding: 0.5rem;
+}
+
+app-capital-flows, app-capital-history {
+  width: 36rem;
+}

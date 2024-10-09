@@ -1,0 +1,48 @@
+@import '../../../../../styles/variables';
+
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1.5rem;
+  .mat-icon {
+    margin: 0 0 0 1.5rem;
+    opacity: $opacity-secondary;
+  }
+  .mat-icon:hover{
+    opacity: $opacity-primary;
+  }
+}
+
+mat-tab-group {
+  padding: 0 0.4rem 0 0.4rem;
+  overflow: auto;
+}
+
+.horizontal-divider-small {
+  border-top: 1px solid #8080802e;
+}
+
+.last-update{
+  color:$toolbar-icon-primary;
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.mat-mdc-form-field{
+  margin-right: 0.5rem; 
+}
+
+.mat-mdc-select{
+  margin-left:10px;
+  flex: 8
+}
+
+.mat-mdc-form-field-infix{
+  color: white;
+}
+
+mat-form-field{
+  width: 150px;
+}

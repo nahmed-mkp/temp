@@ -1,0 +1,46 @@
+<div style="height: 100vh; width: 100vw;flex-direction: column;align-items: center;">
+    <app-asset-targets-params
+        style="width: 100%;"
+        [params]="params$ | async"
+        [assetType]="assetType"
+        [editorAssetTargetType]="editorAssetTargetType$ | async"
+        [privilegedAccess]="userAccessLevel$ | async"
+        [assetTargets]="assetTargets$ | async"
+        [editorAssetTargets]="editorAssetTargets$ | async"
+        [scenarioTargetDashboardData]="scenarioTargetDashboardData$ | async"
+        [scenarioTargetDashboardDataLoading]="scenarioTargetDashboardDataLoading$ | async"
+        [scenarioTargetDashboardDataLoading]="scenarioTargetDashboardDataLoaded$ | async"
+        [scenarioTargetDashboardDataError]="scenarioTargetDashboardDataError$ | async"
+        [scenarioProbabilityDashboardData]="scenarioProbabilityDashboardData$ | async"
+        [scenarioProbabilityDashboardDataLoading]="scenarioProbabilityDashboardDataLoading$ | async"
+        [scenarioProbabilityDashboardDataLoaded]="scenarioProbabilityDashboardDataLoaded$ | async"
+        [scenarioProbabilityDashboardDataError]="scenarioProbabilityDashboardDataError$ | async"
+        (changeShowLevels)="changeShowLevels($event)"
+        (changeDate)="changeDate($event)"
+        (changeType)="changeType($event)"
+        (changeAssetType)="changeAssetType($event)"
+    >
+    </app-asset-targets-params>
+
+    <app-asset-targets-grid-layout
+        [params]="params$ | async"
+        [mode]="mode$ | async"
+        [assetType]="assetType"
+        [initLoadComplete]="initLoadComplete$ | async"
+        [assetTargets]="assetTargets$ | async"
+        [assetTargetsLoading]="assetTargetsLoading$ | async"
+        [assetTargetsLoaded]="assetTargetsLoaded$ | async"
+        [assetTargetsError]="assetTargetsError$ | async"
+        
+        [overridenValues]="overridenValues$ | async"
+        [initAssetCalculatorInputs]="assetCalculatorInitValues$ | async"
+        [editedAssetCalculatorInputs]="asssetCalculatorEditedValues$ | async"
+        [assetCalculatorInputs]="assetCalculatorValues$ | async"
+        [scenarioList]="scenarioProbabilityDashboardData$ | async"
+
+        [assetTargetTimeseries]="assetTargetTimeseries$ | async"
+        [assetTargetTimeseriesLoading]="assetTargetTimeseriesLoading$ | async"
+        [assetTargetTimeseriesLoaded]="assetTargetTimeseriesLoaded$ | async"
+        [assetTargetTimeseriesError]="assetTargetTimeseriesError$ | async">
+    </app-asset-targets-grid-layout> 
+</div>

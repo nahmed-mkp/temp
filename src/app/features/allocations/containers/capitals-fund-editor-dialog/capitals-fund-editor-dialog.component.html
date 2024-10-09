@@ -1,0 +1,93 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Fund Capital Edit</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<!-- {{data | json}} -->
+
+
+<div style="flex: 1 0 0; margin: 1rem" class="vertical-flex">
+    <mat-form-field>
+        <mat-label>Current Capital</mat-label>
+        <input matInput [value]="oldCapitalFormat" [disabled]="true">
+    </mat-form-field>  
+
+    <mat-form-field>
+        <mat-label>Current Leverage</mat-label>
+        <input matInput [value]="oldLeverage" [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Change Type</mat-label>
+        <mat-select (selectionChange)="onSelectionChanged($event)" [(ngModel)]="changeType">
+            <mat-option  [value]="'ChangeTo'">Change To</mat-option>
+            <mat-option  [value]="'ChangeBy'">Change By</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Change Amount</mat-label>
+        <input matInput autocomplete="off" lang="en-150" (keyup)="onKeyup($event)" [value]="capitalChangeFormat" >
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>New Leverage</mat-label>
+        <input matInput type="number" autocomplete="off" [(ngModel)]="newLeverage">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>New Capital</mat-label>
+        <input matInput [value]="newCapitalFormat" [disabled]="true">
+    </mat-form-field>
+</div>
+
+
+<!-- 
+<div style="padding: 1rem; flex: 1 0 0;margin-top: 0.2rem;font-size: 90%;">
+
+    Current fund capital is
+
+    <mat-form-field class="general-shrink" style="width: 8rem;">
+        <input matInput [value]="oldCapitalFormat" [disabled]="true">
+    </mat-form-field>  
+
+    and leverage is 
+
+    <mat-form-field class="general-shrink" style="width: 2rem;">
+        <input matInput [value]="oldLeverage" [disabled]="true">
+    </mat-form-field>  
+
+
+    , will 
+    <mat-form-field class="general-shrink" style="width: 6rem;">
+        <mat-select (selectionChange)="onSelectionChanged($event)" [(ngModel)]="changeType">
+            <mat-option  [value]="'ChangeTo'">Change To</mat-option>
+            <mat-option  [value]="'ChangeBy'">Change By</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="general-shrink" style="width: 10rem;margin-left: 0.5rem;">
+        <input matInput type="number" autocomplete="off" [(ngModel)]="capitalChange" (ngModelChange)="onValueChange()">
+    </mat-form-field>, 
+
+    <mat-form-field class="general-shrink" style="width: 10rem">
+        <input matInput type="number" autocomplete="off" [(ngModel)]="newLeverage" (ngModelChange)="onValueChange()">
+    </mat-form-field>
+
+    <br>
+    <br>
+    <br>
+    <i>
+        New cross funnd capital is: <strong>{{newCapital | number:'1.0':'en-US'}}</strong><br>
+        New leverage is: <strong>{{newLeverage}}</strong>
+    </i>
+
+</div> -->
+
+
+
+
+<div mat-dialog-actions style="margin-right:5px;">
+    <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+    <button mat-button (click)="onClose()">Close</button>
+</div>

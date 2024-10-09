@@ -1,0 +1,64 @@
+<div cdkDropListGroup style="display: flex; height: 100%;">
+
+  <div class="example-container vertical-flex" style="margin-top:-20px;">
+    <h4 class="vertical-align-center" style="opacity: 0.5">Avaliable&nbsp;<i class="material-icons">visibility_off</i></h4>
+    <!-- <div
+      cdkDropList
+      #avaliableList="cdkDropList"
+      [cdkDropListConnectedTo]="[rowGroupingsList]"
+      [cdkDropListData]="avaliableRowGroupings"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of avaliableRowGroupings" cdkDrag>{{item && columnApi.getColumn(item.colId).colDef.headerName}}</div>
+      <div *ngIf="avaliableRowGroupings.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div> -->
+    <app-base-grid
+      class="example-list" 
+      [gridItems]="avaliableRowGroupings"
+      [customGridOption]="customGridOption_avaliable"
+      [customGridCallBack]="customGridCallBack_avaliable"
+      [extraOption]="{}">
+    </app-base-grid>
+  </div>
+
+  <!-- <mat-divider [vertical]="true" style="border-right-style: dashed"></mat-divider> -->
+  <div class="button-mover-control">
+    <!-- <button mat-mini-fab color="primary">
+      <mat-icon>arrow_drop_up</mat-icon>
+    </button> -->
+    <div>
+      <button mat-mini-fab color="primary" style="margin-right: 0.5rem" (click)="movehorizontally('rightToLeft')">
+        <mat-icon>arrow_left</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="movehorizontally('leftToRight')">
+        <mat-icon>arrow_right</mat-icon>
+      </button>
+    </div>
+    <!-- <button mat-mini-fab color="primary">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button> -->
+  </div>
+
+  <div class="example-container vertical-flex" style="margin-top:-20px;">
+    <h4 class="vertical-align-center">Shown&nbsp;<i class="material-icons">visibility</i></h4>
+    <!-- <div
+      cdkDropList
+      #rowGroupingsList="cdkDropList"
+      [cdkDropListConnectedTo]="[avaliableList]"
+      [cdkDropListData]="currentRowGroupings"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of currentRowGroupings" cdkDrag>{{item && columnApi.getColumn(item.colId).colDef.headerName}}</div>
+      <div *ngIf="currentRowGroupings.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div> -->
+    <app-base-grid
+      class="example-list" 
+      [gridItems]="currentRowGroupings"
+      [customGridOption]="customGridOption_show"
+      [customGridCallBack]="customGridCallBack_visiable"
+      [extraOption]="{}">
+    </app-base-grid>
+  </div>
+
+
+</div>

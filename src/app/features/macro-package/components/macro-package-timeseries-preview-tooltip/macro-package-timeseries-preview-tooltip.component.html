@@ -1,0 +1,21 @@
+<!-- <button mat-icon-button (click)="onClose()">
+  <mat-icon>close</mat-icon>
+</button> -->
+
+<div class="loading-screen" *ngIf="loadingStatus">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="date-range-selector"> 
+  <button mat-icon-button disableRipple="true" [ngClass]="{'date-range-selector-active': dateRange === '1M'}" (click)="onChangeDateRange('1M')">1Mon</button>
+  <button mat-icon-button disableRipple="true" [ngClass]="{'date-range-selector-active': dateRange === '5M'}" (click)="onChangeDateRange('5M')">5Mon</button>
+  <button mat-icon-button disableRipple="true" [ngClass]="{'date-range-selector-active': dateRange === '1Y'}" (click)="onChangeDateRange('1Y')">1Yr</button>
+  <button mat-icon-button disableRipple="true" [ngClass]="{'date-range-selector-active': dateRange === '3Y'}" (click)="onChangeDateRange('3Y')">3Yr</button>
+  <button mat-icon-button disableRipple="true" [ngClass]="{'date-range-selector-active': dateRange === 'max'}" (click)="onChangeDateRange('max')">Max</button>
+</div>
+
+<highcharts-chart style="display: flex; flex: 1 0 0;padding-top: 1.5rem;" 
+  [Highcharts]="Highcharts"
+  [options]="optionsPlot || {}"
+  [callbackFunction]="callbackFn">
+</highcharts-chart>

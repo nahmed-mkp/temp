@@ -1,0 +1,6 @@
+<app-market-data-security-search
+    [value]='value'
+    [searchResults]="searchResults$ | async"
+    (marketDataSelected)="onMarketDataSelected($event)"
+    (onSearchMarketData)="onSearchMarketData($event)">
+</app-market-data-security-search>

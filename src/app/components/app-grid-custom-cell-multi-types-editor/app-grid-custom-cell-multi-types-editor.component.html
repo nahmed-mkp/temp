@@ -1,0 +1,16 @@
+
+<mat-form-field style="flex: 1 0 0;" *ngIf="type==='string'">
+    <input type="text" matInput [(ngModel)]="targetData" #target autofocus autocomplete="off">
+</mat-form-field>
+
+
+<mat-form-field style="flex: 1 0 0;" *ngIf="type==='number'">
+    <input type="number" matInput [(ngModel)]="targetData" #target autofocus autocomplete="off">
+</mat-form-field>
+
+<mat-form-field style="flex: 1 0 0;" *ngIf="type==='boolean'">
+    <mat-select [(ngModel)]="targetData" #targetSelect>
+        <mat-option [value]="true">true</mat-option>
+        <mat-option [value]="false">false</mat-option>
+    </mat-select>
+</mat-form-field>

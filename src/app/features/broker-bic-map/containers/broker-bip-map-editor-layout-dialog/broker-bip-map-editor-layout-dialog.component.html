@@ -1,0 +1,24 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Edit Broker BIC Map</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="vertical-flex" style="flex: 1 0 0; padding: 1rem 1rem 0 1rem;">
+
+    <mat-form-field>
+        <mat-label>Broker Code</mat-label>
+        <input matInput disabled type="text" name="BrokerCode" [(ngModel)]="rowData.BrokerCode">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Broker Name</mat-label>
+        <input matInput disabled type="text" name="BrokerCode" [(ngModel)]="rowData.BrokerName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>BIC Code</mat-label>
+        <input matInput type="text" name="BrokerCode" [(ngModel)]="rowData.BIC_Code">
+    </mat-form-field>
+</div>
+
+<button mat-flat-button color="primary" (click)="onSave()">Save</button>

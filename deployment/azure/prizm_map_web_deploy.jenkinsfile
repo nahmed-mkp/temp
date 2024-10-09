@@ -1,0 +1,33 @@
+pipeline {
+  options {
+    ansiColor('xterm')
+  }
+  agent {
+    kubernetes {
+      yamlFile 'builder.yaml'
+    }P
+  }
+  stages {
+    stage('Build & Push Production Image') {
+      steps {
+        container('kaniko') {
+          script {
+            sh '''
+             kubectl set image deployment/map api=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-cache live=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-cache close=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-cache executions=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-cache groupings=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-prizm-cache live=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/positions-prizm-cache close=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/pnl-cacher-rcpm live=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/pnl-cacher-rcpm close=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/pnl-cacher-prizm live=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+             kubectl set image deployment/pnl-cacher-prizm close=mkpcap/prizm-map-server:$(curl http://prizmbuild.mkpcap.com/prod/map-server/)
+            '''
+          }
+        }
+      }
+    }
+  }
+}

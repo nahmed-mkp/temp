@@ -1,0 +1,11 @@
+<app-cs-snapshots-toolbar
+    [periods]="periods$ | async"
+    [funds]="funds$ | async"
+    [param]="param$ | async"
+    [monthEndDates]="monthEndDates$ | async"
+    [refreshDataPendingStatus]="refreshDataPendingStatus$ | async"
+    (paramsChanged)="onParamChanged($event)"></app-cs-snapshots-toolbar>
+
+<app-cs-snapshots-inner-layout></app-cs-snapshots-inner-layout>
+
+

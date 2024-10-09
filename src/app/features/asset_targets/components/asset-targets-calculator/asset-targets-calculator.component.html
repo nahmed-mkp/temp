@@ -1,0 +1,75 @@
+<div class="container">
+    <mat-toolbar>
+        <span class="toolbar-heading"> PROBABILITY TREE SETUP - {{country}} </span>
+        <span class="toolbar-spacer"> </span>
+        <button mat-icon-button class="mat-button-shrink" color="primary" (click)="resetToInitValues()" matTooltip="Reset Values">
+            <mat-icon class="toolbar-icon">refresh</mat-icon>
+        </button>
+        <button mat-icon-button class="mat-button-shrink" color="primary" (click)="saveScenarioValues()" matTooltip="Overwrite Existing Values">
+            <mat-icon class="toolbar-icon">save</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="col-wrap">
+
+        <div *ngFor="let dataset of inputData; index as i" class="y-wrap dataset" >
+            
+            <mat-card class="title" [class]="colorClassArr[i].primaryColor"> 
+                <span> {{dataset.sectionTitle}} </span>
+                <span class="total-percent" *ngIf="dataset.sectionTitle !== 'Inflation'" [ngClass]="{'probability-error': generateTitlePercentage(dataset) !== 100}"> [ {{generateTitlePercentage(dataset)}}% ] </span>
+            </mat-card>
+            <div class="content-wrap" >  
+               
+
+                <!-- ========================= DEMANDS =========================== -->
+
+                <ng-container *ngIf="dataset.sectionTitle === 'Demand'">
+                    <mat-card class="item" 
+                        *ngFor="let item of dataset.data | keyvalue"  
+                        [ngClass]="{'blurred': isBlurred(item), 'hidden': item.hide === true}"
+                    > 
+                        <div class="item-title" [class]="colorClassArr[i].primaryColor"> {{item.value.title}} </div>
+                        <div class="item-desc" [class]="colorClassArr[i].secondaryColor" *ngIf="item.value.description !== undefined"> {{item.value.description}} </div>
+                        <div class="item-value" [class]="colorClassArr[i].secondaryColor"> 
+                            <input type="number"  *ngIf="dataset.sectionTitle !== 'Scenarios'" [(ngModel)]="item.value.value"  /> &nbsp; %
+                        </div>
+                    </mat-card>
+                </ng-container>
+
+                <!-- ========================= INFLATION =========================== -->
+
+                <ng-container *ngIf="dataset.sectionTitle === 'Inflation'" >
+                    
+                    <mat-card *ngFor="let set of inflationSubsets; let j = index" class="inflation-wrap">
+    
+                        <mat-card class="item" *ngFor="let item of set" [ngClass]="{'blurred': isBlurred(item),'hidden': item.hide === true}" > 
+                            <div class="item-title" [class]="colorClassArr[i].primaryColor"> {{item.title}} </div>
+                            <div class="item-value" [class]="colorClassArr[i].secondaryColor"> 
+                                <input type="number" [(ngModel)]="item.value"  /> &nbsp; %
+                            </div>
+                        </mat-card>
+
+                    </mat-card>
+                </ng-container>
+
+                <!-- ========================= SCENARIOS =========================== -->
+
+                <ng-container *ngIf="dataset.sectionTitle === 'Scenarios'" >
+                    
+                    <mat-card *ngFor="let set of scenarioSubsets; let j = index" class="scenario-wrap">
+    
+                        <mat-card class="item" *ngFor="let item of set" [ngClass]="{'hidden': item.hide === true}" (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)" >                              
+                            <div class="item-title" [class]="colorClassArr[i].primaryColor"> {{item.title}} </div>
+                            <div class="item-value" [class]="colorClassArr[i].secondaryColor"> 
+                                {{generateScenarioValue(item.products)}}%
+                            </div>
+                        </mat-card>
+
+                    </mat-card>
+                </ng-container>
+
+
+            </div> 
+        </div> 
+    </div>
+
+</div>

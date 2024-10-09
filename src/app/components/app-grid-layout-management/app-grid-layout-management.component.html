@@ -1,0 +1,68 @@
+<mat-toolbar class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <span style="font-size: 13px; color:white"> Grid Layout Configuration </span>
+  <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</mat-toolbar>
+
+<div class="mat-dialog-content">
+  <div id="newLayoutInput" style="height: 60px;">
+    <mat-form-field appearance="outline" style="margin-top:20px;">
+      <mat-label>Layout Name</mat-label>
+      <input matInput placeholder="Layout Name" [(ngModel)]="newLayoutName">
+    </mat-form-field>  
+
+    <mat-checkbox [(ngModel)]="default" matTooltip="Default layout will be launch in start up">Default</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isShared" matTooltip="Shared Layout will be visiable to everyone">IsShared</mat-checkbox>
+  
+    <!-- <mat-form-field appearance="outline" style="width: 8rem; margin-left: 1rem;">
+      <mat-label>Layout Type</mat-label>
+      <mat-select [(ngModel)]="newLayoutType">
+        <mat-option [value]="'PoolViewer'">Pool Viewer</mat-option>
+        <mat-option [value]="'MapCal'">MAP Cal</mat-option>
+      </mat-select>
+    </mat-form-field>   -->
+    
+    <button mat-flat-button class="btn-primary" (click)="onCloseClick('save')" >Save</button>
+    <button mat-flat-button class="btn-danger" [disabled]="newLayoutName === undefined || newLayoutName === ''" (click)="onCloseClick('delete')" style="min-width: initial">Delete</button>
+  </div>
+
+  <mat-tab-group animationDuration="0ms" style="flex: 1 0 0" headerPosition="below">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="vertical-align-center">
+          Column Layout
+        </span>
+      </ng-template>
+      <app-app-grid-layout-column-configuration 
+        class="block-full-height"
+        [enrichedColumnState]="enrichedColumnState"
+        [columnApi]="columnApi"
+        (currentModifyLayoutState)="currentModifyLayoutState($event)"
+      ></app-app-grid-layout-column-configuration>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="vertical-align-center">
+          Row Grouping
+        </span>
+      </ng-template>
+      <app-app-grid-layout-row-grouping-configuration 
+        class="block-full-height"
+        [columnApi]="columnApi"
+        [currentRowGroupings]="currentRowGroupings"
+        [avaliableRowGroupings]="avaliableRowGroupings"
+        (currentModifyRowGrouping)="currentModifyRowGrouping($event)">
+      </app-app-grid-layout-row-grouping-configuration>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
+
+
+<div mat-dialog-actions style="padding-right: 1rem;">
+  <!-- <button mat-button (click)="onCloseClick()">Save</button> -->
+  <button mat-button class="btn-primary" (click)="onCloseClick('apply')">Apply</button>
+  <button mat-button class="btn-danger" (click)="reset()" matTooltip="All columns will be move to shown and unpinned section, order can not be be maintained (Caution)">Reset</button>
+  <button mat-button class="btn-primary" (click)="onCloseClick('close')">Close</button>
+</div>

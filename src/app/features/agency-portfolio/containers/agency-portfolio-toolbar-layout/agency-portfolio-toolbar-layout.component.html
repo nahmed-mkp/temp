@@ -1,0 +1,78 @@
+<div class="toolbar">
+
+    <mat-icon style="margin-top:-1.5rem" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle (click)="toolbarNoDrag = false">drag_indicator</mat-icon>
+    
+    <span>
+        <mat-form-field class="date-form-field-small" style="margin-left: 0.5rem;margin-top:7.5px;">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="time" (ngModelChange)="onDateChanged()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mat-select-no-line" style="margin-top:7.5px;width: 125px;" *ngIf="toolbarExpandMode">
+            <mat-select [(ngModel)]="mode" (ngModelChange)="onModeChange($event);">
+                <mat-option [value]="'live'">Live Price</mat-option>
+                <mat-option [value]="'closing'">Close Price</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </span>
+
+    <mat-form-field appearance="outline" class="outline-shrink" *ngIf="toolbarExpandMode">
+        <input type="text" placeholder="Jump To column" matInput [formControl]="columnsFilter" [matAutocomplete]="auto">
+        <mat-icon matSuffix>location_searching</mat-icon>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onColumnFocus($event.option.value)">
+            <mat-option *ngFor="let column of filteredColumns$ | async" [value]="column">
+            {{column}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+      <mat-form-field appearance="outline" class="outline-shrink" *ngIf="toolbarExpandMode">
+        <input type="text" matInput placeholder="Global Search..." [(ngModel)]="globalTextFilter" (ngModelChange)="onGlobaTextFilterChange($event)">
+        <mat-icon matSuffix>filter_list</mat-icon>
+      </mat-form-field>
+
+    <span style="margin-left: 0.5rem; margin-top:-1.5rem;">
+        <button mat-icon-button class="mat-button-shrink" color="primary">
+            <mat-icon>save</mat-icon>
+        </button>
+
+        <button mat-icon-button class="mat-button-shrink" color="primary" [matMenuTriggerFor]="layoutMenu">
+            <mat-icon>table_chart</mat-icon>
+        </button>
+        <mat-menu #layoutMenu="matMenu">
+            <button mat-menu-item *ngIf="(layoutNames$ | async).length === 0"><i>No Layout Avaliable</i></button>
+            <button mat-menu-item *ngFor="let name of (layoutNames$ | async)" (click)="onSelectColumnLayout(name)">
+                <i class="material-icons" [ngStyle]="{'visibility': name === activeLayoutName ? 'visible' : 'hidden'}">check</i>{{name}}
+            </button>
+        </mat-menu>
+        
+        <button mat-icon-button class="mat-button-shrink" color="primary" 
+            (click)="onToggleBarChart()" [disabled]="activeTab !=='benchmark'">
+            <mat-icon>bar_chart</mat-icon>
+        </button>
+
+
+        <button mat-icon-button class="mat-button-shrink" color="primary" 
+            [matMenuTriggerFor]="appMenu"
+            [ngClass]="{'spinning': mode==='live', 'non-spinning': mode==='closing'}"
+            [disabled]="mode==='closing'"
+            matTooltip="Update Refresh Time Interval">
+            <mat-icon>cached</mat-icon>
+        </button>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="onSetTimeInterval(10)">10s<i class="material-icons" *ngIf="updateCycle===10">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(20)">20s<i class="material-icons" *ngIf="updateCycle===20">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(30)">30s<i class="material-icons" *ngIf="updateCycle===30">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(60)">1 mins<i class="material-icons" *ngIf="updateCycle===60">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(600)">10 mins<i class="material-icons" *ngIf="updateCycle===600">check</i></button>
+        </mat-menu>
+
+    </span>
+
+
+    <mat-icon id='minimizer' (click)="onToogleToolbar(false)" *ngIf="toolbarExpandMode">minimize</mat-icon>
+    <mat-icon id='minimizer' (click)="onToogleToolbar(true)" *ngIf="toolbarExpandMode===false" style="top: -5px">add</mat-icon>
+    <mat-icon id='toolbar-slider' *ngIf="toolbarNoDrag && slideStatus ==='up'" (click)="slideStatus='down'; onSlideUp()">arrow_drop_up</mat-icon>
+    <mat-icon id='toolbar-slider' *ngIf="toolbarNoDrag && slideStatus ==='down'" (click)="slideStatus='up'; onSlideDown()">arrow_drop_down</mat-icon>
+</div>

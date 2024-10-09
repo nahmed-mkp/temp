@@ -1,0 +1,89 @@
+<form [formGroup]="createForm" class="horizontal-flex-center" style="width: 100%; justify-content: center;margin-top: 0.5rem;">
+
+    <mat-form-field class="date-form-field" style="margin-right:10px;">
+        <mat-label>Start Date</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker1" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="date-form-field" style="margin-right:10px;">
+        <mat-label>End Date</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker2" formControlName="endDate"> 
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </div>
+    </mat-form-field>
+    
+    <mat-form-field style="width:10rem;margin-right:10px;">
+        <div class="mat-form-field-content-wrap">
+            <mat-select formControlName="target" placeholder="Target*">
+                <mat-option [value]="'crd'">CRD</mat-option>
+                <mat-option [value]="'rcpm'">RCPM</mat-option>
+                <mat-option [value]="'dwh'">Data Warehouse</mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field style="width:10rem;margin-right:10px;">
+        <div class="mat-form-field-content-wrap">
+            <mat-select formControlName="secType" placeholder="Asset Class ...">
+                <!-- <mat-option [value]="'GOVT'">GOVT</mat-option> -->
+                <mat-option *ngFor="let supportedAssetClass of (supportedAssetClasses$ | async) " [value]="supportedAssetClass">
+                    {{supportedAssetClass}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <!-- <mat-form-field style="width:10rem;margin-right:10px;"> -->
+        <mat-checkbox style="margin-right:10px;margin-top:-15px;" [ngModelOptions]="{standalone: true}" 
+            [(ngModel)]="onlyDifferentColumnVisibility" (ngModelChange)="onOnlyDifferentColumnVisibilityChange()" >Show Only Diffs</mat-checkbox>
+    <!-- </mat-form-field> -->
+
+    <!-- <mat-form-field style="width:10rem;margin-right:10px;">
+        <input type="text" matInput placeholder="Security Name" formControlName="securityName" autocomplete="off">
+    </mat-form-field> -->
+    <button mat-raised-button color="primary" [disabled]="createForm.touched && createForm.invalid" (click)="onLoadSecurity()" style="margin-top: -1rem;">Load Securities</button>
+
+
+</form>
+
+
+<div style="flex: 1 0 0; position: relative;">
+    <app-security-master-reconciliation-unmatch-viewer 
+        class="full-strech-block"
+        [data]="unMatchData$ | async" 
+        [loading]="reconciliationLoading$ | async"
+        [ngStyle]="activeSideScreen === 'unmatch' ? activeStyle : nonactiveStyle"
+        (toggleView)="onToggleView($event)">
+    </app-security-master-reconciliation-unmatch-viewer>
+
+    <app-security-master-reconciliation-match-viewer 
+        class="full-strech-block"
+        [data]="matchData$ | async" 
+        [loading]="reconciliationLoading$ | async"
+        [ngStyle]="activeSideScreen === 'match' ? activeStyle : nonactiveStyle"
+        (toggleView)="onToggleView($event)">
+    </app-security-master-reconciliation-match-viewer>
+</div>
+
+<!-- [ngStyle]="layoutMode.unmatch ? expandStyle : collapseStyle"
+[ngStyle]="layoutMode.match ? expandStyle : collapseStyle" -->
+
+<button mat-flat-button id="unmatch-grid"
+    class="vertical-write-mode side-button"
+    [color]="(activeSideScreen === 'unmatch') ? 'button-active' : '' " 
+    (click)="onChangeScreen('unmatch')">
+    Unmatch
+</button>
+
+<button mat-flat-button id="match-grid"
+    class="vertical-write-mode side-button"
+    [color]="(activeSideScreen === 'match') ? 'button-active' : '' " 
+    (click)="onChangeScreen('match')">
+    Match
+</button>

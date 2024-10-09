@@ -1,0 +1,13 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <small>Confirm Deletion</small>
+  <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</div>
+
+<div mat-dialog-content style="padding-top:30px;margin-left:5px;width:90%">
+    Are you sure you want to delete this transaction?
+</div>
+
+<div mat-dialog-actions style="padding-top:20px;margin-right:10px;">
+  <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+</div>

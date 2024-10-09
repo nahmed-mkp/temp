@@ -1,0 +1,19 @@
+<div class="wrap">
+    <mat-toolbar>
+      <span class="toolbar-heading"> Repo on  {{secName}} </span>
+    </mat-toolbar>
+    <app-base-grid
+      *ngIf="repoData.length > 0"
+      style="height: 100%;width: 100%"
+      [gridItems]="repoData"
+      [customGridOption]="customGridOption"
+      [extraOption]="extraOption"
+      [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+    <div 
+    style="border:1px solid black;height: 100%;display:flex;align-items:center;justify-content:center"
+      *ngIf="repoData.length === 0"
+    >
+      No Corresponding Repo Data Available
+    </div>
+  </div>

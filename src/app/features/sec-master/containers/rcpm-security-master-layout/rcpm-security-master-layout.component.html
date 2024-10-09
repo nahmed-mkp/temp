@@ -1,0 +1,46 @@
+
+<div class="vertical-flex-full-height" style="padding-bottom:1rem;">
+    <app-sec-master-toolbar
+    (searchSecurities)="searchSecurities($event)"></app-sec-master-toolbar>
+
+    <div class="horizontal-flex" style="flex: 1 0 0">
+        <div class="vertical-flex-full-height" style="flex: 7 0 0">
+            <app-sec-master-search-results
+                class="mat-card mat-card-shadow-adjust"
+                [searchResults]="searchResults$ | async"
+                (securitySelected)="securitySelected($event)">
+            </app-sec-master-search-results>
+    
+            <app-sec-master-details
+                class="mat-card mat-card-shadow-adjust vertical-flex"
+                [selectedSID]="selectedSID$ | async"
+                [selectedSecurity]="selectedSecurity$ | async"
+                [securityLoading]="securityLoading$ | async"
+                [securityLoaded]="securityLoaded$ | async"
+                [securityError]="securityError$ | async"
+                [securityTags]="securityTags$ | async"
+                (updateTags)="updateTags($event)"></app-sec-master-details>
+        </div>
+    
+        <div class="vertical-flex-full-height" style="flex: 3 0 0">
+            <app-sec-master-market-data
+                [selectedSID]="selectedSID$ | async"
+                [marketData]="marketData$ | async"
+                [marketDataLoading]="marketDataLoading$ | async"
+                [marketDataLoaded]="marketDataLoaded$ | async"
+                [marketDataError]="marketDataError$ | async"
+    
+                (selectMarketData)="selectMarketData($event)"
+                
+                [selectedMDID]="selectedMarketData$ | async"
+                [marketDataPoints]="marketDataPoints$ | async"
+                [marketDataPointsLoading]="marketDataPointsLoading$ | async"
+                [marketDataPointsLoaded]="marketDataPointsLoaded$ | async"
+                [marketDataPointsError]="marketDataPointsError$ | async"
+    
+                class="mat-card mat-card-shadow-adjust vertical-flex-full-height"></app-sec-master-market-data>
+        </div>
+    </div>
+
+
+</div>

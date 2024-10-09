@@ -1,0 +1,36 @@
+
+.mat-card {
+    margin: 0.3rem;
+    box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12) !important;
+    padding: 0.4rem;
+    box-sizing: border-box;
+}
+
+#state-tracker {
+    height:500px;
+    width:500px;
+}
+
+.title { 
+    justify-content: center;
+}
+
+.legend { 
+    display: flex;
+    justify-content: center;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-poor { 
+    color: #ffffff;
+    background: #c71d1d;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-progress { 
+    color: #ffffff;
+    background: #ffc600;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-better { 
+    color: #ffffff;
+    background: #00664f;
+}

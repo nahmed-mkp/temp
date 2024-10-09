@@ -1,0 +1,45 @@
+<div *ngIf="loading" class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!factor" class="loading-screen">
+  <h4 style="opacity: 0.5;">Select a factor</h4>
+</div>
+
+
+<h5>{{getTitle()}}</h5>
+
+<mat-button-toggle-group [(ngModel)]="mode">
+  <mat-button-toggle value="chart" [checked]="mode==='chart'" class="outline-super-shrink">Chart</mat-button-toggle>
+  <mat-button-toggle value="raw" [checked]="mode==='raw'" class="outline-super-shrink">Raw</mat-button-toggle>
+</mat-button-toggle-group>
+
+<span id="scatter-info" *ngIf="mode === 'chart' && factor">
+  <i>Y</i>=
+    <strong>
+     {{getRegressionEquationString(data)}}
+    </strong>
+  <br >
+  <i>correl</i>=<strong>{{(data?.correl*100).toLocaleString(undefined, {maximumFractionDigits: 2})}}%</strong>, 
+  <i>r^2</i>= <strong>{{(data?.rSquared*100).toLocaleString(undefined, {maximumFractionDigits: 2})}}%</strong><br>
+  <i>ImpVal</i>= <strong>{{data?.impliedValue.toLocaleString(undefined, {maximumFractionDigits: 3})}}</strong>,
+  <i>StdError</i>= <strong>{{data?.stdErr.toLocaleString(undefined, {maximumFractionDigits: 3})}}</strong>,
+  <i>Z</i>=<strong>{{data?.zScore && data?.zScore.toLocaleString(undefined, {maximumFractionDigits: 3})}}%</strong>
+</span>
+
+<highcharts-chart
+  style="width: 100%;height: 100%;display: block;" 
+  *ngIf="mode === 'chart'"
+  [Highcharts]="Highcharts"
+  [options]="optionsPlot"
+  [callbackFunction]="callbackFn">
+</highcharts-chart>
+
+<app-base-grid
+  style="flex: 1 0 0;"
+  *ngIf="mode === 'raw'"
+  [gridItems]="data?.scatter"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

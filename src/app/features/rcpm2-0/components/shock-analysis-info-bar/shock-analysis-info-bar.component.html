@@ -1,0 +1,20 @@
+
+
+<p>Last Runtime: <i>{{shockInfo && shockInfo.endTime}} </i>  
+    <button mat-icon-button color="primary" aria-label="Rerun report" style="margin-left: 0.5rem; height: 30px;">
+        <mat-icon (click)="onTriggerShock()">refresh</mat-icon>
+    </button>
+</p>
+
+<ul *ngIf="shockInfo && shockInfo.statusByAssetClass && slideStatus === 'up'">
+    <li *ngFor="let key of Object.keys(shockInfo.statusByAssetClass)">
+        <span style="color: #7887c6">{{key}}</span>
+        <span><i> {{shockInfo.statusByAssetClass[key].RunDate}}</i></span>
+    </li>
+</ul>
+
+<div>
+    <mat-icon id='toolbar-slider' *ngIf="slideStatus ==='up'" (click)="slideStatus='down'">arrow_drop_up</mat-icon>
+    <mat-icon id='toolbar-slider' *ngIf="slideStatus ==='down'" (click)="slideStatus='up'">arrow_drop_down</mat-icon>
+</div>
+

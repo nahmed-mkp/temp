@@ -1,0 +1,29 @@
+.wrapper {
+    background-color: white;
+    height: 160px;
+    width: 600px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrap{
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrap span {
+    margin-top:1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-wrap{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

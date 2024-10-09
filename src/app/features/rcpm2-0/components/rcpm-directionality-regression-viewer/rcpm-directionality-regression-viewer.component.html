@@ -1,0 +1,69 @@
+<div *ngIf="regressionLoading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+
+<div class="horizontal-flex-center" style="justify-content: center; margin: 0.5rem 0;">
+
+    <mat-form-field appearance="outline"  class="outline-shrink" style="width: 6.5rem; margin-right: 0.3rem;">
+        <mat-label>FromDate</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="regressionRequestParams.fromDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="width: 6.5rem; margin-right: 0.3rem;">
+        <mat-label>n-Day dayChange</mat-label>
+        <mat-select [(ngModel)]="regressionRequestParams.rollingDays" (ngModelChange)="onRollingChange()">
+            <mat-option *ngFor="let option of dayChanges" [value]="option.value">{{option.displayName}}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+    
+    <fieldset class="material-fieldset">
+        <legend style="font-size: 0.55rem;color: grey;">Beta Calculation</legend>
+        <mat-radio-group [(ngModel)]="displayMode" (ngModelChange)="onSetDisplayMode()">
+            <mat-radio-button value="percent" style="margin-left: 0.5rem"><small>1%/1bp</small></mat-radio-button>
+            <mat-radio-button value="stdev"><small>1 Stdev</small></mat-radio-button>
+        </mat-radio-group>
+    </fieldset>
+
+    <fieldset class="material-fieldset" style="margin-left: 0.2rem;padding-left: 0.5rem;">
+        <legend style="font-size: 0.55rem;color: grey;">Beta Calculation</legend>
+        <mat-checkbox *ngFor="let key of lookbackKeys" [(ngModel)]="selectedLookbacks[key]" (ngModelChange)="onLookbackChange()">{{key}}</mat-checkbox>
+    </fieldset>
+
+    <!-- {{lookbacks | json}} -->
+
+    <button mat-icon-button color="primary" matTooltip="Run Regression" (click)="onRunRegression()">
+        <mat-icon>play_arrow</mat-icon>
+    </button>
+
+    <button mat-icon-button color="primary"  matTooltip="Clear Main Grid" (click)="onSetGridClearingStatus()">
+        <mat-icon>settings_backup_restore</mat-icon>
+    </button>
+</div>
+
+<!-- {{regressionRequestParams | json}} -->
+
+<div style="flex: 1 0 0; position: relative;">
+    <span>
+        <button mat-icon-button color="primary" matTooltip="Select Suggested Factors" (click)="onSelectSuggestedFactors()">
+            <mat-icon>rule</mat-icon>
+        </button>
+        <button mat-icon-button color="primary"  matTooltip="Uncheck All" (click)="onDeselectAll()">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </span>
+    <input type="text" class="ag-grid-custom-auto-group-floating-filter" [(ngModel)]="autoGroupColumnFilterValue" (ngModelChange)="onAutoGroupColumnFilterValueChange()">
+    <app-base-grid
+        style="flex: 1 0 0"
+        [gridItems]="[]"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+</div>
+
+
+<!-- <button mat-flat-button color="primary" style="margin-left: 0.5rem;height: 2rems;">Run Regression</button> -->
+

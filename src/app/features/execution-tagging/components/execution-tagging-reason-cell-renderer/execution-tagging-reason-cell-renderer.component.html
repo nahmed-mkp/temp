@@ -1,0 +1,9 @@
+
+  <div class="mat-form-field-content-wrap yellow-cell" >
+      <mat-select placeholder="" [value]="value" (selectionChange)="onSelectionChanged($event)">
+        <mat-option [value]="-1"> -- None --</mat-option>
+        <mat-optgroup *ngFor="let group of reasonsByGroup" [label]="group['group']" style="font-size:12px;font-style: italic;">
+          <mat-option *ngFor="let reason of group['reasons']" [value]="reason['ReasonId']" style="font-style:normal">{{reason['Reason']}}</mat-option>
+        </mat-optgroup>
+      </mat-select>  
+  </div>          

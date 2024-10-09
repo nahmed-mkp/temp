@@ -1,0 +1,81 @@
+<!-- <p>option-vols-analysis-result-layout works!</p>
+{{guid | json}} -->
+
+
+<div class="top-right-floating-button-group">
+
+    <button  mat-icon-button class="mat-button-shrink top-right-floating-button" (click)="onToggleDisplayMode('delta')" 
+        *ngIf="!loadingStatus && loadedStatus && (result$ | async).templateType === 'FX'" [ngStyle]="{'opacity': displayMode === 'delta' ? 1 : 0.5}">
+        <mat-icon matTooltip="Deltas" class="text-icon">D</mat-icon>
+    </button>
+
+    <button  mat-icon-button class="mat-button-shrink top-right-floating-button" (click)="onToggleDisplayMode('surface')"
+        *ngIf="!loadingStatus && loadedStatus && (result$ | async).templateType === 'FX'" [ngStyle]="{'opacity': displayMode === 'surface'? 1 : 0.5}">
+        <mat-icon matTooltip="Surface" class="text-icon">S</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink top-right-floating-button" (click)="onToggleDisplayMode('forward')"
+     *ngIf="!loadingStatus && loadedStatus && (result$ | async).templateType === 'FX'" [ngStyle]="{'opacity': displayMode === 'forward' ? 1 : 0.5}">
+        <mat-icon matTooltip="Forwards"   class="text-icon">F</mat-icon>
+    </button> 
+
+
+    <button mat-icon-button class="mat-button-shrink top-right-floating-button" matTooltip="Refresh" (click)="onReload()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink top-right-floating-button" matTooltip="Contact Support" (click)="onNotify()">
+        <mat-icon>contact_support</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink top-right-floating-button" matTooltip="Close" (click)="onRemove()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+
+<div *ngIf="loadingStatus" class="loading-screen">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <span style="max-height:100px;">{{(logMessage$ | async)?.message}}</span>
+</div>
+
+<div *ngIf="!loadingStatus && !loadedStatus" class="loading-screen">
+    <mat-progress-bar mode="determinate" color="warn"></mat-progress-bar>
+    <span style="max-height:100px;">{{(logMessage$ | async)?.message}}</span>
+</div>
+
+
+
+<!-- <div class="instruction" *ngIf="loadingStatus">
+    {{logMessage$ | async | json}}
+</div> -->
+
+
+<div *ngIf="!loadingStatus && loadedStatus" style="height: 100%; width: 100%">
+    
+    <ng-container [ngSwitch]="(result$ | async).templateType">
+        
+        <app-option-vols-equity-result-viewer 
+            *ngSwitchCase="'Equity'" 
+            [result]="result$ | async"
+            (adjustSize)="adjustSize($event, 'Equity')">
+        </app-option-vols-equity-result-viewer>
+
+        <app-option-vols-commodity-result-viewer 
+            *ngSwitchCase="'FixedIncome'"
+            [result]="result$ | async"
+            (adjustSize)="adjustSize($event, 'FixedIncome')">
+        </app-option-vols-commodity-result-viewer>
+
+        <app-option-vols-fx-result-viewer
+            *ngSwitchCase="'FX'"
+            [result]="result$ | async"
+            [displayMode]="displayMode"
+            [requestParam]="requestParam$ | async"
+            (adjustSize)="adjustSize($event, 'FX')">
+        </app-option-vols-fx-result-viewer>
+
+    </ng-container>
+</div>
+
+

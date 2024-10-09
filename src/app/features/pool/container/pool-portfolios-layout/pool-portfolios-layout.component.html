@@ -1,0 +1,25 @@
+<!-- <p>
+  pool-portfolios-layout works!
+</p> -->
+
+<span>
+  <strong style="opacity: 0.6;">List</strong>
+  <mat-icon *ngIf="pinMode" (click)="onTogglePin(false)">lock</mat-icon>
+  <mat-icon *ngIf="!pinMode" (click)="onTogglePin(true)">lock_open</mat-icon>
+</span>
+
+<app-pool-portfolios-viewer 
+  [portfolios]="portfolios$ | async" 
+  (viewPortfolioDetail)="onViewPortfolioDetails($event)"
+  (onSetShortcutPortfolios)="onSetShortcutPortfolios($event)">
+</app-pool-portfolios-viewer>
+
+<!-- <app-vertical-tabs>
+  <app-veritcal-tab title="Collat Charts" order="1">    
+  </app-veritcal-tab>
+  <app-veritcal-tab title="Collat Charts" order="1">    
+    </app-veritcal-tab>
+  <app-veritcal-tab title="Yield Book Dials" order="2">
+      <app-yieldbook-dials></app-yieldbook-dials>
+  </app-veritcal-tab>
+</app-vertical-tabs> -->

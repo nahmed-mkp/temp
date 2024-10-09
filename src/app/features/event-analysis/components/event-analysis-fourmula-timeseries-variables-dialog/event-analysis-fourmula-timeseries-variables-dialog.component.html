@@ -1,0 +1,29 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div style="height: 92%; padding: 0.5rem 1rem 1rem 1rem" class="vertical-flex-full-height">
+  <div class="tool-bar-section">
+    <h4>Variables Setup</h4>
+
+    <div class="action-section">
+      <button mat-icon-button class="mat-button-shrink" 
+        color="primary" matTooltip="Add Variable" (click)="onAddVariable()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button class="mat-button-shrink" 
+        color="primary" matTooltip="Add Variable" (click)="onSaveVariables()">
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <app-base-grid
+    style="flex: 1 0 0"
+    [gridItems]="data"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+  </app-base-grid>
+</div>
+

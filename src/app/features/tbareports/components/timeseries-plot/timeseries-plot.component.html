@@ -1,0 +1,60 @@
+<div *ngIf="coupon">
+    <div *ngIf="loaded$ | async; let loaded; else warning" class="flex-row">
+        <div class="timeseries-plot-toolbar">
+            <div>
+                <mat-form-field appearance="outline" style="max-width: 11rem" floatLabel="always">
+                    <mat-label>Coupon To Compare</mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <mat-select  name="couponToCompare" placeholder="Select ..." (selectionChange)="chartCompare($event)" [value]="coupon.couponToCompare">
+                            <mat-option *ngFor="let coupon of couponsToCompare" [value]="coupon">{{coupon.id}}</mat-option>
+                        </mat-select>
+                    </div>
+                </mat-form-field> 
+            </div>
+            <div style="margin-bottom: -0.4rem">
+                <span class="link-row input-control" title="Clear comparison" (click)="clearComparison($event)"><i class="material-icons">undo</i></span>
+            </div>
+        </div>
+        <div class="row" *ngIf="!coupon.couponToCompare" style="margin-top: -3.3rem">
+            <div class="col col-md-12">
+                <app-linechart                
+                    [options]="options"></app-linechart>
+            </div>
+        </div>
+        <div class="row" *ngIf="coupon.couponToCompare" style="margin-top: -3.3rem">
+            <div class="col col-md-12">
+                <app-linechart 
+                    [options]="compareOptions"></app-linechart>
+            </div>
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col col-md-12">
+                <app-tbareports-timeseries-table
+                    [data]="mostRecentData" 
+                    [columns]="columns"></app-tbareports-timeseries-table>  
+            </div>
+        </div>
+    </div>
+    <ng-template #warning>
+        <div class="timesereies-spinner">
+            <ng-template #spinner><mat-spinner></mat-spinner></ng-template>
+            <span *ngIf="loadFail$ | async; let loadFail; else spinner">
+                <i class="material-icons large-icons">error</i><br>
+                Faild to load data <br>
+                <i class="material-icons" style="transform: translateY(0.4rem);cursor: pointer" (click)="loadAndRenderChart()">refresh</i>
+            </span>
+            
+        </div>
+    </ng-template>
+</div>
+<br /><br />
+
+
+
+<!-- <dx-select-box
+    class="input-control"
+    [items]="couponsToCompare"
+    [value]="coupon.couponToCompare"
+    displayExpr="id"
+    (onValueChanged)="chartCompare($event)">
+</dx-select-box> -->

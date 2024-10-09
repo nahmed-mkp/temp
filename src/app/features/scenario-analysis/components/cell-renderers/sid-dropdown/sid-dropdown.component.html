@@ -1,0 +1,5 @@
+
+  <input type="text" matInput [matAutocomplete]="auto" [(ngModel)]="userInput" (ngModelChange)="onInputChange($event)" class="user-input">
+  <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="onSelect($event)">
+      <mat-option *ngFor="let security of filteredSidPrompt" [value]="security['SID']">{{security['SID']}} : {{security['Name']}} </mat-option>
+  </mat-autocomplete>

@@ -1,0 +1,23 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let chartPack of chartPacks; index as i" (click)="panelClicked(chartPack)" [expanded]="isSelected(chartPack)">
+        <mat-expansion-panel-header>
+            <mat-panel-title [ngClass]="{'active': isSelected(chartPack)}">
+                {{chartPack.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{chartPack.description}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="chartPackImagesLoaded; else loading" style="padding-top:5px;">
+            <mat-grid-list cols="7" rowHeight="52px">
+                <mat-grid-tile *ngFor="let image of chartPackImages" [colspan]="1" [rowspan]="1">
+                    <img [src]="image.url" [alt]="image.fileName" class="image" (click)="showImage(image)" [matTooltip]="image.fileName">
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <ng-template #loading>
+            Loading...
+        </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>

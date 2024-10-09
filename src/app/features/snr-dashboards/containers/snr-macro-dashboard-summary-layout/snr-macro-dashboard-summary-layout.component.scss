@@ -1,0 +1,19 @@
+h5 {
+    margin: 1rem 0 0.5rem 0.5rem;
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+mat-checkbox {
+    margin-right: 1rem;
+}
+
+.upper-right-toolbox {
+    position: fixed;
+    right: 0;
+    z-index: 10;
+    background: white;
+    width: 24rem;
+    height: 2rem;
+}

@@ -1,0 +1,24 @@
+i {
+    font-weight: bold;
+}
+
+mat-form-field {
+    margin-right: 0.5rem;
+    max-width: 9rem; 
+    font-size: 9px;
+}
+
+span {
+    margin-right: 0.5rem;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
+mat-select {
+    transform: scaleY(1.25); 
+    letter-spacing: 2px;
+    font-weight: bolder;
+}
+
+mat-radio-button.mat-radio-button {
+    font-size: 12px;
+}

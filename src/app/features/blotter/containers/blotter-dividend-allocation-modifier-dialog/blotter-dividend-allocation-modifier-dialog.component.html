@@ -1,0 +1,16 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small style="color: white; margin-left: 0.5rem;">Dividend Allocation</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick()">close</i>
+</div>
+
+<app-blotter-dividend-allocation-viewer 
+    style="flex: 1 0 0; padding: 0.5rem 0.5rem 0 0.5rem;"
+    [data]="data$ | async"
+    [loading]="loading$| async"
+    (getSaveDataHandler)="getSaveDataHandler($event)">
+</app-blotter-dividend-allocation-viewer>
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()">Save</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

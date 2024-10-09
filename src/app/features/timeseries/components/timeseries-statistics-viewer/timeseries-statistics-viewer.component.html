@@ -1,0 +1,21 @@
+<div class="vertical-flex-full-height">
+
+    <div *ngIf="!statData;else stats" class="warning-panel">
+        <div>
+            No data has been selected. Please create a timeseries portfolio or open an existing one. 
+        </div>
+    </div>
+
+    <ng-template #stats>
+        <app-base-grid
+            style="flex: 1 0 0"
+            [gridItems]="statData"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack"
+            (mouseleave)="onMouseLeave()">
+        </app-base-grid>
+    
+    </ng-template>
+
+</div>

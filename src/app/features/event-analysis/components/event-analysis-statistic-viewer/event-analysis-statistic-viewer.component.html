@@ -1,0 +1,79 @@
+<!-- <p>
+  event-analysis-statistic-viewer works!
+</p> -->
+
+<ng-container *ngIf="activeConfiguration">
+  <div class="tool-bar-section" [ngClass]='{"new-window-viewing": newWindowViewing$ | async}'>
+    <h4>
+      <span *ngIf="editingRecordName===false">{{activeTimeseriesAnalysisRecord && activeTimeseriesAnalysisRecord.name}}</span>
+      <button *ngIf="editingRecordName===false" mat-icon-button class="mat-button-shrink" color="primary" (click)="onChangeToEditMode()" style="height: 20px; line-height: 20px">
+        <mat-icon>edit</mat-icon>
+      </button>
+  
+      <mat-form-field style="width: 10rem" *ngIf="editingRecordName">
+        <input matInput [(ngModel)]="tempRecordName">
+      </mat-form-field>
+      <button *ngIf="editingRecordName" mat-icon-button class="mat-button-shrink" color="primary" (click)="onChangeRecordName()" style="height: 20px; line-height: 20px">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button *ngIf="editingRecordName" mat-icon-button class="mat-button-shrink" color="primary" (click)="onCancelChangeRecordName()" style="height: 20px; line-height: 20px">
+        <mat-icon>reply</mat-icon>
+      </button>
+    </h4>
+  
+    <div class="action-section">
+      <button mat-icon-button class="mat-button-shrink" color="primary" (click)="fitScreen()">
+        <mat-icon>settings_overscan</mat-icon>
+      </button>
+      <button mat-icon-button class="mat-button-shrink" color="primary" (click)="exportCSV()">
+        <mat-icon>save_alt</mat-icon>
+      </button>
+      <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onPopup()" *ngIf="!popUpMode">
+        <mat-icon>filter_none</mat-icon>
+      </button>
+      <mat-form-field appearance="outline" class="outline-shrink" style="margin-left: 1rem">
+        <input matInput placeholder="Search" [(ngModel)]="globalfilterValue" (ngModelChange)="globalFilter()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <mat-button-toggle-group style="margin-left: 0.5rem;">
+        <mat-button-toggle value="bold" (click)="onSwitchingGrid('timeseries')" [checked]="gridMode==='timeseries'">By Timeseries</mat-button-toggle>
+        <mat-button-toggle value="italic" (click)="onSwitchingGrid('date')" [checked]="gridMode==='date'">By Date</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+
+  <app-base-grid
+    *ngIf="gridMode === 'timeseries'"
+    style="flex: 1 0 0"
+    [gridItems]="data?.summaryStats"
+    [customGridOption]="customGridOption_ByTimesereies"
+    [extraOption]="extraOption"
+    [ngClass]='{"new-window-viewing": newWindowViewing$ | async }'
+    [customGridCallBack]="customGridCallBack_ByTimeseries">
+  </app-base-grid>
+
+  <app-base-grid
+    *ngIf="gridMode === 'date'"
+    style="flex: 1 0 0"
+    [gridItems]="data?.gridData"
+    [customGridOption]="customGridOption_byDate"
+    [extraOption]="extraOption"
+    [ngClass]='{"new-window-viewing": newWindowViewing$ | async }'
+    [customGridCallBack]="customGridCallBack_ByDate">
+  </app-base-grid>
+</ng-container>
+
+<div class="instruction" *ngIf="!activeConfiguration">
+  <h4>Instruction - For running Event analysis</h4>
+  <ul>
+    <li>Select an existing analysis record from the top right in the configuration section</li>
+    <li>Or start a new analysis by adding timeseries and/or formula in the bottom configuration pannel</li>
+    <li>Setup or adjust the analysis configuration using the panel on the right</li>
+    <li>Review the event analysis result on event analysis and event statistics section</li>
+  </ul>
+</div>
+
+<div class="loading-screen" *ngIf="activeEventAnalysisLoadingStatus">
+  <mat-spinner></mat-spinner>
+</div>

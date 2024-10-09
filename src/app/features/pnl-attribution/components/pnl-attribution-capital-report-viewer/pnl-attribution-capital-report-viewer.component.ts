@@ -1,0 +1,132 @@
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { GridApi, GridOptions, ColDef } from 'ag-grid-community';
+import { UtilityService } from 'src/app/services';
+
+@Component({
+    selector: 'app-pnl-attribution-capital-report-viewer',
+    templateUrl: './pnl-attribution-capital-report-viewer.component.html',
+    styleUrls: ['./pnl-attribution-capital-report-viewer.component.scss']
+})
+export class PnlAttributionCapitalReportViewerComponent implements OnInit, OnChanges {
+
+    @Input() data: any[];
+    @Input() loading: boolean;
+    @Output() sendGridApi = new EventEmitter<GridApi>();
+
+    private timeOrderMap = {
+        'Jan': 1,
+        'Feb': 2,
+        'Mar': 3,
+        'Apr': 4,
+        'May': 5,
+        'Jun': 6,
+        'Jul': 7,
+        'Aug': 8,
+        'Sep': 9,
+        'Oct': 10,
+        'Nov': 11,
+        'Dec': 12,
+    }
+
+    private gridApi: GridApi;
+    public extraOption = {};
+    public customGridOption: GridOptions = {
+        defaultColDef: {
+            filter: 'agTextColumnFilter',
+            editable: false,
+            enableCellChangeFlash: false,
+            cellStyle: params => {
+                let styleObj = {'justify-content': 'flex-end'};
+                // if (typeof params.value === 'number') {
+                //   styleObj = Object.assign(styleObj, {'justify-content': 'flex-end'})
+                // }
+                if (params.node.data['CrossPod'] === 'Total') {
+                  styleObj = Object.assign(styleObj, {'border-top': '3px solid #8080804d'})
+                }
+                return styleObj;
+            },
+            cellClass: 'cell-right-border',
+            headerClass: 'word-wrap'
+        },
+    
+        columnDefs: [],
+        sideBar: false,
+        headerHeight: 55
+    }
+
+    constructor(private utilityService: UtilityService) { 
+        this.customGridCallBack = this.customGridCallBack.bind(this);
+    }
+
+    ngOnInit() {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.data && changes.data.currentValue && changes.data.currentValue) {
+            setTimeout(() => {
+                const colDefs = this._createDynamicColDef(this.data);
+                if (this.gridApi) {
+                  this.gridApi.setColumnDefs(colDefs);
+                }
+            }, 200);
+        }
+    }
+
+    customGridCallBack(params) {
+        this.gridApi = params.api;
+        this.sendGridApi.emit(this.gridApi);
+    }
+
+    private _createDynamicColDef(data): ColDef[] {
+        console.warn(data)
+
+        if (data.length > 0) {
+
+            
+            const colDefs: ColDef[] = [];
+
+            colDefs.push({
+                headerName: 'CrossPod',
+                field: 'CrossPod',
+                sort: 'desc',
+                comparator: (valueA, valueB, nodeA, nodeB) => {
+                    const dateA = (new Date(valueA)).getTime();
+                    const dateB = (new Date(valueB)).getTime();
+                    return dateA - dateB;
+                },
+                cellStyle: params => {
+                    let styleObj = {'justify-content': 'flex-start'};
+                    if (params.node.data['CrossPod'] === 'Total') {
+                      styleObj = Object.assign(styleObj, {'border-top': '3px solid #8080804d'})
+                    }
+                    return styleObj;
+                }
+            });
+
+            const targetFields = Object.keys(data[0]).filter(field => field !== 'CrossPod');
+            targetFields.sort((valueA, valueB) => {
+                const [monthA, yearA] = valueA.split('-');
+                const [monthB, yearB] = valueB.split('-');
+
+                return this.timeOrderMap[monthA] + parseInt(yearA, 10) * 100 -
+                       (this.timeOrderMap[monthB] + parseInt(yearB, 10) * 100)
+            })
+            
+            
+            targetFields.forEach(field => {
+                colDefs.push({
+                    headerName: field,
+                    field: field,
+                    valueGetter: this.utilityService.formatNumberWithCommaSeperated(0),
+                    width: 80,
+                })
+            })
+
+            return colDefs;
+        } else {
+            return [];
+        }
+
+    }
+
+}

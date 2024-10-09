@@ -1,0 +1,31 @@
+<div style="display:flex;width:100%;justify-content:center;">
+    <form [formGroup]="createForm" #formDirective="ngForm">
+        <mat-form-field style="width:20%;margin-right:10px;" floatLabel="always">
+            <mat-select formControlName="assetClass" placeholder="Asset Class ...">
+                <mat-option *ngFor="let supportedAssetClass of supportedAssetClasses" [value]="supportedAssetClass">
+                    {{supportedAssetClass}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width:30%;margin-right:10px;" floatLabel="always">
+            <mat-select formControlName="identifierType" placeholder="Identifier Type ...">
+                <mat-option *ngFor="let identifier of identifiers" [value]="identifier">
+                    {{identifier}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width:30%;margin-right:10px;" floatLabel="always">
+            <input type="text" matInput placeholder="Identifier ..." formControlName="identifier" autocomplete="off">
+        </mat-form-field>
+
+        <mat-checkbox 
+            style="margin-right:10px;position: relative;width: 100px" 
+            [ngModelOptions]="{standalone: true}" 
+            [(ngModel)]="isOTC" (ngModelChange)="onCheckOTC()" >Is OTC</mat-checkbox>
+        <button mat-raised-button color="primary" 
+            [disabled]="createForm.touched && createForm.invalid" 
+            (click)="onCreateSecurity(formDirective)"
+            style="width: 9rem">Create Security</button>
+    </form>
+</div>
+

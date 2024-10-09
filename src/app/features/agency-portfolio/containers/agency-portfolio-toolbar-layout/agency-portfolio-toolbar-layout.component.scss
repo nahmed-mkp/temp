@@ -1,0 +1,70 @@
+.toolbar {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-top: 0.28rem;
+    margin: 0.28rem 0.5rem 0 0.5rem;
+    position: relative;
+    span:nth-child(2) {
+        transform: translateY(-5px);
+    }
+    .mat-mdc-form-field {
+        font-size: 12px;
+        font-style: italic;
+    }
+    mat-spinner {
+        display: inline-block !important;
+        margin-left: 0.2rem;
+    }
+
+    > .mat-mdc-form-field {
+        flex: 1 0 0;
+    } 
+
+    > .mat-icon {
+        opacity: 0.5;
+        cursor: grab;
+    }
+    .mat-icon-button {
+        width: 33px
+    }
+
+    #minimizer {
+        cursor: pointer;
+        position: absolute;
+        right: -12px;
+        top: -13px;
+        font-size: 19px;
+    }
+
+    #toolbar-slider {
+        cursor: pointer;
+        opacity: 0.3;
+        position: absolute;
+        top: 74%;
+        left: 50%;
+    }
+}
+
+.mat-mdc-form-field {
+    // width: 6.1rem; 
+    margin-left: 0.5rem;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.*/
+mat-select, input {
+    opacity: 0.5; 
+    font-weight: bolder
+}
+
+button.mat-menu-item {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+    i {
+        opacity: 0.5;
+        margin-right: 0.5rem;
+    }
+}
+

@@ -1,0 +1,17 @@
+<mat-grid-list cols="8" rowHeight="100%">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
+
+        <mat-list role="list" #charts *ngIf="tile.component === 'list'">
+            <mat-list-item role="listitem" *ngFor="let chart of typesOfCharts">
+                <mat-radio-button color="accent" [checked]="chart === defaultSelected" [value]="chart" (change)="selectedChart = $event.value">
+                    {{chart}}
+                </mat-radio-button>
+            </mat-list-item>
+        </mat-list>
+
+        <div *ngIf="tile.component !== 'list'" style="width: 100%;display: block;height: 100%;">
+            <app-tracking-history-charts-layout [chartType]="selectedChart" style="display: block;
+            height: 100%;"></app-tracking-history-charts-layout>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

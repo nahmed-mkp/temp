@@ -1,0 +1,21 @@
+<mat-tab-group [animationDuration]="0" class="vertical-flex-full-height" style="height:22px" [(selectedIndex)]="tabIndex" (selectedTabChange)="onTabChange($event)">
+
+  <mat-tab *ngFor="let tab of tabs"  label="{{tab.scenario['Name']}}">
+      <ng-template mat-tab-label>
+          <div>
+              {{tab.scenario['Name']}}
+              <button mat-icon-button *ngIf="isActiveTab(tab.scenario.Name)" (click)="deleteTab()" matTooltip="Delete Tab" style="width: 30px;margin-left: 3px;">
+                  <mat-icon style="font-size:14px;margin-top:-2px;">cancel</mat-icon>
+              </button>
+          </div>
+
+      </ng-template>
+  </mat-tab>
+
+  <mat-tab label="+">
+      <ng-template matTabContent>
+
+      </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

@@ -1,0 +1,58 @@
+<div style="flex: 2 0 0; display: flex">
+    <app-pnl-attribution-viewer
+        style="flex: 3 0 0"
+        [layoutName]="layoutName"
+        [isActive]="isActive"
+        [readOnlyMode]="readOnlyMode$ | async"
+
+        [attributionLoading]="attributionLoading$ | async"
+        [attributionLoaded]="attributionLoaded$ | async"
+        [attributionError]="attributionError$ | async"
+
+        [attributionFlatData]="attributionFlatData$ | async"
+        [attributionTreeData]="attributionTreeData$ | async"
+        [attributionColumns]="attributionColumns$ | async"
+        
+        [rowGrouping]="grouping$ | async"
+        [layoutInfo]="layoutInfo$ | async"
+        [layoutFilterValue]="layoutFilterValue$ | async"
+        [layoutSortState]="layoutSortState$ | async"
+        [guid]="guid"
+        [gridDisplayMode]="gridDisplayMode$ | async"
+
+        (loadPositionAttribution)="onLoadPositionAttribution($event)"
+        (loadTimeseries)="onLoadTimeseries($event)"
+        (loadDetails)="onLoadDetails($event)"
+        (saveLayoutState)="onSaveLayoutState($event)">
+    </app-pnl-attribution-viewer>
+
+    <app-pnl-attribution-detail-layout
+        *ngIf="showDetailInfo" style="flex: 1 0 0"
+        [layoutName]="layoutName">
+    </app-pnl-attribution-detail-layout>
+</div>
+
+
+<app-pnl-attribution-timeseries-layout 
+    *ngIf="showPlot" style="flex: 1 0 0"
+    [guid]="guid"
+    [layoutName]="layoutName">
+</app-pnl-attribution-timeseries-layout>
+
+
+
+
+
+
+<div class="left-tool-bar">
+    <button mat-flat-button [color]="showDetailInfo ? 'button-active' : '' " class="vertical-write-mode" (click)="onChangeSideScreen()">
+        Detail Info
+    </button>
+</div>
+
+
+<div class="bottom-tool-bar">
+    <button mat-flat-button [color]="showPlot ? 'button-active' : '' " (click)="onTogglePlotMode()">
+        Timeseries
+    </button>
+</div>

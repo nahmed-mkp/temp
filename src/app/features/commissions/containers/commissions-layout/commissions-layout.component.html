@@ -1,0 +1,12 @@
+<mat-sidenav-container class="vertical-flex-full-height">
+    <mat-sidenav #sidenav position="end" class="instructions-form">
+        <!-- Place Holder for fly outs -->
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-commissions-toolbar></app-commissions-toolbar>
+        
+        <app-commissions class="vertical-flex-full-height-95" [commissions]="commissions$ | async"
+            [commissionsLoading]="commissionsLoading$ | async" [commissionsLoaded]="commissionsLoaded$ | async"
+            [commissionsError]="commissionsError$ | async"></app-commissions>
+    </mat-sidenav-content>
+</mat-sidenav-container>

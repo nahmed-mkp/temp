@@ -1,0 +1,62 @@
+<!-- <p>
+  pool-grid-grouping-configuration-dialog works!
+</p> -->
+<div mat-dialog-title>
+  <h4>Columns Layout Configuration</h4>
+  <div class="vertical-align-center">
+    <mat-checkbox class="example-margin" [(ngModel)]="SavingPublicLayout">Save as Public Layout</mat-checkbox>
+    <i class="material-icons" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>grain</i>
+  </div>
+</div>
+
+<div mat-dialog-content>
+  <div id="newLayoutInput">
+      <mat-form-field appearance="outline">
+          <mat-label>Layout Name</mat-label>
+          <input matInput placeholder="Layout Name" [(ngModel)]="newGroupingName">
+      </mat-form-field>  
+      
+      <button mat-flat-button color="primary" (click)="onCloseClick('save')">Save</button>
+      <button mat-flat-button color="warn" style="min-width: initial">Delete</button>
+  </div>
+
+  <div cdkDropListGroup style="display: flex">
+
+    <div class="example-container">
+      <h4 class="vertical-align-center" style="opacity: 0.5">Avaliable&nbsp;<i class="material-icons">visibility_off</i></h4>
+      <div
+        cdkDropList
+        #hideList="cdkDropList"
+        [cdkDropListConnectedTo]="[showList]"
+        [cdkDropListData]="available"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of available" cdkDrag>{{item}}</div>
+        <div *ngIf="available.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h4 class="vertical-align-center">Shown&nbsp;<i class="material-icons">visibility</i></h4>
+      <div
+        cdkDropList
+        #showList="cdkDropList"
+        [cdkDropListConnectedTo]="[hideList]"
+        [cdkDropListData]="show"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of show" cdkDrag>{{item}}</div>
+        <div *ngIf="show.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onCloseClick()">Save</button> -->
+  <button mat-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+  <button mat-button color="warn" (click)="reset()" 
+    matTooltip="All columns will be move to shown and unpinned section, order can not be be maintained (Caution)">Reset</button>
+  <button mat-button (click)="onCloseClick('close')">Close</button>
+</div>

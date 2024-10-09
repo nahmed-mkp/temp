@@ -1,0 +1,51 @@
+<mat-sidenav-container class="full-strech-block" [hasBackdrop]="false">
+    <mat-sidenav #sidenav position="end" class="order-book-flyout">
+        <app-order-editor 
+            class="vertical-flex-full-height"
+            [order]="selectedOrder$ | async"
+            [mode]="mode"
+            [lookups]="lookups$ | async"
+            [opened]="sidenav.opened"
+            [currentLevel]="securityCurrentLevel$ | async"
+            (onSaveOrder)="onSaveOrder($event)"
+            (onLoadSecurityCurrentLevel)="onLoadSecurityCurrentLevel($event)"
+            (close)="close($event)"></app-order-editor>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="vertical-flex-full-height">
+        <!-- <div class="top-tool-bar-start">
+            <span class="title">ORDER BOOK</span>
+        </div> -->
+
+        <app-order-book-params 
+            [params]="params$ | async"
+            [selectedOrder]="selectedOrder$ | async"
+            [allOrders]="orders$ | async"
+
+            (paramsChanged)="onParamsChanged($event)"
+            (addOrder)="addOrder()"
+            (editOrder)="editOrder()">
+        </app-order-book-params>
+
+        <!-- <div *ngIf="loading" class="loading-screen">
+            <mat-spinner></mat-spinner>
+        </div> -->
+        
+        <app-order-book 
+            style="display:block;width:100%;flex: 2 0 0;"
+            [lookups]="lookups$ | async"
+            [orders]="orders$ | async"
+            [ordersLoading]="ordersLoading$ | async"
+            (onOrderSelected)="onOrderSelected($event)"
+            (onOrderLocked)="onOrderLocked($event)">
+        </app-order-book>
+
+        <app-order-book-history 
+            style="display:block;width:100%;flex: 1 0 0;"
+            [orderHistory]="orderHistory$ | async"
+            [orderHistoryLoading]="orderHistoryLoading$ | async">
+        </app-order-book-history>
+        
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

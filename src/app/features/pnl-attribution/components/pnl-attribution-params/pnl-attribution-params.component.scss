@@ -1,0 +1,17 @@
+@import '../../../../../styles/variables';
+
+.wrap{
+    border: 1px solid #80808057;
+    display:inline-block;
+    height: 40px;
+}
+
+.mat-raised-button{
+    margin-right:5px; 
+    margin-top: 10px;
+    background-color: $toolbar-button-bg-primary;   
+}
+
+.mat-raised-button .mat-icon{
+    margin-top:-0.2rem;
+}

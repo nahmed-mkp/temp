@@ -1,0 +1,36 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Option Vol Setting</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick()">Close</i>
+</div>
+
+<div class="mat-dialog-content">
+    <!-- <app-option-vols-setting-viewer></app-option-vols-setting-viewer> -->
+    <mat-tab-group class="vertical-tab-group">
+        <mat-tab label="First">
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon" matTooltip="Supported Tickers">list</mat-icon>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-option-vols-supported-tickers-viewer class="standard-grid-layout" 
+                    [data]="supportedTickers$ | async"
+                    (addTicker)="addTicker($event)"
+                    (deleteTicker)="deleteTicker($event)"
+                    (updateTicker)="updateTicker($event)">
+                </app-option-vols-supported-tickers-viewer>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Second">
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon" matTooltip="Futures Mapping">swap_horizontal_circle</mat-icon>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-option-vols-futures-mapping-viewer class="standard-grid-layout" 
+                    [data]="futuresmapping$ | async"
+                    (addFutureMapping)="addFutureMapping($event)"
+                    (deleteFutureMapping)="deleteFutureMapping($event)"
+                    (updateFutureMapping)="updateFutureMapping($event)">
+                </app-option-vols-futures-mapping-viewer>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

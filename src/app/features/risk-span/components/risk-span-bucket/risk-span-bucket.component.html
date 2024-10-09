@@ -1,0 +1,103 @@
+<div class="risk-span-bucket-title">
+    <span>{{bucket.name}}</span>
+    <span>
+        <mat-icon (click)="onToggle()" *ngIf="!detailMode">arrow_drop_down</mat-icon>
+        <mat-icon (click)="onToggle()" *ngIf="detailMode">arrow_drop_up</mat-icon>
+        <mat-checkbox [(ngModel)]="include" (ngModelChange)="onToggleInclude()"></mat-checkbox>
+    </span>
+</div>
+
+<div [ngSwitch]="bucket.uiType" *ngIf="detailMode" class="risk-span-bucket-content">
+    <div *ngSwitchCase="'dropdown-multiple'">
+        <mat-form-field appearance="outline" class="outline-shrink" >
+            <mat-select multiple [(ngModel)]="bucketInput.values" (ngModelChange)="onValueChange()">
+                <mat-option *ngFor="let value of bucket?.values" [value]="value">{{bucket.name==='State100' ? value.name : value}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngSwitchCase="'range-vector'" class="flex-space-between">
+        <mat-form-field *ngIf="mode==='range'" appearance="outline" class="outline-shrink" style="width: 49%">
+            <mat-label>Min</mat-label>
+            <input matInput type="number" [(ngModel)]="bucketInput.valuesMin" (ngModelChange)="onValueChange()" name="min-value">
+        </mat-form-field>
+        <mat-form-field *ngIf="mode==='range'" appearance="outline" class="outline-shrink" style="width: 49%">
+            <mat-label>Max</mat-label>
+            <input matInput type="number" [(ngModel)]="bucketInput.valuesMax" (ngModelChange)="onValueChange()" name="max-value">
+        </mat-form-field>
+        <mat-form-field *ngIf="mode==='range'" appearance="outline" class="outline-shrink" style="width: 49%">
+            <mat-label>Step</mat-label>
+            <input matInput type="number" [(ngModel)]="bucketInput.stepSize" (ngModelChange)="onValueChange()" name="steps-value">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="mode==='vector'" appearance="outline" class="outline-shrink">
+            <input matInput [(ngModel)]="bucketInput.values" (ngModelChange)="onValueChange()" placeholder="eg: 100,120,130,150....">
+        </mat-form-field>
+        <br>
+        <div style="width: 100%;display: flex; margin-top: 0.5rem;justify-content: center;">
+            <mat-button-toggle-group>
+                <mat-button-toggle (click)="onSwitchingMode('range')" [checked]="mode==='range'">Range</mat-button-toggle>
+                <mat-button-toggle (click)="onSwitchingMode('vector')" [checked]="mode==='vector'">Vector</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+
+    </div>
+
+    <div *ngSwitchCase="'choice-yn'">
+        <mat-radio-group [(ngModel)]="bucketInput.value" (ngModelChange)="onValueChange()">
+            <mat-radio-button *ngFor="let value of bucket?.values" [value]="value">{{value}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div *ngSwitchCase="'choice-ynna'">
+        <mat-radio-group [(ngModel)]="bucketInput.value" (ngModelChange)="onValueChange()">
+            <mat-radio-button *ngFor="let value of bucket?.values" [value]="value">{{value}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div *ngSwitchCase="'textbox'">
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input matInput [(ngModel)]="bucketInput.value" (ngModelChange)="onValueChange()">
+        </mat-form-field>
+    </div>
+</div>
+
+
+<!--
+<span [ngSwitch]="bucket.uiType">
+
+    <p *ngSwitchCase="textbox">
+        Show Textbox
+    </p>
+    <p *ngSwitchCase="dropdown">
+        Show Single-select dropdown
+    </p>
+    <p *ngSwitchCase="dropdown-multiple">
+        Show Multi-select dropdown
+    </p>
+    <p *ngSwitchCase="range-vector">
+        Show Range or vector
+    </p>
+    <p *ngSwitchCase="date-single">
+        Show Single Date Picker
+    </p>
+    <p *ngSwitchCase="date-range">
+        Show Date Range Picker
+    </p>
+    <p *ngSwitchCase="choice-yn">
+        Show Yes/No Dropdown
+    </p>
+    <p *ngSwitchCase="choice-ynna">
+        Show Yes/No/NA Dropdown
+    </p>
+    <p *ngSwitchCase="specpools">
+        Show Spec Pools
+    </p>
+    <p *ngSwitchDefault>
+        Unknown Bucket Type
+    </p>
+</span>
+-->
+
+<!-- {{ bucket | json }} -->
+

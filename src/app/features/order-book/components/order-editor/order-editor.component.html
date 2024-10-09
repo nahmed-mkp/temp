@@ -1,0 +1,195 @@
+<div class="vertical-flex" style="padding: 1rem;flex: 3 0 0;">
+
+    <!-- {{opened | json}} -->
+    <h5 *ngIf="mode === 'Edit'">Edit Existing Order</h5>
+    <h5 *ngIf="mode === 'Add'">Add New Order</h5>
+
+    <form [formGroup]="newForm" style="flex: 1 0 0;" class="vertical-flex">
+    
+        <div class="horizontal-flex-center">
+            <span>Order Date<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <input matInput [matDatepicker]="picker1" autocomplete="off" [disabled]="mode === 'Edit'"
+                    formControlName="orderDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    
+    
+        <div class="horizontal-flex-center">
+            <span>Pod<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <mat-select [disabled]="mode === 'Edit'" formControlName="pod">
+                    <mat-option *ngFor="let pod of lookups?.pods" [value]="pod">{{pod}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Order Type<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <mat-select formControlName="orderType">
+                    <mat-option *ngFor="let orderType of lookups?.orderType" [value]="orderType">{{orderType}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Buy/Sell</span>
+            <mat-form-field class="outline-shrink">
+                <mat-select formControlName="buySell">
+                    <mat-option [value]="'BUY'">Buy</mat-option>
+                    <mat-option [value]="'SELL'">Sell</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Quantity</span>
+            <mat-form-field class="outline-shrink">
+                <input autocomplete="off" type="number" matInput formControlName="quantity">
+            </mat-form-field>
+        </div>
+    
+        
+        <div class="horizontal-flex-center">
+            <span>Type</span>
+            <mat-form-field class="outline-shrink">
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let qtyType of lookups?.qtyType" [value]="qtyType">{{qtyType}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Filled/Cancelled<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <mat-select formControlName="orderStatus">
+                    <mat-option *ngFor="let filledCancelled of lookups?.filledCancelled" [value]="filledCancelled">{{filledCancelled}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+    
+        <div class="horizontal-flex-center">
+            <span>In With<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <input autocomplete="off" type="text" matInput formControlName="inWith">
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Contact</span>
+            <mat-form-field class="outline-shrink">
+                <input autocomplete="off" type="text" matInput formControlName="contact">
+            </mat-form-field>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Expiry<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <input autocomplete="off" type="text" matInput formControlName="expiry">
+            </mat-form-field>
+        </div>
+    
+        <!-- <div class="horizontal-flex-center">
+            <span>Security<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <input autocomplete="off" type="text" matInput [(ngModel)]="orderCopy.security" [disabled]="mode === 'Edit'">
+            </mat-form-field>
+        </div> -->
+    
+        <div class="horizontal-flex-center">
+            <span>Security<i>*</i></span>
+            <app-market-data-enhanced-search-layout
+                style="position: relative;height: 2.6rem;"
+                [customClass]="'order-book-security-search-autocomplete'"
+                (onSelectedSecurity)="onSelectedSecurity($event)"
+                (onValueEnter)="onValueEnter($event)">
+            </app-market-data-enhanced-search-layout>
+        </div>
+    
+        <div class="horizontal-flex-center">
+            <span>Display Type<i>*</i></span>
+            <mat-form-field class="outline-shrink">
+                <mat-select formControlName="displayType">
+                    <mat-option [value]="'price'">Price</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+    
+    
+    
+    
+        <mat-tab-group #mattabgroup>
+            <mat-tab label="Security Detail">
+        
+                <div class="horizontal-flex-center">
+                    <span>Name</span>
+                    <mat-form-field class="outline-shrink" class="manual-disable-field">
+                        <input autocomplete="off" type="text" matInput formControlName="security" [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+        
+                <div class="horizontal-flex-center">
+                    <span>Security Type</span>
+                    <mat-form-field class="outline-shrink">
+                        <input autocomplete="off" type="text" matInput formControlName="securityType" [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+        
+                <div class="horizontal-flex-center">
+                    <span>Current Level</span>
+                    <mat-form-field class="outline-shrink">
+                        <input autocomplete="off" type="number" matInput formControlName="currentLevel">
+                    </mat-form-field>
+                </div>
+        
+                <div class="horizontal-flex-center">
+                    <span>Level</span>
+                    <mat-form-field class="outline-shrink">
+                        <input autocomplete="off" type="number" matInput formControlName="orderLevel">
+                    </mat-form-field>
+                </div>
+        
+                <div class="horizontal-flex-center">
+                    <span>Distance to Level</span>
+                    <mat-form-field class="outline-shrink">
+                        <input autocomplete="off" type="number" matInput formControlName="distanceToLevel">
+                    </mat-form-field>
+                </div>
+            
+            </mat-tab>
+        
+        </mat-tab-group>
+        
+        <mat-form-field appearance="outline" style="flex: 1 0 0">
+            <mat-label>Note</mat-label>
+            <textarea matInput rows='5' formControlName="notes"></textarea>
+        </mat-form-field>
+    
+    </form>
+
+    <!-- <div class="horizontal-flex-center">
+        <span>Order Date<i>*</i></span>
+        <mat-form-field class="outline-shrink">
+            <input autocomplete="off" type="text" matInput [(ngModel)]="orderCopy.orderDate" [disabled]="mode === 'Edit'">
+        </mat-form-field>
+    </div> -->
+
+
+
+</div>
+
+
+
+<!-- {{orderCopy | json}} -->
+<div class="horizontal-flex" style="    background: white;z-index: 10;position: absolute;width: 100%;bottom: 0;">
+    <button mat-flat-button color="primary" style="flex: 1 0 0" (click)="saveOrder()" [disabled]="!newForm.valid">Save Order</button>
+    <button mat-flat-button color="accent"  style="flex: 1 0 0" (click)="onClose()">Close</button>
+</div>
+
+
+

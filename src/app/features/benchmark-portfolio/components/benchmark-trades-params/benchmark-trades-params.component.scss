@@ -1,0 +1,9 @@
+@import '../../../../../styles/variables';
+
+button {
+	margin-left: 0.5rem;
+}
+
+.mat-raised-button{
+	background-color: $toolbar-button-bg-primary;
+}

@@ -1,0 +1,41 @@
+<div parallax id="public">
+   
+    <mat-toolbar class="transparent">
+        <span class="logo"><img src="/assets/img/mkp_logo3.png" alt="MKP Capital Managament" style="margin-top:5px"></span>
+        <span class="empty-space"></span>
+        <a class="navlink" href="#" [routerLink]="['/public/landing']">Home</a> | 
+        <a class="navlink" href="#" [routerLink]="['/public/about']"><span>About</span></a> | 
+        <span class="navlink active">Login</span>
+    </mat-toolbar>
+
+    <div class="centered-form">
+        <div>
+            <mat-card class="card" style="width: 600px;background-color: gainsboro">
+                <mat-card-header class="header" style="margin-top:-5px">
+                    <mat-card-title class="title" style="margin-top:0px !important" >Login</mat-card-title>
+                    <mat-card-subtitle class="subtitle">Please enter your credentials to enter the site</mat-card-subtitle>
+                </mat-card-header>
+                
+                <mat-card-content class="content" style="background-color:gainsboro; height: 180px;">
+                    <form [formGroup]="loginForm" class="form-container" style="height: 80px; display:flex;flex-direction: column;align-items:center; justify-content: space-evenly;margin-top:28px;">
+                        <mat-form-field>
+                            <input matInput placeholder="Enter your email" [formControl]="username" required type="text" class="test-username">
+                            <mat-error *ngIf="username.invalid">{{getUsernameErrorMessage()}}</mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field>
+                            <input matInput placeholder="Enter your password" [formControl]="password" required type="password" class="test-password">
+                            <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </form>
+                </mat-card-content>
+        
+                <div style="background-color:gainsboro; display: flex; align-items: center;justify-content:flex-start;height: 50px;margin-top:-15px;">
+                    <button mat-raised-button color="primary" style="margin-left: 1rem;" [disabled]="loginForm.invalid" (click)="submit()">Login</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,129 @@
+<div class="small-grid-title-bar">
+    Security Details
+</div>
+
+<div class="vertical-flex" style="flex: 1 0 0; margin: 0.5rem">
+
+    <!-- {{data | json}} -->
+
+    <div class="horizontal-flex-center" *ngFor="let element of data">
+        <span>{{element.tagName}}</span>
+        <mat-form-field appearance="outline" style="height:40px;"  class="outline-shrink">
+            <div class="mat-form-field-content-wrap">
+                <input type="text" matInput disabled [value]="element?.tagValue">
+            </div>
+        </mat-form-field>
+    </div>
+
+    <!-- <div class="horizontal-flex-center">
+        <span>RiskSecType</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.riskSecType">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>Name</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.name">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>Price</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.Price">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>CurveName</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.CurveName">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>PaymentFrequency</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.PaymentFrequency">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>ResetFrequency</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.ResetFrequency">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>CouponRate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.CouponRate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>IssueDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.IssueDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>SettleDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.SettleDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>MaturityDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.MaturityDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>PrevPaymentDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.PrevPaymentDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>FirstCouponDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.FirstCouponDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>NextCouponDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.NextCouponDate">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>DateCountMethod</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.DateCountMethod">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>Cusip</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.Cusip">
+        </mat-form-field>
+    </div>
+
+    <div class="horizontal-flex-center">
+        <span>ParentCusip</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="data?.ParentCusip">
+        </mat-form-field>
+    </div> -->
+</div>

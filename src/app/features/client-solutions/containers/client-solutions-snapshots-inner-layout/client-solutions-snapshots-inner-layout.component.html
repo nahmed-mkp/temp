@@ -1,0 +1,67 @@
+<mat-tab-group style="flex: 1 0 0; margin-top:8px;">
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Reports
+            </span>
+        </ng-template>
+        <!-- <ng-template matTabContent> -->
+            <app-cs-snapshots
+                class="mat-card-lift vertical-flex"
+                style="height: 99%;"
+                [param]="param$ | async"
+                [groupings]="groupings$ | async"
+                [data]="snapshotData$ | async"
+                [loading]="snapshotDataLoading$ | async"
+                [loaded]="snapshotDataLoaded$ | async"
+                [error]="snapshotDataError$ | async"
+                (groupingChanged)="changeGrouping($event)">
+            </app-cs-snapshots>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Summary Statistics
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <app-cs-snapshots-summarystats
+                class="mat-card-lift vertical-flex"
+                style="height: 99%;"
+                [param]="param$ | async"
+                [summaryStats]="summaryStats$ | async"
+                [summaryStatsLoading]="summaryStatsLoading$ | async"
+                [summaryStatsLoaded]="summaryStatsLoaded$ | async"
+                [summaryStatsError]="summaryStatsError$ | async">
+            </app-cs-snapshots-summarystats>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Correlations Matrix
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <app-cs-snapshots-correlmatrix
+                class="mat-card-lift vertical-flex"
+                style="height: 99%"
+                [param]="param$ | async"
+                [entitiesMap]="entitiesMap$ | async"
+                [correlationMatrix]="correlationMatrix$ | async"
+                [correlationMatrixLoading]="correlationMatrixLoading$ | async"
+                [correlationMatrixLoaded]="correlationMatrixLoaded$ | async"
+                [correlationMatrixError]="correlationMatrixError$ | async">
+            </app-cs-snapshots-correlmatrix>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+
+
+
+
+

@@ -1,0 +1,33 @@
+<div class="flexbox">
+    <table class="border-raised">
+        <thead>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rows of chunkify(plotData, 22)">
+                <td *ngFor="let cell of rows" class="cell" [className]="getClass(cell, sortBy)">
+                    {{ cell.Instrument }}
+                    <div style="float:left;margin-bottom:-10px;">
+                        <span class="jbot">
+                            <mat-icon *ngIf="cell.JBotSignal==='Up'" class="signal green" aria-hidden="false" aria-label="Up"  (click)="navigateTo(cell.Instrument, 'JBotSignal')">arrow_drop_up</mat-icon>
+                            <mat-icon *ngIf="cell.JBotSignal==='Neutral'" class="signal gray" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JBotSignal')">remove</mat-icon>
+                            <mat-icon *ngIf="cell.JBotSignal==='Down'" class="signal red" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JBotSignal')">arrow_drop_down</mat-icon>
+                            <mat-icon *ngIf="cell.JBotSignal==='NoSignal'" class="signal transparent" aria-hidden="false" aria-label="Up">arrow_drop_down</mat-icon>
+                        </span>
+                        <span class="jbottech">
+                            <mat-icon *ngIf="cell.JBotTechSignal==='Up'" class="signal green" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JBotTechSignal')">arrow_drop_up</mat-icon>
+                            <mat-icon *ngIf="cell.JBotTechSignal==='Neutral'" class="signal gray" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JBotTechSignal')">remove</mat-icon>
+                            <mat-icon *ngIf="cell.JBotTechSignal==='Down'" class="signal red" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JBotTechSignal')">arrow_drop_down</mat-icon>
+                            <mat-icon *ngIf="cell.JBotTechSignal==='NoSignal'" class="signal transparent" aria-hidden="false" aria-label="Up">arrow_drop_down</mat-icon>
+                        </span>
+                        <span class="jbottech">
+                            <mat-icon *ngIf="cell.JDataMonitorSignal==='Up'" class="signal green" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JDataMonitorSignal')">arrow_drop_up</mat-icon>
+                            <mat-icon *ngIf="cell.JDataMonitorSignal==='Neutral'" class="signal gray" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JDataMonitorSignal')">remove</mat-icon>
+                            <mat-icon *ngIf="cell.JDataMonitorSignal==='Down'" class="signal red" aria-hidden="false" aria-label="Up" (click)="navigateTo(cell.Instrument, 'JDataMonitorSignal')">arrow_drop_down</mat-icon>
+                            <mat-icon *ngIf="cell.JDataMonitorSignal==='NoSignal'" class="signal transparent" aria-hidden="false" aria-label="Up">arrow_drop_down</mat-icon>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

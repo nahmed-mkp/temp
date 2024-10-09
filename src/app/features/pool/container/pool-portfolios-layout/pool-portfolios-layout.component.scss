@@ -1,0 +1,17 @@
+app-pool-portfolios-viewer {
+    height: 100%;
+}
+
+span {
+    opacity: 0.4;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .mat-icon {
+        font-size: 1.3rem; 
+        cursor: pointer;
+        height: 16px;
+    }
+}

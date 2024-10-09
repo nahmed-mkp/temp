@@ -1,0 +1,58 @@
+<mat-card class="card"  style="margin:5px;font-size:13px;">
+
+    <mat-card-header class="header">
+        <mat-card-title>Calc Servers</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+        <table style="border:none" spacing=0>
+            <tr class="row-headers">
+                <th>Status</th>
+                <th>CalcServer</th>
+                <th>MachineName</th>
+                <th>Timestamp</th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let server of calcServerStatus">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning"
+                        style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning"
+                        style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="width:180px;text-align: center;"><strong>{{ server.AppName.replace('CalcServer -', '') }}</strong></td>
+                <td style="width:50px;"><strong>{{ server.MachineName }}</strong></td>
+                <td style="width:150px;">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never
+                            run</i></small>
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:180px;">
+                    <button mat-icon-button color="primary" [title]="'Restart Calc Server on' + server.MachineName"
+                        (click)="onRestartCalcServer(server.AppName, server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null"
+                        [title]="'Kill ' + (server.PID !== null ? server.PID : 'RT')" (click)="onKillProcess(server)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'View ' + server.AppName + ' History'"
+                        (click)="onViewHistory(server.AppName, server.MachineName)">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>        
+    </mat-card-content>
+
+    <mat-card-actions style="justify-content: end;">
+        <button mat-raised-button color="primary" (click)="onRestartAll()">Restart All Calc Servers</button>
+    </mat-card-actions>
+</mat-card>

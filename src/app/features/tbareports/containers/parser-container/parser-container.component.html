@@ -1,0 +1,59 @@
+<structured-layout>
+    <div header>
+        <ul class="breadcrumb">
+            <li><a href="" [routerLink]="['./../']">TBA Reports</a></li>
+            <li><span>Dealer Reports Parser</span></li>
+        </ul>
+    </div>
+    <div header>
+        <h5>TBA Reports - <span><small><i>Dealer reports parser</i></small></span></h5>
+        <div class="row toolbar">
+            <div class="col col-12">
+                <span class="link-row">
+                    <a href="/api/v1/parsers/tba/template" target="_blank" title="Manual Template"><i class="fa fa-download"> Download Manual Template</i></a>
+                </span>
+                <span class="link-row"><a href="#" [routerLink]="['./../oas']"><i class="fa fa-line-chart"> OAS Charts</i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div content class="card card-padded">
+        
+        <ng-container>
+            <app-tbareports-notification
+                [error]="error$ | async"
+                [oasCacheRefreshingStatus]="oasCacheRefreshingStatus$ | async"
+                [tsyOasCacheRefreshingStatus]="tsyOasCacheRefreshingStatus$ | async"
+                [completionStatus]="completionStatus$ | async"
+                [oasCacheFailedStatus]="oasCacheFailedStatus$ | async"
+                [oasCacheSuccessStatus]="oasCacheSuccessStatus$ | async"
+                [tsyCacheFailedStatus]="tsyCacheFailedStatus$ | async"
+                [tsyCacheSuccessStatus]="tsyCacheSuccessStatus$ | async"
+                (statusCleared)="clearStatus($event)"></app-tbareports-notification>
+        </ng-container>
+        
+        <app-tbareports-parser-steps 
+            [steps]="steps$ | async" 
+            [currentStep]="currentStep$"
+            (onUpdateStep)="updateStep($event)">
+        </app-tbareports-parser-steps>
+
+        <app-tbareports-parser-request 
+            [missingDates]="missingDates$ | async"
+            [request]="request$ | async"
+            [results]="results$ | async"
+            [currentStep]="currentStep$ | async"
+            [cacheKey]="cacheKey$ | async"
+            (onFileUploadSuccess)="uploadSuccess($event)"
+            (onFileUploadError)="uploadError($event)"
+            (onSaveResults)="saveResults($event)"
+            (onRefreshCache)="refreshCache($event)">
+        </app-tbareports-parser-request>
+
+    </div>
+    <div footer>            
+        <app-tbareports-parser-actions 
+            (onPrevStep)="gotoPreviousStep()"
+            (onNextStep)="gotoNextStep()"></app-tbareports-parser-actions>
+    </div>    
+</structured-layout>

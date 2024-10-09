@@ -1,0 +1,138 @@
+<div class="mat-card">
+
+  
+
+  <div class="tool-bar-section" style="position: relative; z-index: 10">
+    <h4>Configuration</h4>
+    <div class="action-section">
+      <button mat-icon-button class="mat-button-shrink" matTooltip="New Analysis"
+        style="transform: translate(6px,-4px);" color="primary"
+        (click)="onRestoreConfigurationToBlankState()"
+        *ngIf="activeConfiguration">
+        <mat-icon>restore_page</mat-icon>
+      </button>
+      <button mat-icon-button class="mat-button-shrink" matTooltip="Save Configuration As"
+        style="transform: translate(6px,-4px);" color="primary"
+        (click)="openCreateNewAnalysesRecord()"
+        *ngIf="activeConfiguration">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-icon-button class="mat-button-shrink test-analysis-record-button" matTooltip="Analyses Record" 
+        style="transform: translate(6px,-4px);" color="primary"
+        [ngClass]="{'bounce': bounceAnimation}"
+        (click)="openEventAnalysisRecordsDialog()">
+        <mat-icon>all_inbox</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+
+  <mat-accordion *ngIf="activeConfiguration">
+
+    <mat-expansion-panel [expanded]="activeTab ==='raw data' || activeTab ==='plot' " class="test-timeseries-analysis-general-setting">
+      <mat-expansion-panel-header>
+        <mat-panel-title><i class="material-icons">settings</i>General</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <h5><i>DATE RANGE</i></h5>
+      <mat-form-field>
+        <input matInput placeholder="Start Date (mm/dd/year)" name="start_date" 
+          [matDatepicker]="startDp" 
+          [(ngModel)]="startDayFormatted"
+          (ngModelChange)="onUpdateStartAndEndDate()">
+        <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+        <mat-datepicker #startDp></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="End Date (mm/dd/year)" name="end_date" 
+          [matDatepicker]="endDp" 
+          [(ngModel)]="endDateFormatted"
+          (ngModelChange)="onUpdateStartAndEndDate()">
+        <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+        <mat-datepicker #endDp></mat-datepicker>
+      </mat-form-field>
+      <br>
+
+      <h5><i>MISSING DATA HANDLING</i></h5>
+      <mat-form-field>
+        <mat-select [(ngModel)]="activeConfiguration.preprocessing" (ngModelChange)="onUpdatePreprocessOption()">
+          <mat-option [value]="'drop'">Drop Missing Dates (Default)</mat-option>
+          <mat-option [value]="'ffill'">Last Valid Value</mat-option>
+          <mat-option [value]="'bfill'">Next Valid Value</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="activeTab ==='event analysis' || activeTab ==='event statistics' " class="test-timeseries-analysis-event-setting">
+
+      <!-- <h5><i>Event Setting</i></h5> -->
+      <mat-expansion-panel-header>
+        <mat-panel-title><i class="material-icons">date_range</i>Event Analysis</mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Event Calender Name..."  name="sec_x"  [matAutocomplete]="auto" [formControl]="eventCalenderFormControl" [value]="activeConfiguration?.eventCalender">
+        <button mat-button matSuffix (click)="openCalenderManagement(); $event.stopPropagation()" class="tiny-icon-button">
+          <i class="material-icons">tune</i>
+        </button>
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onUpdateEventCalenderName($event)">
+        <mat-option *ngFor="let eventCalender of filteredEventCalenders$ | async" [value]="eventCalender.name">{{eventCalender.name}}</mat-option>
+      </mat-autocomplete>  
+      
+      <mat-form-field>
+        <input matInput type="number" placeholder="Days Before" name="EventCalenderName"
+        [(ngModel)]="activeConfiguration.daysBefore" 
+        (blur)="onUpdateEventDaysBeforeAndAfter()"
+        (keyup.enter)="onUpdateEventDaysBeforeAndAfter()">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="Days After" name="EventCalenderName"
+        [(ngModel)]="activeConfiguration.daysAfter"
+        (blur)="onUpdateEventDaysBeforeAndAfter()"
+        (keyup.enter)="onUpdateEventDaysBeforeAndAfter()">
+      </mat-form-field>
+
+    </mat-expansion-panel>
+
+    <!-- <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><i class="material-icons">timeline</i>Multi Regression</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <app-regression-analysis-subsetting></app-regression-analysis-subsetting>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><i class="material-icons">tab_unselected</i>Dimensionality Reduction</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p><i style="opacity: 0.5">Upcoming Feature..</i></p>
+    </mat-expansion-panel> -->
+
+  </mat-accordion>
+
+
+  <div class="pannel-action-section" *ngIf="activeConfiguration">
+    <button mat-flat-button color="primary" (click)="onUpdateConfiguration()" disabled>Auto Save and Run</button>
+  </div>
+
+
+  <ng-container *ngIf="!activeConfiguration">
+    <div class="instruction" style="margin-top: -14rem">
+      <h4><i>Instruction</i></h4>
+      <ul>
+        <li>Select an timeseries from Market data search bar to start a new configuration for the event analysis </li> 
+        <li>Or select an existing timeseries analyses record (top right icon button)</li>
+      </ul>
+    </div>
+  </ng-container>
+      
+</div>

@@ -1,0 +1,58 @@
+<mat-toolbar>
+    <span class="toolbar-heading"> FACTOR EXPOSURE </span>
+
+    <span class="vertical-toolbar-divider-small"> </span>
+    
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 1rem;">
+        <mat-label> Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select (selectionChange)="onDateChanged($event)" [(value)]="activeDate">
+                <mat-option *ngFor="let date of dateDropdownData" [value]="date" style="margin-top:10px;">
+                    {{date}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" style="width:350px; margin-left: 1rem;" floatLabel="always">
+        <mat-label> Grouping </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select (selectionChange)="onGroupingChanged($event)" [(value)]="activeGrouping">
+                <mat-option *ngFor="let grouping of groupingDropdownData" [value]="grouping">
+                    {{grouping}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+
+    <span style="width: 8rem;margin-left:1em;">
+        <button mat-icon-button class="mat-button-shrink" [ngStyle]="{'opacity': this.useUSDFilter ? 1 : 0.3}" (click)="onChangeDisplayMode('$')">
+            <mat-icon class="toolbar-icon" matToolTip="PL($)">monetization_on</mat-icon>
+        </button>
+    
+        <button mat-icon-button class="mat-button-shrink" [ngStyle]="{'opacity': this.useBpsToFundFilter ? 1 : 0.3}" (click)="onChangeDisplayMode('bpsToFund')">
+            <mat-icon class="toolbar-icon" matTooltip="% To Fund" >bar_chart</mat-icon>
+        </button>
+    
+        <button mat-icon-button class="mat-button-shrink" [ngStyle]="{'opacity': this.useBpsToPodFilter ? 1 : 0.3}" (click)="onChangeDisplayMode('bpsToPod')">
+            <mat-icon class="toolbar-icon" matTooltip="% To Pod">stacked_bar_chart</mat-icon>
+        </button>
+    </span>
+    
+    <span class="group-icon-buttons" style="margin-left:1em;margin-top: 4px;">
+        <mat-slide-toggle [checked]="useNullSecFilter" (change)="onToggle($event)" > 
+            <span class="slide-toggle-label">
+                Hide Blank Trades
+            </span>
+        </mat-slide-toggle>
+    </span>
+
+
+    <span class="toolbar-spacer"></span>
+
+    <span class="timestamp-alt">
+        Last Update: {{timestamp}}
+    </span>
+</mat-toolbar>

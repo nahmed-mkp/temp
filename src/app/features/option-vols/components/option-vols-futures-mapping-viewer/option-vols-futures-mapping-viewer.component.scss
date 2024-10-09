@@ -1,0 +1,17 @@
+div {
+    font-size: 0.9rem;
+    font-weight: bold;
+    opacity: 0.4;
+    margin: 0.8rem;
+    display: flex;
+    align-items: center;
+
+    .mat-icon {
+        height: 20px;
+        margin-left: 0.5rem;
+    }
+
+    .mat-icon:hover {
+        cursor: pointer;
+    }
+}

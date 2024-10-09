@@ -1,0 +1,127 @@
+
+app-rcpm-position-viewer, app-rcpm-position-execution-viewer {
+  position: relative;
+}
+
+app-rcpm-position-info-viewer {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  max-width: 18rem;
+  min-width: 18rem;
+  //background: linear-gradient(to bottom, white, #add8e645);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+div.bottom-tool-bar {
+  position: absolute;
+  bottom: 0rem;
+  button.mat-flat-button {
+    // padding: 1rem 0.2rem;
+    margin: 0.2rem 0.2rem 0 0.2rem;
+    min-width: 0;
+    // background: #bdc3c7;
+    line-height: normal;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+    opacity: 0.8;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.vertical-flex-full-height {
+  > span {
+    display: flex;
+    cursor: pointer;
+    mat-icon {
+      opacity: 0.6;
+    }
+  }
+}
+
+.mat-menu-item {
+  display: flex;
+  justify-content: space-between;
+  .mat-icon {
+    margin: 0 0 0 1.5rem;
+    opacity: 0.6;
+  }
+  .mat-icon:hover{
+    color: #3f51b5;
+    opacity: 1;
+  }
+}
+
+.mat-tab-group {
+  flex: 1 0 0
+}
+
+#position-info-button {
+  position: absolute;
+  right: -6px;
+  top: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+#tradename-creation-button {
+  position: absolute;
+  right: -6px;
+  top: 7.0rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+#directionality-button {
+  position: absolute;
+  right: -6px;
+  top: 15.2rem;
+  padding: 0.5rem 0;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #80808045;
+  box-shadow: 2px 3px 7px 0px #80808078;
+  opacity: 0.8;
+}
+
+app-rcpm-position-execution-viewer, app-rcpm-simulation-layout {
+  flex: 1 0 0;
+}
+
+app-rcpm-simulation-layout {
+  border: 1px solid #80808045;
+  margin-top: 0.3rem;
+}
+
+#custom-expand-icon {
+  z-index: 10;
+  position: relative;
+  width: 5rem;
+  height: 1rem;
+  margin: 0px auto -1rem;
+  top: -1rem;
+  border: 1px solid #80808057;
+  background: white;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+
+  mat-icon {
+    top: -0.25rem;
+    position: relative;
+    opacity: 0.5;
+  }
+}

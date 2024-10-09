@@ -1,0 +1,18 @@
+<div class="vertical-flex-full-height">
+
+    <div *ngIf="!idEnrichedData" class="warning-panel">
+        <div>
+            No data has been selected. Please create a timeseries portfolio or open an existing one. 
+        </div>
+    </div>
+
+    <app-base-grid
+        *ngIf="idEnrichedData.length > 0"
+        style="flex: 1 0 0"
+        [gridItems]="[]"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+
+</div>

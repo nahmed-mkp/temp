@@ -1,0 +1,29 @@
+<!-- <div class="loading-screen" *ngIf="loadingStatus && allowLoadingDisplay">
+    <mat-spinner></mat-spinner>
+</div> -->
+
+<div *ngIf="podStrategyAllocationsLoaded">
+    <mat-accordion [multi]="true">
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>Pod Strategy Allocation</strong>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            {{ podStrategyAllocations | json }}
+            <!-- <app-base-grid 
+                [gridItems]="[]" 
+                [customGridOption]="customGridOption" 
+                [extraOption]="extraOption"
+                [customGridCallBack]="customGridCallBack">
+            </app-base-grid> -->
+
+            <mat-action-row>
+                <button mat-raised-button color="primary" (onclick)="saveCrossPodStrategy($event)" [disabled]="true">Save Changes</button>
+            </mat-action-row>
+
+        </mat-expansion-panel>
+        
+    </mat-accordion>
+</div>

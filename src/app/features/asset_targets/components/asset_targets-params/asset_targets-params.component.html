@@ -1,0 +1,72 @@
+<mat-toolbar>
+    <span class="toolbar-heading">ASSET TARGETS</span>
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <mat-slide-toggle [checked]="params?.showLevels === true" (change)="onShowLevelsChanged($event)" style="width:8rem;margin-right:1rem;margin-left:1rem;">
+        <span class="slide-toggle-label" style="color:white !important">Show Levels</span>
+    </mat-slide-toggle>
+    
+    <mat-form-field class="date-form-field" appearance="outline">
+        <mat-label> Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="datePicker" placeholder="Date" [value]="params.asOfDate"
+            (dateChange)="onDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 0.5rem;">
+        <mat-label> Type </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select placeholder="Type" [value]="params.type" (selectionChange)="onTypeChanged($event)">
+                <mat-option [value]="'Latest'">Latest</mat-option>
+                <mat-option [value]="'Historical'">Historical</mat-option>
+                <mat-option [value]="'Testing'">Testing</mat-option>
+            </mat-select>  
+        </div>          
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 1rem;">
+        <mat-label> Scenario Set </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select  placeholder="Asset Type" [value]="assetType" (selectionChange)="onAssetTypeChanged($event)">
+                <mat-option [value]="'fv'">Fair Value</mat-option>
+                <mat-option [value]="'st'">Short Term</mat-option>
+            </mat-select>  
+        </div>          
+    </mat-form-field>
+    
+    <button mat-icon-button
+        class="mat-button-shrink" 
+        color="primary" 
+        style="margin-left:1rem" 
+        *ngIf="privilegedAccess" 
+        (click)="toggleEditorView($event)" 
+        matTooltip="Edit Target/Probability"
+    >
+        <mat-icon class="toolbar-icon">edit</mat-icon>
+    </button>
+
+    <button mat-icon-button 
+        [matMenuTriggerFor]="menu" 
+        color="primary" 
+        style="margin-left:1rem" 
+        #menuTrigger="matMenuTrigger" 
+        (mouseenter)="menuTrigger.openMenu()"
+    >
+        <mat-icon class="toolbar-icon">settings</mat-icon> 
+    </button>
+
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <span (mouseleave)="menuTrigger.closeMenu()">
+        <button mat-menu-item (click)="handleScenarioManagementClick('Create')">
+            <span>Create New Scenarios</span>
+        </button>
+        <button mat-menu-item (click)="handleScenarioManagementClick('Edit')">
+            <span>Edit Existing Scenarios</span>
+        </button>
+        </span> 
+    </mat-menu>
+
+</mat-toolbar>

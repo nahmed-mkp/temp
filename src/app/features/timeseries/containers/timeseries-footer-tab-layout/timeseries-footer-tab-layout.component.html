@@ -1,0 +1,21 @@
+<mat-tab-group [animationDuration]="0" class="vertical-flex-full-height" [(selectedIndex)]="tabIndex" (selectedTabChange)="handleTabChange($event)" #tabs>
+
+    <mat-tab *ngFor="let tab of allTabs" label="{{tab.portfolio.name}}">
+        <ng-template mat-tab-label>
+            <div class="tab" (contextmenu)="onContextMenuClick($event, tab.portfolio.guid)">
+                {{tab.portfolio.name}}
+                <button *ngIf="isActiveTab(tab.portfolio.name)" mat-icon-button (click)="handleTabDeletion()"  matTooltip="Close Portfolio" class="cancel-btn">
+                    <mat-icon style="font-size:14px;margin-top:-2px;">cancel</mat-icon>
+                </button>
+            </div>
+
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="+">
+        <ng-template matTabContent>
+  
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>

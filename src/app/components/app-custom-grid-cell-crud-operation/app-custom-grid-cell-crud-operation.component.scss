@@ -1,0 +1,12 @@
+div {
+    display: flex;
+    justify-content: flex-end;
+    mat-icon {
+        opacity: 0.2;
+        cursor: pointer;
+    }
+
+    mat-icon:hover {
+        opacity: 0.6;
+    }
+}

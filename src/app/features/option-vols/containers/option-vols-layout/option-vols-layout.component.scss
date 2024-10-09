@@ -1,0 +1,23 @@
+app-option-vols-toolbar {
+    display: block;
+    width: 100vw;
+    background: white;
+    z-index: 30;
+}
+
+app-option-vols-analysis-result-layout {
+    flex: 1 0 0;
+    // max-width: 33%;
+    // height: 35rem;
+    position: relative;
+    margin: 0 0.6rem 1rem 0;
+
+}
+
+div.horizontal-flex {
+    flex-wrap: wrap;
+}
+
+.mat-card {
+    padding: 5px;
+}

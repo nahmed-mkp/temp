@@ -1,0 +1,21 @@
+<mat-drawer-container class="vertical-flex-full-height" (backdropClick)="hideSidePane()" [hasBackdrop]="true">
+    <mat-drawer #sidenav [mode]='mode'>
+    </mat-drawer>
+   
+    <mat-drawer-content>
+        
+        <mat-toolbar>
+            <span class="toolbar-heading">
+                COUNTERPARTY CDS SPREADS
+            </span>
+        </mat-toolbar>
+
+        <app-counterparty-cds-spread
+            [cdsSpreads]="cdsSpreads$ | async"
+            [cdsSpreadsLoading]="cdsSpreadsLoading$ | async"
+            [cdsSpreadsLoaded]="cdsSpreadsLoaded$ | async"
+            [cdsSpreadsError]="cdsSpreadsError$ | async"></app-counterparty-cds-spread>
+
+    </mat-drawer-content>
+
+</mat-drawer-container>

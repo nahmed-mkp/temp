@@ -1,0 +1,21 @@
+<div *ngIf="!cdsSpreadsLoading; else loading" style="display:block;height:95%;" >
+
+    <div style="font-size:small;margin-left:10px;margin-top:10px;">
+        <b>Counterparty Risk Limit (CRL)</b>
+        <ul class="notes">
+            <li><b style="font-size:25px;vertical-align:middle;">&#8226;</b> Below 300 - Green</li>
+            <li><b style="font-size:25px;vertical-align:middle;">&#8226;</b> 300 to 350 - Yellow</li>
+            <li><b style="font-size:25px;vertical-align:middle;">&#8226;</b> Above 350 - Red</li>
+        </ul>
+    </div>
+
+    <app-base-grid style="margin:2px;display:block;height:90%;"
+        [gridItems]="[]" [customGridOption]="customGridOption"
+        [extraOption]="extraOption" [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+
+</div>
+
+<ng-template #loading class="loading-screen">
+    <mat-spinner></mat-spinner>
+</ng-template>

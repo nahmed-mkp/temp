@@ -1,0 +1,24 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Grouping Level Color Picker</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</div>
+
+
+<div class="mat-dialog-content">
+    <mat-list>
+        <mat-list-item *ngFor="let item of groupingBackgroundData; let i = index">
+            <span style="color: grey">Level {{item.level}}</span>
+            <span [ngStyle]="{'background': item.color}" class="color-indicator" [matMenuTriggerFor]="menu"></span>
+            <mat-menu #menu="matMenu" (click)="$event.stopPropagation()">
+                <div (click)="$event.stopPropagation()" style="width: 250px; display: block;">
+                    <color-sketch [color]="item.color" (onChangeComplete)="onSelectedColor($event, i)"></color-sketch>
+                </div>
+            </mat-menu>
+        </mat-list-item>
+    </mat-list>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="onReset()">Reset</button>
+    <button mat-stroked-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+</div>

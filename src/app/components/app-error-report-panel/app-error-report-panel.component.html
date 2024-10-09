@@ -1,0 +1,26 @@
+<p style="opacity: 0.8; margin: 2rem 0 0 0;">Most Recent Errors</p>
+
+
+<div style="width: 100%; flex: 1 0 0; overflow: auto;">
+    <div *ngFor="let error of errorCollection" class="error-item">
+        <h4>{{error.type}}</h4>
+        <i>Status Code: {{error.statusCode}}</i> <br>
+        <i>Method: {{error.method}}</i> <br>
+        <p style="font-size: smaller; margin: 0.5rem 0;">{{error.message}}</p> <br>
+        <!-- <span *ngIf="error.reqPayload">Request Payload: {{error.reqPayload | json }}</span>
+        <p *ngIf="error.reqPayload">{{error.reqPayload | json }}</p> -->
+        <app-app-error-report-payload-info 
+            *ngIf="error.reqPayload"
+            [info]="error.reqPayload">
+        </app-app-error-report-payload-info>
+
+        <span>
+            <mat-icon>query_builder</mat-icon>&nbsp;<small>{{error.timeStamp}}</small>
+        </span>
+        
+    </div>
+</div>
+
+<footer>
+    <button mat-button (click)="onClearAll()">Clear All</button>
+</footer>

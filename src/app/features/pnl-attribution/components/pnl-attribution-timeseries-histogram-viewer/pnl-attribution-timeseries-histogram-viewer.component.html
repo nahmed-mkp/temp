@@ -1,0 +1,14 @@
+
+<div *ngIf="loading" class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="notEnoughDataPointwarning" class="loading-screen">
+  <h5>Not Enough Data</h5>
+</div>
+
+<highcharts-chart *ngIf="notEnoughDataPointwarning === false" style="width: 100%; height: 100%; display: flex;" 
+  [Highcharts]="Highcharts"
+  [options]="optionsPlot"
+  [callbackFunction]="callbackFn">
+</highcharts-chart>

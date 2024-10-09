@@ -1,0 +1,50 @@
+<mat-sidenav-container class="vertical-flex-full-height">
+    <mat-sidenav #sidenav position="end" class="chart-pack-selector">
+        <app-research-charts-browser
+            [chartPacks]="chartPacks$ | async"
+            [chartPacksLoading]="chartPacksLoading$ | async"
+            [chartPacksLoaded]="chartPacksLoaded$ | async"
+            [chartPacksError]="chartPacksError$ | async"
+            [selectedChartPack]="selectedChartPack$ | async"
+
+            [chartPackImages]="selectedChartPackImages$ | async"
+            [chartPackImagesLoading]="selectedChartPackChartsLoading$ | async"
+            [chartPackImagesLoaded]="selectedChartPackChartsLoaded$ | async"
+            [chartPackImagesError]="selectedChartPackChartsError$ | async"
+
+            (loadChartPack)="loadChartPack($event)"
+        ></app-research-charts-browser>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <span class="toolbar-heading">RISK & PORTFOLIO ANALYSIS CHART PACKS</span>
+            <span class="toolbar-spacer"> </span>
+            <button mat-icon-button class="toolbar-icon" (click)="onShowList()" matTooltip="View List">
+                <mat-icon>note_add</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <div class="box" *ngIf="selectedChartPackChartsLoaded$ | async">
+            <div>
+                <h3>{{ (selectedChartPack$ | async)?.name }}</h3>
+                <small style="margin-top:-5px;">
+                    <i>
+                        {{ (selectedChartPack$ | async)?.description }} | {{ (selectedChartPack$ | async)?.updateTs }}
+                    </i>
+                </small>
+            </div>
+        </div>
+
+        <mat-grid-list cols="3" rowHeight="675px">
+            <mat-grid-tile *ngFor="let chart of selectedChartPackCharts$ | async" [colspan]="1" [rowspan]="1">        
+                <app-research-charts-gallery
+                    [selectedChartPack]="selectedChartPack$ | async"
+                    [chartPackCharts]="chart"
+                    [chartPackChartsLoading]="selectedChartPackChartsLoading$ | async"
+                    [chartPackChartsLoaded]="selectedChartPackChartsLoaded$ | async"
+                    [chartPackChartsError]="selectedChartPackChartsError$ | async"></app-research-charts-gallery>        
+            </mat-grid-tile>
+        </mat-grid-list>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,79 @@
+<mat-toolbar>
+    <span class="toolbar-heading">MARKET DATA DASHBOARDS</span>
+</mat-toolbar>
+
+<mat-tab-group [animationDuration]="0" (selectedTabChange)="changeTab($event)" #tabs>
+
+    <mat-tab [label]="dashboard['name']" *ngFor="let dashboard of metaData$ | async">
+        <ng-template matTabContent>
+            <div [ngSwitch]="dashboard['name']" class="wrapper-div" >
+                <mat-card-content *ngSwitchCase="'Bonds'" class="bond-dashboard-card-content" style="width: 100vw;">
+                    <app-bond-dashboard
+                        style="flex: 1 0 0"
+                        [lookbacks]="dashboard['params']['lookbacks']"
+                        [instruments]="dashboard['params']['instruments']"
+                        [data]="selectedDashboardData$ | async"
+                        [dataLoading]="selectedDashboardDataLoading$ | async"
+                        [dataLoaded]="selectedDashboardDataLoaded$ | async"
+                        [dataError]="selectedDashboardDataError$ | async"
+                        (loadDashboard)="loadDashboard('bonds')"
+                        (loadChartData)="loadChartData($event)"
+                        (loadChartSpreadData)="loadChartSpreadData($event)"
+                        (unsubFromDashboard)="unsubFromDashboard($event)"
+                    >
+                    </app-bond-dashboard>
+                    <mat-card-content style="width: 45%; padding: 2px;display: flex; flex-direction: column;">
+                        <app-bond-dashboard-chart-viewer
+                            style="height: 50%; width: 100%;"
+                            [chartData]="chartData$ | async"
+                        > 
+                        </app-bond-dashboard-chart-viewer>
+                        <app-dashboard-chart-spread-viewer
+                            style="height: 50%; width: 100%;"
+                            [chartData]="chartSpreadData$ | async"
+                        > 
+                    </app-dashboard-chart-spread-viewer>
+                    </mat-card-content>
+                </mat-card-content>
+
+                <mat-card-content *ngSwitchCase="'Bills/Short Coupons'" class="bsc-dashboard-card-content" style="width: 100vw; height: auto">
+                    <app-bsc-dashboard
+                        style="flex: 1 0 0"
+                        [data]="selectedDashboardData$ | async"
+                        [dataLoading]="selectedDashboardDataLoading$ | async"
+                        [dataLoaded]="selectedDashboardDataLoaded$ | async"
+                        [dataError]="selectedDashboardDataError$ | async"
+                        (loadDashboard)="loadDashboard('bills_short_coupons')"
+                        (loadChartData)="loadBillsShortCouponCharts($event)"
+                    >
+                    </app-bsc-dashboard>
+                    <div style="height: 100%;width: 43%; padding: 2px;display: flex; flex-direction: column;">
+
+                        <mat-card-content style=" height: 33%">
+                            <app-bills-short-coupon-dashboard-chart-viewer
+                                [type]="'vsMaturity'"
+                                [chartData]="billsShortCouponsChartData$ | async"
+                            > 
+                            </app-bills-short-coupon-dashboard-chart-viewer>
+                        </mat-card-content>
+
+                        <!-- <mat-card-content style="height: 33%">
+                            <app-bills-short-coupon-dashboard-chart-viewer
+                                [title]="'Second Chart'"
+                            > 
+                            </app-bills-short-coupon-dashboard-chart-viewer>
+                        </mat-card-content>
+
+                        <mat-card-content style="height: 33%">
+                            <app-bills-short-coupon-dashboard-chart-viewer
+                                [title]="'Third Chart'"
+                            > 
+                            </app-bills-short-coupon-dashboard-chart-viewer>
+                        </mat-card-content> -->
+                    </div>
+                </mat-card-content>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>

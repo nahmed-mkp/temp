@@ -1,0 +1,16 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Create New Layout</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div style="padding: 0.5rem; flex: 1 0 0;margin-top: 0.2rem;" class="horizontal-flex">
+    <mat-form-field appearance="outline" class="outline-shrink">
+        <mat-label>New Layout Name</mat-label>
+        <input matInput [(ngModel)]="layoutName">
+    </mat-form-field>  
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onConfirm()" [disabled]="layoutName.length === 0">Confirm</button>
+    <button mat-button (click)="onClose()">Close</button>
+</div>

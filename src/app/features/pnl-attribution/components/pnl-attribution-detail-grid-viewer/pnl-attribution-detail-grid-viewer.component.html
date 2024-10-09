@@ -1,0 +1,17 @@
+<div *ngIf="loadingStatus" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<!-- {{maxTimeStamp}} -->
+
+
+<app-base-grid
+    class="vertical-flex-full-height" 
+    style="flex: 1 0 0;padding: 0.5rem 0"
+
+    [ngStyle]="{'padding': pinnedStatus === 'left' ? '0.5rem 0 0.5rem 3.5rem' : '0.5rem 0' }"
+    [gridItems]="data"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

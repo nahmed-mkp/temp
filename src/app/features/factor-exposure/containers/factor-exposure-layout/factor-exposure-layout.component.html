@@ -1,0 +1,39 @@
+<app-factor-exposure-params
+    [activeDate]="activeDate$ | async"
+    [activeGrouping]="activeGrouping$ | async"
+    [dateDropdownData]="dateDropdown$ | async "
+    [timestamp]="timestamp$ | async"
+    [useUSDFilter]="useUSDFilter$ | async"
+    [useBpsToFundFilter]="useBpsToFundFilter$ | async"
+    [useBpsToPodFilter]="useBpsToPodFilter$ | async"
+    [useNullSecFilter]="useNullSecFilter$ | async"
+    [groupingDropdownData]="groupingDropdown$ | async"
+    
+    (changeParams)="changeParams($event)"
+    (updateDisplayFilters)="updateDisplayFilters($event)"
+    (updateNullSecFilter)="updateNullSecFilters($event)"
+>
+</app-factor-exposure-params>
+
+<app-factor-exposure-tab-viewer
+    [privilegedAccess]="userAccessLevel$ | async"
+    [activeDate]="activeDate$ | async"
+    [activeGrouping]="activeGrouping$ | async"
+    [factorsTabData]="factorTab$ | async"
+    [factorsTabDataLoaded]="factorTabLoaded$ | async"
+    [groupingTabData]="groupingTab$ | async"
+    [groupingTabDataLoaded]="groupingTabLoaded$ | async"
+    [positionsAndGroupingData]="positionsAndGroupingData$ | async"
+    [positionsAndGroupingDataLoaded]="positionsAndGroupingDataLoaded$ | async"
+    [groupingNameAndIdMaping]="groupingNameAndIdMaping$ | async"
+    [tabsList]="tabs$ | async"
+    [useUSDFilter]="useUSDFilter$ | async"
+    [useBpsToFundFilter]="useBpsToFundFilter$ | async"
+    [useBpsToPodFilter]="useBpsToPodFilter$ | async"
+    [useNullSecFilter]="useNullSecFilter$ | async"
+    [userSettings]="userSettings$ | async"
+
+    (activeTabChanged)="changeActiveTab($event)"
+    (tabClosed)="tabClosed($event)"
+>
+</app-factor-exposure-tab-viewer>

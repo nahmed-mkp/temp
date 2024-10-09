@@ -1,0 +1,15 @@
+<!-- <p>
+  event-analysis-records-layout-dialog works!
+</p> -->
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+<app-event-analysis-archive-records-viewer
+  [analysesRecords]="analysesRecords$ | async"
+  (addNewAnalysis)="addNewAnalysisRecord($event)"
+  (updateAnalysisRecord)="updateAnalysisRecord($event)"
+  (deleteAnalysisRecord)="deleteAnalysisRecord($event)"
+  (loadConfiguration)="loadConfiguration($event)"
+  class="vertical-flex-full-height"
+  style="height: 96%; padding: 0.5rem 1.2rem 1.2rem 1.2rem">
+</app-event-analysis-archive-records-viewer>

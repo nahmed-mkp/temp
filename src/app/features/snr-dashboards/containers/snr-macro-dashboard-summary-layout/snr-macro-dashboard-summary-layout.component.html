@@ -1,0 +1,129 @@
+<div *ngIf="macroRunLoading$ | async" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+
+<div class="mat-card-lift upper-right-toolbox horizontal-flex-center">
+    <mat-checkbox style="margin-left: 1rem;" [(ngModel)]="displayMode['75%']" (ngModelChange)="onDisplayModeChange()">75%</mat-checkbox>
+    <mat-checkbox [(ngModel)]="displayMode['50%']" (ngModelChange)="onDisplayModeChange()">50%</mat-checkbox>
+    <mat-checkbox [(ngModel)]="displayMode['25%']" (ngModelChange)="onDisplayModeChange()">25%</mat-checkbox>
+    <mat-checkbox [(ngModel)]="displayMode['Actual']" (ngModelChange)="onDisplayModeChange()">Actual</mat-checkbox>
+    <mat-checkbox [(ngModel)]="displayMode['Consensus']" (ngModelChange)="onDisplayModeChange()">Consensus</mat-checkbox>
+</div>
+
+
+
+<div style="flex: 1 0 0" class="vertical-flex">
+    <h5>Quarterly GDP
+        <i *ngIf="(macroRunQuarterlyGDP$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-quarterly-gdp-plot-viewer 
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunQuarterlyGDP$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async"
+            [displayMode]="displayMode">
+        </app-snr-macro-quarterly-gdp-plot-viewer>
+    </div>
+</div>
+
+
+<div style="flex: 1 0 0"  class="vertical-flex">
+    <h5>Monthly GDP
+        <i *ngIf="(macroRunMonthlyGDP$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-monthly-gdp-plot-viewer
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunMonthlyGDP$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async"
+            [displayMode]="displayMode">
+        </app-snr-macro-monthly-gdp-plot-viewer>
+    </div>
+</div>
+
+<div style="flex: 1 0 0">
+    <h5>Monthly Inflation - Core
+        <i *ngIf="(macroRunMonthlyInflation_core$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-monthly-inflation-plot-viewer
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunMonthlyInflation_core$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async"
+            [displayMode]="displayMode">
+        </app-snr-macro-monthly-inflation-plot-viewer>
+    </div>
+</div>
+
+<div style="flex: 1 0 0">
+    <h5>Monthly Inflation - Headline
+        <i *ngIf="(macroRunMonthlyInflation_headline$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-monthly-inflation-plot-viewer
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunMonthlyInflation_headline$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async"
+            [displayMode]="displayMode">
+        </app-snr-macro-monthly-inflation-plot-viewer>
+    </div>
+</div>
+
+
+<div style="flex: 1 0 0">
+    <h5>
+        GDP Decomposition
+        <i *ngIf="(macroRunQuarterlyGDPDecomposition$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-decomposition-plot-viewer
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunQuarterlyGDPDecomposition$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async">
+        </app-snr-macro-decomposition-plot-viewer>
+    </div>
+</div>
+
+<div style="flex: 1 0 0">
+    <h5>Inflation Decomposition
+        <i *ngIf="(macroRunMonthlyInflationDecomposition$ | async).length === 0 && (macroRunLoading$ | async) === false">
+            <small> - No Data</small>
+        </i>
+    </h5>
+    <div style="flex: 1 0 0; margin: 0 0.5rem" class="horizontal-flex">
+        <app-snr-macro-decomposition-plot-viewer
+            style="margin-right: 0.5rem;"
+            class="mat-card-lift"
+            *ngFor="let plotRawData of (macroRunMonthlyInflationDecomposition$ | async)"
+            [plotRawData]="plotRawData"
+            [loading]="macroRunLoading$ | async"
+            [loaded]="macroRunLoaded$ | async">
+        </app-snr-macro-decomposition-plot-viewer>
+    </div>
+</div>

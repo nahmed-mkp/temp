@@ -1,0 +1,10 @@
+<div *ngIf="runHistoryLoading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+<app-base-grid
+    style="height:500px;"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

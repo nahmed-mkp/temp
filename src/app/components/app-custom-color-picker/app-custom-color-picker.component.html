@@ -1,0 +1,13 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Color Picker</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</div>
+
+
+<div class="mat-dialog-content">
+    <color-sketch color="#fff" (onChangeComplete)="onChangeComplete($event)"></color-sketch>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+</div>

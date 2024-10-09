@@ -1,0 +1,21 @@
+<div style="height:100%;display:flex;flex-direction:row;" class="horizontal-flex-full-height">
+    
+    <app-cs-capital-flows-chart style="width: 25%; padding: 0.2rem;"
+        [dateRange]="dateRange$ | async"
+        [chartData]="chartData$ | async">
+    </app-cs-capital-flows-chart>
+
+    <app-cs-capital-flows style="width: 74.5%; padding: 0.2rem;"
+        [dateRange]="dateRange$ | async"
+        [investors]="investors$ | async"
+        [capitalFlows]="capitalFlows$ | async"
+        [capitalFlowStats]="capitalFlowStats$ | async"
+        [projectedAUM]="projectedAUM$ | async"
+        [formData]="formData$ | async"
+        [canEditCapitalFlows]="canEditCapitalFlows$ | async"
+        (addInvestment)="addInvestment($event)"
+        (editInvestment)="editInvestment($event)"
+        (deleteInvestment)="deleteInvestment($event)"
+        (sendCapitalFlowEmail)="sendCapitalFlowEmail()">
+    </app-cs-capital-flows>
+</div>

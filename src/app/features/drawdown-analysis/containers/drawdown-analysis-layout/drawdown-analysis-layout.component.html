@@ -1,0 +1,88 @@
+
+<mat-toolbar>
+  <span class="toolbar-heading">DRAWDOWN ANALYSIS</span> 
+</mat-toolbar>
+
+<div style="width: 99vw; display:flex; flex-direction:row; height: 94%">
+
+  <app-drawdown-analysis-timeseries-viewer 
+  [drawdownAnalysisTimeseries]="drawdownAnalysisTimeseries$ | async"
+  [drawdownAnalysisTableItems]="drawdownAnalysisTableItems$ | async" 
+  [drawdownAnalysisTimeseriesLoadingStatus] = "drawdownAnalysisTimeseriesLoadingStatus$ | async"
+  [drawdownAnalysisTimeseriesLoadedStatus] = "drawdownAnalysisTimeseriesLoadedStatus$ | async"
+  [chartTitle]="drawdownAnalysisRequest.securityName"
+  [drawdownAnalysisItemSelected]="drawdownAnalysisItemSelected"
+  (pointedSelected)="onPointSelected($event)">
+</app-drawdown-analysis-timeseries-viewer>
+
+<div class="feature-content-section">
+
+  <div class="feature-control-section">
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Select Security"  [(ngModel)]="drawdownAnalysisRequest.securityName" name="securityName"  [matAutocomplete]="auto" [formControl]="myControl">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let security of filteredDrawdownAnalysisSecurityList$ | async" [value]="security.Name">{{security.Name}}</mat-option>
+      </mat-autocomplete>
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="Observe Window..." [(ngModel)]="drawdownAnalysisRequest.observe_window" name="observe_window" >
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="Report Num..." [(ngModel)]="drawdownAnalysisRequest.report_num" name="report_num" >
+      </mat-form-field>
+    </div>
+  
+  
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Start Date (mm/dd/year)" [(ngModel)]="drawdownAnalysisRequest.start_date" name="start_date" [matDatepicker]="startDp" [max]="drawdownAnalysisRequest.end_date">
+        <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+        <mat-datepicker #startDp></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="End Date (mm/dd/year)" [(ngModel)]="drawdownAnalysisRequest.end_date" name="end_date" [matDatepicker]="endDp" [min]="drawdownAnalysisRequest.start_date">
+        <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+        <mat-datepicker #endDp></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Calc Method" [(ngModel)]="drawdownAnalysisRequest.calc_method" name="calc_method">
+          <mat-option [value]="'pct'">Percentage</mat-option>
+          <mat-option [value]="'diff'">Differenece</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Direction" [(ngModel)]="drawdownAnalysisRequest.direction" name="direction">
+          <mat-option [value]="'long'">Long</mat-option>
+          <mat-option [value]="'short'">Short</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div style="transform: translateY(-0.7rem);">
+      <button mat-flat-button color="primary" (click)="onRequestDrawdownAnalysis()" [disabled]="requestDisable" matTooltip='wait' [matTooltipDisabled]="!requestDisable">Submit</button>
+      <button mat-flat-button color="accent" (click)="onClean()" style="margin-left: 0.5rem;" (click)="onClean()">Reset</button>
+    </div>
+    <!-- {{drawdownAnalysisRequest | json}} -->
+  </div>
+
+
+  <app-drawdown-analysis-list-viewer 
+    [drawdownAnalysisTableItems]="drawdownAnalysisTableItems$ | async" 
+    [drawdownAnalysisTableLoadingStatus] = "drawdownAnalysisTableLoadingStatus$ | async"
+    [drawdownAnalysisTableLoadedStatus] = "drawdownAnalysisTableLoadedStatus$ | async"
+    [pointSelected]="pointSelected"
+    [calMethod]="drawdownAnalysisRequest.calc_method"
+    (drawdownAnalysisItemSelected)="onDrawdownAnalysisItemSelected($event)">
+  </app-drawdown-analysis-list-viewer>
+</div>
+
+</div>

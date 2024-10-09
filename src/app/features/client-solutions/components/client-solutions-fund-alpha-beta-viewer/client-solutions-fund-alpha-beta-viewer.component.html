@@ -1,0 +1,26 @@
+<div *ngIf="loading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<h5>
+    <span>{{title}} Alpha Beta Analysis vs. </span>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="width: 22rem;margin-right: 0.5rem;">
+        <mat-label>Benchmark*</mat-label>
+        <mat-select  [(ngModel)]="selectedBenchmark" (ngModelChange)="selectedBenchmarkChange()">
+            <mat-option *ngFor="let benchmark of benchmarks" [value]="benchmark">
+                {{benchmark?.description}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</h5>
+
+
+
+<app-base-grid
+    style="flex: 1 0 0; margin: 0.3rem"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

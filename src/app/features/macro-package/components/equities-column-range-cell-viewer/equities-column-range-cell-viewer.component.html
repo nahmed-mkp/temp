@@ -1,0 +1,7 @@
+<highcharts-chart 
+  *ngIf="params.node.group === false"
+  style="width: 100%; height: 100%; display: flex;" 
+  [Highcharts]="Highcharts"
+  [options]="optionsPlot || {}"
+  [callbackFunction]="callbackFn">
+</highcharts-chart>

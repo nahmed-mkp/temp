@@ -1,0 +1,37 @@
+<mat-tab-group [animationDuration]="0" #tabs  [selectedIndex]="tabIndex" (selectedTabChange)="onTabChanged($event)" class="vertical-flex-full-height" style="flex: 1 0 0; border: 1px solid black;">
+  <mat-tab *ngFor="let tabItem of tabsList; let index=index" [label]="tabItem" style="flex: 1 0 0;"> 
+      <ng-template mat-tab-label>
+        <div class="col" style="margin-left:5px;">{{tabItem}}</div>
+        <i class="material-icons tab-delete" matTooltip="Close" (click)="removeLayout(layout)">clear</i>
+      </ng-template>
+      <app-factor-exposure-dynamic-tab
+        [nonlinearData]="groupingTabData"
+        [nonlinearDataLoaded]="groupingTabDataLoaded"
+ 
+        [linearData]="positionsAndGroupingData"
+        [linearDataLoaded]="positionsAndGroupingDataLoaded"
+ 
+        [activeGrouping]="activeGrouping"
+        [activeGroupingArray]="getActiveGroupingArray(activeGrouping)"
+
+        [useUSDFilter]="useUSDFilter"
+        [useBpsToFundFilter]="useBpsToFundFilter"
+        [useBpsToPodFilter]="useBpsToPodFilter"
+        [useNullSecFilter]="useNullSecFilter"
+
+        [privilegedAccess]="privilegedAccess"
+        [groupingNameAndIdMaping]="groupingNameAndIdMaping"
+        [userSettings]="userSettings"
+      >
+      </app-factor-exposure-dynamic-tab>
+  </mat-tab>
+
+  <mat-tab *ngIf="privilegedAccess" [label]="'Factors'" style="flex: 1 0 0;"> 
+    <app-factors-tab
+      style="flex: 1 0 0"
+      [gridData]="factorsTabData"
+      [dataLoaded]="factorsTabDataLoaded"  
+    >
+    </app-factors-tab>
+  </mat-tab>
+</mat-tab-group>

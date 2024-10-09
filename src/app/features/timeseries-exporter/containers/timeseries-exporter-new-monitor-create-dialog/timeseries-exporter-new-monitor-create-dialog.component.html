@@ -1,0 +1,20 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small style="color: white; margin-left: 0.5rem;">Create New Monitor List</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick()">close</i>
+</div>
+
+
+<mat-form-field appearance="outline" class="outline-shrink" style="flex: 1 0 0;padding: 1rem;">
+    <mat-label>New Monitor List Name</mat-label>
+    <input matInput placeholder="1%" [(ngModel)]="newMonitorName" autocomplete="off"(ngModelChange)="checkIfNameValid()">
+    <span *ngIf="duplicationMonitorNameWarning" style="color: red;">Monitor name already existed, please try another one.</span>
+</mat-form-field>
+
+<!-- <div class="error">
+    <p *ngIf="duplicationMonitorNameWarning">Monitor name already existed, please try another one.</p>
+</div> -->
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onConfirm()" [disabled]="duplicationMonitorNameWarning || !newMonitorName">Confirm</button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

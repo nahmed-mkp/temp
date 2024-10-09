@@ -1,0 +1,73 @@
+<div *ngIf="!currTab" class="vertical-flex-full-height" style="width:100%;display:flex;align-items: center;justify-content: center;">
+    <div>
+        No data has been selected. Please create a timeseries portfolio or open an existing one. 
+    </div>
+</div>
+
+<div *ngIf="currTab.portfolio.timeseries.length > 0" class="vertical-flex-full-height">
+    
+        <div *ngIf="
+                currTab.portfolio.timeseries.length > 0 && 
+                this.currTab.regressionData && 
+                (this.currTab.regressionData.timeseries.length === 0  || this.currTab.regressionData === null)" class="vertical-flex-full-height" style="width:100%;display:flex;align-items: center;justify-content: center;">
+            <div>
+                No regression has been run. Please apply the proper params and run the regression.
+            </div>
+        </div>
+        
+        <mat-tab-group class="mat-card bottom-tab-group vertical-flex-full-height" headerPosition="below" [selectedIndex]="selectedIndex" [animationDuration]="0"  (selectedTabChange)="onSelectedTabChange($event)">
+
+            <mat-tab [label]="'regression'">
+                <ng-template mat-tab-label>
+                    <div class="tab">
+                        Regression
+                    </div>
+                </ng-template>
+                <highcharts-chart 
+                    *ngIf="this.currTab.regressionData && this.currTab.regressionData.timeseries.length > 0"
+                    style="display: flex; height: 100%;" 
+                    [Highcharts]="Highcharts"
+                    [options]="chartConfig || {}"
+                    [callbackFunction]="regressionChartCallbackFn"
+                >
+                </highcharts-chart> 
+            </mat-tab>
+
+        
+            <mat-tab [label]="'actual'">
+                <ng-template mat-tab-label>
+                    <div class="tab">
+                        Actual vs. Predicted
+                    </div>
+                </ng-template>
+                <highcharts-chart 
+                    *ngIf="this.currTab.regressionData && this.currTab.regressionData.timeseries.length > 0"
+                    style="display: flex; height: 100%;" 
+                    [Highcharts]="Highcharts"
+                    [constructorType]="'stockChart'"
+                    [options]="chartConfig || {}"
+                    [callbackFunction]="actualChartCallbackFn"
+                >
+                </highcharts-chart> 
+            </mat-tab>
+
+            <mat-tab [label]="'residual'">
+                <ng-template mat-tab-label>
+                    <div class="tab">
+                        Residual
+                    </div>
+                </ng-template>
+                <highcharts-chart 
+                    *ngIf="this.currTab.regressionData && this.currTab.regressionData.timeseries.length > 0"
+                    style="display: flex; height: 100%;"
+                    [Highcharts]="Highcharts"
+                    [constructorType]="'stockChart'"
+                    [options]="chartConfig || {}"
+                    [callbackFunction]="residualChartCallbackFn"
+                >
+                </highcharts-chart> 
+            </mat-tab>
+        
+        </mat-tab-group>
+   
+</div>

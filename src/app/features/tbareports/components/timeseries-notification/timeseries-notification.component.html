@@ -1,0 +1,33 @@
+<div class="alert alert-danger" *ngIf="error">
+    <strong>Error!</strong> {{error}}
+</div>
+<div class="alert alert-success" *ngIf="completionStatus">
+    <strong>Success!</strong> {{ completionStatus }}
+</div>
+<div class="alert alert-danger" *ngIf="oasCacheFailedStatus">
+    <button type="button" class="close" data-dismiss="alert" (click)="clearStatus('oasFailed')">x</button>
+    <strong>Failed! </strong>
+    {{ oasCacheFailedStatus }}
+</div>
+<div class="alert alert-success" *ngIf="oasCacheSuccessStatus">
+    <button type="button" class="close" data-dismiss="alert" (click)="clearStatus('oasSuccess')">x</button>
+    <strong>Success !</strong>
+    {{ oasCacheSuccessStatus }}
+</div>
+<div class="alert alert-info" *ngIf="oasCacheRefreshingStatus">
+    <strong>Please wait...</strong> Refreshing OAS Cache
+</div>    
+
+<div class="alert alert-danger" *ngIf="tsyCacheFailedStatus">
+    <button type="button" class="close" data-dismiss="alert" (click)="clearStatus('tsyFailed')">x</button>
+    <strong>Failed! </strong>
+    {{ tsyCacheFailedStatus }}
+</div>
+<div class="alert alert-success" *ngIf="tsyCacheSuccessStatus">
+    <button type="button" class="close" data-dismiss="alert" (click)="clearStatus('tsySuccess')">x</button>
+    <strong>Success !</strong>
+    {{ tsyCacheSuccessStatus }}
+</div>
+<div class="alert alert-info" *ngIf="tsyOasCacheRefreshingStatus">
+    <strong>Please wait...</strong> Refreshing Tsy OAS Cache
+</div>

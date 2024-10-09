@@ -1,0 +1,77 @@
+<mat-form-field class="hidden">
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date" class="hidden"
+    (dateChange)="onDateChanged($event)">
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<button mat-flat-button color="datepicker" *ngIf="!utilityService.isCompactMode()" class="mat-button mat-button-shrink"
+  (click)="picker.open()" id="date-picker-button"
+  [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}">{{date}}</button>
+
+
+<button *ngIf="!streamingStatus && !utilityService.isCompactMode()"
+  mat-flat-button class="mat-button mat-button-shrink" [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}" [disabled]="mode === 'close' || !isLive()"
+  (click)="onToggleStreaming()" color="primary" id="start-stream-button">Start Streaming</button>
+
+<button *ngIf="streamingStatus && !utilityService.isCompactMode()"
+  mat-flat-button class="mat-button mat-button-shrink" [disabled]="mode === 'close' || !isLive()"
+  (click)="onToggleStreaming()" color="danger" id="stop-stream-button" [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}">Stop Streaming</button>
+
+<mat-slide-toggle [disabled]="!isLive()" id="mode-selector" color="primary" [checked]="mode === 'close'" *ngIf="!utilityService.isCompactMode()"
+  [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}" (change)="onModeChanged($event)">
+  <span class="slide-toggle-label" *ngIf="mode === 'close'">
+    Close Mode
+  </span>
+  <span class="slide-toggle-label" *ngIf="mode !== 'close'">
+    Live Mode
+  </span>
+</mat-slide-toggle>
+
+<!-- <button [disabled]="mode !== 'close' || !isLive()" mat-flat-button class="mat-button mat-button-shrink" (click)="onTakeSnapshot()" *ngIf="!utilityService.isCompactMode()"
+  color="snapshot" id="snapshot-button" [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}">Take Snapshot</button> -->
+
+<button mat-flat-button class="mat-button mat-button-shrink" (click)="onOpenCompactMode()" *ngIf="!utilityService.isCompactMode()"
+  color="snapshot" id="compact-view-button" [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}">Compact Mode</button>
+
+<button mat-flat-button class="mat-button mat-button-shrink" (click)="onRestartTradewebExcel()"
+  color="danger" id="restart-tradeweb-button" *ngIf="!utilityService.isCompactMode()"
+  [ngClass]="{'restart-tradeweb-compact': utilityService.isCompactMode()}">Restart Tradeweb</button>
+
+<mat-slide-toggle id="risk-selector" color="primary" [checked]="showDurations"
+  [ngClass]="{'daily-tracking-compact': utilityService.isCompactMode()}"
+  (change)="onShowDurationsChanged()">
+  <span class="slide-toggle-label" *ngIf="!showDurations">
+    Show Durations
+  </span>
+  <span class="slide-toggle-label" *ngIf="showDurations">
+    Hide Durations
+  </span>
+</mat-slide-toggle>
+
+<button mat-flat-button class="mat-button mat-button-shrink" (click)="onRestartTradewebExcel()" color="danger"
+  *ngIf="utilityService.isCompactMode()"
+  id="restart-tradeweb-button-compact">Restart Tradeweb</button>
+
+<!-- <mat-slide-toggle id="sofr-selector" color="primary" [checked]="useSOFR === true"
+    *ngIf="!utilityService.isCompactMode()" (change)="toggleSOFRSpreads($event)">Use SOFR Spreads</mat-slide-toggle>
+
+<mat-slide-toggle id="sofr-selector-compact" color="primary" [checked]="useSOFR === true"
+  *ngIf="utilityService.isCompactMode()" (change)="toggleSOFRSpreads($event)">Use SOFR Spreads</mat-slide-toggle>
+
+<mat-slide-toggle id="legacy-selector" color="primary" [checked]="useLegacy === true"
+  *ngIf="!utilityService.isCompactMode()" (change)="toggleLegacyMode($event)">Use Excel</mat-slide-toggle>
+
+<mat-slide-toggle id="legacy-selector-compact" color="primary" [checked]="useLegacy === true"
+  *ngIf="utilityService.isCompactMode()" (change)="toggleLegacyMode($event)">Use Excel</mat-slide-toggle> -->
+
+
+<app-base-grid 
+  class="vertical-flex-full-height" 
+  [gridItems]="[]" 
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption" 
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+
+

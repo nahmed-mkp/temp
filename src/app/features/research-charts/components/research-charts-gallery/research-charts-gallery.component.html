@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{chartPackCharts?.name}}</mat-card-title>
+        <mat-card-subtitle>{{chartPackCharts?.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="display:flex;flex-grow: 1 1 auto;flex-direction:column;">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    </mat-card-content>
+</mat-card>

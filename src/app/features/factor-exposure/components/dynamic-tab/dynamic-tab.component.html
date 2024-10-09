@@ -1,0 +1,12 @@
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="[]" 
+  [customGridOption]="customGridOption" 
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+
+<div *ngIf="!(nonlinearDataLoaded && linearDataLoaded) && tabSwitchBuffer"  class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div>

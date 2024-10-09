@@ -1,0 +1,26 @@
+<div *ngIf="!showChart()" class="warning-panel" style="width:100%;">
+    <div>
+        No data has been selected. Please create a timeseries portfolio or open an existing one. 
+    </div>
+</div>
+
+<div *ngIf="timeseriesArr.length === 0" class="warning-panel" style="width:100%;">
+    <div>
+        No data has been loaded. Please adjust params and submit a request for a technical indicator.
+    </div>
+</div>
+
+
+
+
+<div class="vertical-flex-full-height" >
+    <highcharts-chart style="display: flex; flex: 1 0 0;" 
+        [Highcharts]="Highcharts"
+        [constructorType]="'chart'"
+        [options]="chartConfig || {}"
+        [callbackFunction]="callbackFn"
+    >
+    </highcharts-chart>
+</div>
+
+

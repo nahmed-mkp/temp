@@ -1,0 +1,37 @@
+
+.toolbar { 
+    padding: 0rem 0.7rem;
+    // margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    align-items: right;
+
+    .link-row { 
+        margin: 0.3rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    span {
+        opacity: 0.5;
+    }
+
+    span:hover {
+        opacity: 1;
+        color: #3f51b5;
+    }
+    span:last-child:hover {
+        color: initial;
+        opacity: 1;
+    }
+
+    position: fixed;
+    z-index: 100;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px -1rem;
+    box-shadow: 1px 1px 10px 0px #80808078;
+    border-radius: 10px;
+}

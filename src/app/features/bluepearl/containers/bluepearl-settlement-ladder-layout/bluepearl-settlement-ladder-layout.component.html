@@ -1,0 +1,17 @@
+<app-bluepearl-settlement-ladder-toolbar-layout
+    [migrationDate] = "migrationDate$ | async"
+    [settlementDate] = "settlementDate$ | async"
+    [selectedFund] = "selectedFund$ | async"
+    [funds] = "funds$ | async"
+>
+
+</app-bluepearl-settlement-ladder-toolbar-layout>
+<div class="grid-wrap">
+    <app-bluepearl-settlement-ladder-viewer
+        style="vertical-flex-full-height"
+        [settlementLadderData]="settlementLadderData$ | async"
+        [settlementLadderDataLoading]="settlementLadderDataLoading$ | async"
+        [repoGovs]="repoGovs$ | async"
+    >
+    </app-bluepearl-settlement-ladder-viewer>
+</div>

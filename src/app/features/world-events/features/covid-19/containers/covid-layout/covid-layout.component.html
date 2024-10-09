@@ -1,0 +1,38 @@
+<mat-tab-group>
+    <mat-tab label="United States">
+        <app-covid-us-stats></app-covid-us-stats>
+    </mat-tab>
+    <mat-tab label="World">
+        <app-covid-world-stats></app-covid-world-stats>
+    </mat-tab>
+   <mat-tab label="Mobility Index">
+        <app-covid-mobility-index></app-covid-mobility-index>
+    </mat-tab>
+</mat-tab-group>
+
+
+<!-- {{ countries$ | async | json }} -->
+<!-- 
+<app-covid-timeseries-configuration
+    [countries]="countries$ | async"
+    [columns]="columns$ | async"
+    (onSelectCountry)="selectedCountry = $event"
+    (onSelectScale)="selectedScale = $event"
+    (onSelectXaxis)="selectedXaxis = $event"
+    (onSelectColumn)="selectedColumns = $event">
+</app-covid-timeseries-configuration>
+
+<app-covid-timeseries-plot-layout
+    [selectedCountry]="selectedCountry"
+    [selectedScale]="selectedScale"
+    [selectedXaxis]="selectedXaxis"
+    [selectedColumns]="selectedColumns"
+    
+    [countriesRawData]="countriesRawData$ | async"
+    [countriesRawDataLoading]="countriesRawDataLoading$ | async"
+    [countriesRawDataError]="countriesRawDataError$ | async"
+    [columns]="columns$ | async">
+</app-covid-timeseries-plot-layout> -->
+
+
+

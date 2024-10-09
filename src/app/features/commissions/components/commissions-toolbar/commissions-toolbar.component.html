@@ -1,0 +1,23 @@
+<mat-toolbar>
+    <span class="toolbar-heading">COMMISSIONS SCHEDULE</span>
+    <span class="toolbar-spacer"></span>
+
+    <button mat-icon-button class="toolbar-icon" (click)="showInstructions()" matTooltip="Show Instructions">
+        <mat-icon>help</mat-icon>
+    </button>
+
+    <button mat-raised-button matTooltip="Download Commissions" (click)="downloadCommissions()">
+        <mat-icon>download</mat-icon>
+        Download Commissions
+    </button>
+
+    <input style="display:none" id="upload-file" matTooltip="Upload Commissions" 
+        name="upload-file" type="file" #uploader (change)="addFiles($event)" accept="xlsx"/>
+    <label for="upload-file">            
+        <button mat-raised-button color="primary" (click)="uploader.click()"
+            style="margin-left:0.5rem; ">
+            <mat-icon>upload</mat-icon>
+            Upload Commissions
+        </button>
+    </label>        
+</mat-toolbar>

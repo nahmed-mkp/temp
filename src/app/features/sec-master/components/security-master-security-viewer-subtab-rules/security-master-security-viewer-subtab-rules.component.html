@@ -1,0 +1,11 @@
+<!-- <p>security-master-security-viewer-subtab-rules works!</p> -->
+
+<!-- {{rules | json}} -->
+
+<mat-card *ngFor="let rule of rulesFormatted">
+    <h5 [ngStyle]="{'color': rule.status === 'Success' ? '#4caf50' : '#f44336'}">{{rule.ruleName}}</h5>
+    <small>{{rule.message}}</small>
+</mat-card>
+
+
+

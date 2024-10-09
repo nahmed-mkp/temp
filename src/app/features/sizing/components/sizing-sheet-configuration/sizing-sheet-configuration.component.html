@@ -1,0 +1,36 @@
+<div class="vertical-flex-full-height" style="flex: 1 0 0">
+    <h4>Sizing Sheet Configuration</h4>
+    <mat-tab-group animationDuration="0ms" style="flex: 1 0 0">    
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    Securities
+                </span>
+            </ng-template>
+            <app-sizing-sheet-securities
+                [sizingSheetSecurities]="sizingSheetSecurities"
+                [sizingSheetSecuritiesLoading]="sizingSheetSecuritiesLoading"
+                [sizingSheetSecuritiesLoaded]="sizingSheetSecuritiesLoaded"
+                [sizingSheetSecuritiesError]="sizingSheetSecuritiesError"
+                (saveChanges)="saveChanges($event)"></app-sizing-sheet-securities>
+        </mat-tab>
+    
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    User/Pod Mapping
+                </span>
+            </ng-template>
+            <app-sizing-sheet-default-capitals
+                [defaultCapitals]="defaultCapitals"
+                [defaultCapitalsLoading]="defaultCapitalsLoading"
+                [defaultCapitalsLoaded]="defaultCapitalsLoaded"
+                [defaultCapitalsError]="defaultCapitalsError"></app-sizing-sheet-default-capitals>
+        </mat-tab>
+    
+    </mat-tab-group>
+    
+</div>
+
+
+

@@ -1,0 +1,24 @@
+<mat-tab-group #tabGroup style="flex: 1 0 0; height: 100%;" [selectedIndex]="selectedIndex" (selectedTabChange)="tabChanged($event)">
+    <mat-tab *ngFor="let layoutName of layoutNames; let i = index;" [label]="layoutName">
+
+        <ng-template mat-tab-label>
+            <span>
+                {{
+                    (layoutEntity)[layoutName]?.isShared ? 
+                    ('[ ' + (layoutEntity)[layoutName]?.createdBy + ' ] ' + layoutName) :
+                    layoutName
+                }}
+            </span>
+            <i class="material-icons tab-delete" matTooltip="Close" (click)="removeLayout(layoutName)">clear</i>
+        </ng-template>
+
+
+        <app-pnl-attribution-sub-layout 
+            style="flex: 1 0 0;"
+            class="vertical-flex-full-height"
+            [layoutName]="layoutName"
+            [isActive]="tabGroup._selectedIndex === i">
+        </app-pnl-attribution-sub-layout>
+    
+    </mat-tab>
+</mat-tab-group>

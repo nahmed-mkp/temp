@@ -1,0 +1,21 @@
+<!-- <p>option-vols-commodity-result-viewer works!</p> -->
+<app-base-grid
+  class="vertical-flex-full-height" 
+  style="flex: 1 0 0"
+  *ngIf="result && displayMode==='delta'"
+  [gridItems]="[]"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<app-option-vols-fx-surface-result-viewer
+  *ngIf="result && displayMode==='surface'"
+  [result]="result"
+  (adjustSize)="onSurfaceAdjustSize($event)">
+</app-option-vols-fx-surface-result-viewer>
+
+<app-option-vols-fx-forward-result-viewer
+  *ngIf="result && displayMode==='forward'"
+  [result]="result">
+</app-option-vols-fx-forward-result-viewer>

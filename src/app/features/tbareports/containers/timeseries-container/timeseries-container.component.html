@@ -1,0 +1,49 @@
+<mat-toolbar>
+
+    <span class="toolbar-heading"> REPORTS </span>
+    <span class="vertical-toolbar-divider-small"></span>
+
+
+    <app-tbareports-timeseries-selector 
+        [mode]="mode$ | async"
+        [series]="series$ | async"
+        [selectedSeries]="selectedSeries$ | async"
+        [metricTypes]="metricTypes$ | async"
+        [selectedMetricType]="selectedMetricType$ | async"
+        (onSeriesSelected)="selectSeries($event)"
+        (onPlotTypeChanged)="changePlotType($event)"
+        (onMetricTypeChanged)="changeMetricType($event)"
+        (modeChanged)="modeChanged($event)">
+    </app-tbareports-timeseries-selector>
+
+    <span class="toolbar-spacer"></span>
+
+    <!-- (trackerModeChanged)="trackerModeChanged($event)" -->
+
+    <div style="margin-top:5px;">
+        <span class="link-row " (click)="refreshData($event)" matTooltip="Refresh Data"><i class="material-icons toolbar-icon">refresh</i></span>
+        <span class="link-row"  (click)="reloadCharts($event)" matTooltip="Reload Charts"><i class="material-icons toolbar-icon">restore_page</i></span>
+        <span *ngIf="(mode$ | async)  ==='trackerTypeMode' || (mode$ | async)==='dialedTypeMode' || (mode$ | async)==='v99TypeMode'" (click)="downloadTracker()" class="link-row tracker-mode-option toolbar-icon" matTooltip="Download Dealer Runs"><i class="material-icons">save_alt</i></span>
+        <span *ngIf="(mode$ | async) ==='trackerTypeMode' || (mode$ | async)==='dialedTypeMode' || (mode$ | async)==='v99TypeMode'" class="link-row tracker-mode-option toolbar-icon" matTooltip="TBA Tracker Timestamp" id="tba-tracker-timestamp"><i class="material-icons">query_builder</i><span class="timestamp-alt" style="margin-left:0rem;font-weight: normal">{{trackerTimestamp$ | async}}</span></span>
+    </div>
+
+  
+</mat-toolbar>
+
+<ng-container>
+    <app-tbareports-notification
+        [oasCacheRefreshingStatus]="oasCacheRefreshingStatus$ | async"
+        [tsyOasCacheRefreshingStatus]="tsyOasCacheRefreshingStatus$ | async"
+        [oasCacheFailedStatus]="oasCacheFailedStatus$ | async"
+        [oasCacheSuccessStatus]="oasCacheSuccessStatus$ | async"
+        [tsyCacheFailedStatus]="tsyCacheFailedStatus$ | async"
+        [tsyCacheSuccessStatus]="tsyCacheSuccessStatus$ | async"
+        (statusCleared)="clearStatus($event)"></app-tbareports-notification>
+</ng-container>
+
+<app-tbareports-timeseries-plots 
+    *ngIf="!trackerMode || (trackerMode && selectedMetricType)"
+    [mode]="mode$ | async"
+    [timeseries]="selectedSeries$ | async"
+    [allCoupons]="coupons$ | async"
+    [selectedCoupons]="selectedCoupons$ | async"></app-tbareports-timeseries-plots>

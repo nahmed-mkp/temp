@@ -1,0 +1,43 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+<div style="display: flex">
+  <span class="vol-report-infor-section" style="flex: 1.5 0 0">
+    <h5>Data Source</h5>
+    <ul>
+      <li><span>Equity:</span><span>Bloomberg Equity Live Vol</span></li>
+      <li><span>FX:</span><span>Bloomberg FX Vol</span></li>
+      <li><span>Rate:</span><span>Barclays Rate Annual Bps Vol</span></li>
+      <li><span>Credit:</span><span>JPM Credit Spread Vol</span></li>
+      <li><span>Commodity:</span><span>Bloomberg Equity Live Vol</span></li>
+    </ul>
+  </span>
+
+  <span class="vol-report-infor-section" style="flex: 1.5 0 0">
+    <h5>Option Breakeven Definition:</h5>
+    <ul>
+      <li><span>Put BE:</span><span>25Delta Put Strike‐Put Premium</span></li>
+      <li><span>Call BE:</span><span>25Delta Call Strike+Call Premium</span></li>
+      <li><span>Credit:</span><span>IG, Main and XO are quoted in spread, HY is in Price</span></li>
+    </ul>
+  </span>
+
+  <span class="vol-report-infor-section" style="flex: 2 0 0">
+    <h5>Skew Definition:</h5>
+    <ul>
+      <li><span>Equity:</span><span> 90% Put ‐ 110% Call</span></li>
+      <li><span>FX:</span> <span>25Delta Put ‐ 25Delta Call</span></li>
+      <li><span>Rate:</span> <span>Annual Bp Vol, ATM+50 bps ‐ ATM‐50 bps</span></li>
+      <li><span>Credit:</span><span>75Delta (wider spread) ‐25Delta (lower spread) Spread Vol</span> </li>
+      <li><span>Commodity:</span><span>90% Put ‐ 110% Call</span> </li>
+    </ul>
+  </span>
+
+  <span class="vol-report-infor-section" style="flex: 1.2 0 0">
+    <h5>Color Coding</h5>
+    <ul>
+      <li><span>Percentile:</span><span>0 - 10%; 90 - 100%; <br> 10 - 20 %; 80-90%</span> </li>
+      <li><span>Weekly Vol Chg:</span><span>&lt;=-20%; &gt;=20%</span></li>
+    </ul>
+  </span>
+</div>

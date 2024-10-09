@@ -1,0 +1,13 @@
+.mat-card-lift {
+    margin: 0 0.25rem;
+    border-radius: 5px;
+}
+
+app-market-data-timeseries-plot-viewer,
+app-market-data-timeseries-grid-viewer, app-market-data-detail-viewer {
+    position: relative;
+}
+
+app-market-data-enhanced-search-layout  {
+    position: relative;
+}

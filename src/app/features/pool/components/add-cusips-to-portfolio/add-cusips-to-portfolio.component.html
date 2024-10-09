@@ -1,0 +1,58 @@
+<!-- <p>
+  add-cusip-to-portfolio works!
+</p> -->
+<h4 class="pool-sidenav-card-title">
+  Add Cusips
+</h4>
+<div class="card-action">
+  <i class="material-icons" (click)="onclose()">arrow_left</i>
+</div>
+
+<form>
+  <mat-form-field>
+    <textarea matInput rows='30' 
+      placeholder="Paste or type in the are below" 
+      name="cusips" 
+      [(ngModel)]="cusipString"
+      (ngModelChange)="cusipsChange()"> 
+    </textarea>
+  </mat-form-field>
+</form>
+
+<div>
+    <button mat-flat-button color="primary" (click)="addCusips()" style="margin-right: 1rem">Add</button>
+    <!-- <button mat-flat-button color="accent" (click)="onclose()" style="margin-right: 1rem">Close</button> -->
+    <button mat-stroked-button (click)="onReset()">Reset</button>
+    <!-- <mat-divider style="margin-top: 0.8rem"></mat-divider> -->
+</div>
+
+
+<!-- <table mat-table [dataSource]="portfolio">
+
+  <ng-container matColumnDef="cusip">
+    <th mat-header-cell *matHeaderCellDef> Cusip </th>
+    <td mat-cell *matCellDef="let element"> {{element.Cusip}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="blbgName">
+    <th mat-header-cell *matHeaderCellDef> BlbgName </th>
+    <td mat-cell *matCellDef="let element"> {{element.BlbgName}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="origFace">
+    <th mat-header-cell *matHeaderCellDef> OrigFace </th>
+    <td mat-cell *matCellDef="let element"> {{element.BidOrigFace}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table> -->
+
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="portfolio"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

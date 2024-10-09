@@ -1,0 +1,91 @@
+<!-- <p>
+  event-analysis-layout works!
+</p> -->
+
+<div>
+
+  <mat-tab-group #tabs class="mat-card test-timeseries-analysis-result-viewer" 
+    (selectedTabChange)="showSelectedTabContent($event)"
+    style="flex: 2 0 0; overflow: auto">
+
+    <mat-tab label="Raw Data" >
+      <app-event-analysis-rawdata-viewer 
+        [data]="activeMarketDataGridFormated$ | async" 
+        class="vertical-flex-full-height"
+        [activeConfiguration]="activeConfiguration$ | async"
+        [activeMarketDataLoadingStatus]="activeMarketDataLoadingStatus$ | async"
+        [activeTimeseriesAnalysisRecord]="activeTimeseriesAnalysisRecord$ | async"
+        (changeRecordName)="changeRecordName($event)">
+    </app-event-analysis-rawdata-viewer>
+    </mat-tab>
+    
+    <mat-tab label="Plot">
+      <ng-template matTabContent>
+        <app-event-analysis-plot-viewer 
+          [data]="activeMarketDataPlotFormated$ | async" 
+          [activeConfiguration]="activeConfiguration$ | async"
+          [activeMarketDataLoadingStatus]="activeMarketDataLoadingStatus$ | async"
+          [activeTimeseriesAnalysisRecord]="activeTimeseriesAnalysisRecord$ | async"
+          [displayMode]='displayMode'
+          class="vertical-flex-full-height" 
+          style="width: 100%; display: block">
+        </app-event-analysis-plot-viewer>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Event Analysis">
+      <ng-template matTabContent>
+        <app-event-analysis-event-plot-viewer
+          [data]="activeEventAnalysisEventPlotData$ | async"
+          [activeConfiguration]="activeConfiguration$ | async"
+          [selectedDates]="selectedEventAnalysisDates"
+          [datesColorCodes]="activeEventAnalysisDatesColorCodes$ | async"
+          [activeEventAnalysisLoadingStatus]="activeEventAnalysisLoadingStatus$ | async"
+          [activeTimeseriesAnalysisRecord]="activeTimeseriesAnalysisRecord$ | async"
+          [displayMode]="displayMode"
+          (selectedDatesChange)="selectedDatesChange($event)"
+          class="vertical-flex-full-height"
+          style="width: 100%; display: block">
+        </app-event-analysis-event-plot-viewer>
+      </ng-template>  
+    </mat-tab>
+
+    <mat-tab label="Event Statistics">
+      <ng-template matTabContent>
+        <app-event-analysis-statistic-viewer
+          [data]="activeEventAnalysisStatisticData$ | async"
+          [activeConfiguration]="activeConfiguration$ | async"
+          [activeEventAnalysisLoadingStatus]="activeEventAnalysisLoadingStatus$ | async"
+          [activeTimeseriesAnalysisRecord]="activeTimeseriesAnalysisRecord$ | async"
+          (changeRecordName)="changeRecordName($event)"
+          class="vertical-flex-full-height">
+        </app-event-analysis-statistic-viewer>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+  <app-event-analysis-formula-timeseries-setting
+    class="mat-card vertical-flex-full-height"
+    style="height: initial"
+    [configuration]="activeConfiguration$ | async"
+    [marketDataProviders]="marketDataProviders$ | async"
+    [displayMode]="displayMode"
+    [ngClass]="{'collapse': displayMode === 'collapse', 'expand': displayMode==='expand'}"
+    [visibilityInEventPlot]="visibilityInEventPlot$ | async "
+    (addConfiguration)="addConfiguration($event)"
+    (updateConfiguration)="updateConfiguration($event)"
+    (changeDisplayMode)="changeDisplayMode($event)"
+    (toggleVisibilityInEventPlot)="onToggleVisibilityInEventPlot($event)"
+  ></app-event-analysis-formula-timeseries-setting>
+
+</div>
+
+<app-event-analysis-configuration-panel 
+  class="vertical-flex-full-height"
+  [preprocessingOptions] = 'preprocessingOptions$ | async'
+  [activeConfiguration]="activeConfiguration$ | async"
+  [activeTab]="activeTab"
+  [eventCalenders] ='eventCalenders$ | async'
+  (updateConfiguration)="updateConfiguration($event)"
+  (restoreConfiguration)="restoreConfiguration()">
+</app-event-analysis-configuration-panel>

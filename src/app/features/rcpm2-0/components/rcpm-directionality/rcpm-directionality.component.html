@@ -1,0 +1,60 @@
+<div *ngIf="loading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+
+<div class="horizontal-flex-full-width" style="margin-top:1rem;">
+    <mat-form-field appearance="outline" class="date-form-field" >
+        <mat-label>First Lookback</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-icon class="param-icon" matPrefix >today</mat-icon>
+                <mat-select [value]="params.lookbacks[0]" (selectionChange)="onLookbackchange($event, 0)">
+                    <mat-option *ngFor="let option of input.lookback1" [value]="option.code">{{option.name}}</mat-option>
+                </mat-select>
+            </div>
+
+       
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink date-form-field">
+        <mat-label>Second Lookback</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-icon class="param-icon" matPrefix>today</mat-icon>
+            <mat-select [value]="params.lookbacks[1]" (selectionChange)="onLookbackchange($event, 1)">
+                <mat-option *ngFor="let option of input.lookback2" [value]="option.code">{{option.name}}</mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink date-form-field">
+        <mat-label>Date</mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="params.fromDate" (ngModelChange)="onFromDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <form style="margin-right: 0.3rem;margin-bottom:-5px;">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="e.g. EWZ IShares Brazil" (input)="onSearch($event.target.value)" autocomplete="off">
+        </mat-form-field>
+    </form>
+
+    <button mat-icon-button color="primary" (click)="onRefresh()" style="opacity: 0.5;margin-top:-1rem">
+        <mat-icon>refresh</mat-icon>
+    </button>
+    <small style="margin-top:-1rem;">Updated: {{timeDiffFormat}}</small>
+</div>
+
+<app-base-grid
+    style="flex: 1 0 0"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+
+<!-- {{dataPath | json}} -->

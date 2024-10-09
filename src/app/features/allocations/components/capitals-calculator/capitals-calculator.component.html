@@ -1,0 +1,55 @@
+<mat-grid-list cols="3" [rowHeight]="rowHeight" >
+    <mat-grid-tile [colspan]="1">
+        <mat-card class="dashboard-card">
+            <mat-card-content class="dashboard-card-content">
+                <app-crosspod-matrix style="height:100%;"
+                    class="vertical-flex"
+                    [asOfDate]="input?.asOfDate"
+                    [mode]="'readonly'"
+                    [showPct]="showPct"
+                    [guid]="input?.guid"
+                    [funds]="funds"
+                    [fundComplex]="input?.fundComplex"
+                    [capitalMatrix]="capitalMatrix"
+                    [originalCapitalMatrix]="capitalMatrix">
+                </app-crosspod-matrix>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+        <mat-card class="dashboard-card">
+            <mat-card-content class="dashboard-card-content">
+                <app-crosspod-matrix
+                    style="height:100%;"
+                    class="vertical-flex"
+                    [asOfDate]="input?.asOfDate"
+                    [mode]="'editable'"
+                    [showPct]="showPct"
+                    [guid]="input?.guid"
+                    [funds]="funds"
+                    [fundComplex]="input?.fundComplex"
+                    [capitalMatrix]="capitalMatrixNew"
+                    [originalCapitalMatrix]="capitalMatrix">
+                </app-crosspod-matrix>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+        <mat-card class="dashboard-card">
+            <mat-card-content class="dashboard-card-content">
+
+                <app-crosspod-matrix style="height:100%;"
+                    class="vertical-flex"
+                    [asOfDate]="input?.asOfDate"
+                    [mode]="'diff'"
+                    [showPct]="showPct"
+                    [guid]="input?.guid"
+                    [funds]="funds"
+                    [fundComplex]="input?.fundComplex"
+                    [capitalMatrix]="capitalMatrixDiff"
+                    [originalCapitalMatrix]="capitalMatrix">
+                </app-crosspod-matrix>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

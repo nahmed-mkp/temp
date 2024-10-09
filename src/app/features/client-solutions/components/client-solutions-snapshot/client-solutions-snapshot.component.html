@@ -1,0 +1,32 @@
+<h5 style="margin-left: 0.5rem;">
+    <span *ngIf="param">
+        {{param.fund.description}} Report Data
+    </span>
+    <span *ngIf="!param">
+        Fund Report Data <small><i>Please select a grouping</i></small>
+    </span>
+
+    <mat-form-field style="width:400px;margin-right:10px;">
+        <mat-select [(ngModel)]="selectedGrouping" (ngModelChange)="onGroupingChanged()" placeholder="Grouping">
+            <mat-option *ngFor="let grouping of groupings" [value]="grouping">
+                {{grouping}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</h5>
+
+<div *ngIf="loading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid
+    style="flex: 1 0 0; margin: 0 0.5rem 0.5rem 0.5rem;"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<!-- {{data | json}} -->
+
+<!-- {{groupings | json}} -->

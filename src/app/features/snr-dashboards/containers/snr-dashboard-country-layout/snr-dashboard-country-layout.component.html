@@ -1,0 +1,42 @@
+<!-- <p>snr-dashboard-country-layout works!</p> -->
+
+<mat-selection-list #chartGroupList (selectionChange)="onSelectionChange($event)" >
+    <mat-list-option 
+        *ngFor="let chartGroup of (macroRunResultChartGroupsWithSelectedCountry$ | async), let i = index" 
+        [selected]="chartGroup && i == 0"
+        [value]="chartGroup">
+        {{chartGroup.description}}
+    </mat-list-option>
+</mat-selection-list>
+
+<div style="flex: 1 0 0;overflow-y: auto; flex-wrap: wrap;" class="horizontal-flex-full-height">
+
+    <div class="loading-screen" *ngIf="selectedChartDataLoading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="" *ngIf="(selectedChartDataError$ | async) !== null">
+        {{selectedChartDataError$ | async}}
+    </div>
+
+    <div class="missing-files" *ngIf="(selectedChartDataMissingFiles$ | async)?.length > 0">
+        <div style="margin:10px;">Following files are missing from the model run:</div>
+        <mat-chip-list aria-label="Missing Files">
+            <mat-chip color="accent" selected *ngFor="let missingFile of selectedChartDataMissingFiles$ | async">{{missingFile}}</mat-chip>
+        </mat-chip-list>
+        <br />
+    </div>
+
+    <div *ngFor="let data of (selectedChartData$ | async)" style="flex: 0 0 33.3%; height: 37rem; padding: 0.25rem;"
+        [ngSwitch]="data.chartType">
+
+        <app-snr-macro-decomposition-plot-viewer *ngSwitchCase="'decomposition'" 
+            class="full-strech-block mat-card-lift" [plotRawData]="data">
+        </app-snr-macro-decomposition-plot-viewer>
+
+        <app-snr-macro-general-plot-viewer *ngSwitchDefault
+            class="full-strech-block mat-card-lift"
+            [plotRawData]="data">
+        </app-snr-macro-general-plot-viewer>        
+    </div>
+</div>

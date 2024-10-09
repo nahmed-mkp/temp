@@ -1,0 +1,34 @@
+<mat-toolbar>
+    <span class="toolbar-heading">MACRO CREDIT </span>
+    <span class="vertical-toolbar-divider-small"> </span>
+    <mat-spinner *ngIf="datesLoading$ | async" [diameter]="15"></mat-spinner>
+    
+    <mat-form-field *ngIf="datesLoaded$ | async" appearance="outline" class="date-form-field"  style="margin-left: 1rem;">
+        <mat-label> Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [value]="selectedDate$ | async" (selectionChange)="dateSelected($event)">
+                <mat-option *ngFor="let date of dates$ | async" [value]="date">{{date}}</mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="datesLoaded$ | async" appearance="outline" style="width: 150px; margin-left: 1rem;">
+        <mat-label> Look Backs </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedColumnSet">
+                <mat-option [value]="'all'">All</mat-option>
+                <mat-option *ngFor="let name of uniqueColumnSetNames$ | async" [value]="name">{{name}}</mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+</mat-toolbar>
+
+<app-credit-analytics
+    class="mat-card"
+    [analytics]="analytics$ | async"
+    [loading]="analyticsLoading$ | async"
+    [loaded]="analyticsLoaded$ | async"
+    [error]="analyticsError$ | async"
+    [selectedColumnSet]="selectedColumnSet"
+    (viewTimeSeries)="viewTimeSeries()">
+</app-credit-analytics>

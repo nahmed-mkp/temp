@@ -1,0 +1,22 @@
+<div class="toolbar">
+  <span >VOL REPORT
+    <mat-spinner *ngIf="asOfDatesLoadingStatus$ | async" [diameter]="15"></mat-spinner>
+    <mat-form-field *ngIf="asOfDatesLoadedStatus$ | async" class="mat-select-no-line" style="width: 6rem; margin-left: 0.2rem;">
+      <mat-select [value]="activeAsOfDate$ | async" 
+        style="opacity: 0.5; font-weight: bolder" (selectionChange)="onAsOfDateChange($event)">
+        <mat-option *ngFor="let date of asOfDates$ | async" [value]="date">{{date}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+
+  <span>
+    <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onOpenInfoDialog()">
+      <mat-icon>help</mat-icon>
+    </button>
+  </span>
+</div>
+
+<app-vol-report-viewer class="mat-card" 
+  [plotData]="activeAsOfDateVolReport$ | async"
+  [volReportLoadingStatus]="volReportLoadingStatus$ | async">
+</app-vol-report-viewer>

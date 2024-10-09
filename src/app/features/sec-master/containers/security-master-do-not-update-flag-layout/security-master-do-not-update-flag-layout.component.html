@@ -1,0 +1,7 @@
+<app-security-master-do-not-update-flag-viewer
+    class="vertical-flex-full-height"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    (manualSetDoNotUpdateFlag)="onManualSetDoNotUpdateFlag($event)"
+    (setDoNotUpdateFlag)="onSetDoNotUpdateFlag($event)">
+</app-security-master-do-not-update-flag-viewer>

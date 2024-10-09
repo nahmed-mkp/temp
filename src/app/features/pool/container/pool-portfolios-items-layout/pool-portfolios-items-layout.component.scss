@@ -1,0 +1,16 @@
+#tab-add-button {
+    z-index: 10;
+}
+
+app-pool-portfolios-layout {
+    width: 30rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 100;
+}
+
+app-pool-portfolios-items-viewer {
+    background: white
+}

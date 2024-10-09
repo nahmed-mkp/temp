@@ -1,0 +1,29 @@
+<h5>
+    <span *ngIf="param">
+        {{param.fund.description}} vs. Benchmarks (Statistics)
+    </span>
+    <span *ngIf="!param">
+        Fund vs. Benchmarks (Statistics)
+    </span>
+
+    <button mat-icon-button class="mat-button-ultra-shrink" color="primary" matTooltip="Download Data"
+        (click)="onDownloadData()">
+        <mat-icon>download</mat-icon>
+    </button>
+</h5>
+
+<div *ngIf="summaryStatsLoading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid style="flex: 1 0 0; margin: 0.3rem"
+    [gridItems]="summaryStats"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<footer>
+    ** Return series does not span across the specified date range.
+    ** <strong>Sharpe Ratio</strong> is calculated as: (Compound RoR(A) - RiskFreeRate) / StdDev(A)
+</footer>

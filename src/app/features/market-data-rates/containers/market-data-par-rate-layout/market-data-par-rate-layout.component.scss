@@ -1,0 +1,62 @@
+div.horizontal-flex-full-width {
+    // overflow-x: auto;
+    // flex: 1 0 0;
+}
+
+h5 {
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    opacity: 0.7;
+
+    > div {
+        display: inline-block;
+    }
+    position: fixed;
+}
+
+span.draggable-button {
+    color: white;
+    opacity: 0.8;
+    padding: 0.3rem 0.6rem;
+    background: #3f51b5;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    
+
+    font-weight: lighter;
+    display: inline-flex;
+    align-items: center;
+
+    mat-icon.mat-icon {
+        height: initial;
+        width: initial;
+        font-size: initial;
+        cursor: move;
+    }
+}
+
+app-market-data-par-rate-viewer{
+    flex: 1 0 0;
+    min-width: 20rem;
+    max-width: 20rem;
+    margin-right: 0.3rem;
+}
+
+#par-rate-timestamp {
+    position: fixed;
+    right: 1rem;
+    font-weight: 500;
+    color: #f4433687;
+    top: 4.7rem;
+    align-items: center;
+    display: flex;
+    font-size: 0.9rem;
+    .mat-icon {
+        margin-right: 0.3rem;
+    }
+}
+
+#glossary {
+    position: fixed;
+    right: 12rem;
+    display: flex;
+}

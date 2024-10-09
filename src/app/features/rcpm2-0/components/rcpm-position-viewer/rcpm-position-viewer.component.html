@@ -1,0 +1,34 @@
+<!-- <div *ngIf="activateSpinning && loadingStatus" class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div> -->
+
+<input type="text" class="ag-grid-custom-auto-group-floating-filter" [(ngModel)]="autoGroupColumnFilterValue" (ngModelChange)="onAutoGroupColumnFilterValueChange()">
+
+<!-- {{this.isOnCurrentDate | json}} -->
+<app-base-grid
+  [gridItems]="[]"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack"
+  [colDefs]="dynamicColDefs"
+  [currentLayoutName]="(targetLayout && targetLayout.layoutName) || undefined"
+  [targetLayout]="targetLayout"
+  [getNonlinearDataPath]="positionViewerService.getNonlinearDataPath"
+  [getNonlinearDataPathAdvance]="positionViewerService.getNonlinearDataPathAdvance"
+  [primaryGroupingNameIdMaping]="primaryGroupingNameIdMaping"
+  [mode]="layoutName.includes('static') ? 'basic' : 'advance'"
+
+  [userGridConfig]="userGridConfig"
+  [userGroupingStyle]="userGroupingStyle"
+  [userLayoutStyle]="layoutStyle"
+
+  (updateUserLayoutList)="onUpdateUserLayoutList($event)"
+  (togglePeriodicPullingStatus)="onTogglePeriodicPullingStatus($event)"
+  (backupGridSetting)="onBackupGridSetting($event)"
+  (updateUserGridConfig)="onUpdateUserGridConfig($event)"
+  (updateUserGroupingStyle)="onUpdateUserGroupingStyle($event)"
+  (updateUserLayoutStyle)="onUpdateUserLayoutStyle($event)"
+  (openSecurityEditor)="onOpenSecurityEditor($event)">
+</app-base-grid>
+
+

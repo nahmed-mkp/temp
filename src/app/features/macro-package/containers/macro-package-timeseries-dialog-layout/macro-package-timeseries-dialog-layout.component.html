@@ -1,0 +1,12 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">Remove</i>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<app-macro-package-timeseries-viewer
+  [data]="activeTimeseries$ | async"
+  [loadingStatus]="loadingStatus$ | async"
+  [displayPropety]="displayPropety"
+  [title]="targetAssetClass"
+  [subTitle]="sector || data.mode">
+</app-macro-package-timeseries-viewer>

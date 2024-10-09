@@ -1,0 +1,11 @@
+<div *ngIf="results">
+    <dx-data-grid
+        [showRowLines]="true"
+        rowAlternationEnabled="true"
+        [headerFilter]="true"
+        [allowColumnResizing]="true"
+        [allowColumnReordering]="true"
+        [columnChooser]="true"
+        [columnAutoWidth]="true"
+        [dataSource]="getResults(results.data)"></dx-data-grid>
+</div>

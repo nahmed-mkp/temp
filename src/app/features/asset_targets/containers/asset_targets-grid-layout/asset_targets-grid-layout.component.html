@@ -1,0 +1,34 @@
+<div *ngIf="!assetTargetTimeseriesLoaded; else content" class="loading-screen">
+        <mat-spinner></mat-spinner>
+</div>
+
+
+<div *ngIf="assetTargets.countries && assetTargets.countries.length === 0 && initLoadComplete" style="display:flex; align-items: center;justify-content: center;height: 85vh;"> 
+    <div>
+        No country data picked up for this asset type. Please check the data source.
+    </div>
+</div>
+
+<ng-template #content>
+    <div *ngIf="showHistoricalWarning" class="warning-div">
+        Please select a historical date to view historical data
+    </div>
+    <div *ngIf="!showHistoricalWarning" style="padding:5px;">
+        <div *ngFor="let country of assetTargets?.countries">
+            <app-asset-targets
+                [params]="params"
+                [mode]="mode"
+                [country]="country" 
+                [data]="assetTargets['data'][country]"
+                [scenarios]="assetTargets['scenarios'][country]"
+                [scenarioList]="scenarioList"
+                [timeseries]="assetTargetTimeseries"
+                [overridenValues]="overridenValues"
+                [initAssetCalculatorInputs]="initAssetCalculatorInputs[country]"
+                [editedAssetCalculatorInputs]="editedAssetCalculatorInputs[country]"
+                [assetCalculatorInputs]="assetCalculatorInputs[country]"
+            >
+            </app-asset-targets><br />    
+        </div>
+    </div>
+</ng-template>

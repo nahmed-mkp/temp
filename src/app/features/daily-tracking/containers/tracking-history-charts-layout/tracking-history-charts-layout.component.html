@@ -1,0 +1,24 @@
+<div *ngIf="chartType; else select" style="display: block;height: 100%;">
+    <ng-container [ngSwitch]="chartType">
+        <app-tracking-ohlc-chart *ngSwitchCase="'OHLC'"
+            [chartData]="ohlc$ | async"
+            [chartLoading]="ohlcLoading$ | async"
+            [chartLoaded]="ohlcLoaded$ | async"
+            [chartError]="ohlcError$ | async">
+        </app-tracking-ohlc-chart>
+
+        <app-tracking-median-hourly-chart *ngSwitchCase="'Median levels (hourly)'"
+            [chartData]="medianByTimeOfDay$ | async"
+            [chartLoading]="medianByTimeOfDayLoading$ | async"
+            [chartLoaded]="medianByTimeOfDayLoaded$ | async"
+            [chartError]="medianByTimeOfDayError$ | async">
+        </app-tracking-median-hourly-chart>
+
+        <app-tracking-daily-chart *ngSwitchCase="'Daily Closes'">
+        </app-tracking-daily-chart>
+    </ng-container>
+    
+</div>
+<ng-template #select>
+    <h4 class="select">Please select a chart</h4>
+</ng-template>

@@ -1,0 +1,109 @@
+<!-- <p>
+  pool-grid-layout-configuration-dialog works!
+</p> -->
+<div mat-dialog-title>
+  <h4>Columns Layout Configuration</h4>
+  <div class="vertical-align-center">
+    <mat-checkbox class="example-margin" [(ngModel)]="SavingPublicLayout">Save as Public Layout</mat-checkbox>
+    <i class="material-icons" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>grain</i>
+  </div>
+  
+</div>
+
+<div mat-dialog-content>
+  <div id="newLayoutInput">
+      <mat-form-field appearance="outline">
+          <mat-label>Layout Name</mat-label>
+          <input matInput placeholder="Layout Name" [(ngModel)]="newLayoutName">
+      </mat-form-field>  
+
+      <mat-form-field appearance="outline" style="width: 8rem; margin-left: 1rem;">
+          <mat-label>Layout Type</mat-label>
+          <mat-select [(ngModel)]="newLayoutType">
+            <mat-option [value]="'PoolViewer'">Pool Viewer</mat-option>
+            <mat-option [value]="'MapCal'">MAP Cal</mat-option>
+          </mat-select>
+      </mat-form-field>  
+      
+      <button mat-flat-button color="primary" (click)="onCloseClick('save')">Save</button>
+      <button mat-flat-button color="warn" style="min-width: initial">Delete</button>
+  </div>
+
+  <div cdkDropListGroup style="display: flex">
+    <div class="example-container">
+      <h4 class="vertical-align-center" style="opacity: 0.5">Hidden (Avaliable)&nbsp;<i class="material-icons">visibility_off</i></h4>
+      <div
+        cdkDropList
+        #hideList="cdkDropList"
+        [cdkDropListConnectedTo]="[showList, LeftPinList, RightPinList]"
+        [cdkDropListData]="hide"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of hide" cdkDrag>
+          {{item.getColDef().headerName}}
+          <span class="column-type">{{item.getColDef().type}}</span>
+        </div>
+        <div *ngIf="hide.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h4 class="vertical-align-center">Shown&nbsp;<i class="material-icons">visibility</i></h4>
+      <div
+        cdkDropList
+        #showList="cdkDropList"
+        [cdkDropListConnectedTo]="[hideList, LeftPinList, RightPinList]"
+        [cdkDropListData]="show"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of show" cdkDrag>
+          {{item.getColDef().headerName}}
+          <span class="column-type">{{item.getColDef().type}}</span>
+        </div>
+        <div *ngIf="show.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h4 class="vertical-align-center">Pinned&nbsp;<i class="material-icons">gps_fixed</i></h4>
+      <div
+        cdkDropList
+        #LeftPinList="cdkDropList"
+        [cdkDropListConnectedTo]="[hideList, showList, RightPinList]"
+        [cdkDropListData]="pinLeft"
+        class="example-list example-list-pinned"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box example-box-section">Left Pinned</div>
+        <div class="example-box" *ngFor="let item of pinLeft" cdkDrag>
+          {{item.getColDef().headerName}}
+          <span class="column-type">{{item.getColDef().type}}</span>
+        </div>
+        <div *ngIf="pinLeft.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+
+      <div
+        cdkDropList
+        #RightPinList="cdkDropList"
+        [cdkDropListConnectedTo]="[hideList, showList, LeftPinList]"
+        [cdkDropListData]="pinRight"
+        class="example-list example-list-unpinned"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box example-box-section">Right Pinned</div>
+        <div class="example-box" *ngFor="let item of pinRight" cdkDrag>
+          {{item.getColDef().headerName}}
+          <span class="column-type">{{item.getColDef().type}}</span>
+        </div>
+        <div *ngIf="pinRight.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onCloseClick()">Save</button> -->
+  <button mat-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+  <button mat-button color="warn" (click)="reset()" 
+    matTooltip="All columns will be move to shown and unpinned section, order can not be be maintained (Caution)">Reset</button>
+  <button mat-button (click)="onCloseClick('close')">Close</button>
+</div>

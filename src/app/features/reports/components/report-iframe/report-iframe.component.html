@@ -1,0 +1,28 @@
+<!-- <div *ngIf="report">
+    <h6>{{report.name}} - <small><i>{{report.description}}</i></small></h6>
+    
+    <p *ngIf="report.type==='SSRS'">
+        <app-ssrs-report 
+            (onReportOpened)="reportOpened($event)"
+            [src]="report.url" 
+            [isUserSpecific]="report.isUserSpecific"
+            [user]="user"
+            [height]="report.height"></app-ssrs-report>
+    </p>
+    <p *ngIf="report.type === 'Tableau'">
+        <app-tableau-report 
+            (onReportOpened)="reportOpened($event)"
+            [src]="report.url"
+            [isUserSpecific]="report.isUserSpecific"
+            [user]="user"
+            [height]="report.height"></app-tableau-report>
+    </p>
+    <p *ngIf="report.type === 'JupyterLab'">
+        <app-jupyterlab-report
+            (onReportOpened)="reportOpened($event)"
+            [src]="report.url"
+            [isUserSpecific]="report.isUserSpecific"
+            [user]="user"
+            [height]="report.height"></app-jupyterlab-report>
+    </p>
+</div> -->

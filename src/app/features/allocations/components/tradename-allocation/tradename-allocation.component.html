@@ -1,0 +1,20 @@
+<div *ngIf="tradeNameAllocationsLoaded">
+    <mat-accordion [multi]="true">
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>TradeName Allocations</strong>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            {{ tradeNameAllocations | json }}
+
+            <mat-action-row>
+                <button mat-raised-button color="primary" (onclick)="saveTradeNameAllocations($event)"
+                    [disabled]="true">Save Changes</button>
+            </mat-action-row>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>

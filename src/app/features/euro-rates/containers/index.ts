@@ -1,0 +1,1 @@
+export * from './euro-rates-layout/euro-rates-layout.component';

@@ -1,0 +1,13 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Mode Change Promote</small> 
+    <!-- <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i> -->
+</div>
+
+<mat-dialog-content style="margin: 0; padding-top: 2rem; flex: 1 0 0;">
+    Portfolio has rolled to <i>{{data}}</i> . Would you like to switch?
+</mat-dialog-content>
+
+<mat-dialog-actions style="margin-left:1rem;">
+    <button mat-button mat-dialog-close color="primary"  (click)="onClose(true)">Yes</button>
+    <button mat-button mat-dialog-close color="warn" (click)="onClose()">No</button>
+</mat-dialog-actions>

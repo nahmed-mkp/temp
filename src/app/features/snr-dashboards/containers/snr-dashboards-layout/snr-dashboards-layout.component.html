@@ -1,0 +1,22 @@
+<app-snr-macro-toolbar
+    [dates]="dates$ | async"
+    [countries]="countries$ | async"
+    [inputsLoading]="inputsLoading$ | async"
+    [inputsLoaded]="inputsLoaded$ | async"
+    [inputsError]="inputsError$ | async"
+    (inputChanged)="onInputChanged($event)"></app-snr-macro-toolbar>
+
+<!-- <app-snr-macro-dashboards-layout style="flex: 1 0 0"></app-snr-macro-dashboards-layout> -->
+
+<mat-tab-group style="flex: 1 0 0;overflow: auto;" [selectedIndex]="currIndex" (selectedTabChange)="changeTab($event)"  #tabs>
+    <mat-tab *ngFor="let country of (selectedCountries$ | async)" label="{{country.code}}">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                {{country.name}}
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <app-snr-dashboard-country-layout class="horizontal-flex-full-height" [country]="country"></app-snr-dashboard-country-layout>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

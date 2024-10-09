@@ -1,0 +1,118 @@
+// Import material theming functions
+@use '@angular/material' as mat;
+@import '@angular/material/_theming';
+
+// ================ VARIABLES ==================
+
+// APP GLOBAL 
+
+$opacity-primary: 1.0;
+$opacity-secondary: 0.6;
+
+// TOOLBAR
+
+$toolbar-heading-font-color:white;
+$toolbar-heading-font-size: 16px;
+$toolbar-height: 60px;
+
+$toolbar-dialog-height: 40px; 
+
+$toolbar-font-size: 16px;
+$toolbar-font-color: white;
+$toolbar-font-active-color: black;
+
+$toolbar-bg-primary: #3f51b5;
+$toolbar-icon-primary: white;
+$toolbar-icon-menu-primary: #D5D5D5;
+
+$toolbar-button-bg-primary: gainsboro;
+
+$toolbar-toggle-active-color: gainsboro;
+$toolbar-toggle-inactive-color: #A9A9A9;
+
+// TAB NAV
+
+$tab-active-color: #B2BEB5;
+
+$tab-wrap-bg-primary: gainsboro;
+$tab-wrap-border-radius: 5px 0 0 0;
+
+$tab-bg-color-primary: #fafafa;
+$tab-height: 1.3rem;
+$tab-padding: 0 1.1rem;
+$tab-border: 1px solid #8080807a;
+$tab-font-color: gray;
+$tab-opacity: 1.0;
+$tab-border-radius: 5px 5px 0 0;
+$tab-font-size: 12px;
+
+// TOOLTIP
+
+$tooltip-padding: 2px;
+$tooltip-background-color: #4f4f4f;
+$tooltip-font-size: 12px;
+
+// MAT MENU
+
+$menu-background-color: #F0F0F0;
+
+// OPEN NEW TAB ICON
+
+$new-tab-icon-ml: -0.5rem;
+$new-tab-icon-mt: 2rem;
+$new-tab-background-color: gray;
+
+// TIMESTAMP
+
+$ts-color: red;
+$ts-color-alt: white;
+$ts-font-size: 12px;
+$ts-opacity: 1;
+
+// MAT TOGGLE
+
+$toggle-font-size: 12px;
+$toggle-font-color: white;
+$toggle-border: 1px solid gainsboro;
+$toggle-thumb-background-color: white;
+$toggle-inactive-background-color: rgba(0,0,0,.38);
+$toggle-active-background-color: #3F51B5;
+$toggle-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+
+// MAT FORM FIELD 
+
+$mat-form-field-color-primary: white;
+$mat-form-field-color-secondary: gainsboro;
+
+$mat-form-field-border-color-primary: white;
+$mat-form-field-border-color-secondary: gainsboro;
+
+$mat-form-field-height: 40px;
+$mat-form-field-font-size: 12px;
+
+$mat-date-form-field-width: 150px;
+$mat-date-form-field-small-width: 122px;
+
+$mat-grouping-form-field-width: 350px;
+$mat-fund-form-field-width: 120px;
+$mat-fund-form-field-large-width: 200px;
+
+// MAT CARD
+
+$mat-card-margin: 0.3rem;
+$mat-card-padding: 0.4rem;
+$mat-card-box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+
+// MAT LABEL
+
+$mat-label-font-size-primary: 12px;
+$mat-label-color:white;
+
+//  MAT INPUT 
+
+$mat-input-font-size-primary: 12px;
+
+// BOTTOM NOTIFICATION POPUP
+
+$bottom-notif-font-size: 12px;
+$obttom-notif-background-color: gainsboro;

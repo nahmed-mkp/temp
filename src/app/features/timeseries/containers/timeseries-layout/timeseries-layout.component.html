@@ -1,0 +1,64 @@
+<div class="vertical-flex-full-height">
+
+    <app-timeseries-params-toolbar-layout
+        [sourceMapVisibility]="sourceMapVisibility"
+        [importablePortfolios]="importablePortfolios$| async"
+        [startDate]="startDate$ | async"
+        [endDate]="endDate$ | async"
+        [mode]="mode"
+        [tabs]="tabs$ | async"
+        (modeChanged)="modeChangedHandler($event)"
+        (showDataSourceVisibilityHandler)="dataSourceVisibilityHandler($event)"
+        (clearScratchpad)="clearScratchpad()"
+    >
+    </app-timeseries-params-toolbar-layout>
+
+    
+    <div class="horizontal-wrap horizontal-flex-full-height">
+        <div class="content-wrap">
+            <div style="height: 100%">
+
+                <as-split [unit]="'percent'" [direction]="'vertical'">
+                    <as-split-area [size]="75" [order]="2">
+                        <app-timeseries-tab-layout
+                            style="height: 98%"
+                            class="mat-card"
+                            [drawdownData]="drawdownData$ | async"
+                            [drawdownDataLoading]="drawdownDataLoading$ | async"
+                            [selectedDrawdownDataTimeseries]="selectedDrawdownTimeseries$| async"
+                            [selectedDrawdownDataTimeseriesRow]="selectedDrawdownTimeseriesRow$ | async"
+                            [currTab]="curTabSubject$| async"
+                            [startDate]="startDate$ | async"
+                            [endDate]="endDate$ | async"        
+                            (onSelectedDrawdownTimeseriesChanged)="onSelectedDrawdownTimeseriesChanged($event)"
+                            (onRegressionViewChanged)="onRegressionViewChanged($event)"
+                        >
+                        </app-timeseries-tab-layout>
+                    </as-split-area>
+
+                    <as-split-area [size]="25" [order]="3">
+                            <app-timeseries-grid-viewer-component
+                                class="vertical-flex-full-height"
+                                [currTab]="currTab$ | async"
+                                [startDate]="startDate$ | async"
+                                [endDate]="endDate$ | async"
+                                [loadPortfolioFromUrlError]="loadPortfolioFromUrlError$ | async"
+                                (showDataSourceVisibilityHandler)="dataSourceVisibilityHandler($event)"
+                            > 
+                            </app-timeseries-grid-viewer-component>   
+                    </as-split-area>
+                </as-split>
+
+            </div>
+            
+            <app-timeseries-footer-tab-layout
+                style="height: 22px;"
+                [allTabs]= "tabs$ | async"
+                [currTab] = "currTab$ | async"
+            >
+            </app-timeseries-footer-tab-layout> 
+
+        </div>
+    </div>
+    
+</div>

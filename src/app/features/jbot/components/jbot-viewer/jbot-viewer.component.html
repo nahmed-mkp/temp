@@ -1,0 +1,29 @@
+<div class="loading-screen" *ngIf="jbotResultLoadingStatus || dataRendering">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-tab-group #tabs class="mat-card test-timeseries-analysis-result-viewer bottom-tab-group" 
+  headerPosition="below" (selectedTabChange)="selectedTabChange($event)">
+  <mat-tab *ngFor="let category of categories" [label]="category">
+    <ng-template matTabContent>
+      <app-base-grid
+        *ngIf="!deltaMode"
+        class="vertical-flex-full-height" 
+        style="flex: 1 0 0"
+        [gridItems]="plotDataGrouping[category]"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+      </app-base-grid>
+      <app-base-grid
+        *ngIf="deltaMode"
+        class="vertical-flex-full-height" 
+        style="flex: 1 0 0"
+        [gridItems]="plotDataGrouping[category]"
+        [customGridOption]="customGridOption_delta"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+      </app-base-grid>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

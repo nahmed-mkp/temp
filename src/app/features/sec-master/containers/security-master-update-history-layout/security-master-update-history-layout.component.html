@@ -1,0 +1,8 @@
+<app-security-master-update-history-viewer
+    class="vertical-flex-full-height"
+    [startDate]="startDate"
+    [endDate]="endDate"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    (onLoadUpdateHistory)="onLoadUpdateHistory($event)">
+</app-security-master-update-history-viewer>

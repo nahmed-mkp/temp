@@ -1,0 +1,96 @@
+<div class="horizontal-flex-full-height" style="width:100%;justify-content: center;margin-left:auto;margin-right:auto;">
+    <mat-horizontal-stepper [linear]="true" #stepper style="width:100%;height:100%;">
+
+        <mat-step>
+            <form style="display:block;margin:auto;width:80%;" autocomplete="off">
+                <ng-template matStepLabel>Select file(s)</ng-template>
+                <app-uploader
+                    [url]="'http://prizm-map.mkpcap.com/api/v1/position/prizm_sei_pnl_rec/upload'"
+                    [showQueue]="true" 
+                    [allowMultiple]="true"
+                    [allowSingle]="false"
+                    (onFailedItem)="uploadFailure($event)" (onSuccessItem)="uploadSuccess($event)"></app-uploader>
+                <br /><br />
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" style="margin-left:10px;" matStepperNext>Next</button>
+                <button mat-raised-button color="accent" style="margin-left:10px;" matStepperNext (click)="switchMode('database')">Skip</button>
+            </form>
+        </mat-step>
+        
+        <mat-step *ngIf="mode==='file'">        
+            <form style="display:block;margin:auto;width:80%;" autocomplete="off">
+                <ng-template matStepLabel>Select Funds (from uploaded files)</ng-template>
+                
+                <mat-form-field>
+                    <mat-label>Funds</mat-label>
+                    <mat-select [formControl]="selectedFiles" multiple>
+                        <mat-option *ngFor="let file of files$ | async" [value]="file.fileName">{{file.fundName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br />
+                <div style="width:100%">
+                    <mat-chip-list aria-label="File selection" *ngFor="let file of selectedFiles.value">
+                        <mat-chip color="primary" selected>{{files[file]}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+                
+                <br /><br />
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" style="margin-left:10px;" (click)="uploadSelectedFiles(selectedFiles.value)" matStepperNext>Next</button>
+            </form>        
+        </mat-step>
+
+        <mat-step *ngIf="mode==='database'">
+            <form style="display:block;margin:auto;width:80%;" autocomplete="off">
+                <ng-template matStepLabel>Select Funds (from warehouse)</ng-template>
+        
+                <mat-form-field>
+                    <mat-label>Funds</mat-label>
+                    <mat-select [formControl]="selectedFunds" multiple>
+                        <mat-option *ngFor="let fundInDB of fundsInDB$ | async" [value]="fundInDB">{{fundInDB}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br />
+                <div style="width:100%">
+                    <mat-chip-list class="mat-chip-list-stacked" aria-label="Fund selection" *ngFor="let selectedFund of selectedFunds.value">
+                        <mat-chip color="primary" selected>{{selectedFund}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+        
+                <br /><br />
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" style="margin-left:10px;"
+                    (click)="uploadSelectedFunds(selectedFunds.value)" matStepperNext>Next</button>
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>SEI Rec Data</ng-template>            
+            <app-prizm-sei-pnl-viewer class="vertical-flex-full-height" style="height:700px;"
+                [funds]="funds$ | async"
+                [data]="data$ | async"
+                [filesUploading]="filesUploading$ | async"
+                [filesUploaded]="filesUploaded$ | async"
+                [filesUploadError]="filesUploadError$ | async">
+            </app-prizm-sei-pnl-viewer>
+            <br /><br />
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" style="margin-left:10px;" matStepperNext>Next</button>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Run Rec</ng-template>
+            <app-prizm-sei-pnl-rec-viewer class="vertical-flex-full-height" style="height:700px;"
+                [funds]="funds$ | async"
+                [reconciliations]="reconciliations"
+                [reconciliationsLoading]="reconciliationsLoading"
+                [reconciliationsLoaded]="reconciliationsLoaded"
+                [reconciliationsError]="reconciliationsError"
+                (fundSelected)="fundSelected($event)">
+            </app-prizm-sei-pnl-rec-viewer>
+            <br /><br />
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" style="margin-left:10px;" matStepperNext>Finish</button>        
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

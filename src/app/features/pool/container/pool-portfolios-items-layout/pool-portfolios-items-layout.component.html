@@ -1,0 +1,171 @@
+
+<button mat-mini-fab matTooltip="Update Risk Free Rate" color="accent" id="tab-add-button" (click)="updateRiskFreeRate()">&#9881;</button>
+<button mat-mini-fab matTooltip="Create New Portfolio" color="accent" id="tab-add-button" (click)="createNewPortfolio()" style="left: 1.3rem;">+</button>
+<button mat-mini-fab matTooltip="Portfolio List" color="accent" id="tab-add-button" (click)="listOpen = true" style="left: 2.65rem;">
+  <mat-icon style="font-size: 15px; height: 15px; width: 20px;">all_inbox</mat-icon>
+</button>
+<button mat-mini-fab matTooltip="Most Recent Portfolio" color="accent" id="tab-add-button" style="left: 3.95rem;" [matMenuTriggerFor]="menu">&#9734;</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onloadShortcutPortfolio('cashPortfolio')">Cash</button>
+  <button mat-menu-item (click)="onloadShortcutPortfolio('deliverablePortfolio')">TBA Deliverables</button>
+  <button mat-menu-item (click)="onloadShortcutPortfolio('tbaPortfolio')">TBA</button>
+  <button mat-menu-item (click)="onTogglebidlistsViewMode()">Bidlists</button>
+</mat-menu>
+
+
+<app-pool-portfolios-layout class="mat-card-lift standard-grid-layout" 
+  (mouseleave)="closeListPannel()"
+  (togglePin)="togglePin($event)"
+  [ngStyle]="{'z-index': listOpen ? 100 : -100}"></app-pool-portfolios-layout>
+
+
+<mat-tab-group animationDuration="0ms" style="height: 100%;">
+  <!-- <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="vertical-align-center">
+        <i class="material-icons" style="font-size: 17px; transform: translateY(-0.6px);">all_inbox</i>&nbsp;
+        <span>Portfolios</span>
+      </span>
+    </ng-template>
+    <app-pool-portfolios-layout></app-pool-portfolios-layout>
+  </mat-tab> -->
+
+  <mat-tab #tab *ngFor='let portfolioSecurities of portfoliosSecurities$ | async; trackBy: trackByFn'>
+    
+    <ng-template mat-tab-label>
+      <span class="vertical-align-center">
+          <i class="material-icons" style="font-size: 17px; transform: translateY(-0.6px);">list_alt</i>&nbsp;
+        <span>{{portfolioSecurities.name}}</span>
+      </span>
+      <i class="material-icons tab-delete" (click)="removeActivePortfolio(portfolioSecurities.id)" matTooltip="Close">clear</i>
+    </ng-template>
+
+    <!---------------------------------------------------Right Side Tab----------------------------------------------->
+
+
+    <mat-sidenav-container class="right-side-popup side-popup">
+      <!-- <mat-sidenav #sidenav position="end" (click)="sidenav.toggle()">Yield Table component</mat-sidenav> -->
+
+      <mat-sidenav #sidenav2 position="end">
+        <app-dials-layout class="pool-sidenav-card" (closeSideNav)="sidenav2.close()" ></app-dials-layout>
+      </mat-sidenav>
+      
+      <!-- <mat-sidenav #sidenav3 position="end" (click)="sidenav3.toggle()">Collat Charts Component</mat-sidenav> -->
+      <mat-sidenav #sidenav4 position="end" style="width: 36rem;">
+        <app-pool-portfolio-curve-comparison-layout 
+          class="pool-sidenav-card"
+          [selectedCusip]="selectedCusipCollection[portfolioSecurities.id]"
+          [openStatus]="sidenav4.opened"
+          (closeSideNav)="sidenav4.close()" >
+        </app-pool-portfolio-curve-comparison-layout>
+      </mat-sidenav>
+
+      <!-- <mat-sidenav #sidenav8 position="end"> 
+        <app-scenario-generator-layout
+          class="pool-side-panel" 
+          (closeSideNav)="sidenav8.close()"
+          [defaultScenarios]="defaultScenarios$ | async">
+        </app-scenario-generator-layout>
+      </mat-sidenav> -->
+    
+      <mat-sidenav-content>
+        <!-- <button mat-button class="pool-sidenav-tab" (click)="sidenav.toggle()">Yield Table</button> -->
+        <button mat-button class="pool-sidenav-tab" (click)="sidenav2.open()">Yieldbook Dials</button>
+        <!-- <button mat-button class="pool-sidenav-tab" (click)="sidenav8.open()">Scenario Generator</button> -->
+        <!-- <button mat-button class="pool-sidenav-tab" (click)="sidenav3.toggle()">Collat Charts</button> -->
+        <button mat-button class="pool-sidenav-tab" (click)="sidenav4.toggle()">Curve Comparison</button>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <!---------------------------------------------------Left Side Tab----------------------------------------->
+    
+    <mat-sidenav-container class="left-side-popup side-popup">
+      <mat-sidenav #sidenav5 disableClose style="width: 553px;">
+        <app-pool-configuration-layout 
+          class="pool-side-panel"
+          (closeSideNav)="sidenav5.close()" 
+          [globalSettings]="globalSettings$ | async"
+          [severitySettings]="severitySettings$ | async"
+          [calibrationSettings]="calibrationSettings$ | async">
+        </app-pool-configuration-layout>
+      </mat-sidenav>
+
+      <mat-sidenav #sidenav6 disableClose>
+        <app-pool-scenario-picker-layout
+          class="pool-side-panel"
+          (closeSideNav)="sidenav6.close()" >
+        </app-pool-scenario-picker-layout>
+      </mat-sidenav>
+
+      <mat-sidenav #sidenav7 disableClose style="width: 344px;">
+        <app-add-cusips-to-portfolio
+          class="pool-side-panel" 
+          [expressions]="expressions$ | async"
+          [expressionsLoading]="expressionsLoading$ | async"
+          [expressionsLoaded]="expressionsLoaded$ | async"
+          [expressionsError]="expressionsError$ | async"
+          [portfolio]="bidlistPortfolio$ | async"
+          [portfolioLoading]="bidlistPortfolioLoading$ | async"
+          [portfolioLoaded]="bidlistPortfolioLoaded$ | async"          
+          [portfolioError]="bidlistPortfolioError$ | async"
+          (closeSideNav)="sidenav7.close()" 
+          (parseUserInputCusip)="parseUserInputCusip($event, portfolioSecurities.id)"
+          (addCusipsToPortfolio)="addCusipsToPortfolio($event, portfolioSecurities.id)">
+        </app-add-cusips-to-portfolio>
+      </mat-sidenav>
+    
+      <mat-sidenav-content>
+        <button mat-button class="pool-sidenav-tab" (click)="sidenav5.open()">Configuration</button>
+        <button mat-button class="pool-sidenav-tab" (click)="sidenav7.open()">Add Cusips</button>
+        <button mat-button class="pool-sidenav-tab" (click)="openYieldbookQueueMonitor()">Yieldbook Queue Monitor</button>
+      </mat-sidenav-content>
+    </mat-sidenav-container> 
+
+
+    <!---------------------------------------------------Main Grid View----------------------------------------------->
+
+    <app-pool-portfolios-items-viewer 
+      [securities]="portfolioSecurities && portfolioSecurities.items"
+      [poolLayouts]="poolLayouts$ | async"
+      [poolLayoutsLoadingStatus]="poolLayoutsLoadingStatus$ | async"
+      [poolViewerItemsGroupings]="poolViewerItemsGroupings$ | async"
+      [poolViewerItemsGroupingsLoadingStatus]="poolViewerItemsGroupingsLoadingStatus$ | async"
+      [lookups] = "lookups$ | async"      
+      [gridSize]="gridSize$ | async" 
+      [isActive]="tab.isActive"
+      [loading]="portfoliosSecuritiesLoadingStatus$ | async"
+      [PortfolioId]="portfolioSecurities.id"
+      
+      (onSaveNewPoolLayout)="saveNewPoolLayout($event)"
+      (onSaveNewPoolItemsGrouping)="saveNewPoolItemsGrouping($event)"
+      (onRunPYCalc)="onRunPYCalc($event)"
+      (onRunSensitivities)="onRunSensitivities($event)"
+      (onRunHorizonAnalysis)="onRunHorizonAnalysis($event)"
+      (onRunModelValidation)="onRunModelValidation($event)"
+      (onExplodeMegaData)="onExplodeMegaData($event)"
+      (onSelectedCusip)="onSelectedCusip($event, portfolioSecurities.id)">
+    </app-pool-portfolios-items-viewer>
+
+  </mat-tab>
+
+  <mat-tab *ngIf="bidlistsViewMode$ | async">
+    <ng-template mat-tab-label>
+      <span class="vertical-align-center">
+          <i class="material-icons" style="font-size: 17px; transform: translateY(-0.6px);">list_alt</i>&nbsp;
+        <span>Bid Lists</span>
+      </span>
+      <i class="material-icons tab-delete" (click)="onTogglebidlistsViewMode()" matTooltip="Close">clear</i>
+    </ng-template>
+    <app-pool-bidlists-layout 
+      [activePortfolioIds]="activePortfolioIds$ | async"
+      class="standard-grid-layout"
+      style="background: white;">
+    </app-pool-bidlists-layout>
+  </mat-tab>
+
+
+</mat-tab-group>
+
+<!-- <div *ngFor='let portfolioItems of portfoliosItems$ | async'>
+  {{portfolioItems | json}}
+</div> -->

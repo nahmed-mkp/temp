@@ -1,0 +1,27 @@
+<div *ngIf="(loading$ | async) || (updating$ | async) " class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-toolbar>
+    <span class="toolbar-heading">Broker BIC MAP</span>
+    <!-- <span>
+        <mat-form-field style="width: 15rem; margin-right: 0.3rem;">
+            <mat-label>Broker</mat-label>
+            <mat-select [(ngModel)]="selectedBroker" (ngModelChange)="onLoadBrokerDetail()">
+                <mat-option *ngFor="let option of (brokerList$ | async)" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </span> -->
+</mat-toolbar>
+
+<!-- <p>
+    <span>Broker BIC Map</span>
+</p> -->
+
+
+
+<app-broker-bic-map-viewer 
+    style="margin-top:10px;"
+    [data]="brokerList$ | async"
+    [loading]="loading$ | async">
+</app-broker-bic-map-viewer>

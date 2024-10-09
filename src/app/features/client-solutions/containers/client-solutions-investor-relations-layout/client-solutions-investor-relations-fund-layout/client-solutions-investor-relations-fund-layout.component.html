@@ -1,0 +1,27 @@
+<div style="height: 99%; flex-wrap: wrap;" class="horizontal-flex-full-height">
+    
+    <div style="flex: 0 0 40%; padding: 0.2rem; height: 50%">
+        <app-cs-investor-relations-fund-aum-balances  
+            [aumBalances]="fundAumBalances"
+        ></app-cs-investor-relations-fund-aum-balances>
+    </div>
+    
+    <div style="flex: 0 0 40%; padding: 0.2rem; height: 50%">
+        <app-cs-investor-relations-fund-region
+            [regionList]="fundRegions"
+        ></app-cs-investor-relations-fund-region>
+    </div>
+
+    <div style="flex: 0 0 20%; padding: 0.2rem; height: 50%">
+        <app-cs-investor-relations-fund-investor-type
+            [investorTypes]="fundInvestorTypes"
+        ></app-cs-investor-relations-fund-investor-type>
+    </div>
+
+    <div style="flex: 0 0 100%; padding: 0.2rem;height: 45%;">
+        <app-cs-investor-fund-top-10-list
+            [top10List]="fundTop10List">
+        </app-cs-investor-fund-top-10-list>
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+<app-yieldbook-requests-params
+    [asOfDate]="selectedDate$ |async"
+    (dateSelected)="selectDate($event)"></app-yieldbook-requests-params>
+
+<app-yieldbook-request-logs
+    [requestLogs]="requestLogs$ | async"
+    [selectedRequestLog]="selectedRequestedLog$ | async"
+    [requestLogsLoading]="requestLogsLoading$ | async"
+    [requestLogsLoaded]="requestLogsLoaded$ | async"
+    [requestLogsError]="requestLogsError$ | async"
+    (requestLogSelected)="selectRequestLog($event)"></app-yieldbook-request-logs>
+
+<app-yieldbook-request-response></app-yieldbook-request-response>

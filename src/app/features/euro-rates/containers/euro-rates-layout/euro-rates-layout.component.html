@@ -1,0 +1,22 @@
+
+<app-euro-rates-viewer 
+  cdkDropListGroup
+  [euroRateFiles]="euroRateFilesComplete$ | async"
+  [euroRateFilesLoadingStatus]="euroRateFilesLoadingStatus$ | async"
+  [euroRateFileDownloadProgress]="euroRateFileDownloadProgress$ | async" 
+
+  (startDownload)="startDownload($event)"
+  (removeFileFromQueue)="removeFileFromQueue($event)"
+  (resetFileStatus)="resetFileStatus($event)"
+  (fileOrderChange)="changeFileOrder($event)">
+</app-euro-rates-viewer>
+
+<!-- 
+[euroRateRealTimeConnection]="euroRateRealTimeConnection$ | async"
+[euroRateFileDownloadProgress]="euroRateFileDownloadProgress$ | async"
+[euroRateGeneralEventUpdate]="euroRateGeneralEventUpdate$ | async"
+[euroRateFileOrder]="euroRateFileOrder$ | async" 
+
+(toggleRealTime)="toggleRealTime($event)"
+(fileOrderChange)="changeFileOrder($event)"
+-->

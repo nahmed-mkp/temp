@@ -1,0 +1,16 @@
+<app-timeseries-exporter-editor
+    [monitor]="selectedMonitor$ | async"
+    [mode]="mode"
+    [existedMonitorNames]="existedMonitorNames$ | async"
+
+    [monitors]="monitors$ | async"
+    [monitorsLoading]="monitorsLoading$ | async"
+    [monitorsLoaded]="monitorsLoaded$ | async"
+    [monitorsError]="monitorsError$ | async"
+    
+    (cancel)="onCancel($event)"
+    (applyChanges)="onApplyChanges($event)"
+    (deleteList)="onDeleteList($event)"
+    (monitorSelected)="selectMonitor($event)"
+    (runTempList)="onRunTempList($event)">
+</app-timeseries-exporter-editor>

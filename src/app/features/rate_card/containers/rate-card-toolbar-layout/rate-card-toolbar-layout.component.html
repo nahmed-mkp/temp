@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <span class="toolbar-heading"> RATE CARD </span>
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <span class="toolbar-spacer"></span>
+
+    <button class="btn-primary" mat-button mat-dialog-close *ngIf="activeTab === 'Admin'" (click)="onSignOff()">Sign Off</button>
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 1rem;">
+        <mat-label> Sec Type </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select (selectionChange)="onSecTypeChanged($event)"  [formControl]="secTypeFormControl" multiple>
+                <mat-option *ngFor="let secType of secTypes" [value]="secType" style="margin-top:10px;">
+                    {{secType}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 1rem;">
+        <mat-label> Currency </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select (selectionChange)="onCurrencyChanged($event)" [formControl]="currencyFormControl" multiple>
+                <mat-option *ngFor="let currency of currencies" [value]="currency" style="margin-top:10px;">
+                    {{currency}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" *ngIf="activeTab !== 'Admin'">
+        <mat-label>Start Date</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerFrom"[(ngModel)]="formattedStartDate" (ngModelChange)="onStartDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" *ngIf="activeTab !== 'Admin'" >
+        <mat-label>End Date</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerFrom2" [(ngModel)]="formattedEndDate" (ngModelChange)="onEndDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom2"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom2></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+</mat-toolbar>

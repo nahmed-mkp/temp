@@ -1,0 +1,28 @@
+.wrapper {
+    background-color: white;
+    height: 250px;
+    width: 600px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrap{
+    height: 100%;
+    flex-direction: column;
+}
+
+.input-wrap{
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-end
+}
+
+.button-wrap{
+    height: 25%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center
+}

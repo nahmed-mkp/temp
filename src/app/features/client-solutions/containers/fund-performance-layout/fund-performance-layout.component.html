@@ -1,0 +1,85 @@
+<!-- <div *ngIf="params;else loading" style="margin-left:10px;">
+    <h4>{{params?.fund?.description}}</h4>
+    <pre>{{params | json}}</pre>
+</div>
+
+<ng-template #loading>
+    <div class="loading-screen">
+        <h3>Please select a Fund...</h3>
+    </div>
+</ng-template> -->
+
+<app-client-solutions-fund-net-return-viewer 
+    class="mat-card-lift vertical-flex" 
+    style="min-height: 30rem;margin-top:20px"
+    [params]="params"
+    [data]="rawReturns$ | async"
+    [loading]="rawReturnsLoading$ | async"
+    [title]="params?.fund?.description"
+    [ngStyle]="{'min-height': (rawReturnsViewHeight$ | async)}">
+</app-client-solutions-fund-net-return-viewer>
+
+<app-client-solutions-fund-statistics-viewer 
+    class="mat-card-lift vertical-flex" style="min-height: 30rem"
+    [data]="fundStatistic$ | async"
+    [loading]="fundStatisticLoading$ | async"
+    [title]="params?.fund?.description"
+    [ngStyle]="{'min-height': (fundStatisticViewHeight$ | async)}">
+</app-client-solutions-fund-statistics-viewer>
+
+<app-client-solutions-fund-correlation-viewer 
+    class="mat-card-lift vertical-flex" 
+    style="min-height: 30rem"
+    [data]="correlations$ | async"
+    [loading]="correlationsLoading$ | async"
+    [benchmarkCodeMap]="benchmarkCodeMap$ | async"
+    [fundEntity]="fundEntity$ | async"
+    [title]="params?.fund?.description"
+    [ngStyle]="{'min-height': (correlationsViewHeight$ | async)}">
+</app-client-solutions-fund-correlation-viewer>
+
+<div class="horizontal-flex-full-width" style="min-height: 30rem">
+    <app-client-solutions-fund-timeseries-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 1 0 0; height: 98%;"
+        [rawData]="timeseries$ | async"
+        [loading]="timeseriesLoading$ | async"
+        [benchmarkCodeMap]="benchmarkCodeMap$ | async"
+        [fundEntity]="fundEntity$ | async"
+        [title]="params?.fund?.description"
+        [filteredBenchmark]="filteredBenchmark$ | async">
+    </app-client-solutions-fund-timeseries-viewer>
+    <app-client-solutions-fund-drawdown-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 1 0 0; height: 98%;"
+        [rawData]="drawdown$ | async"
+        [loading]="drawdownLoading$ | async"
+        [benchmarkCodeMap]="benchmarkCodeMap$ | async"
+        [fundEntity]="fundEntity$ | async"
+        [title]="params?.fund?.description"
+        [filteredBenchmark]="filteredBenchmark$ | async">
+    </app-client-solutions-fund-drawdown-viewer>
+</div>
+
+<div class="horizontal-flex-full-width" style="min-height: 30rem">
+    <app-client-solutions-fund-histogram-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 1 0 0; height: 98%;"
+        [histogram]="histogram$ | async"
+        [loading]="histogramLoading$ | async"
+        [title]="params?.fund?.description">
+    </app-client-solutions-fund-histogram-viewer>
+
+    <app-client-solutions-fund-alpha-beta-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 1 0 0; height: 98%;" 
+        [benchmarks]="benchmarks$ | async"
+        [data]="alphaBetaStats$ | async"
+        [loading]="alphaBetaStatsLoading$ | async"
+        [title]="params?.fund?.description">
+    </app-client-solutions-fund-alpha-beta-viewer>
+</div>
+
+
+
+

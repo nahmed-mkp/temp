@@ -1,0 +1,10 @@
+<div style="justify-content:end;width:100%">
+    <span *ngIf="hasOverride; else noOverride">
+        <span style="text-decoration:line-through">{{value ? value.toFixed(3): 'N/A'}}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b><i>{{override ? override.toFixed(3) + '%': ''}}</i></b>
+    </span>
+    <ng-template #noOverride>
+        {{generateValue()}}
+    </ng-template>&nbsp;
+    <sup style="color:red" *ngIf="position && position !== 0.0">P</sup>
+</div>

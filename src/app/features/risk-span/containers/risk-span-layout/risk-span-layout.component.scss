@@ -1,0 +1,65 @@
+app-risk-span-plot-viewer {
+    max-height: 50rem;
+    max-width: 100rem;
+    width: 100%;
+}
+
+app-risk-span-multi-plot-layout {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    overflow: auto;
+    justify-content: space-around;
+    position: relative;
+}
+
+app-risk-span-raw-data-viewer {
+    width: 100%;
+}
+
+div#risk-span-tool-set {
+    position: absolute;
+    z-index: 1;
+    right: 4rem;
+    top: 1rem;
+    
+    .mat-mdc-form-field {
+        width: 0;
+    }
+
+    .mat-button-shrink {
+        transform: translateY(-4px);
+    }
+    button {
+        margin-right: 0.5rem;
+    }
+}
+
+div.instruction {
+    position: relative;
+
+    .mat-icon {
+        position: absolute;
+        transform: scale(33);
+        opacity: 0.05;
+        user-select: none;
+        z-index: -1;
+    }
+}
+
+.mat-drawer-container.side-popup.right-side-popup {
+    position: absolute;
+    top: 0;
+    .mat-sidenav-content {
+        transform: translateY(13px);
+        background: #334aa9a8;
+        border-radius: 6px 0 0 6px;
+        button {color: white}
+    }
+}
+
+.mat-card {
+    margin: 0rem 0.5rem 0.5rem 0.5rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14), 0 1px 1px 0 rgba(0, 0, 0, 0), 0 1px 3px 0 rgba(0,0,0,.12) !important;
+}
+

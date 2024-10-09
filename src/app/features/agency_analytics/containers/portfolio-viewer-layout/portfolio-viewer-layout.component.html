@@ -1,0 +1,10 @@
+<app-portfolio-viewer
+    [mode$]="mode$"
+    [lookups]="lookups"
+    [selectedViews]="selectedViews"
+    [securityDetails]="securityDetails$ | async"
+    [securityDetailsLoading]="securityDetailsLoading$ | async"
+    [securityDetailsLoaded]="securityDetailsLoaded$ | async"
+    [securityDetailsError]="securityDetailsError$ | async"
+    [selectedItems]="selectedItems"
+    (updateSelectedItems)="onUpdateSelectedItems($event)"></app-portfolio-viewer>

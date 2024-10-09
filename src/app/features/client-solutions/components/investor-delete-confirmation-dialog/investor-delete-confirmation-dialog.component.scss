@@ -1,0 +1,22 @@
+.mat-dialog-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+        margin: 0
+    }
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    mat-checkbox {
+        font-size: 0.8rem;
+    }
+
+    i {
+        margin-left: 0.5rem;
+        opacity: 0.3;
+        cursor: grab;
+        position: absolute;
+        right: 0px;
+        top: 3px;
+    }
+}

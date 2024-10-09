@@ -1,0 +1,149 @@
+<div id="euro-rate-file-backlog-section" >
+  <h3><span>Avaliable Files</span></h3>
+  <div class="header-card" style="padding: 16px 30px 0 30px;">
+    <span style="flex: 2 0 0"><i>File Name</i></span>
+    <span style="flex: 1 0 0"></span>
+    <span style="flex: 2 0 0"><i>Last Modified Time</i></span>
+    
+    <span style="flex: 2 0 0; text-align: right"><i>Process Name</i></span>
+    <span style="flex: 2 0 0; text-align: right"><i>Status</i></span>
+  </div>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="filesBacklog" id="avaliable-file">
+    <div *ngFor="let file of filesBacklog; let i = index"  cdkDrag class="card-container" >
+      <mat-card [ngClass]="{'complete-progress': file.progress === 100 || file.status === 'Finished'}">
+        <span style="flex: 2 0 0; color: #3f51b5; word-break:break-all"><strong>{{file.filePath && file.filePath.split('\\').pop()}}</strong></span>
+        <span style="flex: 1 0 0"></span>
+        <span style="flex: 2 0 0">{{file.lastModifiedTime | date:'medium'}}</span>
+        <span style="flex: 2 0 0; text-align: right">{{file.processName}}</span>
+        <span style="flex: 2 0 0; text-align: right">{{file.status}}</span>
+      </mat-card>
+      <span class="euro-rate-file-action">
+        <button mat-icon-button matTooltip="Reset Status" 
+          (click)="onResetStatusToNotDownloaded(file.id)" *ngIf="file.status == 'Finished'">
+          <mat-icon>replay</mat-icon>
+        </button>
+      </span>
+    </div>
+    
+    <div *ngIf="filesBacklog.length ===0" class="instruction">
+      <h4>Drop File here to start download</h4>
+    </div>
+  </div>
+</div>
+
+<div class="euro-rata-file-divider"><span></span></div>
+
+<div id="euro-rate-download-section">
+  <h3>
+    <span>Download</span>
+    <div id="euro-rates-action-button">
+      <mat-slide-toggle [checked]="euroRateRealTimeConnection" (change)="onRealTimeConnectionChanged($event)">
+        <span class="slide-toggle-label">
+          Real Time
+        </span>
+      </mat-slide-toggle>
+      <button mat-raised-button color="primary"  (click)="onStartDownload()">Submit</button>
+    </div>
+
+  </h3>
+  <div class="header-card">
+    <div style="display: flex; flex: 11 0 0">
+      <!-- <span style="flex: 0.5 0 0"><i></i></span> -->
+      <span style="flex: 2 0 0"><i>File Name</i></span>
+      <span style="flex: 1 0 0"></span>
+      <span style="flex: 2 0 0"><i>Last Modified Time</i></span>
+      
+      <span style="flex: 2 0 0;"><i>Process Name</i></span>
+      <span style="flex: 1 0 0; text-align: right"><i>Status</i></span>
+      <span style="flex: 1 0 0; text-align: right"><i>Error</i></span>
+      <span style="flex: 1 0 0;"></span>
+    
+      <span style="flex: 3 0 0"><i>Download Progress</i></span>
+      <span style="flex: 1 0 0; text-align: right" matTooltip="Drag to re-order the item priority">
+        <i>Priority<sup>?</sup></i>
+      </span>
+    </div>
+  
+  
+    <span style="flex: 1 0 0"></span>
+  </div>
+  
+  <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="filesInDownloadQueue" id="download-file">
+    <div *ngFor="let file of filesInDownloadQueue; let i = index" 
+      cdkDrag class="card-container" (cdkDragExited)="onRemoveFileFromQueue($event)" 
+      [cdkDragData]="file" [cdkDragDisabled]="file.success"> 
+      <mat-card 
+        [ngClass]="{'complete-progress': file.progress === 100 || file.status === 'Finished',
+                    'pending-progress': file.progress > 0 && file.progress !== 100,
+                    'error-progress': file.errors !== null}">
+    
+        <!-- <mat-checkbox style="flex: 0.5 0 0;" (change)="onSelect($event)" [id]="i"></mat-checkbox> -->
+        <span style="flex: 2 0 0; color: #3f51b5; word-break:break-all"><strong>{{file.filePath && file.filePath.split('\\').pop()}}</strong></span>
+        <span style="flex: 1 0 0"></span>
+        <span style="flex: 2 0 0">{{file.lastModifiedTime | date:'medium'}}</span>
+    
+        
+        <span style="flex: 2 0 0;">{{file.processName}}</span>
+        <span style="flex: 1 0 0; text-align: right">{{file.status}}</span>
+        
+        <span style="flex: 1 0 0; text-align: right">
+          <i *ngIf="file.errors === null">N/A</i>
+          <button *ngIf="file.errors !== null" mat-icon-button color="warn" (click)="openErrorReport(file)">
+            <mat-icon class="fade">error</mat-icon>
+          </button>
+        </span>
+    
+        <span style="flex: 1 0 0;"></span>
+    
+        <span style="flex: 3 0 0" *ngIf="file.errors === null && file.queueId !== null && file.status !== 'Finished'">
+          <i style="opacity: 0.6" [ngStyle]="{'color': file.progress === 100 ? 'green' : 'inherit'}">
+            {{file.progress !== 100 ? file.progress + '%' : 'Completed!'}}
+          </i>
+          <mat-progress-bar *ngIf="file.progress !== 100 && file.progress !== 'pending'"  mode="determinate" [value]="file.progress">
+          </mat-progress-bar>
+        </span>
+        <span style="flex: 3 0 0"  *ngIf="file.status==='Finished'">
+          <i style="opacity: 0.6; color: green">
+            Completed!
+          </i>
+        </span>
+        <span style="flex: 3 0 0" *ngIf="file.errors === null && file.queueId === null && file.status!=='Finished'">
+          <i style="opacity: 0.6">
+            Pending...
+          </i>
+        </span>
+        <span style="flex: 3 0 0" *ngIf="file.errors !== null">
+          <i style="opacity: 0.6; color: red">
+            download failed, check errors!
+          </i>
+        </span>
+    
+        <span style="flex: 1 0 0;text-align: right">
+          <!-- <mat-form-field  appearance="outline" class="outline-shrink" style="width: 5rem">
+            <mat-label>Priority</mat-label>
+            <input type="number" matInput>
+          </mat-form-field> -->
+          <i [ngStyle]="{'opacity': file.status === 'Not Download' ? 1 : 0.3}">{{file.downloadPriority}}</i>
+        </span>
+      </mat-card>
+
+
+  
+      <span class="euro-rate-file-action">
+        <button mat-icon-button (click)="onClickRemoveFileFromQueue(file)" 
+          matTooltip="Reset Status" *ngIf="file.queueId !== null">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </span>
+    </div>
+
+    <div *ngIf="filesInDownloadQueue.length ===0" class="instruction">
+      <h4>Drop File here to start download</h4>
+    </div>
+  </div>
+  <br><br>
+  
+</div>
+
+

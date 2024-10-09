@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+  <mat-toolbar>
+      <span class="toolbar-heading"> Create New Economic Variable </span>
+  </mat-toolbar>
+
+  <div class="content-wrap">
+    <div class="input-wrap">
+
+      <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+        <mat-label> Country </mat-label>
+        <mat-select [(ngModel)]="selectedCountryName" placeholder="..." (selectionChange)="handleInputChange($event)">
+          <mat-option *ngFor="let country of countryList" [value]="country.countryCode">{{country.Name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+        <mat-label> Variable Name </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput placeholder="..." autocomplete="off"[(ngModel)]="variableName" (input)="handleInputChange($event)">
+        </div>
+      </mat-form-field>
+
+    </div>
+
+    <div class="button-wrap">
+      <button mat-button (click)="cancel()" style="background-color:#f1807e;">Cancel</button>
+      <button mat-button [disabled]="submitDisabled" (click)="save()" style="background-color:lightskyblue;margin-left: 2rem;">Save</button>
+    </div>
+  </div>
+
+</div>

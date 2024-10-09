@@ -1,0 +1,18 @@
+.horizontal-flex-full-height {
+    justify-content: space-between;
+    span {
+        flex: 1 0 0
+    }
+    span:not(:first-child){
+        text-align: right;
+    }
+    span:first-child {
+        opacity: 0.6;
+    }
+}
+
+.vertical-flex-full-height {
+    padding: 0.5rem;
+    font-size: 12px;
+    color: grey;
+}

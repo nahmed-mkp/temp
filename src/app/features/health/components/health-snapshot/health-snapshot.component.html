@@ -1,0 +1,82 @@
+<!-- <mat-grid-list cols="8" rowHeight="fit" style="height:100%;justify-content: center;">
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <app-bbg-snapshot style="width:100%"
+            [bbgStatus]="healthStatus?.bbgs"
+            [twebStatus]="healthStatus?.tradeweb"
+            (loginAndRestartBloombergServer)="onLoginAndRestartBloombergServer($event)"
+            (restartBloombergServer)="onRestartBloombergServer($event)"
+            (restartMDServerAndTradewebFeed)="onRestartMDServerAndTradewebFeed($event)"
+            (restartTradewebFeed)="onRestartTradewebFeed($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-bbg-snapshot>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="2">
+        <app-jobscheduler-snapshot style="width:100%"
+            [jobSchedulers]="healthStatus?.jobschedulers"
+            (restartJobScheduler)="onRestartJobScheduler($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-jobscheduler-snapshot>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3" [rowspan]="2">
+        <app-calcserver-snapshot style="width:100%"
+            [calcServerStatus]="healthStatus?.calcservers"
+            (restartCalcServer)="onRestartCalcServer($event)"
+            (restartAllCalcServers)="onRestartAllCalcServers($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-calcserver-snapshot>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <app-riskserver-snapshot
+            style="width:100%"
+            [riskServerStatus]="healthStatus?.riskserver"
+            [simGenStatus]="healthStatus?.simgen"
+            (restartRiskServer)="onRestartRiskServer($event)"
+            (restartSimGen)="onRestartSimGen($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-riskserver-snapshot>
+    </mat-grid-tile>
+</mat-grid-list> -->
+
+<div style="width: 99vw; display: flex; flex-direction: row;align-items: flex-start;justify-content: center;"> 
+    <div style="flex: 1;height: 100%; flex-direction:column;">
+        <div style='flex:1'> 
+            <app-bbg-snapshot style="width:100%"
+                [bbgStatus]="healthStatus?.bbgs"
+                [twebStatus]="healthStatus?.tradeweb"
+                (loginAndRestartBloombergServer)="onLoginAndRestartBloombergServer($event)"
+                (restartBloombergServer)="onRestartBloombergServer($event)"
+                (restartMDServerAndTradewebFeed)="onRestartMDServerAndTradewebFeed($event)"
+                (restartTradewebFeed)="onRestartTradewebFeed($event)"
+                (killProcess)="onKillProcess($event)">
+            </app-bbg-snapshot>
+        </div>
+        <div style='flex: 1'> 
+            <app-riskserver-snapshot
+                style="width:100%;"
+                [riskServerStatus]="healthStatus?.riskserver"
+                [simGenStatus]="healthStatus?.simgen"
+                (restartRiskServer)="onRestartRiskServer($event)"
+                (restartSimGen)="onRestartSimGen($event)"
+                (killProcess)="onKillProcess($event)">
+            </app-riskserver-snapshot>
+        </div>
+    </div>
+    <div style="flex: 1;height: 100%;">
+        <app-jobscheduler-snapshot style="width:100%"
+            [jobSchedulers]="healthStatus?.jobschedulers"
+            (restartJobScheduler)="onRestartJobScheduler($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-jobscheduler-snapshot>
+    </div>
+    <div style="flex: 1; height: 100%;">
+        <app-calcserver-snapshot style="width:100%"
+            [calcServerStatus]="healthStatus?.calcservers"
+            (restartCalcServer)="onRestartCalcServer($event)"
+            (restartAllCalcServers)="onRestartAllCalcServers($event)"
+            (killProcess)="onKillProcess($event)">
+        </app-calcserver-snapshot>
+    </div>  
+</div>

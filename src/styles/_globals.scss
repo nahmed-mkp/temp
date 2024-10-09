@@ -1,0 +1,341 @@
+// ======================== GLOBALLY APPLIED CLASSES ========================== //
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
+html,
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  height: 100%;
+  background: #fafafa;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #dddddda1;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(63, 81, 181, 0.27);
+}
+
+*::-webkit-resizer {
+  cursor: ne-resize;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.ag-theme-balham .ag-row.yellow-background,
+.yellow-background,
+.yellow-cell,
+.yellow-header {
+  background: #ffff002e;
+}
+
+.red-cell{
+  color: #FF9994;
+}
+
+.vertical-write-mode {
+  span {
+    font-size: 12px;
+    word-spacing: 3px;
+    writing-mode: vertical-rl;
+  }
+}
+
+mat-spinner {
+  opacity: 0.6;
+}
+
+tr {
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    padding: 0 1rem;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+
+// ======================== GLOBALLY REUSABLE CLASSES ========================== //
+
+// ================= LEGACY =================
+
+.material-card {
+  padding: 20px 20px 0 20px;
+  background: white;
+  box-shadow: 1px 1px 11px 0px #8080806b;
+  margin: 0.4rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+
+.vertical-flex-full-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.vertical-flex-full-height-99 {
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  position: relative;
+}
+
+.vertical-flex-full-height-95 {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  position: relative;
+}
+
+.vertical-flex-full-height-90 {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  position: relative;
+}
+
+.vertical-flex-full-height-80 {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  position: relative;
+}
+
+.vertical-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.horizontal-flex-full-height {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: stretch;
+}
+
+.horizontal-flex-full-center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-flex-full-width {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-flex-95-width {
+  width: 95%;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-flex-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.centralize-single {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell-bold {
+font-weight: bold;
+}
+
+.cell-italic {
+font-style: italic;
+}
+
+.cell-right-align {
+justify-content: flex-end;
+}
+
+.mat-card-component {
+  flex: 1 0 0;
+  // padding: 0.7rem;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14), 0 1px 1px 0 rgba(0, 0, 0, 0),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+  position: relative;
+}
+
+.mat-card {
+  padding: 0;
+  flex: 1 0 0;
+  // padding: 0.7rem;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
+    0 1px 1px 0 rgba(0, 0, 0, 0), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+  position: relative;
+}
+
+.mat-card-lift {
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14), 0 1px 1px 0 rgba(0, 0, 0, 0),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-card.mat-card-shadow-adjust {
+  border-radius: 5px;
+  box-shadow: 0 2px 7px -1px rgba(0, 0, 0, 0.12),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.header-bold {
+  font-weight: bolder;
+  color: #3a3a3a;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.non-clickable:hover {
+  cursor: not-allowed;
+}
+
+.loading-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+  z-index: 10;
+}
+
+// ================= POST-MIGRATION =================
+
+
+// wrap the toolbar heading name
+.toolbar-heading {
+  font-size: $toolbar-heading-font-size;
+  color: $toolbar-heading-font-color;
+}
+
+// wrap all toolbar icons
+.toolbar-icon {
+  color: $toolbar-icon-menu-primary;
+  opacity: $opacity-primary;
+  background: transparent;
+}
+
+.toolbar-icon:hover {
+  opacity: $opacity-primary;
+}
+
+// split items on the left/right of this element
+.vertical-toolbar-divider-small {
+  height: 2.2rem;
+  width: 1px;
+  display: block;
+  background: white;
+  opacity: 0.5;
+  margin-left: 1rem;
+}
+
+.toolbar-spacer {
+  @include spacer;
+}
+
+.toolbar-datepicker {
+  color: white;
+  font-size: 20px;
+}
+
+// ========================
+
+.date-form-field{
+  top: 0.2rem;
+  margin-right: 0.5rem;
+  width: $mat-date-form-field-width;
+}
+
+.date-form-field-small{
+  top: 0.2rem;
+  margin-right: 0.5rem;
+  width: $mat-date-form-field-small-width;
+}
+
+.grouping-form-field{
+    width: $mat-grouping-form-field-width; 
+}
+
+.fund-form-field{
+  width: $mat-fund-form-field-width;
+}
+
+.fund-form-field-large{
+  width: $mat-fund-form-field-large-width;
+}
+
+// ========================
+
+.open-new-tab-icon {
+  margin-left: $new-tab-icon-ml;
+  margin-top: $new-tab-icon-mt;
+  color: $new-tab-background-color;
+}
+
+// ========================
+
+.timestamp {
+  color: $ts-color;
+  font-size: $ts-font-size;
+  opacity: $ts-opacity;
+  font-weight: bold;
+}
+
+.timestamp-alt {
+  color: $ts-color-alt;
+  font-size: $ts-font-size;
+  opacity: $ts-opacity;
+}
+
+.mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}

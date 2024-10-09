@@ -1,0 +1,30 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Grid Layout Configuration</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</div>
+
+<div style="padding: 0.5rem" class="horizontal-flex-center">
+    <mat-form-field appearance="outline" class="outline-shrink">
+        <mat-label>Layout Name</mat-label>
+        <input matInput placeholder="Layout Name" [value]="layoutName" disabled>
+    </mat-form-field>  
+
+    <mat-checkbox style="margin-left: 0.5rem;" [(ngModel)]="default" [disabled]="layoutName === 'Overview'">Default</mat-checkbox>
+    <mat-checkbox style="margin-left: 0.5rem;" [(ngModel)]="isShared" [disabled]="layoutName === 'Overview'">IsShared</mat-checkbox>
+
+    <button mat-flat-button color="primary" (click)="onCloseClick('save')" style="min-width: initial;margin-left: 0.5rem;" [disabled]="layoutName === 'Overview'">Save</button>
+    <button mat-flat-button color="warn" (click)="onCloseClick('delete')" style="min-width: initial;margin-left: 0.5rem;" [disabled]="layoutName === 'Overview'">Delete</button>
+</div>
+
+<div class="mat-dialog-content" style="padding: 0 1.5rem">
+    <app-app-grid-layout-basic-row-grouping-configuration
+        [currentGroupings]="layoutGrouping$ | async"
+        [availableGroupings]="supportedGroupings$ | async"
+        (currentModifyRowGrouping)="currentModifyRowGrouping($event)">
+    </app-app-grid-layout-basic-row-grouping-configuration>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+    <button mat-button (click)="onCloseClick('close')">Close</button>
+</div>

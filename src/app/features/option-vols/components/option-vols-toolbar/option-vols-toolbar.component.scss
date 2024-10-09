@@ -1,0 +1,71 @@
+mat-button-toggle-group {
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+mat-checkbox {
+    margin-right: 0.5rem;
+}
+
+button {
+    margin-right: 0.5rem;
+}
+
+button.mat-icon-button {
+    margin-right: 0;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of option that may no longer apply for the MDC version. */
+mat-option i {
+    opacity: 0.5;
+    margin-right: 1rem;
+}
+
+mat-chip.mat-chip {
+    margin-top: -0.2rem !important;
+}
+
+.mat-calendar-body-cell.selected
+{
+  background-color:rgba(14, 152, 5, 0.25);
+  border-radius: 50%
+}
+
+.drop-calendar
+{
+  width:30rem
+}
+
+.drop-dates
+{
+  width:18rem
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+.mat-button-toggle-label-content{
+    margin-top:-0.5rem;
+}
+
+.mat-chip-input{
+    border:none;
+}
+
+mat-label{
+    width: 100px;
+}
+
+mat-form-field{
+    margin-left: 1rem;
+}
+
+.active{
+    opacity: 1;
+}
+
+.inactive{
+    opacity: 0;
+}

@@ -1,0 +1,12 @@
+<div class="fab">
+    <button mat-mini-fab color="primary" aria-label="Choose Parameters" (click)="openParams()" [disabled]="!loaded">
+        <mat-icon>view_list</mat-icon>
+    </button>
+</div>
+
+<!-- <div id="chart" *ngIf="(plotData$ | async)?.length > 0">
+    {{ plotData$ | async | json }}
+</div> -->
+
+<app-linechart style="width: 100%; height: 100%; display: flex;" [options]="optionsPlot" [callbackFn]="callbackFn">
+</app-linechart>

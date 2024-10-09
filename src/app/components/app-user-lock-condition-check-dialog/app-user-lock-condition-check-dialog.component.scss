@@ -1,0 +1,17 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;        /* for single line flex container */
+    flex-direction: column;
+}
+
+.flex-item {
+    align-content: center;      /* for multi-line flex container */
+}
+
+.link {
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}

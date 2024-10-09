@@ -1,0 +1,5 @@
+<button *ngIf="!isIconButton" mat-icon-button class="mat-button-ultra-shrink" (click)="onClick()">{{buttonText || 'N/A'}}</button>
+
+<button *ngIf="isIconButton" mat-icon-button class="mat-button-ultra-shrink" style="opacity: 0.5;" (click)="onClick()">
+    <mat-icon>{{icon}}</mat-icon>
+</button>

@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+  <mat-toolbar>
+      <span class="toolbar-heading"> Create New Forecast Period </span>
+  </mat-toolbar>
+
+  <div class="content-wrap">
+
+    <div class="input-wrap">
+        
+      <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+        <mat-label> Economic Variable </mat-label>
+        <mat-select [(ngModel)]="selectedEconVariableId" placeholder="..." (selectionChange)="handleInputChange($event)">
+          <mat-option *ngFor="let econVar of econVariableList" [value]="econVar.VariableId">{{econVar.VariableName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+        <mat-label> Period Name </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput placeholder="..." autocomplete="off" [(ngModel)]="forecastPeriodName" (input)="handleInputChange($event)" >
+        </div>
+      </mat-form-field>
+
+    </div>
+  
+    <div class="button-wrap">
+      <button mat-button (click)="cancel()" style="background-color:#f1807e;">Cancel</button>
+      <button mat-button [disabled]="submitDisabled" (click)="save()" style="background-color:lightskyblue; margin-left: 2rem">Save</button>
+    </div>
+  </div>
+
+</div>

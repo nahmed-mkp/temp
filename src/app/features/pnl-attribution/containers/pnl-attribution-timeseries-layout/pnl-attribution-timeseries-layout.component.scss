@@ -1,0 +1,15 @@
+app-pnl-attribution-timeseries-plot-viewer, app-pnl-attribution-timeseries-histogram-viewer, div {
+    position: relative;
+}
+
+div > div > div {
+    position: absolute;
+    z-index: 1;
+    transform: scale(0.7);
+    right: -0.7rem;
+    top: -0.4rem;
+}
+
+app-pnl-attribution-timeseries-plot-viewer, app-pnl-attribution-timeseries-grid-viewer {
+    border-right: 1px solid #bdc3c7;
+}

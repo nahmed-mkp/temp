@@ -1,0 +1,13 @@
+<mat-form-field>
+    <input #search matInput type="text" [matAutocomplete]="auto" [value]="value" (keyup)="handleKeyUpEvent($event)"
+        (keydown)="onKeyDown($event)">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="securitySelected($event)"  [displayWith]="displayFn"  
+        panelWidth="500">
+        <mat-option *ngIf="searching" class="loading">Loading...</mat-option>
+        <ng-container *ngIf="!searching">
+            <mat-option *ngFor="let searchResult of searchResults" [value]="searchResult">
+                {{searchResult.name}}
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>
+</mat-form-field>

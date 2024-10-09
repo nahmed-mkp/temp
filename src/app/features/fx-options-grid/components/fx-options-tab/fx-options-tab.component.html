@@ -1,0 +1,13 @@
+
+<br />
+<strong>{{filteredGrid.ccyPair}}</strong> spot: <strong>{{filteredGrid.spot}}</strong> as of <strong>{{filteredGrid.snaptime}}</strong>
+<br /><br />
+
+<div class="horizontal-flex-full-width">
+    <app-fx-options-viewer
+        *ngFor="let expiry of getExpiries(filteredGrid.option_pricing)"
+        style="margin:5px; flex: 1 0 0" 
+        [currency]="currency"
+        [data]="getSurface(filteredGrid.option_pricing, expiry)">
+    </app-fx-options-viewer>
+</div>

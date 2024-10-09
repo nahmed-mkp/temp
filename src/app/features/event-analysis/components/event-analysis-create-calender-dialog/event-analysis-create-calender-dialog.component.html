@@ -1,0 +1,39 @@
+<!-- <p>
+  event-analysis-create-calender-dialog works!
+</p> -->
+
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<!-- <mat-form-field appearance="outline" class="outline-shrink">
+  <mat-label>New Calender Name</mat-label>
+  <input matInput placeholder="Name" [(ngModel)]="newAnalysis.name">
+</mat-form-field> -->
+
+<div class="menu-dialog">
+  <div class="menu-dialog-title" (click)="$event.stopPropagation();">
+    <h5><i>Create New Calender</i></h5>
+  </div>
+
+  <div class="menu-dialog-content">
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>New Calender Name</mat-label>
+      <input matInput placeholder="Name" [(ngModel)]="newCalender.name">
+    </mat-form-field>
+    <br>
+    <br>
+<!-- 
+    <label>Calender Type: </label>
+    <mat-radio-group [(ngModel)]="newCalender.type">
+      <mat-radio-button value="private">Private</mat-radio-button>
+      <mat-radio-button value="public">Public</mat-radio-button>
+    </mat-radio-group> -->
+  </div>
+
+  <div class="menu-dialog-action" (click)="$event.stopPropagation();">
+    <button mat-button color="primary" (click)="onSaveNewCalender()">Save</button>
+    <button mat-button (click)="onClose()">Close</button>
+  </div>
+</div>
+

@@ -1,0 +1,19 @@
+.box {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.box div {
+    width: 805px;
+    height: 805px;
+}
+
+.image {
+    height: 800px;
+    width: 800px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 0 2px 1px rgba(198, 201, 201, 0.5);
+}

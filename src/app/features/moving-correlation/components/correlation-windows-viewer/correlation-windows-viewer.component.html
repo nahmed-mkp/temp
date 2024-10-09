@@ -1,0 +1,14 @@
+<!-- <p>
+  correlation-windows-viewer works!
+</p>
+{{movingWindowsCorrelation | json}} -->
+<highcharts-chart 
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+  [callbackFunction]="chartCallBack"
+  #chart
+  style="width: 100%; height: 100%; display: block; overflow: scroll;"
+></highcharts-chart>
+<div class="loading-screen" *ngIf="correlationLoadingStatus">
+  <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,16 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <span style="margin-left:10px;color:white;">Enter a name for the new dial</span>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCancel()">close</i>
+</div>
+
+<div class="dialog-padding">
+    <mat-form-field style="flex: 1 0 0;width:100%;">
+        <input type="text" appearance="outline" matInput placeholder="Enter a Dial Name" [(ngModel)]="dialName" 
+            autocomplete="off" name="dialName">
+    </mat-form-field>
+
+    <div mat-dialog-actions class="dialog-action">
+        <button mat-button color="primary" (click)="onSubmit()" style="cursor:pointer">Save</button>
+        <button mat-button color="primary" (click)="onCancel()" style="cursor:pointer">Cancel</button>
+    </div>
+</div>

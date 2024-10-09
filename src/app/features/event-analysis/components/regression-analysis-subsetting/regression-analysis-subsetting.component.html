@@ -1,0 +1,39 @@
+<!-- <p>
+  regression-analysis-subsetting works!
+</p> -->
+
+<fieldset>
+  <legend>Analysis 1</legend>
+  <div>
+    <span class="dependent-variable-label">Y:</span>
+    <mat-form-field>
+      <mat-select>
+        <mat-option [value]="'drop'">Drop Missing Dates (Default)</mat-option>
+        <mat-option [value]="'ffill'">Last Valid Value</mat-option>
+        <mat-option [value]="'bfill'">Next Valid Value</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <span class="independent-variable-label">X1:</span>
+    <mat-form-field>
+      <mat-select>
+        <mat-option [value]="'drop'">Drop Missing Dates (Default)</mat-option>
+        <mat-option [value]="'ffill'">Last Valid Value</mat-option>
+        <mat-option [value]="'bfill'">Next Valid Value</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <span class="independent-variable-label">X2:</span>
+    <mat-form-field>
+      <mat-select>
+        <mat-option [value]="'drop'">Drop Missing Dates (Default)</mat-option>
+        <mat-option [value]="'ffill'">Last Valid Value</mat-option>
+        <mat-option [value]="'bfill'">Next Valid Value</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</fieldset>

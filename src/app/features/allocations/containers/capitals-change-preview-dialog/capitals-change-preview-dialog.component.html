@@ -1,0 +1,51 @@
+<div style="height:100%; background-color:white;display:flex;flex-direction: column;">
+
+    <mat-toolbar>
+        <span class="toolbar-heading"> Preview Capital Changes for {{ getInputDate() }} </span>
+        <span class="vertical-toolbar-divider-small"></span> 
+        <span style="margin-left: 1rem; color: white;"> Guid: {{ inputPayload?.guid | json }} </span>
+    </mat-toolbar>
+
+    <mat-tab-group #tabs class="vertical-flex-full-height" style="flex: 1 0 0;" [selectedIndex]="0">
+        <mat-tab [label]="'Fund'" style="flex: 1 0 0">
+            <app-fund-capital-preview
+                [fundCapitalChangePreview]="fundCapitalChangePreview$ | async"
+                [previewLoading]="previewCapitalChangesLoading$ | async"
+                [previewLoaded]="previewCapitalChangesLoaded$ | async"
+                [previewError]="previewCapitalChangesError$ | async"> </app-fund-capital-preview>
+        </mat-tab>
+    
+        <mat-tab [label]="'Pod'" style="flex: 1 0 0">
+            <app-pod-capital-preview 
+                [podCapitalChangePreview]="podCapitalChangePreview$ | async"
+                [previewLoading]="previewCapitalChangesLoading$ | async" 
+                [previewLoaded]="previewCapitalChangesLoaded$ | async"
+                [previewError]="previewCapitalChangesError$ | async"> </app-pod-capital-preview>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div style="display: flex; align-items:center;justify-content:space-between;width: 90%; margin-left: 5%;"> 
+        <div>
+            <mat-form-field style="margin-top:1rem;">
+                <textarea matInput rows="4" placeholder="Enter a comment here" (change)="onCommentaryChanged($event.target.value)">
+                </textarea>
+            </mat-form-field>
+        </div>
+    
+        <div mat-dialog-actions *ngIf="(saveCapitalChangesLoading$ | async) === false" style="display: flex;align-items: center;justify-content: space-around;">
+            <mat-form-field style="width:150px;margin-top:1rem;margin-left:-2rem;">
+                <mat-label>Choose a date: </mat-label>
+                <input matInput [matDatepicker]="picker" (dateChange)="changeDate($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!dateSelected || !commentary">Save</button>
+            <button mat-button (click)="onClose()">Cancel</button>
+        </div>       
+    </div>
+ 
+    <div mat-dialog-actions  *ngIf="(saveCapitalChangesLoading$ | async) === true">
+        <span style="font-size:12px;"><strong>Saving capitals for {{ selectedDate }}...</strong></span>
+    </div>       
+    
+</div>

@@ -1,0 +1,37 @@
+<mat-toolbar class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <span style="font-size:13px; color: white;">Security Editor</span> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</mat-toolbar>
+
+<section class="horizontal-flex">
+    <span>
+        <i>Name: </i>
+        <strong>{{rowData.securityName}}</strong>
+    </span>
+
+    <!-- <mat-divider [vertical]="true"></mat-divider> -->
+
+    <span>
+        <i>Type: </i>
+        <strong>{{rowData.securityType}}</strong>
+    </span>
+
+    <!-- <mat-divider [vertical]="true" *ngIf="rowData.Cusip"></mat-divider> -->
+
+    <span *ngIf="rowData.Cusip">
+        <i>Cusip: </i>
+        <strong>{{rowData.Cusip}}</strong>
+    </span>
+
+    <!-- <mat-divider [vertical]="true"></mat-divider> -->
+
+    <span>
+        <i>SID: </i>
+        <strong>{{rowData.sid}}</strong>
+    </span>
+</section>
+<app-security-editor-general-layout 
+    style="flex: 1 0 0"
+    [targetSid]="targetSid"
+    [mode]="mode">
+</app-security-editor-general-layout>

@@ -1,0 +1,16 @@
+<div class="vertical-flex-full-height">
+    <mat-toolbar> 
+        <span class="toolbar-heading"> Additional Info</span>
+    </mat-toolbar>
+    <div class="vertical-flex-full-height">
+        <app-base-grid
+            class="vertical-flex-full-height"
+            style="flex: 1 0 0"
+            [gridItems]="additionalData"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </div>
+</div>
+

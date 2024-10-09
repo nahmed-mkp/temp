@@ -1,0 +1,11 @@
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="gridData.data" 
+  [customGridOption]="customGridOption" 
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<div *ngIf="!dataLoaded" class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div>

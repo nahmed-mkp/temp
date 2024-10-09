@@ -1,0 +1,35 @@
+<!-- <p>
+  pool-configuration-layout works!
+</p> -->
+<h4 class="pool-sidenav-card-title">
+    Configuration
+  </h4>
+  
+<div class="card-action">
+  <i class="material-icons" [matMenuTriggerFor]="menu" aria-label="Configuration Options" style="margin-right: 0">more_vert</i>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>cloud_download</mat-icon>
+      <span>Load Personal</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>save</mat-icon>
+      <span>Save Personal</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+      <mat-icon>cloud_download</mat-icon>
+      <span>Load Defaults</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>save</mat-icon>
+      <span>Save Defaults</span>
+    </button>
+  </mat-menu>
+  <i class="material-icons" (click)="onclose()">arrow_left</i>
+</div>
+<app-pool-configuration-viewer 
+  [globalSettings]="globalSettings"
+  [severitySettings]="severitySettings"
+  [calibrationSettings]="calibrationSettings">
+</app-pool-configuration-viewer>

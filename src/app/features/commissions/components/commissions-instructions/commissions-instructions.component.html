@@ -1,0 +1,38 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Commissions Help</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div class="vertical-flex" style="flex: 1 0 0; padding: 1rem; font-size: 0.8rem;">
+
+    <p>
+        Please read the below instructions for adding, updating and deleting Futures Commissions:
+    </p>
+
+    <h4>ADD NEW COMMISSIONS</h4>
+    <ol>
+        <li>Download the Commissions export by clicking on "Download Commissions"</li>
+        <li>Add rows to the Excel sheet, and for each of these rows, put the word "Add", "Insert" or "New" in the Action column</li>
+        <li>Delete other records that do not need to be modified</li>
+        <li>Click the "Upload Commissions" button and point to the file you have just edited</li>
+    </ol>
+
+    <h4>EDIT EXISTING COMMISSIONS</h4>
+    <ol>
+        <li>Download the Commissions export by clicking on "Download Commissions"</li>
+        <li>Edit rows in the Excel sheet. Do not modify the Id columns. For all the edited rows, put the word "Edit", "Update" or "Modify" in the
+            Action column</li>
+        <li>Delete other records that do not need to be modified</li>
+        <li>Click the "Upload Commissions" button and point to the file you have just edited</li>
+    </ol>
+
+    <h4>DELETE COMMISSIONS</h4>
+    <ol>
+        <li>Download the Commissions export by clicking on "Download Commissions"</li>
+        <li>In the Action column, put the word "Delete", "Cancel" or "Erase" in all the rows that need to be deleted</li>
+        <li>Delete other records that do not need to be modified</li>
+        <li>Click the "Upload Commissions" button and point to the file you have just edited</li>
+    </ol>
+
+    All of the above steps can be performed as part of a single upload. 
+</div>

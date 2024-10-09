@@ -1,0 +1,10 @@
+<mat-card class="horizontal-flex-full-height" style="height:98%;margin:0.3rem">    
+    <div style="font-size:15px;font-weight:bold;"> Missing Investor Details - 
+        <small><i>Following investors (with InvestorId and FundId) appear in Admin statements but are missing or not mapped correctly</i></small>
+    </div>
+    <app-base-grid style="height:90%;width:100%;"
+        [gridItems]="exceptions"
+        [customGridOption]="customGridOption" [extraOption]="extraOption" [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+</mat-card>
+

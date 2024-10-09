@@ -1,0 +1,156 @@
+.container{
+    height: 100%;
+    width: 100%;
+    display: flex; 
+    flex-direction: column; 
+    background-color:white; 
+    border-radius: 8px;
+}
+
+.col-wrap{
+    display: flex;
+    flex-direction: row; 
+    height: 100%;
+    width: 100%;
+}
+
+.y-wrap{
+    height: 100%;
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.content-wrap{
+    width: 100%;
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.inflation-wrap{
+    height: 175px; 
+    width: 80%;
+    display: flex;
+    padding:2px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.scenario-wrap{
+    height: 175px;
+    width:80%;
+    display: flex;
+    padding: 2px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; 
+}
+
+.probability-error{
+    color:red
+}
+
+/* ============ TITLE =========== */
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    font-size: 13.5px;
+    height: 50px;
+}
+
+.total-percent{
+    margin-top:5px;
+    font-size: 11px;
+    font-weight:bold;
+}
+
+/* ============ ITEM =========== */
+
+.item{
+    width: 70%;
+}
+
+.item-title{
+    height: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:12px;
+}
+
+.item-desc{
+    height: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11.5px;
+}
+
+.item-value{
+    height: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.item-value input{
+    width: 60px;
+}
+
+/* ============ VISIBILITY =========== */
+
+.blurred{
+    opacity: 0.3;
+}
+
+.hidden{
+    display: none;
+}
+
+/* ============ COLORS =========== */
+
+.blue-primary{
+    background-color: #C9DFF1;
+}
+
+.blue-secondary{
+    background-color: #DDEBF6;   
+}
+
+.pink-primary{
+    background-color: #FFC2CB;   
+}
+
+.pink-secondary{
+    background-color: #FFDCE1;
+}
+
+.gray-primary{
+    background-color: #E5E5E5;
+}
+
+.gray-secondary{
+    background-color: #F1F1F1;
+}
+
+.beige-primary{
+    background-color: #eed9c4;  
+}
+
+.beige-secondary{
+    background-color: #F4E6D8; 
+}

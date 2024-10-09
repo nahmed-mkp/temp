@@ -1,0 +1,29 @@
+.wrapper {
+    background-color: white;
+    height: 200px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+  
+  .input-wrapper{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-around;
+    height: 60%;
+    margin-top:3%;
+  }
+
+  .btn-wrap{
+    width: 200px;
+    display:flex;
+    align-items: center;
+    justify-content:space-around;
+    margin-top:-10px;
+  }
+  
+  .material-icons:hover{
+    color: gainsboro !important;
+  }

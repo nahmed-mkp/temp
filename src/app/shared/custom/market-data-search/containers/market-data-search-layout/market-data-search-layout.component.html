@@ -1,0 +1,8 @@
+<app-market-data-search-inner
+    [providers]="providers$ | async" 
+    [searchCriteria]="searchCriteria$ | async"
+    [searchResults]="searchResults$ | async"
+    (updateProvider)="updateProvider($event)"
+    (searchMarketData)="searchMarketData($event)"
+    (marketDataEntered)="marketDataInput($event)"
+    (marketDataSelected)="selectMarketData($event)"></app-market-data-search-inner>

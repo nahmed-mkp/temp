@@ -1,0 +1,15 @@
+<app-cs-perf-toolbar
+    [funds]="funds$ | async"
+    [selectedFund]="selectedFund$ | async"
+    [startDate]="startDate$ | async"
+    [endDate]="endDate$ | async"
+    [refreshDataPendingStatus]="refreshDataPendingStatus$ | async"
+
+    [benchmarks]="benchmarks$ | async"
+    [selectedBenchmark]="filteredBenchmark$ | async"
+    (paramsChanged)="changeParams($event)"
+    (benchmarkChanged)="onBenchmarkChanged($event)"></app-cs-perf-toolbar>
+
+<app-cs-fund-performance-layout
+    [params]="params$ | async">
+</app-cs-fund-performance-layout>

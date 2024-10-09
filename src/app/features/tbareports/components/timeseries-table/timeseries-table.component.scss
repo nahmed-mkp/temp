@@ -1,0 +1,12 @@
+.flex-container { 
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+.flex-item { 
+    // width: 80%;
+    align-self:center;
+    height: 100%;
+    margin: 0;
+}

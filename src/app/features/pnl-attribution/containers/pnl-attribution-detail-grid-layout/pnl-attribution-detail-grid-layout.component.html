@@ -1,0 +1,18 @@
+<app-pnl-attribution-detail-grid-viewer
+    class="full-strech-block"
+    [guid]="guid"
+    [gridUniqueId]="gridUniqueId"
+    [masterGridApi]="masterGridApi"
+    [colDefs]="colDefs"
+    [pinnedStatus]="pinnedStatus"
+    [masterNode]="masterNode"
+    [gridColumnStateChangeSubject]="gridColumnStateChangeSubject"
+    [detailGridRowSelectedSubject]="detailGridRowSelectedSubject"
+    [singleCellValueSubject$]="singleCellValueSubject$"
+    
+    [data]="data$ | async"
+    [loadingStatus]="loadingStatus$ | async"
+    [gridDisplayMode]="gridDisplayMode$ | async"
+    (loadTimeseries)="onLoadTimeseries($event)"
+    (loadDetails)="onLoadDetails($event)">
+</app-pnl-attribution-detail-grid-viewer>

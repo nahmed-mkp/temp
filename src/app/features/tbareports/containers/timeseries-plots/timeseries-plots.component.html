@@ -1,0 +1,27 @@
+<div *ngIf="timeseries">
+    <!-- <div class="d-flex justify-content-center">
+        <h4>{{timeseries.description }} - {{selectedPlotType$ | async}}</h4>
+    </div><br /> -->
+    <div class="flex-grid">
+        <ng-container *ngFor="let coupon of selectedCouponFiltered; let i=index"> 
+            <app-tbareports-timeseries-plot class="flex-item"
+                *ngIf="plotType==='OAS' 
+                    || plotType==='TSYOAS' 
+                    || coupon && coupon.isSupportedByTBATracker "
+                [plotId]="i"
+                (onChartLoad)="loadChart($event)"
+                (onChartCompareLoad)="loadChartComparison($event)"
+                (onChartRendered)="chartRendered($event)"
+                (onChartCompare)="chartCompare($event)"
+                (onChartCompareRendered)="comparisonChartRendered($event)"
+                (onClearComparison)="clearComparison($event)"
+                [coupons]="allCoupons"
+                [coupon]="coupon"
+                [metricTypes]="metricTypes$ | async"
+                [seriesDescription]="timeseries.description"
+                [plotType]="plotType"
+                [metricTypes]="metricTypes$ | async">
+            </app-tbareports-timeseries-plot>
+        </ng-container>
+    </div>
+</div>

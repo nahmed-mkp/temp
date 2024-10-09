@@ -1,0 +1,63 @@
+.flexbox { 
+    display: flex;
+    justify-content: center;
+    margin:5px;
+}
+
+.cell { 
+    width:80px;
+    height:62px;
+    font-size: .7em;
+    text-align:center;
+    vertical-align: middle;
+    background-color: #f4f99b;
+    color: #5b5760;
+    font-weight: bold;
+    position: relative;
+    border-radius: 5px;
+}
+
+.cell:hover {
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+    transform: translate3d(0px, -1px, 0px);
+}
+
+.cell-green {
+    background-color: #daf3c7;
+}
+
+.cell-red { 
+    background-color: #fd846f;
+}
+
+.cell-gray { 
+    background-color: #e0e0e0;
+}
+
+.signal { 
+    font-size: 30px;
+}
+
+.green {
+    color: #1be010;
+}
+
+.red {
+    color: #e92503;
+}
+
+.gray {
+    color: #b7bebf;
+}
+
+.transparent { 
+    color: transparent;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+table {
+    border-spacing: 0.3rem;
+}

@@ -1,0 +1,10 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">Remove</i>
+<i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+<app-jbot-timeseries-viewer 
+  [data]="activeJbotTimeseries$ | async"
+  [loadingStatus]="loadingStatus$ | async"
+  [displayPropety]="displayPropety"
+  [title]="this.data.seriesName">
+</app-jbot-timeseries-viewer>

@@ -1,0 +1,54 @@
+<div class="vertical-flex-full-height">
+    <mat-toolbar>
+
+            <span class="toolbar-heading">P&L ATTRIBUTION <i *ngIf="readOnlyMode"><small>Read Only</small></i></span>
+            <span class="toolbar-spacer" ></span>
+    
+            <app-pnl-attribution-params
+                *ngIf="!readOnlyMode"
+                [request]="activeAttributionRequest"
+                [gridDisplayMode]="gridDisplayMode$ | async"
+                [layoutNames]="layoutNames$ | async"
+                [layoutCollection]="layoutCollection$ | async"
+                
+                [reclassifyRepoToggleValue]="reclassifyRepoToggleValue$ | async"
+                [excludeFundingToggleValue]="excludeFundingToggleValue$ | async"
+                [includeBetaToggleValue]="includeBetaToggleValue$ | async"
+    
+                [commonGroupingsMainCategory]="commonGroupingsMainCategory$ | async"
+                [commonGroupingsByCategory]="commonGroupingsByCategory$ | async"
+    
+                (runAttribution)="runAttribution($event)"
+                (changeGridDisplayMode)="changeGridDisplayMode($event)"
+                (selectedLayout)="onSelectedLayout($event)"
+                (applyCommonGrouping)="onApplyCommonGrouping($event)"
+                
+                (toggleReclassifyRepo)="onToggleReclassifyRepo($event)"
+                (toggleExcludeFunding)="onToggleExcludeFunding($event)"
+                (toggleIncludeBetaAdjustment)="onToggleIncludeBetaAdjustment($event)">
+            </app-pnl-attribution-params>
+    
+            <app-pnl-attribution-params-readonly
+                *ngIf="readOnlyMode"
+                style="margin-bottom: 0.2rem;"
+                [request]="activeAttributionRequest"
+                [gridDisplayMode]="gridDisplayMode$ | async"
+                [layoutNames]="layoutNames$ | async"
+                
+                (changeGridDisplayMode)="changeGridDisplayMode($event)"
+                (selectedLayout)="onSelectedLayout($event)">
+            </app-pnl-attribution-params-readonly>
+
+    </mat-toolbar>
+
+    <button mat-mini-fab matTooltip="Create New Layout" color="accent" id="tab-add-button" (click)="openCreateNewLayoutDialog()" [disabled]="readOnlyMode">+</button>
+    <app-pnl-attribution-tab-layout
+        style="flex: 1 0 0"
+        [layoutNames]="layoutNames$ | async"
+        [layoutEntity]="layoutEntity$ | async"
+        (onTabChanged)="tabChanged($event)"
+        (onRemoveLayout)="removeLayout($event)"
+    >
+
+    </app-pnl-attribution-tab-layout>
+</div>

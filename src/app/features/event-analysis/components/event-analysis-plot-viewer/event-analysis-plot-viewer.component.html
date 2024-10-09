@@ -1,0 +1,23 @@
+<!-- <p>
+  event-analysis-plot-viewer works!
+</p> -->
+
+<div class="instruction" *ngIf="!activeConfiguration">
+  <h4>Instruction - For running basic timeseries analysis</h4>
+  <ul>
+    <li>Select an existing analysis record from the top right in the configuration section</li>
+    <li>Or start a new analysis by adding timeseries and/or formula in the bottom configuration pannel </li>
+    <li>Setup or adjust the analysis configuration using the panel on the right</li>
+    <li>Review the timeseries analysis result on raw data and plot section</li>
+  </ul>
+</div>
+
+<app-linechart style="width: 100%; height: 100%; display: flex;" 
+  *ngIf="activeConfiguration && show"
+  [options]="optionsPlot || {}"
+  [callbackFn]="callbackFn">
+</app-linechart>
+
+<div class="loading-screen" *ngIf="activeMarketDataLoadingStatus">
+  <mat-spinner></mat-spinner>
+</div>

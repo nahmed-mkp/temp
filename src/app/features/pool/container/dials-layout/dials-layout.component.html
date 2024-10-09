@@ -1,0 +1,19 @@
+<h4 class="pool-sidenav-card-title">Yieldbook Dials</h4>
+<div class="card-action">
+    <i class="material-icons" (click)="onclose()">arrow_right</i>
+</div>
+
+<app-dials-set-selector 
+    [dialsSets]="dialsSets$ | async"
+    [selectedDialsSet]="selectedDialsSet$ | async"
+    [editedDial]="editedDial"
+    (selectDialsSet)="selectDialsSet($event)"
+    (addDialsSet)="addDialsSet($event)"
+    (deleteDialset)="deleteDialsSet($event)"
+    (updateDial)="updateDial()">
+</app-dials-set-selector>
+
+<app-dials
+    [dials]="dials$ | async"
+    (editedDial)="onDialChange($event)">
+</app-dials>

@@ -1,0 +1,41 @@
+mat-radio-button.mat-radio-button {
+    font-size: 0.9rem;
+    margin-right: 0.2rem;
+    padding-bottom: 0.4rem;
+}
+
+fieldset {
+    position: relative;
+    top: -3px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+mat-checkbox {
+    margin-right: 0.5rem;
+}
+
+button.mat-icon-button {
+    opacity: 0.5;
+    width: 2rem;
+}
+
+div > span {
+    position: absolute;
+    z-index: 1;
+    right: 1rem;
+    top: -0.1rem;
+}
+
+input.ag-grid-custom-auto-group-floating-filter {
+    position: absolute;
+    z-index: 1;
+    top: 0.4rem;
+    width: 10rem;
+    margin-left: 0.4rem;
+    height: 1.3rem;
+    border-radius: 0;
+    border-color: #95a5a6;
+    box-shadow: none;
+    border-style: solid;
+    left: 4rem;
+}

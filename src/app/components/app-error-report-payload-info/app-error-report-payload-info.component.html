@@ -1,0 +1,10 @@
+<span>
+    Req Payload: 
+    <a (click)="display = !display">
+        Detail
+        <mat-icon *ngIf="!display">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="display">arrow_drop_up</mat-icon>
+    </a>
+</span>
+
+<p *ngIf="display">{{info | json}}</p>

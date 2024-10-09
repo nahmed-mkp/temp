@@ -1,0 +1,38 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Cross Pod Capital Edit</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<!-- {{data | json}} -->
+
+<div style="flex: 1 0 0; margin: 1rem" class="vertical-flex">
+    <mat-form-field>
+        <mat-label>Current Capital</mat-label>
+        <input matInput [value]="currentLevelFormatted" [disabled]="true">
+    </mat-form-field>  
+
+    <mat-form-field>
+        <mat-label>Change Type</mat-label>
+        <mat-select (selectionChange)="onSelectionChanged($event)" [(ngModel)]="changeType">
+            <mat-option  [value]="'ChangeTo'">Change To</mat-option>
+            <mat-option  [value]="'ChangeBy'">Change By</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Change Amount</mat-label>
+        <input matInput autocomplete="off" (keyup)="onKeyup($event)" [value]="changeAmountFormat" >
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>New Capital</mat-label>
+        <input matInput [value]="newLevelFormatted" [disabled]="true">
+    </mat-form-field>
+</div>
+
+
+<div mat-dialog-actions style="margin-right:5px;">
+    <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+    <button mat-button (click)="onClose()">Close</button>
+</div>
+

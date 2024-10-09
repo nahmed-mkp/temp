@@ -1,0 +1,35 @@
+<mat-toolbar>
+    <span class="toolbar-heading">
+        SETTLEMENT LADDER
+    </span>
+    <span class="toolbar-spacer"></span>
+
+       
+    <mat-form-field class="date-form-field" appearance="outline">
+        <mat-label> Settlement Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="datePicker" placeholder="Settlement Date" [value]="formattedSettlementDate" (dateChange)="onSettlementDateChanged($event)" />
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 0.5rem;">
+        <mat-label> Migration Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="datePicker1" placeholder="Migration Date" [value]="formattedMigrationDate" (dateChange)="onMigrationDateChanged($event)" />
+            <mat-datepicker-toggle matSuffix [for]="datePicker1"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker1></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 9rem; margin-left: 1rem;">
+        <mat-label> Fund </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(value)]="selectedFund.FundID" placeholder="Fund" (selectionChange)="onFundChanged($event)"> 
+                <mat-option *ngFor="let fund of funds" [value]="fund.FundID">{{fund.FundName}}</mat-option>
+            </mat-select>  
+        </div>          
+    </mat-form-field>
+</mat-toolbar>
+

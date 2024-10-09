@@ -1,0 +1,104 @@
+<mat-card class="card" style="margin:5px;font-size:13px;">
+
+    <mat-card-header class="header">
+        <mat-card-title>Bloombergs & Tradeweb Feeds</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+        <table style="border:none" spacing=0 padding=0>
+            <tr class="row-headers">
+                <th>Status</th>
+                <th>Server</th>
+                <th>Timestamp</th>
+                <th>Subscriptions</th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="6"><strong>Bloomberg RTs</strong></td>
+            </tr>
+            <tr *ngFor="let server of bbgStatus">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning" style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning" style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="width:100px;"><strong>{{ server.MachineName }}</strong></td>
+                <td style="width:150px;">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never run</i></small>
+                </td>
+                <td style="width:100px;text-align: center;">
+                    <small style="color:gray"><i>{{server.BlbgPatterns || 'None'}}</i></small>
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:250px;" *ngIf="isMachineAvailable(server.MachineName)">
+                    <button mat-icon-button 
+                        color="primary" 
+                        [title]="'Login & restart BBG/RT on ' + server.MachineName"
+                        (click)="onLoginAndRestartBloomberg(server.MachineName)">
+                        <mat-icon>cached</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'Restart RT on' + server.MachineName"
+                        (click)="onRestartBloomberg(server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null" [title]="'Kill ' + (server.PID !== null ? server.PID : 'RT')"
+                        (click)="onKillProcess(server)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary"  [title]="'View ' + server.MachineName + ' History'"
+                        (click)="onViewHistory(server.MachineName, 'BloombergRT')">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="6"><strong>Tradeweb</strong></td>
+            </tr>
+            <tr *ngFor="let server of twebStatus">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning"
+                        style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning" style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="width:100px;"><strong>{{ server.MachineName }}</strong></td>
+                <td style="width:150px;">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never run</i></small>
+                </td>
+                <td style="width:180px;">
+                    &nbsp;
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:180px;" *ngIf="server.IsRunning">
+                    <button mat-icon-button color="primary" [title]="'Restart Tradeweb server & feed on ' + server.MachineName"
+                        (click)="onRestartMDLinkServerAndFeeds(server.MachineName)">
+                        <mat-icon>cached</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'Restart Tradeweb feed on' + server.MachineName"
+                        (click)="onRestartTradeweb(server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null"
+                        [title]="'Kill ' + (server.PID !== null ? server.PID : 'Tradeweb Feed')" (click)="onKillProcess(server)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'View ' + server.MachineName + ' History'"
+                        (click)="onViewHistory(server.MachineName, 'TradewebFeed')">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>    
+</mat-card>

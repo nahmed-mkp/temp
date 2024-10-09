@@ -1,0 +1,160 @@
+<!-- <div class="toolbar">
+    <span>
+        <span class="toolbar-header">{{activeTab.toUpperCase()}}</span>
+        <mat-form-field class="mat-select-no-line">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="time" (ngModelChange)="onReloadData($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mat-select-no-line">
+            <mat-select [(ngModel)]="mode" (ngModelChange)="onReloadData($event);">
+                <mat-option [value]="'live'">Live Price</mat-option>
+                <mat-option [value]="'closing'">Close Price</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </span>
+
+    <span>
+        <button mat-icon-button class="mat-button-shrink" color="primary">
+            <mat-icon>save</mat-icon>
+        </button>
+
+        <button mat-icon-button class="mat-button-shrink" color="primary" [matMenuTriggerFor]="layoutMenu">
+            <mat-icon>table_chart</mat-icon>
+        </button>
+        <mat-menu #layoutMenu="matMenu">
+            <button mat-menu-item *ngIf="(layoutNames$ | async).length === 0"><i>No Layout Avaliable</i></button>
+            <button mat-menu-item *ngFor="let name of (layoutNames$ | async)" (click)="onSelectColumnLayout(name)">{{name}}</button>
+        </mat-menu>
+        
+        <button mat-icon-button class="mat-button-shrink" color="primary" 
+            (click)="onToggleBarChart()" [disabled]="activeTab !=='benchmark'">
+            <mat-icon>bar_chart</mat-icon>
+        </button>
+
+
+        <button mat-icon-button class="mat-button-shrink" color="primary" 
+            [matMenuTriggerFor]="appMenu"
+            [ngClass]="{'spinning': mode==='live', 'non-spinning': mode==='closing'}"
+            [disabled]="mode==='closing'"
+            matTooltip="Update Refresh Time Interval">
+            <mat-icon>cached</mat-icon>
+        </button>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="onSetTimeInterval(10)">10s<i class="material-icons" *ngIf="updateCycle===10">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(20)">20s<i class="material-icons" *ngIf="updateCycle===20">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(30)">30s<i class="material-icons" *ngIf="updateCycle===30">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(60)">1 mins<i class="material-icons" *ngIf="updateCycle===60">check</i></button>
+            <button mat-menu-item (click)="onSetTimeInterval(600)">10 mins<i class="material-icons" *ngIf="updateCycle===600">check</i></button>
+        </mat-menu>
+    </span>
+
+</div> -->
+
+<div class="vertical-flex-full-height">
+
+    <mat-toolbar>
+        <span class="toolbar-heading"> AGENCY PORTFOLIO </span>
+    </mat-toolbar>
+
+    <mat-tab-group #tabs class="mat-card bottom-tab-group" headerPosition="below" (selectedTabChange)="onSelectedTabChange($event)">
+        <mat-tab #tabposition [label]="'Position'">
+        <!-- <ng-template matTabContent> -->
+            <app-agency-portfolio-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="positionsData$ | async"
+                [loadingStatus]="positionsDataLoadingStatus$ | async"
+                [columns]="positionsGridColumns"
+                [category]="'position'"
+                [layout]="activePositionLayout$ | async"
+                [globalTextFilter]="globalTextFilter$ | async"
+                [targetColumn]="targetColumn$ | async"
+                [isActive]="tabposition.isActive"
+                [allowLoadingDisplay]="allowLoadingDisplay$ | async"
+                (setAllowLoadingDisplay)="setAllowLoadingDisplay($event)"
+                (rangesStatisticsUpdate)="onRangesStatisticsUpdate($event)">
+            </app-agency-portfolio-viewer>
+        <!-- </ng-template> -->
+        </mat-tab>
+
+        <mat-tab #tabbenchmark [label]="'Benchmark'">
+        <!-- <ng-template matTabContent> -->
+            <app-agency-portfolio-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="benchmarksData$ | async"
+                [loadingStatus]="benchmarksDataLoadingStatus$ | async"
+                [columns]="benchmarksGridColumns"
+                [category]="'benchmark'"
+                [layout]="activeBenchMarkLayout$ | async"
+                [globalTextFilter]="globalTextFilter$ | async"
+                [targetColumn]="targetColumn$ | async"
+                [isActive]="tabbenchmark.isActive"
+                [allowLoadingDisplay]="allowLoadingDisplay$ | async"
+                (setAllowLoadingDisplay)="setAllowLoadingDisplay($event)"
+                (rangesStatisticsUpdate)="onRangesStatisticsUpdate($event)">
+            </app-agency-portfolio-viewer>
+        <!-- </ng-template> -->
+        </mat-tab>
+    
+        <mat-tab #tabsecurity [label]="'Security'">
+        <!-- <ng-template matTabContent> -->
+            <app-agency-portfolio-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="securitiesData$ | async"
+                [loadingStatus]="securitiesDataLoadingStatus$ | async"
+                [columns]="securitiesGridColumns"
+                [category]="'security'"
+                [layout]="activeSecurityLayout$ | async"
+                [globalTextFilter]="globalTextFilter$ | async"
+                [targetColumn]="targetColumn$ | async"
+                [isActive]="tabsecurity.isActive"
+                [allowLoadingDisplay]="allowLoadingDisplay$ | async"
+                (setAllowLoadingDisplay)="setAllowLoadingDisplay($event)"
+                (rangesStatisticsUpdate)="onRangesStatisticsUpdate($event)">
+            </app-agency-portfolio-viewer>
+        <!-- </ng-template> -->
+        </mat-tab>
+
+        <mat-tab #tabrolls [label]="'Rolls'">
+        <!-- <ng-template matTabContent> -->
+            <app-agency-portfolio-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="rollsData"
+                [loadingStatus]="rollsDataLoadingStatus$ | async"
+                [columns]="rollsGridColumns"
+                [category]="'rolls'"
+                [layout]="activeRollsLayout$ | async"
+                [globalTextFilter]="globalTextFilter$ | async"
+                [targetColumn]="targetColumn$ | async"
+                [isActive]="tabsecurity.isActive"
+                [allowLoadingDisplay]="allowLoadingDisplay$ | async"
+                (setAllowLoadingDisplay)="setAllowLoadingDisplay($event)"
+                (rangesStatisticsUpdate)="onRangesStatisticsUpdate($event)">
+            </app-agency-portfolio-viewer>
+        <!-- </ng-template> -->
+        </mat-tab>
+    
+        <!-- <div class="range-statistics" style="position: absolute; z-index: 1000">
+            <span>Sum: {{rangeSum}}</span>
+            <span>Mean: {{rangeMean}}</span>
+        </div> -->
+
+        <mat-tab disabled position="-1">
+        <ng-template class="range-statistics" style="position: absolute; z-index: 1000" mat-tab-label>
+            <span>Sum: <i>{{rangeSum}}</i></span>
+            <span>Mean: <i>{{rangeMean}}</i></span>
+            <span>Max: <i>{{rangeMax}}</i></span>
+            <span>Min: <i>{{rangeMin}}</i></span>
+        </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+
+    <app-agency-portfolio-bar-chart *ngIf="(showBarChart$ | async) === true && activeTab ==='benchmark'" class="mat-card"
+        [data]="benchmarksData$ | async">
+    </app-agency-portfolio-bar-chart>
+</div>

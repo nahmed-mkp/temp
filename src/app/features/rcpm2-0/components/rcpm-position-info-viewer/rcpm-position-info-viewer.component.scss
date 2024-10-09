@@ -1,0 +1,33 @@
+@import '../../../../../styles/variables';
+
+h5 {
+    font-weight: normal;
+    margin: 0.5rem 0;
+    opacity: 0.6;
+}
+
+div.horizontal-flex-center {
+    margin-top:-2rem;
+    span {
+        //font-weight: bold;
+        color: grey;
+        opacity: 0.9;
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    mat-form-field {
+        width: 10rem;
+        margin-top: 1.5rem;
+    }
+
+    justify-content: space-between;
+}
+
+input{
+    font-size: $mat-input-font-size-primary !important;
+}
+
+.mat-mdc-form-field-icon-suffix{
+    margin-top:-10px;
+}

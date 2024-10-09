@@ -1,0 +1,28 @@
+<div class="horizontal-flex-center" style="margin-bottom: -0.4rem; justify-content: space-between;">
+  <span class="horizontal-flex-center" style="margin-top:5px;">
+      <mat-form-field class="date-form-field" floatLabel="always">
+          <mat-label> Date </mat-label>
+          <input matInput placeholder="As Of Date" [matDatepicker]="picker1"
+          [(ngModel)]="selectedPortfolioDate" (ngModelChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>&nbsp;&nbsp;
+
+      <mat-slide-toggle id="mode-selector" color="accent" [checked]="mode === 'live'"
+        (change)="onModeChanged($event)" style="width:80px;">
+        <span class="slide-toggle-label">Refresh</span>
+      </mat-slide-toggle>
+  </span>
+</div>
+
+<div style="flex: 1 0 0" class="horizontal-flex">
+  <app-pricing-engine-bval-bonds-viewer 
+      style="flex: 4 0 0"
+      class="vertical-flex-full-height"
+      [data]="data$ | async"
+      [loading]="loading$ | async"
+  >
+  </app-pricing-engine-bval-bonds-viewer>
+</div>
+
+

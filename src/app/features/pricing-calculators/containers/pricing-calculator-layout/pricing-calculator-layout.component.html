@@ -1,0 +1,31 @@
+<mat-toolbar>
+    <span class="toolbar-heading"> PRICING CALCULATORS</span>
+</mat-toolbar>
+
+<mat-tab-group [animationDuration]="0" (selectedTabChange)="changeTab($event)" #tabs style="flex: 1 0 0">
+
+    <!-- <mat-tab label="Swaps">
+        <ng-template matTabContent>
+            <app-pricer-swap-layout></app-pricer-swap-layout>
+        </ng-template>
+    </mat-tab>
+    
+    <mat-tab label="Swaptions">
+        <ng-template matTabContent>
+            <app-pricer-swaption-layout></app-pricer-swaption-layout>
+        </ng-template>
+    </mat-tab> -->
+    
+    <mat-tab label="FX Options" text="FXOptions">
+        <ng-template matTabContent>
+            <app-pricer-fxoption-layout></app-pricer-fxoption-layout>
+        </ng-template>
+    </mat-tab>
+<!-- 
+    <mat-tab label="Options">
+        <ng-template matTabContent>
+            <app-pricer-options-layout></app-pricer-options-layout>
+        </ng-template>
+    </mat-tab> -->
+
+</mat-tab-group>

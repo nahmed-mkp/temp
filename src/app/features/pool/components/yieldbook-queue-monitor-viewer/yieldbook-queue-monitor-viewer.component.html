@@ -1,0 +1,33 @@
+<!-- <p>
+  calc-farm-monitor-viewer works!
+</p> -->
+<div>
+  <h4 class="pool-sidenav-card-title">
+    Yieldbook Queue Monitor
+  </h4>
+
+  <!-- <mat-form-field appearance="outline" class="outline-shrink" style="margin-right: 10px">
+    <mat-label>DealUpdateType</mat-label>
+    <mat-select name="DealUpdateType">
+      <mat-option *ngFor="let dealUpdateType of dealUpdateTypes" [value]="dealUpdateType">{{dealUpdateType}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="outline-shrink" style="margin-right: 10px">
+    <mat-label>processorType</mat-label>
+    <mat-select name="processorType">
+      <mat-option *ngFor="let processorType of processorTypes" [value]="processorType">{{processorType}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button class="mat-button-shrink" matTooltip="Start Processors">ON</button>
+  <button mat-button class="mat-button-shrink" matTooltip="Start Processors">OFF</button> -->
+</div>
+
+<div class="card-action">
+  <i class="material-icons" (click)="onClose()">arrow_drop_down</i>
+</div>
+<app-base-grid
+  [gridItems]="dummyData"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption">
+</app-base-grid>

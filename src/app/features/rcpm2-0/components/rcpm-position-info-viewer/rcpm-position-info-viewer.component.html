@@ -1,0 +1,194 @@
+<div class="vertical-flex-full-height tradename-form">
+    <h5>POSITION INFO</h5>
+    
+    
+    <!-- {{positionDetail? | json}} -->
+    
+    
+    <div class="horizontal-flex-center">
+        <span>Fund</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.FundName">
+        </mat-form-field>
+    </div>
+    
+    <div class="horizontal-flex-center">
+        <span>Pod</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.PodName">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Account</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.PodName">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>TradeNameWithID</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.TradeNameWithID">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Security Name(CRD)</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.SecurityName">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Cusip</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.Cusip">
+        </mat-form-field>
+    </div>
+    
+    <br>
+    
+    
+    
+    
+    <div class="horizontal-flex-center">
+        <span>Notional</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.Notional, 3)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Quantity</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.Qty, 3)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Factor Value</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.Factor, 5)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Factor Date</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.FactorDate">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Avg Trade Price</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.AvgTradePrice, 5)">
+        </mat-form-field>
+    </div>
+    
+    <br>
+    
+    
+    
+    
+    <div class="horizontal-flex-center">
+        <span>Price</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.CurrPrc, 5)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Prev Close Price</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.PrevClosePrc, 5)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Market Value($K)</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.MVUSD, 4)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>MV USD($k)</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.MVUSD, 4)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Current FX Rate</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.CurrFxRate, 5)">
+        </mat-form-field>
+    </div>   
+    
+    <br />    
+    
+    <div class="horizontal-flex-center">
+        <span>Cusip</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.Cusip">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>ISIN</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.ISIN">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>RiskSecType</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.SecurityType">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>Currency</span>
+        <mat-form-field appearance="outline" class="outline-shrink">
+            <input type="text" matInput disabled [value]="positionDetail?.Currency">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>constractSize</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="positionDetail?.ContractSize">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>IssueDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [matDatepicker]="dp1" [value]="positionDetail?.IssueDate">
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>MaturityDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [matDatepicker]="dp" [value]="positionDetail?.MaturityDate">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>ExpireDate</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [matDatepicker]="dp2" [value]="positionDetail?.ExpiryDate">
+            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center">
+        <span>CouponRate</span>
+        <mat-form-field appearance="outline" class="outline-shrink text-align-right">
+            <input type="text" matInput disabled [value]="numberFormatter(positionDetail?.Coupon, 5)">
+        </mat-form-field>
+    </div>
+    <div class="horizontal-flex-center" style="margin: 0.5rem 0">
+        <span>ZeroRisk</span>
+        <!-- <mat-form-field appearance="outline" class="outline-shrink"> -->
+        <!-- <input type="text" matInput disabled [value]="positionDetail?.ZeroRisk"> -->
+        <mat-checkbox disabled [checked]="positionDetail?.ZeroRisk"></mat-checkbox>
+        <!-- </mat-form-field> -->
+    </div>
+    <div class="horizontal-flex-center" style="margin: 0.5rem 0">
+        <span>ZeroEquity Expo</span>
+        <!-- <mat-form-field appearance="outline" class="outline-shrink"> -->
+        <!-- <input type="text" matInput disabled [value]="positionDetail?.ZeroeEquityExposure"> -->
+        <mat-checkbox disabled [checked]="positionDetail?.ZeroeEquityExposure"></mat-checkbox>
+        <!-- </mat-form-field> -->
+    </div>
+</div>

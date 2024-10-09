@@ -1,0 +1,98 @@
+<div>
+    <h4 style="opacity: 0.6;margin-bottom: 0.6rem;">Capital Contributions/Redemptions </h4>
+
+    <!-- {{flowsInput | json}} -->
+
+    <div class="horizontal-flex">
+
+        <mat-form-field class="date-form-field">
+            <mat-label> From </mat-label>
+            <input matInput [matDatepicker]="pickerStart" placeholder="From" [value]="getDate(flowsInput, 'start')"
+                (dateInput)="onActiveDateChanged_debounce($event, 'start')" (dateChange)="onActiveDateChanged_debounce($event, 'start')">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
+
+        <!-- <span style="top: 0.6rem; position: relative;">to</span>  -->
+        <mat-form-field class="date-form-field" style="margin-left: 1rem;margin-right:5px;">
+            <mat-label> To </mat-label>
+            <input matInput [matDatepicker]="pickerEnd" placeholder="To" [value]="getDate(flowsInput, 'end')"
+                (dateInput)="onActiveDateChanged_debounce($event, 'end')" (dateChange)="onActiveDateChanged_debounce($event, 'end')">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+    
+
+        <button type="button" mat-icon-button (click)="changeMode('chart')" color="primary">
+            <mat-icon>bar_chart</mat-icon>
+        </button>
+        
+        <button type="button" mat-icon-button (click)="changeMode('data')" color="primary">
+            <mat-icon>grid_on</mat-icon>
+        </button>
+    </div>
+
+</div>
+<mat-tab-group #tabs class="vertical-flex-full-height" style="flex: 1 0 0">
+    <mat-tab [label]="'Fund'" style="flex: 1 0 0;" >
+        <ng-template matTabContent>
+
+            <div style="width: 100%;text-align: center;">
+                <mat-button-toggle-group *ngIf="mode==='chart'" [(ngModel)]="activefundAttribute" style="margin-top: 0.5rem;" (ngModelChange)="onAttributeChange('fund')">
+                    <mat-button-toggle *ngFor="let attribute of fundAttributes" [value]="attribute" class="outline-super-shrink">{{attribute}}</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+
+            <div [ngSwitch]="mode" style="height: 100%;">
+
+                <div *ngIf="fundCapitalFlowsLoading" class="loading-screen">
+                    <mat-spinner></mat-spinner>
+                </div>
+
+                <highcharts-chart 
+                    *ngSwitchCase="'chart'"
+                    [Highcharts]="highcharts" [constructorType]="'stockChart'" [options]="chartOptions"
+                    [callbackFunction]="callbackFn_fund" style="width: 100%; height: 600px; display: block;">
+                </highcharts-chart>
+    
+                <app-base-grid
+                    *ngSwitchCase="'data'"
+                    height="95%"
+                    [customGridOption]="customGridOption_fund"
+                    [extraOption]="extraOption"
+                    [gridItems]="[]" [customGridCallBack]="customGridCallBack_fund">
+                </app-base-grid>
+            </div>
+        </ng-template>
+
+    </mat-tab>
+
+    <mat-tab [label]="'Pod'" style="flex: 1 0 0">
+        <ng-template matTabContent>
+            <div style="width: 100%;text-align: center;">
+                <mat-button-toggle-group *ngIf="mode==='chart'" [(ngModel)]="activePodAttribute" style="margin-top: 0.5rem;" (ngModelChange)="onAttributeChange('pod')">
+                    <mat-button-toggle *ngFor="let attribute of podAttributes" [value]="attribute" class="outline-super-shrink">{{attribute}}</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div [ngSwitch]="mode" style="height: 100%;">
+
+                <div *ngIf="podCapitalFlowsLoading" class="loading-screen">
+                    <mat-spinner></mat-spinner>
+                </div>
+                        
+                <highcharts-chart 
+                    *ngSwitchCase="'chart'"
+                    [Highcharts]="highcharts" [constructorType]="'stockChart'" [options]="chartOptions"
+                    [callbackFunction]="callbackFn_pod" style="width: 100%; height: 600px; display: block;">
+                </highcharts-chart>
+    
+                <app-base-grid 
+                    *ngSwitchCase="'data'"
+                    style="height: 95%" [customGridOption]="customGridOption_pod" [extraOption]="extraOption"
+                    [gridItems]="[]" [customGridCallBack]="customGridCallBack_pod">
+                </app-base-grid>
+            </div>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

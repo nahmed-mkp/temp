@@ -1,0 +1,45 @@
+<mat-toolbar>
+    <span class="toolbar-heading">S&R MACRO TOOLKIT</span>
+    <span class="toolbar-spacer"> </span>
+    <div>
+        
+        <form [formGroup]="inputForm" autocomplete="off">
+
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 180px;">
+                <mat-label>Forecast Date</mat-label>
+                <mat-select formControlName="asOfDate">
+                    <mat-option *ngFor="let date of dates" [value]="date">
+                        {{date}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="outline-shrink" style="margin-left:1rem; width: 90px;">
+                <mat-label>Ticker</mat-label>
+                <input type="text" matInput placeholder="Eg. SPX Index" [matAutocomplete]="auto" [formControl]="tickerFormControl"  [(ngModel)]="optionVolsParametersTemp.ticker">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let ticker of filteredTickers$ | async" [value]="ticker">
+                      {{ticker}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 180px;">
+                <mat-label>Countries</mat-label>
+                <mat-select formControlName="countries" multiple>
+                    <mat-option #allSelected (click)="toggleAllCountries()" [value]="0">All</mat-option>
+                    <mat-option *ngFor="let country of countries" [value]="country" (click)="toggleSingleCountry()">
+                        {{country.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <button mat-raised-button 
+                [disabled]="!inputForm.valid"
+                (click)="onSubmitForm()">
+                Load Forecast
+                <mat-icon>file_upload</mat-icon>
+            </button>
+        </form>
+    </div>
+</mat-toolbar>

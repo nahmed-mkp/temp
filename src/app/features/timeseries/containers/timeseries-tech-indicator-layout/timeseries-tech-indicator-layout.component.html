@@ -1,0 +1,160 @@
+<div *ngIf="!currTab" class="vertical-flex-full-height" style="width:100%;display:flex;align-items: center;justify-content: center;">
+    <div>
+        No data has been selected. Please create a timeseries portfolio or open an existing one. 
+    </div>
+</div>
+
+
+<as-split [unit]="'percent'" [direction]="'horizontal'" *ngIf="currTab.portfolio.timeseries.length > 0">
+    <as-split-area [size]="75" [order]="1">
+
+            <app-timeseries-tech-indicator-chart-viewer
+                [currTab]="currTab"
+            >
+            </app-timeseries-tech-indicator-chart-viewer>
+
+    </as-split-area>
+    <as-split-area [size]="25" [order]="2">
+        <div class="vertical-flex-full-height">
+
+            <mat-toolbar>
+                <span class="toolbar-heading"> Indicators </span>
+            </mat-toolbar>
+
+            
+            <div class="vertical-flex-full-height" style="flex-direction:column; align-items: center; justify-content: flex-start;">
+
+                <mat-accordion style="width: 100%;">
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header [ngClass]="bbollingerActive ? 'active-panel' : 'inactive-panel'">
+                        <mat-panel-title>
+                            Bollinger Bands
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="vertical-flex-full-height" style="margin-top:10px;">
+                        <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                            <mat-label> Window </mat-label>
+                            <div class="mat-form-field-content-wrap">
+                                <input matInput type="number" placeholder="..." [(ngModel)]="bbollingerWindow" min="1" max="100">
+                            </div>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                            <mat-label> Std Dev Up </mat-label>
+                            <div class="mat-form-field-content-wrap">
+                                <input matInput type="number" placeholder="..." [(ngModel)]="bbollingerStdDevUp" min="1" max="100">
+                            </div>
+                        </mat-form-field>
+            
+                        <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                            <mat-label> Std Dev Down </mat-label>
+                            <div class="mat-form-field-content-wrap">
+                                <input matInput type="number" placeholder="..." [(ngModel)]="bbollingerStdDevDown" min="1" max="100">
+                            </div>
+                        </mat-form-field>
+
+                        <div>
+                            <button mat-button [disabled]="isNotValid('bbands')" (click)="submitBBandsParams()" class="toolbar-btn"> 
+                                <span> Submit </span>
+                            </button>
+                            <button mat-button (click)="clearIndicator('bbands')" class="toolbar-btn" style="margin-left:10px;"> 
+                                <span> Clear </span>
+                            </button>
+                        </div>
+                    </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header [ngClass]="smaActive ? 'active-panel' : 'inactive-panel'">
+                        <mat-panel-title>
+                            Simple Moving Average
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="vertical-flex-full-height" style="margin-top:10px;">
+                        <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                            <mat-label> Window </mat-label>
+                            <div class="mat-form-field-content-wrap">
+                                <input matInput type="number" placeholder="..." [(ngModel)]="smaWindow" min="1" max="100">
+                            </div>
+                        </mat-form-field>
+
+                        <div>
+                            <button mat-button [disabled]="isNotValid('sma')" (click)="submitSmaParams()" class="toolbar-btn"> 
+                                <span> Submit </span>
+                            </button>
+                            <button mat-button (click)="clearIndicator('sma')" class="toolbar-btn" style="margin-left:10px;"> 
+                                <span> Clear </span>
+                            </button>
+                        </div>
+                    </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header [ngClass]="rsiActive ? 'active-panel' : 'inactive-panel'">
+                            <mat-panel-title>
+                                Relative Strength Indicator
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="vertical-flex-full-height" style="margin-top:10px;">
+                            <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                                <mat-label> Window </mat-label>
+                                <div class="mat-form-field-content-wrap">
+                                    <input matInput type="number" placeholder="..." [(ngModel)]="rsiWindow" min="1" max="100">
+                                </div>
+                            </mat-form-field>
+                            <div>
+                                <button mat-button [disabled]="isNotValid('rsi')"  (click)="submitRsiParams()" class="toolbar-btn"> 
+                                    <span> Submit </span>
+                                </button>
+                                <button mat-button (click)="clearIndicator('rsi')" class="toolbar-btn" style="margin-left:10px;"> 
+                                    <span> Clear </span>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header [ngClass]="macdActive ? 'active-panel' : 'inactive-panel'">
+                            <mat-panel-title>
+                                Moving Average Convergence Divergence
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="vertical-flex-full-height" style="margin-top:10px;">
+                            <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                                <mat-label> Window Fast </mat-label>
+                                <div class="mat-form-field-content-wrap">
+                                    <input matInput type="number" placeholder="..." [(ngModel)]="macdWindowFast" min="1" max="100">
+                                </div>
+                            </mat-form-field>
+                
+                            <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                                <mat-label> Window Slow </mat-label>
+                                <div class="mat-form-field-content-wrap">
+                                    <input matInput type="number" placeholder="..." [(ngModel)]="macdWindowSlow" min="1" max="100">
+                                </div>
+                            </mat-form-field>
+                                
+                            <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                                <mat-label> Window Signal </mat-label>
+                                <div class="mat-form-field-content-wrap">
+                                    <input matInput type="number" placeholder="..." [(ngModel)]="macdWindowSignal" min="1" max="100">
+                                </div>
+                            </mat-form-field>
+
+                            <div>
+                                <button mat-button [disabled]="isNotValid('macd')" (click)="submitMacdParams()" class="toolbar-btn"> 
+                                    <span> Submit </span>
+                                </button>
+                                <button mat-button (click)="clearIndicator('macd')" class="toolbar-btn" style="margin-left:10px;"> 
+                                    <span> Clear </span>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    
+                </mat-accordion>
+            </div>
+        </div>
+    </as-split-area>
+</as-split>

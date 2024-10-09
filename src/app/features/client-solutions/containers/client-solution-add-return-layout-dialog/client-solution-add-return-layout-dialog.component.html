@@ -1,0 +1,50 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small style="color: white; margin-left: 0.5rem;">Add Return</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick()">close</i>
+</div>
+
+<div class="vertical-flex" style="flex: 1 0 0">
+    <div class="horizontal-flex" style="padding: 0.5rem 1rem;">
+        <mat-form-field style="flex: 1 0 0;">
+            <mat-label>Month</mat-label>
+            <mat-select [(value)]="fundReturn.month">
+              <mat-option *ngFor="let month of monthsOfYear" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field style="margin-left: 1rem;flex: 1 0 0;">
+            <mat-label>Year</mat-label>
+            <mat-select [(value)]="fundReturn.year">
+              <mat-option *ngFor="let year of listOfYears" [value]="year">
+                {{year}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+    <div class="horizontal-flex" style="padding: 0.5rem 1rem;align-items: center;">
+        <mat-form-field style="flex: 1 0 0;">
+            <input matInput type="number" min="0" max="100" placeholder="1%" [ngModel]="fundReturn.return" autocomplete="off"
+              (ngModelChange)="fundReturn.return=$event" [formControl]="percentageFormControl" />
+              <mat-error *ngIf="percentageFormControl.hasError('min')">Value cannot be less than -100</mat-error>
+              <mat-error *ngIf="percentageFormControl.hasError('max')">Value cannot be more than 100</mat-error>
+        </mat-form-field>
+    
+        <mat-checkbox style="flex: 1 0 0;margin-left: 1rem;" [(ngModel)]="fundReturn.isEstimated">Is Estimated Return</mat-checkbox>
+    </div>
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSaveFundReturn()">
+        Save
+        <mat-spinner diameter="20" *ngIf="fundReturnSaving$ | async"></mat-spinner>
+        <!-- <mat-icon *ngIf="fundReturnSaved$ | async" style="margin-left: 0.5rem;">thumb_up</mat-icon> -->
+    </button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>
+
+

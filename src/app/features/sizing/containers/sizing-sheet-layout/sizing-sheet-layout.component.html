@@ -1,0 +1,38 @@
+<mat-sidenav-container class="vertical-flex-full-height">
+    <mat-sidenav #sidenav position="end" class="configuration-form">
+        <app-sizing-sheet-configuration
+             [sizingSheetSecurities]="sizingSecurities$ | async"
+             [sizingSheetSecuritiesLoading]="sizingSecuritiesLoading$ | async"
+             [sizingSheetSecuritiesLoaded]="sizingSecuritiesLoaded$ | async"
+             [sizingSheetSecuritiesError]="sizingSecuritiesError$ | async"
+             [defaultCapitals]="defaultCapitals$ | async"
+             [defaultCapitalsLoading]="defaultCapitalsLoading$ | async"
+             [defaultCapitalsLoaded]="defaultCapitalsLoaded$ | async"
+             [defaultCapitalsError]="defaultCapitalsError$ | async"
+
+             (addSecurity)="addSizingSecurity($event)"
+             (updateSecurity)="updateSizingSecurity($event)"
+             (deleteSecurity)="deleteSizingSecurity($event)"
+             (saveSecurities)="saveSecurities($event)"
+
+             (addDefaultCapital)="addDefaultCapital($event)"
+             (updateDefaultCapital)="updateDefaultCapital($event)"
+             (deleteDefaultCapital)="deleteDefaultCapital($event)"
+        ></app-sizing-sheet-configuration>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-sizing-sheet-viewer
+            class="vertical-flex-full-height"
+            [sizingSheetItems]="sizingSheetItems$ | async"
+            [sizingSheetItemsLoading]="sizingSheetItemsLoading$ | async"
+            [sizingCapitals]="sizingCapitals$ | async"
+            [sizingSheetUpdatedTime]="sizingSheetUpdatedTime$ | async"
+            [sizingSheetDefaultColumns]="sizingSheetDefaultColumns$ | async"
+            [sizingSheetCapitalBase]="sizingSheetCapitalBase$ | async"
+            (toggleConfiguration)="toggleConfiguration()">
+        </app-sizing-sheet-viewer>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+

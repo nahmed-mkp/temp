@@ -1,0 +1,22 @@
+.wrapper-div{
+    height:calc(100vh - 3.5rem);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.bond-dashboard-card-content{
+    display:flex;
+    height: 70%;
+}
+
+.bsc-dashboard-card-content{
+    display: flex;
+    height: 99vw;
+}
+
+@media(max-height: 1000px){
+    .bsc-dashboard-card-content{
+        height: 95%;
+    }
+}

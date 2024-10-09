@@ -1,0 +1,21 @@
+div.risk-span-bucket-title {
+    display: flex;
+    justify-content: space-between;
+    background: #3f51b517;
+    padding: 0.5rem;
+    span {
+        position: relative;
+        mat-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: -0.20rem;
+            opacity: 0.6;
+            cursor: pointer;
+        }
+    }
+}
+
+div.risk-span-bucket-content {
+    padding: 0.5rem;
+}
+

@@ -1,0 +1,5 @@
+<ul class="list-unstyled multi-steps">
+    <li [ngClass]="{'is-active': step.isActive}" *ngFor="let step of steps">
+        <a href="#" (click)="updateStep($event)" title="{{step.name}}">{{ step.name }}</a>
+    </li>
+</ul>

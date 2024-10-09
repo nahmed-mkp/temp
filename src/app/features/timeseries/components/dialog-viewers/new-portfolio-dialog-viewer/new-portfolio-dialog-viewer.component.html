@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <mat-toolbar class="mat-toolbar-dialog">
+        <span class="toolbar-heading"> Create New Portfolio </span>
+    </mat-toolbar>
+    <div mat-dialog-actions class="input-wrapper">
+
+      <div style="height: 50px;">
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+          <mat-label> Portfolio Name </mat-label>
+          <div class="mat-form-field-content-wrap">
+              <input matInput placeholder="..." autocomplete="off" (input)="handleInput($event)">
+          </div>
+        </mat-form-field>
+        <mat-checkbox (change)="handleCheckbox($event)">shared?</mat-checkbox>
+      </div>
+
+      <span *ngIf="isDisabled" class="dupe-name-warning"> This name already exists, please choose a different one. </span>
+
+      <div class="button-wrap">
+        <button mat-button [disabled]="isDisabled" (click)="save()" style="background-color:gainsboro">Save</button>
+      </div>
+
+    </div>
+</div>

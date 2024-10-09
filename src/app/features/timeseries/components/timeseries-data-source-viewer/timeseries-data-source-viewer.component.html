@@ -1,0 +1,8 @@
+<app-tree-navigation     
+  [loading]="timeseriesHierarchyDataLoading$ | async"
+  [rawData]="timeseriesHierarchyData$ | async"
+  [treeData]="[]"
+  [selectedData]="selectedTimeseries$ | async"
+  (timeseriesSelected)="handleTimeseriesSelected($event)"
+>
+</app-tree-navigation>

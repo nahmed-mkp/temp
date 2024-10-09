@@ -1,0 +1,25 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 100% !important;
+}
+
+::ng-deep .ag-header-cell-text {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+}
+
+::ng-deep .ag-header-cell-label {
+    /* Necessary to allow for text to grow vertically */
+    height: 100%;
+    padding: 0 !important;
+}
+
+
+::ng-deep {
+    .ag-header-cell-text{
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,28 @@
+<div *ngIf="missingDates">
+    <dx-data-grid
+        [showRowLines]="true"
+        rowAlternationEnabled="true"
+        [headerFilter]="true"
+        [allowColumnResizing]="true"
+        [allowColumnReordering]="true"
+        [columnChooser]="true"
+        [columnAutoWidth]="true"
+        [dataSource]="missingDates">
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+        <dxo-grouping [contextMenuEnabled]="true"></dxo-grouping>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-paging [pageSize]="40"></dxo-paging>
+        <dxo-load-panel [enabled]="false"></dxo-load-panel>
+        <dxi-column dataField="Date" caption="Date" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <dxi-column dataField="BCIDate" caption="Barclays" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <dxi-column dataField="GSDate" caption="Goldman Sachs" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <dxi-column dataField="JPMDate" caption="JP Morgan" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <dxi-column dataField="CSDate" caption="Credit Suisse" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <dxi-column dataField="CIDate" caption="Citi" [dataType]="'date'" cellTemplate="missingCellTemplate"></dxi-column>
+        <div *dxTemplate="let d of 'missingCellTemplate'" [ngClass]="{'missing': !d.value}">
+            <span>{{ (d.value || '') !== '' ? (d.value | utcDate | date:'MM/dd/yyyy') : '&nbsp;'  }}</span>
+        </div>
+    </dx-data-grid>
+</div>

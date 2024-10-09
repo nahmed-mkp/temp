@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <span class=toolbar-heading> ADMIN SOCKET DASHBOARD </span>
+    <!-- <span class="vertical-toolbar-divider-small"></span> -->
+    <!-- <span class="toolbar-spacer"></span> -->
+    
+</mat-toolbar>
+<div class="grid-wrap">
+    <app-sockets-overview-component
+        [socketDashboardData]="socketDashboardData$ | async"
+    >
+    </app-sockets-overview-component>
+</div>

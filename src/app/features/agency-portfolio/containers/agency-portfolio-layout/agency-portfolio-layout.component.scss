@@ -1,0 +1,70 @@
+
+mat-tab-group {
+    height: 100%;
+    flex: 5 0 0
+}
+
+app-agency-portfolio-bar-chart {
+    flex: 2 0 0;
+    margin-left: 0.5rem;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+
+    span:first-child {
+        transform: translateY(-5px);
+    }
+    .mat-mdc-form-field {
+        font-size: 14px;
+        font-style: italic;
+    }
+    mat-spinner {
+        display: inline-block !important;
+        margin-left: 0.2rem;
+    }
+
+    .toolbar-header {
+        font-weight: bolder;
+        opacity: 0.7;
+        color: #0d3484;
+    }
+}
+
+.mat-mdc-form-field {
+    width: 6.1rem; 
+    margin-left: 0.9rem;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
+mat-select, input {
+    opacity: 0.5; 
+    font-weight: bolder
+}
+
+button.mat-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    i {opacity: 0.5}
+}
+
+.spinning {
+    animation: spin-animation 3s linear infinite forwards;
+}
+
+.non-spinning {
+    opacity: 0.4;
+}
+
+@keyframes spin-animation {
+    from {
+        transform:rotate(360deg);
+    }
+    to {
+        transform:rotate(0deg);
+    }
+}

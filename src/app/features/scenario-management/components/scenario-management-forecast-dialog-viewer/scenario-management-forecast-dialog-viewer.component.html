@@ -1,0 +1,52 @@
+<div class="wrapper">
+
+    <mat-toolbar>
+        <span class="toolbar-heading"> Create New Forecast  </span>
+    </mat-toolbar>
+  
+    <div class="content-wrap">
+  
+      <div class="input-wrap">
+          
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+          <mat-label> Scenario </mat-label>
+          <mat-select [(ngModel)]="selectedScenarioId" placeholder="..." (selectionChange)="handleInputChange($event)">
+            <mat-option *ngFor="let scenario of scenarioList" [value]="scenario.ScenarioId">{{scenario.ScenarioName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 400px">
+          <mat-label> Forecast Period </mat-label>
+          <mat-select [(ngModel)]="selectedForecastPeriodId" placeholder="..." (selectionChange)="handleInputChange($event)">
+            <mat-option *ngFor="let forecastPeriod of forecastPeriodList" [value]="forecastPeriod.ForecastPeriodId">{{forecastPeriod.ForecastPeriod}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <div style="width: 400px; display:flex; flex-direction:row; align-items:center;justify-content: space-around;">
+
+          <mat-form-field appearance="outline" floatLabel="always" style="width: 150px">
+            <mat-label> MKP Value </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input type="number" min="1" matInput [(ngModel)]="mkpValue" placeholder="..." autocomplete="off" (input)="handleInputChange($event)">
+            </div>
+          </mat-form-field> 
+    
+          <mat-form-field appearance="outline" floatLabel="always" style="width: 150px">
+            <mat-label> Consensus Value </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input type="number" min="1" matInput [(ngModel)]="consensusValue" placeholder="..." autocomplete="off" (input)="handleInputChange($event)">
+            </div>
+          </mat-form-field> 
+      
+        </div>
+
+      </div>
+
+      <div class="button-wrap">
+          <button mat-button (click)="cancel()" style="background-color:#f1807e;">Cancel</button>
+          <button mat-button [disabled]="submitDisabled" (click)="save()" style="background-color:lightskyblue; margin-left: 2rem">Save</button>
+      </div>
+
+    </div>
+  
+  </div>

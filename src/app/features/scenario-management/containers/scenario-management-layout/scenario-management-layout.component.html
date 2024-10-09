@@ -1,0 +1,101 @@
+<div style="height: 100%;width: 100%;display:flex;flex-direction: column;background-color:white">
+ 
+  <mat-toolbar>
+    <span class="toolbar-heading" *ngIf="displayMode==='Create'">
+        Scenario Management
+    </span>
+    <span class="toolbar-heading" *ngIf="displayMode==='Edit'">
+      Scenario Management - Forecast Edit
+  </span>
+
+
+  </mat-toolbar>
+  
+  <mat-stepper [linear]="false" #stepper class="vertical-flex-full-height" *ngIf="displayMode === 'Create'">
+    
+    <mat-step>
+      <ng-template matStepLabel>Countries</ng-template>
+      <div class="wrapper">
+        <app-scenario-management-country-viewer
+          [countries]="countries$ | async"
+          (countryUpdate)="handleCountryUpdate($event)"
+        > 
+        </app-scenario-management-country-viewer>
+        <div class="button-wrapper">
+        </div>
+      </div>
+    </mat-step>
+    
+    <mat-step>
+      <ng-template matStepLabel>Economic Variables</ng-template>
+      <div class="wrapper">
+        <app-scenario-management-econvar-viewer
+          [economicVars]="economicVariables$ | async"
+          (economicVariableUpdate)="handleEconomicVariableUpdate($event)"
+        > 
+        </app-scenario-management-econvar-viewer>
+        <div class="button-wrapper">
+            <button mat-button (click)="addEconomicVariable()" >Add Economic Variable</button>
+        </div>
+      </div>
+    </mat-step>
+    
+
+    <mat-step >
+      <ng-template matStepLabel>Forecast Periods</ng-template>
+      <div class="wrapper">
+        <app-scenario-management-forecast-period-viewer
+          [forecastPeriods]="forecastPeriods$ | async"
+          (forecastPeriodUpdate)="handleForecastPeriodUpdate($event)"
+        > 
+        </app-scenario-management-forecast-period-viewer>
+        <div class="button-wrapper">
+          <button mat-button (click)="addForecastPeriod()">Add Forecast Period</button>
+        </div>
+      </div>
+    </mat-step>
+
+  
+    <mat-step>
+      <ng-template matStepLabel>Scenarios</ng-template>
+      <div class="wrapper">
+        <app-scenario-management-scenario-viewer
+          [scenarios]="scenarios$ | async"
+          (scenarioUpdate)="handleScenarioUpdate($event)"
+        > 
+      </app-scenario-management-scenario-viewer>
+        <div class="button-wrapper">
+          <button mat-button (click)="addScenario()">Add Input Scenario</button>
+        </div>
+      </div>
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Forecasts</ng-template>
+      <div class="wrapper">
+        <app-scenario-management-forecast-viewer
+          style="width: 90%; height: 97%; margin-top:2rem"
+          [forecasts]="forecasts$ | async"
+          (forecastUpdate)="handleForecastUpdate($event)"
+        > 
+        </app-scenario-management-forecast-viewer>
+        <div class="button-wrapper">
+          <button mat-button (click)="addForecast()">Add Forecast</button>
+        </div>
+      </div>
+    </mat-step>
+
+  </mat-stepper>  
+
+  <div class="vertical-flex-full-height" style="align-items: center;justify-content: center;" *ngIf="displayMode === 'Edit'">
+    <app-scenario-management-forecast-viewer
+      style="width: 99%;  margin-top:0rem"
+      [forecasts]="forecasts$ | async"
+      (forecastUpdate)="handleForecastUpdate($event)"
+    > 
+    </app-scenario-management-forecast-viewer>
+  </div>
+</div>
+
+

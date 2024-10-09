@@ -1,0 +1,25 @@
+<!-- <p>
+  scenario-generator-viewer works!
+</p> -->
+<mat-tab-group>
+  <mat-tab label="Paste Cusip As Text">
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Paste it here"></textarea>
+    </mat-form-field>
+  </mat-tab>
+
+  <mat-tab label="Paste Cusip With Price">
+    <app-base-grid
+      [gridItems]="[]"
+      [customGridOption]="customGridOptionForCusips"
+      [extraOption]="{}">
+    </app-base-grid>
+  </mat-tab>
+</mat-tab-group>
+
+<app-base-grid
+  [gridItems]="defaultScenarios"
+  [customGridOption]="customGridOptionForScenarios"
+  [extraOption]="{}">
+</app-base-grid>
+

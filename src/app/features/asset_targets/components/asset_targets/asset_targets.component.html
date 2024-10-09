@@ -1,0 +1,28 @@
+<mat-card class="card" style="padding:5px !important; height: fit-content;">
+    <mat-card-title style="font-size:14px;padding-left: 20px">
+        {{country}}
+    </mat-card-title>
+ 
+    <button mat-icon-button
+        class="mat-button-shrink" 
+        color="black" 
+        style="position:absolute;right:4rem;top:0px;cursor:pointer;" 
+        (click)="toggleCalculatorView()" 
+        matTooltip="Calculate Probabilities"
+    >
+        <mat-icon style="color:black;" class="toolbar-icon">share</mat-icon>
+    </button>
+
+    <button style="position:absolute;right:1rem;top:0px;cursor:pointer;" mat-icon-button class="mat-button-shrink" color="primary"
+        (click)="resetProbabilityOverrides()" matTooltip="Reset Probability Overrides">
+        <mat-icon>replay</mat-icon>
+    </button>
+    <mat-card-content>
+        <app-base-grid 
+            [customGridOption]="customGridOption" 
+            [extraOption]="extraOption" 
+            [gridItems]="[]"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </mat-card-content>
+</mat-card>

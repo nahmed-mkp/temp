@@ -1,0 +1,38 @@
+.pane:hover{
+    background-color:gainsboro
+}
+
+.pane-header{
+    background-color: #D9D9D9; 
+    width: 100%; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+    height: 25px;
+}
+
+.pane-item{
+    height: 25px; 
+    border-bottom:1px solid gainsboro;
+    display:flex;
+    align-items:center; 
+    justify-content:flex-start; 
+    font-size:12px;
+}
+
+.pane-item-wrap{
+    display:flex;
+    align-items:center; 
+    justify-content: space-between;
+    width: 100%; 
+    font-size:11px
+}
+
+.activePane{
+    background-color:lightblue
+}
+
+.catalog-level{
+    font-size:13px;
+    font-weight: bold;
+}

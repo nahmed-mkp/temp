@@ -1,0 +1,15 @@
+<div *ngIf="security==='Probabilities';else securityViewer">
+    {{ security }}
+    <span *ngIf="!addsToHundred" style="color:red">[{{ (totalProbability * 100).toFixed(0) }}%]</span>
+    <span *ngIf="addsToHundred">[{{ (totalProbability * 100).toFixed(0) }}%]</span>
+</div>
+
+<ng-template #securityViewer >
+    <div class="cell-wrap">
+        <mat-icon  class="chart-icon" title="View History" (click)="showHistory(security)">timeline</mat-icon> 
+        <span> 
+            {{ security }}
+        </span>
+    </div>
+
+</ng-template>

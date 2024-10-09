@@ -1,0 +1,25 @@
+h5 {
+    font-weight: normal;
+    margin: 0.5rem 0;
+    opacity: 0.6;
+}
+
+div.horizontal-flex-center {
+    span {
+        //font-weight: bold;
+        color: grey;
+        opacity: 0.9;
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    mat-form-field {
+        width: 10rem;
+    }
+
+    justify-content: space-between;
+}
+
+mat-form-field {
+    margin-bottom: 0.2rem;
+}

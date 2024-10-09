@@ -1,0 +1,21 @@
+<mat-form-field>
+    <mat-label>Please select a fund</mat-label>
+    <mat-select (selectionChange)="selectFund($event)">
+        <mat-option *ngFor="let fund of funds" [value]="fund">
+            {{fund}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<app-base-grid
+    class="vertical-flex-full-height" 
+    height="100%"
+    [gridItems]="reconciliations"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<div *ngIf="reconciliationsLoading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>

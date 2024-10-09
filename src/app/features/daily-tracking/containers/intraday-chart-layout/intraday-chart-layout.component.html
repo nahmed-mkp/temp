@@ -1,0 +1,38 @@
+<mat-sidenav-container class="vertical-flex-full-height" style="height:99%">
+    <mat-sidenav #sidenav position="end" class="timeseries-selector-form">
+
+        <app-tracking-timeseries-selector
+            [request]="request"
+            [metaData]="metaData"></app-tracking-timeseries-selector>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="mat-dialog-content">
+            <div id="toolbar" style="justify-content:flex-end;">
+                <mat-form-field style="width:1px;visibility:hidden;">
+                    <input [value]="resetModel" matInput [matDatepicker]="picker" placeholder="Choose a date"
+                        (dateChange)="dateChanged($event)" hidden />
+                    <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker [dateClass]="dateClass"></mat-datepicker>
+                </mat-form-field>
+        
+                <button mat-icon-button color="primary" aria-label="Choose Dates(s)" title="Choose date(s)"
+                    (click)="picker.open()">
+                    <mat-icon>calendar_month</mat-icon>
+                </button>        
+                <button style="float:right;" mat-icon-button color="primary" aria-label="Choose Timeseries"
+                    title="Choose Timeseries" (click)="onShowTimeseriesSelector()">
+                    <mat-icon>menu_open</mat-icon>
+                </button>        
+            </div>
+        
+            <div class="vertical-flex-full-height" style="padding:5px;">
+                <app-tracking-intraday-chart #chart
+                    [request]="request" [selectedDates]="selectedDates"
+                    [intradayPlot]="intradayPlot$ | async" [intradayPlotLoading]="intradayPlotLoading$ | async"
+                    [intradayPlotLoaded]="intradayPlotLoaded$ | async"
+                    [intradayPlotError]="intradayPlotError$ |  async"></app-tracking-intraday-chart>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

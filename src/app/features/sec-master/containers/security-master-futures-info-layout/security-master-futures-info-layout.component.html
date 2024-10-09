@@ -1,0 +1,7 @@
+<app-security-master-futures-info-viewer
+    class="vertical-flex-full-height"
+    [data]="futureRoots$ | async"
+    [countries]="countries$ | async"
+    [loading]="loading$ | async"
+    (createFutureInfo)="createFutureInfo($event)">
+</app-security-master-futures-info-viewer>

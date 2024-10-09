@@ -1,0 +1,14 @@
+<div class="vertical-flex-full-height">
+    <div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+        <small>Timeseries Lookup/Search</small>
+        <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+    </div>
+    <div style="height:100%;padding:5px;">
+        <app-timeseries-search 
+            (searchTimeseries)="searchTimeseries($event)"></app-timeseries-search>
+    </div>
+    <div mat-dialog-actions style="padding-right:10px;">
+        <button mat-raised-button color="primary" (click)="onCloseClick('apply')">Apply</button>
+        <button mat-raised-button (click)="onCloseClick('close')">Cancel</button>
+    </div>
+</div>

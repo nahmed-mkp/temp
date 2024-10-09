@@ -1,0 +1,21 @@
+ <div style="height: 100%; width: 100%; display:flex; flex-direction:row">
+ 
+    <div class="loading-screen" *ngIf="loading" >
+        <mat-spinner></mat-spinner>
+    </div>
+    
+    <app-tree-navigation-pane 
+        style="flex:1;" 
+        class="mat-card"
+        *ngFor="let item of (constructedHierarchy$ | async)" 
+        [paneData]="item"
+        [selectedData]="selectedData"
+        [constructedHierarchy]="constructedHierarchy$ | async"
+        [activePathArr]="activePathArr$ | async"
+        (overwriteActiveArr)="overwriteActiveArray($event)"
+        (overwriteConstructedHierarchy)="overwriteConstructedHierarchy($event)"
+        (onTimeseriesSelect)="onTimeseriesSelect($event)"
+    >
+    </app-tree-navigation-pane>
+</div>
+

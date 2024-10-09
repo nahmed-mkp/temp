@@ -1,0 +1,73 @@
+@import '../../../../../styles/variables';
+
+.tradename-form {
+    padding: 5px;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.wide-width {
+    width: 75%;
+}
+
+.crd-trade-prefix {
+    font-size: .9em;
+    margin-left: 10px;
+}
+
+.actions {
+    justify-content: end;
+    margin-top:1rem
+}
+
+.error {
+    font-size: 0.7em;
+    color: #e01b38;
+}
+
+.success {
+    font-size: 0.7em;
+}
+
+input{
+    font-size: $mat-input-font-size-primary !important;
+}
+
+.mat-form-field{
+    height: 40px !important;
+}
+  
+.mat-mdc-text-field-wrapper{
+    height: 40px !important;
+}
+
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+mat-checkbox {
+    margin-right: 1rem
+}
+
+mat-form-field{
+    margin-top:-1rem;
+}
+
+mat-option {
+    font-size: 12px; 
+}
+
+mat-icon {
+    margin-top: -1rem;
+}
+
+
+mat-label{
+    font-size: 14px !important;
+}
+
+app-base-grid{
+    height: 375px !important;
+    display: block;
+}
+

@@ -1,0 +1,34 @@
+<div class="vertical-flex-full-height">
+    
+    <mat-tab-group style="flex: 1 0 0" (selectedTabChange)="tabChanged($event)" headerPosition="below" #tabs>
+
+        <mat-tab label="Current Period">
+            <ng-template matTabContent>
+                <app-prizm-sei-active-rec-builder
+                    style="height:100%;display: block"
+                    [funds$]="funds$"
+                    [fundsInDB$]="fundsInDB$"
+                    [fundsInDBError$]="fundsInDBError$"
+                    [data$]="data$"
+                    [filesUploading$]="filesUploading$"
+                    [filesUploaded$]="filesUploaded$"
+                    [filesUploadError$]="filesUploadError$"
+                    [reconciliations]="reconciliations$ | async"
+                    [reconciliationsLoading]="reconciliationsLoading$ | async"
+                    [reconciliationsLoaded]="reconciliationsLoaded$ | async"
+                    [reconciliationsError]="reconciliationsError$ | async"
+                    (loadFromDatabase)="loadFromDatabase()"
+                    (uploadFiles)="uploadFiles($event)"
+                    (uploadFunds)="uploadFunds($event)"
+                    (loadRec)="loadRec($event)"></app-prizm-sei-active-rec-builder>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Historical">
+            <ng-template matTabContent>
+                Show Historical Recs here
+            </ng-template>
+        </mat-tab>
+        
+    </mat-tab-group>
+</div>

@@ -1,0 +1,18 @@
+<!-- <p>
+  dials-set-create-dialog works!
+</p> -->
+<div mat-dialog-title>
+  <h4>Create New Dialset</h4>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Dialset Name</mat-label>
+    <input matInput placeholder="Save As">
+  </mat-form-field> 
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onCloseClick('save')">Save</button>
+  <button mat-button (click)="onCloseClick('close')">Cancel</button>
+</div>

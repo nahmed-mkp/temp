@@ -1,0 +1,1 @@
+export * from './sovereign-cds-spread-viewer/sovereign-cds-spreads-viewer.component';

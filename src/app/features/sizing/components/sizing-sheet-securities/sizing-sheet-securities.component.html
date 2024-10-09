@@ -1,0 +1,27 @@
+<div style="height:80%">
+    <button mat-icon-button class="mat-button-shrink" color="primary" (click)="addRow()" matTooltip="Add row">
+        <mat-icon>playlist_add</mat-icon>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" color="primary" (click)="removeRow()" matTooltip="Remove row">
+        <mat-icon>delete_sweep</mat-icon>
+    </button>
+    <mat-slide-toggle id="mode-selector" color="primary" [checked]="viewMode === 'showChanges'"
+        class="slide-toggle"
+        (change)="onViewModeChanged($event)">
+        <span class="slide-toggle-label">
+            View Changes
+        </span></mat-slide-toggle>
+    <br />
+   
+    <app-base-grid style="height:250px;" 
+        [gridItems]="sizingSheetSecurities$ | async"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid><br />
+    
+    <div class="actions">
+        <button mat-raised-button color="primary" [disabled]="!(changeStatus$ | async)" (click)="onApplyChanges()">Apply</button>
+        <span style="margin-left:5px;"><button mat-raised-button (click)="onReset()">Reset</button></span>
+    </div>
+</div>

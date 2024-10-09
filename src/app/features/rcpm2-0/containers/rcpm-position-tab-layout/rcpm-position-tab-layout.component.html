@@ -1,0 +1,201 @@
+<div class="vertical-flex-full-height">
+
+
+    <div *ngIf="(userLayoutLoadingStatus$ | async)" class="loading-screen" style="flex-direction: column;">
+        <mat-spinner></mat-spinner><br>
+        <div style="text-align: center;" *ngIf="userLayoutLoadingStatus$ | async">
+          <p >Loading User layout ... </p> 
+        </div>
+    </div>
+
+    <mat-toolbar>
+
+        <small class="flex-center">
+
+            <div *ngIf="positionStaticLayoutMainMenu$ | async">
+                <span *ngFor="let menuName of positionStaticLayoutMainMenu$ | async; let i = index" matTooltip="{{menuName}}">
+                    <button mat-icon-button class="toolbar-icon" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" >
+                        <i class="material-icons" matPrefix >{{icons[i]}}</i>
+                    </button> 
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngFor="let layoutName of (positionStaticLayoutSubMenu$ | async)[menuName].layouts" 
+                        (click)="onApplyStaticLayout($event, layoutName, false); menuTrigger.closeMenu()" >
+                            {{positionStaticLayouts[layoutName]['layoutName']}}
+                            <button mat-icon-button class="toolbar-icon" (click)="onApplyStaticLayout($event, layoutName, true);menuTrigger.closeMenu()">
+                                <mat-icon matPrefix class="open-new-tab-icon" matTooltip="Open in new tab">add_to_queue</mat-icon>
+                            </button>
+                        </button>
+                    </mat-menu>
+                </span>
+            </div>
+
+            <span class="vertical-toolbar-divider-small"></span>
+
+            <button style="margin-left:1rem;" mat-icon-button  class="toolbar-icon" disableRipple matTooltip="Layout Configuration (Server)" [matMenuTriggerFor]="cloud_menu" #menuTriggerUser_cloud="matMenuTrigger">
+                <i class="material-icons">cloud_circle</i>
+            </button>
+            <mat-menu #cloud_menu="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="sharedmenu_cloud">Shared Layout</button>
+                <button mat-menu-item [matMenuTriggerFor]="privatemenu_cloud">Private Layout</button>
+                <button mat-menu-item class="horizontal-divider-small" [matMenuTriggerFor]="common_grouping">Common Grouping</button>
+                <button mat-menu-item (click)="onApplyUserLayout($event, 'Overview', true);menuTriggerUser_cloud.closeMenu()">
+                    Overview (Default View)
+                </button>
+            </mat-menu>
+            <mat-menu #sharedmenu_cloud="matMenu">
+                <button mat-menu-item *ngFor="let layout of userCloudLayouts_shared" (click)="onApplyUserLayout($event, layout, false);menuTriggerUser_cloud.closeMenu()">
+                    {{layout.createdBy ? ("[ " + layout.createdBy + " ] " + layout.layoutName) : layout.layoutName}}
+                    <span>
+                        <button mat-icon-button class="toolbar-icon" (click)="onApplyUserLayout($event, layout, true);menuTriggerUser_cloud.closeMenu()" >
+                            <mat-icon class="open-new-tab-icon" matTooltip="Open in new tab">add_to_queue</mat-icon>
+                        </button>
+                    </span>
+                </button>
+            </mat-menu>
+            <mat-menu #privatemenu_cloud="matMenu">
+                <button mat-menu-item *ngFor="let layout of userCloudLayouts_private" (click)="onApplyUserLayout($event, layout, false);menuTriggerUser_cloud.closeMenu()">
+                    {{layout.layoutName}}
+                    <span>
+                        <button mat-icon-button class="toolbar-icon" (click)="onApplyUserLayout($event, layout, true);menuTriggerUser_cloud.closeMenu()">
+                            <mat-icon class="open-new-tab-icon" matTooltip="Open in new tab">add_to_queue</mat-icon>
+                        </button>
+                    </span>
+                </button>
+            </mat-menu>
+
+            <mat-menu #common_grouping="matMenu">
+                <button mat-menu-item *ngFor="let grouping of (nonlinearSupportGroupingOfActiveDay$ | async).mainGroupings"   [matMenuTriggerFor]="sub_common_grouping"  [matMenuTriggerData]="{name: grouping}">
+                    {{grouping}}
+                </button>
+            </mat-menu>
+            <mat-menu #sub_common_grouping="matMenu">
+                <ng-template matMenuContent let-name="name">
+                    <button mat-menu-item *ngFor="let grouping of (nonlinearSupportGroupingOfActiveDay$ | async).groupingCollection[name]"
+                        (click)="onApplyCommomGrouping(grouping);menuTriggerUser_cloud.closeMenu()">
+                        {{grouping.split('|').join(' | ')}}
+                    </button>
+                </ng-template>
+            </mat-menu>
+
+            <button mat-icon-button class="toolbar-icon" disableRipple matTooltip="Setting" [matMenuTriggerFor]="menu2" #menuTrigger="matMenuTrigger">
+                <i class="material-icons" matPrefix>tune</i>
+            </button>
+            <mat-menu #menu2="matMenu">
+                <span mat-menu-item (click)="doNotCloseMenu($event)"><mat-checkbox [(ngModel)]="IsUnsettledClosingTradeStillAccruing" >Hide Unsettled (but still accuring) Trades </mat-checkbox></span>
+                <span *ngIf="IsUserHasPermissionOnExcludeTestFund" mat-menu-item (click)="doNotCloseMenu($event)"><mat-checkbox [(ngModel)]="IsExcludeTestFundEnabled" >Exclude Test Fund</mat-checkbox></span>
+            </mat-menu>
+
+            <button mat-icon-button class="toolbar-icon" disableRipple matTooltip="Show Missing Closes" (click)="showMissingCloses()">
+                <i class="material-icons" matPrefix><span class="material-symbols-outlined">
+                    quiz
+                </span></i>
+            </button>
+
+            <button mat-icon-button class="toolbar-icon" class="mat-button-shrink spinning" style="color:white; opacity: 1;" matTooltip="30s refresh Cycle, click to reset" (click)="onForceResetTimer()">
+                <mat-icon>cached</mat-icon>
+            </button>
+
+            <span class="vertical-toolbar-divider-small"></span>
+
+            <i class="horizontal-flex-center last-update">
+                <mat-icon matTooltip="{{timeStampCollection$ | async | json}}" style="margin-right: 0.3rem; margin-left: 1rem; opacity: 1;">schedule</mat-icon>
+                <span class="timestamp-alt"> LastUpdate: {{timeStamp$ | async}} </span>
+                
+            </i>
+
+            <mat-slide-toggle style="margin-left: 1.5rem;" [checked]="mode==='live'" (change)="onModeChange()" [disabled]="latestAvaliableDate !== currentSelectedDate">
+                <span class="slide-toggle-label">
+                    {{ this.mode === 'live' ? 'Live': 'Close'}}
+                </span>
+            </mat-slide-toggle>
+
+        </small>
+
+        <span class="toolbar-spacer"></span>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label> Target Column </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-icon>my_location</mat-icon>
+                <input type="text" matInput [matAutocomplete]="auto" placeholder="Search..."  [formControl]="targetColumnFormControl" style="margin-left:10px;flex: 8;">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="200" >
+                    <mat-optgroup *ngFor="let group of filteredColumnsWithGrouping$ | async" [label]="group.label">
+                        <mat-option *ngFor="let column of group.columns" [value]="column" (click)="onTargetColumnChange(column)">
+                            {{column.headerName}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label> Date </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-icon>today</mat-icon>
+                <mat-select placeholder="Position Date" [(ngModel)]="currentSelectedDate" (ngModelChange)="onDateChange()">
+                    <mat-option *ngFor="let date of positionsDate$ | async" [value]="date">
+                        {{date}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 200px!important">
+            <mat-label> PM </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-icon>person</mat-icon>
+                <mat-select placeholder="Select ..." [(ngModel)]="targetManager" multiple>
+                    <mat-option [value]="'all'">All</mat-option>
+                    <mat-option *ngFor="let name of managers$ | async" [value]="name">
+                        {{name === 'Beta PM' ? 'Beta Pod' : name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="sourcePermission" appearance="outline">
+            <mat-label>Source</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-icon style="flex:2"> inventory</mat-icon>       
+                <mat-select placeholder="Source" [(ngModel)]="source" (ngModelChange)="onSourceChange()">
+                    <mat-option [value]="'RCPM'">RCPM</mat-option>
+                    <mat-option [value]="'PRIZM'">PRIZM</mat-option>
+                    </mat-select>
+            </div>
+        </mat-form-field>
+
+    </mat-toolbar>
+
+
+    <mat-tab-group #mattabgroup animationDuration="0ms" style="height: 100%;" (selectedIndexChange)="selectedIndexChange($event)">
+        <mat-tab #tab *ngFor="let layout of (selectedLayouts$ | async); let i = index;">
+            <ng-template mat-tab-label>
+                <span class="vertical-align-center">
+                    <i class="material-icons" style="font-size: 17px; transform: translateY(-0.6px);">list_alt</i>&nbsp;
+                 
+                  <span>{{layout.includes('static') ? positionStaticLayouts[layout.split('[static] ')[1]]['layoutName'] : layout }}</span>
+                </span>
+                <i class="material-icons tab-delete" matTooltip="Close" (click)="removeLayout(layout)">clear</i>
+            </ng-template>
+
+            <app-rcpm-position-layout
+                [nonlinearSupportGrouping]="nonlinearSupportGrouping$ | async"
+                [positionLookups]="positionLookups$ | async"
+                [layout]="layout"
+                [selectedUserLayout]="getLayoutIfExisted(layout)"
+                [currentDate]="currentSelectedDate"
+                [isActive]="mattabgroup._selectedIndex === i"
+                [targetManager]="targetManager"
+                [targetColumn]="targetColumn"
+                [mode]="mode"
+                [source]="source"
+                [IsUnsettledClosingTradeStillAccruing]="IsUnsettledClosingTradeStillAccruing"
+                [IsExcludeTestFundEnabled]="IsExcludeTestFundEnabled"
+                (updateLayout)="updateLayout($event, i)"
+                (boardcastDisplayColumns)="receiveDisplayColumns($event, i)"
+                (sendResetTimerFunction)="receiveResetTimerFunction($event)"
+                style="padding: 0;">
+            </app-rcpm-position-layout>
+        </mat-tab>
+    </mat-tab-group>
+</div>

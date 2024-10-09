@@ -1,0 +1,128 @@
+<div class="vertical-flex-full-height">
+    <mat-toolbar>
+        <span class="toolbar-heading">PORTFOLIO PRICING</span>
+    </mat-toolbar>
+    
+    <mat-tab-group [animationDuration]="0" (selectedTabChange)="changeTab($event)" #tabs>
+        <!-- <mat-tab label="Agency">
+            <app-pricing-engine-agency-layout class="vertical-flex-full-height" style="flex: 1 0 0"></app-pricing-engine-agency-layout>
+        </mat-tab>
+    
+        <mat-tab label="Asset Swaps">
+            <app-pricing-engine-asset-swaps-layout class="vertical-flex-full-height" style="flex: 1 0 0"></app-pricing-engine-asset-swaps-layout>
+        </mat-tab>
+    
+        <mat-tab label="Non Agency">
+            <app-pricing-engine-non-agency-layout class="vertical-flex-full-height" style="flex: 1 0 0"></app-pricing-engine-non-agency-layout>
+        </mat-tab>
+    
+        <mat-tab label="Options">
+            <app-pricing-engine-options-layout class="vertical-flex-full-height" style="flex: 1 0 0"></app-pricing-engine-options-layout>
+        </mat-tab>
+    
+        <mat-tab label="Repo">
+            <app-pricing-engine-repo-layout class="vertical-flex-full-height" style="flex: 1 0 0"></app-pricing-engine-repo-layout>
+        </mat-tab> -->
+    
+        <mat-tab label="Equities">
+            <ng-template matTabContent>
+                <app-pricing-engine-equitites-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                >   
+                </app-pricing-engine-equitites-layout>
+            </ng-template>
+        </mat-tab>
+    
+        <mat-tab label="FX">
+            <ng-template matTabContent>
+                <app-pricing-engine-fx-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-fx-layout>
+            </ng-template>
+        </mat-tab>
+        
+        <mat-tab label="Treasury">
+            <ng-template matTabContent>
+                <app-pricing-engine-treasury-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-treasury-layout>
+            </ng-template>
+        </mat-tab>
+    
+        <mat-tab label="Futures">
+            <ng-template matTabContent>
+                <app-pricing-engine-futures-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-futures-layout>
+            </ng-template>
+        </mat-tab>
+    
+        <mat-tab label="Swaps">
+            <ng-template matTabContent>
+                <app-pricing-engine-swaps-layout class="horizontal-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-swaps-layout>
+            </ng-template>
+        </mat-tab>
+    
+        <mat-tab label="Swaptions">
+            <ng-template matTabContent>
+                <app-pricing-engine-swaptions-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-swaptions-layout>
+            </ng-template>
+        </mat-tab>
+    
+        <mat-tab label="Options">
+            <ng-template matTabContent>
+                <app-pricing-engine-options-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    (openPopup)="openValueRetentionDialog($event)"
+                >
+                </app-pricing-engine-options-layout>
+            </ng-template>
+        </mat-tab>
+
+            
+        <mat-tab label="BVAL Bond Pricing">
+            <ng-template matTabContent>
+                <app-pricing-engine-bval-bonds-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                    [latestPortfolioDate]="latestPortfolioDate$ | async"
+                    [selectedPortfolioDate]="selectedPortfolioDate$ | async"
+                >
+                </app-pricing-engine-bval-bonds-layout>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="RV Trades">
+          <ng-template matTabContent>
+              <app-pricing-engine-rv-layout class="vertical-flex-full-height" style="flex: 1 0 0"
+                [latestPortfolioDate]="latestPortfolioDate$ | async"
+                [selectedPortfolioDate]="selectedPortfolioDate$ | async"
+                (openPopup)="openValueRetentionDialog($event)"
+              >
+              </app-pricing-engine-rv-layout>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Manual-Marks">
+          <ng-template matTabContent>
+              <app-pricing-engine-manual-marks-layout
+                [latestPortfolioDate]="latestPortfolioDate$ | async"
+                [selectedPortfolioDate]="selectedPortfolioDate$ | async" 
+              >
+              </app-pricing-engine-manual-marks-layout>
+          </ng-template>
+        </mat-tab>
+
+    </mat-tab-group>

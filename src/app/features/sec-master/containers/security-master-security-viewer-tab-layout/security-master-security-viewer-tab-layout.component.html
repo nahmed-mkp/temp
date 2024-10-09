@@ -1,0 +1,64 @@
+
+<!-- {{dateSource$ | async | json}} -->
+
+<div *ngIf="(dynamicTabLayoutLoading$ | async) || (loading$ | async)" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-tab-group [animationDuration]="0" mat-align-tabs="center" style="flex: 1 0 0; overflow: auto;" (selectedTabChange)="onTabChanged($event)">
+    <mat-tab *ngFor="let tab of (activeTabs$ | async)" [label]="tab && tab.name">
+        <ng-template mat-tab-label>
+            <span>{{tab && tab.name}}</span>
+        </ng-template>
+
+        <div style="margin-top: 1rem;padding: 0 10rem;">
+            <!-- {{tab?.fields | json}} -->
+            <app-security-master-security-viewer-subtab
+                [tabName]="tab && tab.name"
+                [fields]="tab?.fields"
+                [loading]="loading$ | async"
+                [securityDetail]="dateSource$ | async"
+                (valueGetterCallBack)="valueGetterCallBack($event)">
+            </app-security-master-security-viewer-subtab>
+        </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="(dateSource$ | async)?.rules"  label="Rules">
+        <ng-template mat-tab-label>
+            <span>Rules</span>
+        </ng-template>
+
+        <div style="margin-top: 1rem;padding: 0 10rem;">
+            <app-security-master-security-viewer-subtab-rules [rules]="(dateSource$ | async)?.rules" class="horizontal-flex" style="flex-wrap: wrap;">
+            </app-security-master-security-viewer-subtab-rules>
+        </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="dateSource$ | async" label="Error">
+        <ng-template mat-tab-label>
+            <span>Error</span>
+        </ng-template>
+
+        <div style="margin-top: 1rem; padding: 0 10rem;">
+            {{(dateSource$ | async).errors}}
+        </div>
+    </mat-tab>
+    
+
+    <mat-tab *ngIf="dateSource$ | async" label="Raw">
+        <ng-template mat-tab-label>
+            <span>Raw</span>
+        </ng-template>
+
+        <div style="margin-top: 1rem;">
+            <!-- <ngx-json-viewer [json]="(dateSource$ | async)"></ngx-json-viewer> -->
+        </div>
+    </mat-tab>
+
+</mat-tab-group>
+
+
+<button disabled mat-raised-button *ngIf="showSaveButton" color="primary" style="margin: 1rem auto; width: 10rem;" (click)="onSave()">Save</button>
+
+<!-- <button mat-flat-button color='button-active' type="submit">Save</button> -->
+

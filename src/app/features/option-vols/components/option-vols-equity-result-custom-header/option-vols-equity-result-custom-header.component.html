@@ -1,0 +1,19 @@
+<div class="horizontal-flex">
+    <span style="flex: 1 0 0">Fut Ref: <i>{{result && result.spotPx}}</i></span>
+    <span style="flex: 1 0 0">2w Real: <i>{{result && result.realizedVol10D | number}}</i></span>
+    <span style="flex: 1 0 0">1m Real: <i>{{result && result.realizedVol20D | number}}</i></span>
+</div>
+<div class="horizontal-flex">
+    <mat-form-field class="outline-shrink" style="flex: 1 0 0;">
+        <span matPrefix style="font-size: 12px;">Expiry &nbsp;&nbsp;&nbsp;</span>
+        <mat-select [(ngModel)]="targetExpiry" (ngModelChange)="onTargetExpiryChange()">
+            <mat-option *ngFor="let date of uniqueExpiry" [value]="date" style="font-size: 0.7rem">
+              {{date}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-radio-group [(ngModel)]="mode" style="flex: 1 0 0" (ngModelChange)="onModeChange()">
+        <mat-radio-button value="buy">Buy</mat-radio-button>
+        <mat-radio-button value="sell">Sell</mat-radio-button>
+    </mat-radio-group>
+</div>

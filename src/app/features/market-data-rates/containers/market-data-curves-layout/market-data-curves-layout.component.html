@@ -1,0 +1,17 @@
+<div *ngIf="loading$ | async" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="error$ | async" class="loading-screen">
+    <h4>Load Data Failed!</h4>
+</div>
+
+<div *ngIf="(loaded$ | async) === true && (curves$ | async).length === 0 " class="loading-screen">
+    <h4>No Curve Data!</h4>
+</div>
+
+<app-market-data-curves-viewer 
+    class="mat-card-lift"
+    *ngFor="let curve of (curves$ | async)"
+    [rawData]="curve">
+</app-market-data-curves-viewer>

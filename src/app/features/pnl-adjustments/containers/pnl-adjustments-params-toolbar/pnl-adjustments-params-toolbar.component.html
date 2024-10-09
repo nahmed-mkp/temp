@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <span class="toolbar-heading"> PNL ADJUSTMENTS </span>
+
+  <span class="vertical-toolbar-divider-small"></span>
+
+  <span class="toolbar-spacer"></span>
+
+  <mat-form-field class="date-form-field outline-shrink" appearance="outline" >
+      <mat-label>From</mat-label> 
+      <div class="mat-form-field-content-wrap">
+          <input matInput [matDatepicker]="pickerFrom" placeholder="From" [(ngModel)]="formattedStartDate" (ngModelChange)="startDateChanged($event)">
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom></mat-datepicker>
+      </div>
+  </mat-form-field>
+
+
+  <mat-form-field class="date-form-field outline-shrink" appearance="outline" >
+      <mat-label>To</mat-label> 
+      <div class="mat-form-field-content-wrap">
+          <input matInput [matDatepicker]="pickerTo" placeholder="To" [(ngModel)]="formattedEndDate" (ngModelChange)="endDateChanged($event)">
+          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #pickerTo></mat-datepicker>
+      </div>
+  </mat-form-field>
+
+</mat-toolbar>

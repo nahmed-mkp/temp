@@ -1,0 +1,113 @@
+$header-height: 64px;
+
+.logo { 
+    position: absolute;
+    left: 10;
+    top: 10;
+}
+
+*[parallax] {
+
+    width: 100%;
+    height: 100%;
+
+
+    background-size: 100%;
+
+}
+
+#public {
+    background-image: url('../../../../../assets/img/map_bg-3.jpg')
+}
+
+.transparent { 
+    color: #ffffff;
+    position: absolute;
+    background-color: transparent;
+}
+
+.empty-space { 
+    flex: 1 1 auto;
+}
+
+.navlink { 
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 999;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 16px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.active { 
+    cursor: default;
+    border-bottom: solid 2px #ffffff;
+    display: inline;
+    padding-bottom: 3px;
+}
+
+.card {
+  padding: 0;
+  margin: -$header-height auto 0;
+  width: 25%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: $header-height;
+  box-sizing: border-box;
+  border-bottom: solid 1px rgba(0,0,0,0.12);
+  color: #ffffff;
+  background-color: #3f51b5;
+
+  .title {
+    margin-top: 20px;
+    font-weight: 400;
+    width: 100%;
+  }
+
+  .subtitle { 
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 100;
+  }
+}
+
+.content {
+  padding: 20px;
+}
+
+.footer { 
+    margin-top: -80px !important;
+}
+
+.centered-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: fixed;
+  
+    & a {
+      color: #989797;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    & .form-container {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    & .form-container > * {
+      width: 100%;
+    }
+  }

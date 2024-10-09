@@ -1,0 +1,10 @@
+<mat-card style="height: 100%; margin-top:15px;">
+    <div style="margin-top:-10px;font-size:15px; font-weight:bold; ">  Top 10 Investors </div>
+    <app-base-grid
+        style="flex:1 0 0"
+        [gridItems]="top10List"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+</mat-card>

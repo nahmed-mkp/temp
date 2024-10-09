@@ -1,0 +1,32 @@
+<div class="vertical-flex-full-height">
+    <mat-toolbar>
+        <span class="toolbar-heading"> Scenario Analysis </span>
+    </mat-toolbar>
+
+    <div class="left-tool-bar">
+        <button mat-flat-button [color]="showScenarioFlyout ? 'button-active' : '' " class="vertical-write-mode" (click)="changeFlyoutVisibility()">
+          Configuration
+        </button>
+    </div>
+
+    <div style="display: flex; flex-direction: row; height: 100%; width: 100%; position: relative;">
+        <div>
+            <scenario-analysis-portfolio-grid-viewer
+                [linearData]="linearData$ | async"
+            >
+
+            </scenario-analysis-portfolio-grid-viewer>
+        </div>
+        <div *ngIf="showScenarioFlyout" style="width: 50%;height: 100%;background-color:white;position: absolute; right: 0;" >
+            <scenario-analysis-config-layout
+                [importableScenarios]="importableScenarios$ | async"
+                [tabs]="tabs$ | async"
+                [currTab]="currTab$ | async"
+                [metaData]="metaData$ | async"
+                [sidPrompt]="sidPrompt$ | async"
+            >
+            </scenario-analysis-config-layout>
+        </div>    
+    </div>
+
+</div>

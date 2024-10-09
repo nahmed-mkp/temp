@@ -1,0 +1,30 @@
+pipeline {
+  agent any
+   environment {
+        //once you create ACR in Azure cloud, use that here
+        registryName = "mkpcapacr"
+        //- update your credentials ID after creating credentials for connecting to ACR
+        registryCredential = 'acr-credentials'
+        dockerImage = ''
+        registryUrl = 'mkpcapacr.azurecr.io'
+    }
+  stages {
+    stage('Label image from RC to Stable') {
+      steps {
+          script{
+              docker.withRegistry( "http://${registryUrl}", registryCredential ) {
+                   sh """
+                    docker tag ${registryUrl}/prizm-map-web-acr:rc ${registryUrl}/prizm-map-web-acr:stable
+                    docker tag ${registryUrl}/prizm-map-web-acr:rc ${registryUrl}/prizm-map-web-acr:stable.${env.BUILD_NUMBER}
+                    docker push ${registryUrl}/prizm-map-web-acr:stable
+                    docker push ${registryUrl}/prizm-map-web-acr:stable.${env.BUILD_NUMBER}
+                    mkdir -p /var/www/html/prod/map-web
+                    echo stable.${env.BUILD_NUMBER} > /var/www/html/prod/map-web/index.html
+                   """
+              }
+          }
+
+      }
+    }
+  }
+}

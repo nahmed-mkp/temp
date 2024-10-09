@@ -1,0 +1,166 @@
+<!-- <p>
+    <strong>DataSets:</strong>  <br /><br />
+    {{ dataSets | json }}
+</p>
+<br />
+<div>
+    <strong>Filters:</strong> <br /><br />
+    <div *ngFor="let filter of filters">
+        <app-risk-span-filter
+            [filter]="filter"
+            (addToRequest)="filterAdded($event)"
+            (removeFromRequest)="filterRemoved($event)"
+            (factorChanged)="factorChanged($event)"></app-risk-span-filter>
+    </div>
+</div>
+<br />
+<div>
+    <strong>Buckets:</strong><br /><br />
+    <div *ngFor="let bucket of buckets">
+        <app-risk-span-bucket [bucket]="bucket"></app-risk-span-bucket>
+    </div>
+</div>
+<br />
+<p>
+    <strong>Request:</strong> <br /><br />
+    {{ request | json }}
+</p> -->
+
+<!-- <div style="display: flex; border-bottom: 1px solid #80808038">
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple
+        (click)="mode = 'configuration'" [ngStyle]="{'background': mode==='configuration' ? 'white' : '#80808029'}">CONFIGURATION</button>
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple
+        (click)="mode = 'reports'" [ngStyle]="{'background': mode==='reports' ? 'white' : '#80808029'}">REPORTS</button>
+</div> -->
+
+
+<div style="padding: 0 1rem 1rem 1rem;">
+
+    <div>
+        <!-- This should be a drop down multi-select -->
+        <h4 class="pool-sidenav-card-title flex-space-between">
+            Data Sets
+            <mat-icon>replay</mat-icon>
+        </h4>
+        <mat-form-field appearance="outline" class="outline-shrink" >
+            <mat-label>Data Sets</mat-label>
+            <mat-select multiple [(ngModel)]="request.dataSets">
+              <mat-option *ngFor="let dataSet of dataSets" [value]="dataSet.code">{{dataSet.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <div class="flex-space-between" style="margin-top: 0.5rem; opacity: 0.8">
+            <button mat-flat-button color="primary" (click)="onSubmitRequest()">Run Report</button>
+            <button mat-flat-button disabled (click)="onUploadReport()">Add series</button>
+            <button mat-flat-button color="accent">Save CSV</button>
+        </div>
+    
+        <!-- {{request | json}}
+        <br>
+        {{bucketCollectionIndexed | json}} -->
+    
+    </div>
+    
+    <br>
+    
+    <div>
+        <h4 class="pool-sidenav-card-title flex-space-between">
+            Output
+            <mat-icon>replay</mat-icon>
+        </h4>
+        <mat-radio-group>
+            <mat-radio-button value="standard">Standard Output Set</mat-radio-button>
+            <mat-radio-button value="expanded">Expanded Output Set</mat-radio-button>
+        </mat-radio-group>
+        <mat-checkbox>Avg CPRS</mat-checkbox>
+    </div>
+    
+    <br>
+    
+    <div>
+        <h4 class="pool-sidenav-card-title flex-space-between">
+            Quick Filter
+            <mat-icon>replay</mat-icon>
+        </h4>
+    
+        <div class="flex-space-between" style="margin-bottom: 0.5rem">
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 32%" >
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="pickerStart" [(ngModel)]="request.factorDates.valuesMin">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 32%">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="request.factorDates.valuesMax">
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+            </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="outline-shrink" style="width: 32%">
+              <mat-label>Steps</mat-label>
+              <input matInput type="number" [(ngModel)]="request.factorDates.stepSize">
+          </mat-form-field>
+        </div>
+    
+        <div class="flex-space-between" style="margin-bottom: 0.5rem">
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 49%">
+                <mat-label>Pool Term</mat-label>
+                <mat-select multiple disabled>
+                    <mat-option *ngFor="let value of poolTermFilter?.values"  [value]="value">{{value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 49%">
+                <mat-label>Pool Type</mat-label>
+                <mat-select multiple disabled>
+                    <mat-option *ngFor="let value of poolTypeFilter?.values"  [value]="value">{{value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="flex-space-between" style="margin-bottom: 0.5rem">
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 49%">
+                <mat-label>Cur Bal ></mat-label>
+                <input matInput type="number" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 49%">
+                <mat-label>Num of Loans ></mat-label>
+                <input matInput type="number" disabled>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <br>
+    
+    <div>
+        <h4 class="pool-sidenav-card-title flex-space-between">
+            Filters / Bucketing
+            <mat-icon>replay</mat-icon>
+        </h4>
+
+        <!-- {{bucketCollectionIndexed | json}} -->
+        <!-- <div *ngFor="let filter of filters">
+            <app-risk-span-filter
+                [filter]="filter"
+                (addToRequest)="filterAdded($event)"
+                (removeFromRequest)="filterRemoved($event)"
+                (factorChanged)="factorChanged($event)"></app-risk-span-filter>
+        </div> -->
+    
+        <div *ngFor="let bucket of buckets">
+            <app-risk-span-bucket
+                [bucket]="bucket"
+                [bucketInputFromRequest]="bucketCollectionIndexed[bucket.name] || undefined"
+                (addToRequest)="bucketAdded($event)"
+                (removeFromRequest)="bucketRemoved($event)"
+                (valueChanged)="bucketUpdated($event)"
+                >
+            </app-risk-span-bucket>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,76 @@
+<mat-sidenav-container class="vertical-flex-full-height">
+    
+    <mat-sidenav #sidenav position="end" class="sidepane">
+    
+        <app-timeseries-exporter-items 
+            *ngIf="sidePaneView==='items'"
+            [monitor]="selectedMonitor$ | async">
+        </app-timeseries-exporter-items>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="vertical-flex" style="display: flex;">
+        <mat-toolbar>
+            <span class="toolbar-heading">TIMESERIES EXPORTER</span>
+            <span class="vertical-toolbar-divider-small"></span>
+
+            <app-timeseries-exporter-params
+                [params]="params$ | async"
+                [monitors]="monitors$ | async"
+                [monitorsLoading]="monitorsLoading$ | async"
+                [monitorsLoaded]="monitorsLoaded$ | async"
+                [monitorsError]="monitorsError$ | async"
+                (paramsChanged)="changeParams($event)"
+                (monitorSelected)="selectMonitor($event)"
+                (changeViewMode)="changeViewMode($event)"
+                (toggleSidePane)="toggleSidePane($event)">
+            </app-timeseries-exporter-params>
+        </mat-toolbar>
+
+        <div class="horizontal-flex-full-width" style="flex: 1 0 0;">
+            <mat-card style="flex: 1 0 0;height: 100%; margin: 0.25rem;">
+                <app-timeseries-exporter-editior-layout></app-timeseries-exporter-editior-layout>
+            </mat-card>
+
+            <mat-card style="flex: 2 0 0; height: 100%;margin: 0.25rem;">
+                <app-timeseries-viewer
+                    [selectedMonitor]="(selectedMonitor$ | async)?.name"
+                    [params]="params$ | async"
+                    [viewMode]="viewMode$ | async"
+                    [timeseries]="timeseries$ | async"
+                    [timeseriesLoading]="timeseriesLoading$ | async"
+                    [timeseriesLoaded]="timeseriesLoaded$ | async" 
+                    [timeseriesError]="timeseriesError$ | async">
+                </app-timeseries-viewer>
+            </mat-card>
+        </div>
+
+
+
+        <!-- <mat-grid-list cols="1" style="flex: 1 0 0">
+            <mat-grid-tile [colspan]="1">
+                <mat-card class="dashboard-card">
+                    <mat-card-content class="dashboard-card-content">
+                        <app-timeseries-viewer
+                            [selectedMonitor]="(selectedMonitor$ | async)?.name"
+                            [params]="params$ | async"
+                            [viewMode]="viewMode$ | async"
+                            [timeseries]="timeseries$ | async"
+                            [timeseriesLoading]="timeseriesLoading$ | async"
+                            [timeseriesLoaded]="timeseriesLoaded$ | async" 
+                            [timeseriesError]="timeseriesError$ | async">
+                        </app-timeseries-viewer>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="dashboard-card">
+                    <mat-card-content class="dashboard-card-content">
+                        <app-timeseries-exporter-items
+                            [monitor]="selectedMonitor$ | async">
+                        </app-timeseries-exporter-items>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>

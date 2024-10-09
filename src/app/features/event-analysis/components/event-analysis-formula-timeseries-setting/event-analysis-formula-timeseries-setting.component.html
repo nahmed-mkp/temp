@@ -1,0 +1,59 @@
+<!-- <p>
+  event-analysis-formula-timeseries-setting works!
+</p> -->
+<div class="tool-bar-section" style="z-index: 10">
+  <h4>Timeseries Configuration</h4>
+
+  <div class="action-section">
+    <button mat-icon-button class="mat-button-shrink" style="font-weight: bolder" matTooltip="Function" 
+      (click)="onOpenCustomFunctionset()" color="accent" *ngIf="displayMode==='expand'">
+      <!-- <mat-icon>refresh</mat-icon> -->
+      <i>f(x)</i>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" style="font-weight: bolder" color="accent"
+      matTooltip="Custom Variables" (click)="onOpenVariableSetup()" *ngIf="displayMode==='expand'">
+      <!-- <mat-icon>refresh</mat-icon> -->
+      <i>x</i>
+    </button>
+    <button mat-icon-button class="mat-button-shrink" style="font-weight: bolder" color="primary"
+      matTooltip="Add new timeseries" *ngIf="displayMode==='expand'" (click)="onAdd()">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    <!-- <button mat-icon-button class="mat-button-shrink" style="font-weight: bolder" color="warn"
+      matTooltip="Delete timeseries" *ngIf="displayMode==='expand'" (click)="onMultiDelete()">
+      <mat-icon>delete_forever</mat-icon>
+    </button> -->
+    <!-- <button mat-icon-button class="mat-button-shrink" color="accent">
+      <mat-icon>add_box</mat-icon>
+    </button> -->
+    <!-- <button mat-icon-button class="mat-button-shrink" color="primary">
+      <mat-icon>save_alt</mat-icon>
+    </button> -->
+
+    <!-- <app-market-data-search
+      *ngIf="displayMode==='expand'"
+      [searchContext]="'EventAnalysis'"
+      (marketDataEntered)="marketDataEntered($event)"
+      (marketDataSelected)="marketDataSelected($event)"></app-market-data-search> -->
+
+    <button mat-icon-button class="mat-button-shrink" style="font-weight: bolder" color="primary"
+      matTooltip="Collapse" (click)="onChangeDisplayMode()">
+      <!-- <mat-icon>refresh</mat-icon> -->
+      <i class="material-icons" *ngIf="displayMode==='expand'">keyboard_arrow_down</i>
+      <i class="material-icons" *ngIf="displayMode==='collapse'">keyboard_arrow_up</i>
+    </button>
+  </div>
+
+</div>
+
+<div class="instruction" *ngIf="!configuration && displayMode==='expand'">
+  <h4>No Data to Show</h4>
+</div>
+
+<app-base-grid *ngIf="configuration && displayMode==='expand'"
+  style="flex: 1 0 0"
+  [gridItems]="configuration.timeseriesAndFormulas"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

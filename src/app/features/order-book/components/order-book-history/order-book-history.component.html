@@ -1,0 +1,24 @@
+<mat-card class="full-strech-block">
+    <!-- <mat-card-header>
+        <mat-card-title>Show Order History here</mat-card-title>
+        <mat-card-subtitle>subtitle</mat-card-subtitle>
+    </mat-card-header> -->
+    <!-- <mat-card-content> -->
+
+    <div *ngIf="orderHistoryLoading" class="loading-screen">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <app-base-grid
+        style="flex: 1 0 0"
+        [gridItems]="orderHistory"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+
+    <!-- </mat-card-content> -->
+    <!-- <mat-card-actions>
+        <button mat-raised-button>Ok</button>
+    </mat-card-actions> -->
+</mat-card>

@@ -1,0 +1,12 @@
+<app-trade-agreements
+    [agreements]="filteredTradeAgreements$ | async"
+    [agreementsLoading]="agreementsLoading$ | async"
+    [agreementsLoaded]="agreementsLoaded$ | async"
+    [agreementsError]="agreementsError$ | async"
+    [agreementTypes]="agreementTypes$ | async"
+
+    (addAgreement)="addAgreement($event)"
+    (updateAgreement)="updateAgreement($event)"
+    (deleteAgreement)="deleteAgreement($event)"
+    (resetAgreementGrid)="resetAgreementGrid($event)"
+    (updateAllocationCache)="updateAllocationCache($event)"></app-trade-agreements>

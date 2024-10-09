@@ -1,0 +1,19 @@
+div.bottom-tool-bar {
+    position: absolute;
+    bottom: 0rem;
+    z-index: 20;
+    button.mat-flat-button {
+      // padding: 1rem 0.2rem;
+      margin: 0.2rem 0.2rem 0 0.2rem;
+      min-width: 0;
+      // background: #bdc3c7;
+      line-height: normal;
+      box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+      opacity: 0.8;
+      border-radius: 5px 5px 0 0;
+    }
+}
+
+app-security-master-user-activity-viewer {
+  height: 20rem;
+}

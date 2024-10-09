@@ -1,0 +1,54 @@
+<mat-toolbar>
+    <span class="toolbar-heading">ORDER BOOK</span>
+    <span class="toolbar-spacer"></span>
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" >
+        <mat-label>From</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerStart" placeholder="From" [(ngModel)]="fromDate" (ngModelChange)="onActiveDateChanged($event, 'start')">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" style="margin-right:10px;">
+        <mat-label>To</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerEnd" placeholder="To" [(ngModel)]="toDate" (ngModelChange)="onActiveDateChanged($event, 'end')">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+        </div>
+    </mat-form-field>
+  
+    <button mat-icon-button class="toolbar-icon" (click)="onRefreshOrders()" matTooltip="Refresh Orders">
+        <mat-icon>refresh</mat-icon>
+    </button>
+    
+    <button mat-icon-button class="toolbar-icon" (click)="onAddOrder()" matTooltip="Add Order">
+        <mat-icon>playlist_add</mat-icon>
+    </button>
+
+    <button mat-icon-button class="toolbar-icon" (click)="onEditOrder()" matTooltip="Edit Order" [disabled]="selectedOrder?.locked && selectedOrder?.lockedBy?.toLowerCase() !== currentUser">
+        <mat-icon>edit_note</mat-icon>
+    </button>
+
+    <!-- {{selectedOrder | json}} -->
+    
+    <!-- <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onImportNewOrders()" matTooltip="Import New Orders">
+        <mat-icon>file_upload</mat-icon>
+    </button> -->
+
+    <div class="menu_separator"></div>
+
+    <button mat-icon-button class="toolbar-icon" color="primary" (click)="onSendEmail()"
+        matTooltip="Send Email">
+        <mat-icon>forward_to_inbox</mat-icon>
+    </button>
+
+    <div class="menu_separator"></div>
+
+    <button mat-icon-button class="toolbar-icon" color="primary" (click)="onShowHelp()" matTooltip="Show Help">
+        <mat-icon>info</mat-icon>
+    </button>
+</mat-toolbar>
+   

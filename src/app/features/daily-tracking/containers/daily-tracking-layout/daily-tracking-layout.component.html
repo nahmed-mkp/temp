@@ -1,0 +1,82 @@
+<div class="vertical-flex-full-height" style="width: 100vw">
+
+<mat-toolbar *ngIf="!compaceViewingMode">
+    <span class="toolbar-heading"> DAILY TRACKING </span>
+</mat-toolbar>
+
+
+<div class="grid-wrap">
+  <app-tsy-swap-viewer 
+    [metaData]="intradayMetadata$ | async"
+    class="mat-card"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}"
+    [date]="date"
+    [data]="tsySwaps$ | async"
+    [mode]="mode$ | async"
+    [useSOFR]="useSOFR$ | async"
+    [useLegacy]="useLegacy$ | async"
+    id="daily-tracking-tsy-swaps"
+    [streamingStatus]="streamingStatus$ | async"
+    [loading]="loadingStatus$ | async"
+    [compaceViewingMode]="compaceViewingMode"
+    (changeDate)="changeDate($event)"
+    (changeMode)="changeMode($event)"
+    (toggleStreaming)="toggleStreaming($event)"
+    (takeSnapshot)="takeSnapshot($event)"
+    (openCompactMode)="openCompactMode($event)"
+    (restartTradewebExcel)="restartTradewebExcel()"
+    (useSOFRSpreads)="useSOFRSpreads($event)"
+    (useLegacyMode)="useLegacyMode($event)"
+    (loadIntradayPlot)="loadIntradayPlot($event)"
+    (loadEODPlot)="loadEODPlot($event)"
+    (toggleShowDurations)="toggleShowDurations($event)">
+  </app-tsy-swap-viewer>
+
+  <app-mbs-raw-viewer 
+    [metaData]="intradayMetadata$ | async"
+    [data]="mbsRaws$ | async" 
+    [loading]="loadingStatus$ | async"
+    id="daily-tracking-box-mbs-raw" 
+    (cellEditingStarted)="cellEditingStarted($event)"
+    (updateUserInputs)="updateUserInputs($event)"
+    class="mat-card"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}"
+    (loadIntradayPlot)="loadIntradayPlot($event)"
+    (loadEODPlot)="loadEODPlot($event)">
+  </app-mbs-raw-viewer>
+
+  <app-mbs-risk-viewer 
+    *ngIf="!showDurations"
+    [metaData]="intradayMetadata$ | async"
+    [data]="mbsRisks$ | async"
+    [loading]="loadingStatus$ | async"
+    id="daily-tracking-box-mbs-risk" 
+    class="mat-card"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}"
+    (loadIntradayPlot)="loadIntradayPlot($event)"
+    (loadEODPlot)="loadEODPlot($event)">
+  </app-mbs-risk-viewer>
+
+  <app-mbs-oas-viewer *ngIf="showDurations" [metaData]="intradayMetadata$ | async" [data]="mbsOas$ | async"
+    [loading]="loadingStatus$ | async" id="daily-tracking-box-mbs-risk" class="mat-card"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}">
+  </app-mbs-oas-viewer>
+
+  <app-tracking-closes
+    *ngIf="!compaceViewingMode"
+    id="daily-tracking-box-closes"
+    [data]="csCloses$ | async"
+    [loading]="loadingStatus$ | async"
+    class="mat-card no-print"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}">
+  </app-tracking-closes>
+<!-- 
+  <app-tracking-history
+    *ngIf="!compaceViewingMode"
+    id="daily-tracking-box-history"
+    class="mat-card no-print"
+    [ngClass]="{'compact-mat-card': compaceViewingMode}">
+  </app-tracking-history> -->
+</div>
+ 
+</div>

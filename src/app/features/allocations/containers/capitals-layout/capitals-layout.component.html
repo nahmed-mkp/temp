@@ -1,0 +1,95 @@
+<div class="loading-screen" *ngIf="capitalMatrixLoading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-sidenav-container class="vertical-flex-full-height">
+    <mat-sidenav #sidenav position="end" class="capital-form">
+
+        <app-capital-flows *ngIf="activeSideNav === 'flows'" 
+            class="vertical-flex-full-height"
+            [flowsInput]="capitalFlowsInput$ | async" [fundOrPod]="'Fund'"
+            [fundCapitalFlows]="fundCapitalFlows$ | async" [fundCapitalFlowsLoading]="fundCapitalFlowsLoading$ | async"
+            [podCapitalFlows]="podCapitalFlows$ | async" [podCapitalFlowsLoading]="podCapitalFlowsLoading$ | async"
+            (changeFlowsInput)="onChangeFlowsInput($event)">
+        </app-capital-flows>
+                
+        <app-capital-history *ngIf="activeSideNav === 'history'" [fundOrPod]="'Fund'"
+            class="vertical-flex-full-height"
+            [historyInput]="historyInput$ | async" [fundMapping]="fundMapping$ | async"
+            [fundCapitalHistory]="fundCapitalHistory$ | async" [fundCapitalHistoryLoading]="fundCapitalHistoryLoading$ | async" 
+            [podCapitalHistory]="podCapitalHistory$ | async" [podCapitalHistoryLoading]="podCapitalHistoryLoading$ | async"
+            (changeFundHistoryInput)="onChangeFundHistoryInput($event)"
+            (changePodHistoryInput)="onChangePodHistoryInput($event)">
+        </app-capital-history>
+        
+        <app-fund-matrix *ngIf="activeSideNav === 'matrix'" [fundComplex]="input?.fundComplex"
+            class="vertical-flex-full-height"
+            [fundCapitals]="fundCapitals$ | async">
+        </app-fund-matrix>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <span class="toolbar-heading">
+                CAPITAL FLOWS & ALLOCATIONS
+            </span>
+            <span class="vertical-toolbar-divider-small"></span>
+                <app-capitals-parameters
+                    [fundComplexes]="fundComplexes$ | async"
+                    [input]="capitalInput"
+                    (paramChanged)="changeParams($event)"
+                    (resetCapitalChanges)="onResetCapitalChanges($event)"
+                    (saveCapitalChanges)="onSaveCapitalChanges($event)">
+                </app-capitals-parameters>
+        </mat-toolbar>
+        
+        <app-capitals-calculator
+            [input]="capitalInput$ | async"
+            [capitalMatrix]="capitalMatrix$ | async"
+            [capitalMatrixNew]="capitalMatrixNew$ | async"
+            [capitalMatrixDiff]="capitalMatrixDiff$ | async"
+            [funds]="capitalMatrixFunds$ | async"
+            [capitalMatrixLoading]="capitalMatrixLoading$ | async"
+            [capitalMatrixLoaded]="capitalMatrixLoaded$ | async"
+            [capitalMatrixError]="capitalMatrixError$ | async"
+            [showPct]="false"
+            [rowHeight]="503">
+        </app-capitals-calculator>
+
+        <app-capitals-calculator
+            [input]="capitalInput$ | async"
+            [capitalMatrix]="capitalMatrixPct$ | async"
+            [capitalMatrixNew]="capitalMatrixPctNew$ | async"
+            [capitalMatrixDiff]="capitalMatrixPctDiff$ | async"
+            [funds]="capitalMatrixFunds$ | async"
+            [capitalMatrixLoading]="capitalMatrixLoading$ | async"
+            [capitalMatrixLoaded]="capitalMatrixLoaded$ | async"
+            [capitalMatrixError]="capitalMatrixError$ | async"
+            [showPct]="true"
+            [rowHeight]="530">
+        </app-capitals-calculator>
+
+        <button mat-flat-button id="flows-button" class="vertical-write-mode"
+            [color]="(activeSideNav === 'flows') ? 'button-active' : '' " 
+            (click)="onOpenSideNav('flows')">
+            Capital Flows
+        </button>
+        
+        <button mat-flat-button id="history-button" class="vertical-write-mode"
+            [color]="(activeSideNav === 'history') ? 'button-active' : '' "
+            (click)="onOpenSideNav('history')">
+            Capital History
+        </button>
+        
+        <!-- <button mat-flat-button id="matrix-button" class="vertical-write-mode"
+            [color]="(activeSideNav === 'matrix') ? 'button-active' : '' "
+            (click)="onOpenSideNav('matrix')">
+            Capital Matrix
+        </button>
+
+        <button mat-flat-button id="allocation-button" class="vertical-write-mode"
+            [color]="(activeSideNav === 'tradeAllocation') ? 'button-active' : '' " (click)="onOpenSideNav('tradeAllocation')">
+            Trade Allocation
+        </button> -->
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

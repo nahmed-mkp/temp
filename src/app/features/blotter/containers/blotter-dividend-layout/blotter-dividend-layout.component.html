@@ -1,0 +1,6 @@
+<app-blotter-dividend-viewer
+    class="vertical-flex-full-height"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    (loadData)="onLoadData($event)">
+</app-blotter-dividend-viewer>

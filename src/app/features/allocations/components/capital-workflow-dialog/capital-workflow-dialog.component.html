@@ -1,0 +1,53 @@
+<h4>Capital Update Wizard</h4>
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Update Allocation Strategies</ng-template>
+        <p>Show Cross Pod Alloc Strategies here!</p>
+        <div>
+            <button color="primary" mat-button matStepperNext>Next</button>
+        </div>
+        <!-- <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Update CrossPod Allocation Strategies</ng-template>
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form> -->
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Update Capitals</ng-template>
+        <p>Show Capital Grids here!</p>
+        <div>
+            <button color="primary" mat-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Review Cross Pod Capital Matrix</ng-template>
+        <p>Show Pod Capital Matrix here</p>
+        <div>
+            <button color="primary" mat-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Review Trade Allocations</ng-template>
+        <p>Show Trade Allocations here!</p>
+        <div>
+            <button color="primary" mat-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Save</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button color="primary" mat-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

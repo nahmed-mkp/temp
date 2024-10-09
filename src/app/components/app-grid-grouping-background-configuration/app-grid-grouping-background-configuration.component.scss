@@ -1,0 +1,39 @@
+.mat-dialog-content {
+    margin: 0;
+    padding: 0;
+
+    .mat-list-item {
+        height: 1.5rem;
+        border-bottom: 1px solid #80808024;
+    }
+}
+
+button {
+    width: 100%;
+    margin: 0 0.7rem;
+}
+
+.color-indicator {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #0000004d;
+}
+
+.color-indicator:hover {
+    cursor: pointer;
+}
+
+.mat-dialog-actions {
+    margin-top: 0.5rem;
+    button {flex: 1 0 0}
+}
+
+mat-menu {
+    position: absolute;
+}
+
+.mat-menu-item {
+    height: auto;
+}
+

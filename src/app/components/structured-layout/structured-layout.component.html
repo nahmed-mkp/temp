@@ -1,0 +1,8 @@
+<div class="structured-container">
+    <ng-content select="[header]"></ng-content>
+    <!-- <hr class="header-line" [style.visibility]="hideHeaderLine ? 'collapse' : 'visible'"/> -->
+    <ng-content select="[content]"></ng-content>
+    <div class="footer-area">
+        <ng-content select="[footer]"></ng-content>
+    </div>    
+</div>

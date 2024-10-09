@@ -1,0 +1,47 @@
+.event-analysis-top-edge {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+small {
+    color: white;
+    margin-left: 0.3rem;
+}
+
+#newLayoutInput {
+    display: flex;
+    align-items: center;
+    // margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 11px 0px #80808042;
+}
+
+.mat-dialog-content {
+    // margin: 0.5rem 1rem;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    max-height: none;
+}
+
+.mat-dialog-actions {
+    margin-bottom: 0;
+}
+
+button {
+    margin-left: 1rem
+}
+
+mat-tab-group {
+    flex: 1 0 0;
+    padding: 0.5rem 1rem 0 1rem;
+    background: #1a2f5c0a;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
+mat-checkbox {
+    margin-left: 1rem;
+}

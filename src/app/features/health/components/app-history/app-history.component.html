@@ -1,0 +1,15 @@
+<div mat-dialog-title>
+    Run History for <strong>{{data?.appName}}</strong> on <strong>{{data?.machineName}}</strong>
+</div>
+
+<div mat-dialog-content style="height:40rem;">
+    <app-app-history-viewer
+        [runHistory]="runHistory$ | async"
+        [runHistoryLoading]="runHistoryLoading$ | async"
+        [runHistoryLoaded]="runHistoryLoaded$ | async"
+        [runHistoryError]="runHistoryError$ | async"></app-app-history-viewer>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="close()" color="primary">Close</button>
+</div>

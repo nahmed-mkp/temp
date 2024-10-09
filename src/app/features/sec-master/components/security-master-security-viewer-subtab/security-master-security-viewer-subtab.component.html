@@ -1,0 +1,61 @@
+<!-- <p>security-master-security-viewer-subtab works!</p> -->
+
+<!-- {{fields | json}} -->
+
+
+<form [formGroup]="newFormGroup" (ngSubmit)="onSumbit()" style="margin: 2rem 1rem 0 1rem; display: flex;flex-wrap: wrap;" autocomplete="off">
+
+    <div *ngFor="let field of fields[0]" style="flex: 1 0 0;">
+        <div [ngSwitch]="field?.Type" style="display: inline-block;">
+
+            <mat-form-field style="width: 25rem; margin-right: 1rem;" *ngSwitchCase="'STRING'">
+                <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+                <input matInput type="text" [formControlName]="field['PSMAttributeName']">
+            </mat-form-field>
+
+            <mat-form-field style="width: 25rem; margin-right: 1rem;" *ngSwitchCase="'NUMERIC'">
+                <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+                <input matInput type="number" [formControlName]="field['PSMAttributeName']">
+            </mat-form-field>
+
+            <mat-form-field style="width: 25rem; margin-right: 1rem;" *ngSwitchCase="'INT'">
+                <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+                <input matInput type="number" [formControlName]="field['PSMAttributeName']">
+            </mat-form-field>
+
+            <mat-form-field style="width: 25rem; margin-right: 1rem;" *ngSwitchCase="'Numeric'">
+                <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+                <input matInput type="number" [formControlName]="field['PSMAttributeName']">
+            </mat-form-field>
+
+
+            <mat-checkbox style="width: 25rem; margin-right: 1rem; display: block;" *ngSwitchCase="'BOOLEAN'" [formControlName]="field['PSMAttributeName']">{{field.PSMAttributeDisplayName}}</mat-checkbox>
+
+
+            <mat-form-field style="width: 25rem;margin-right: 1rem;" *ngSwitchCase="'DATETIME'">
+                <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+                <input matInput placeholder="As Of Date" [matDatepicker]="picker" [formControlName]="field['PSMAttributeName']">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- <mat-form-field *ngFor="let field of fields[0]" style="width: 25rem; margin-right: 1rem;">
+        <mat-label>{{field.PSMAttributeDisplayName}}</mat-label>
+        <div [ngSwitch]="field?.Type">
+            <input matInput type="text" *ngSwitchCase="'STRING'">
+            <input matInput  type="number" *ngSwitchCase="'NUMERIC'">
+            <mat-checkbox *ngSwitchCase="'BOOLEAN'">{{field.PSMAttributeDisplayName}}</mat-checkbox>
+
+            <input matInput *ngSwitchDefault type="number">
+        </div>
+    </mat-form-field> -->
+    <!-- <button mat-button type="submit">Save</button> -->
+
+    <br>
+    <br>
+    <br>
+
+    {{newFormGroup.value | json}}
+</form>

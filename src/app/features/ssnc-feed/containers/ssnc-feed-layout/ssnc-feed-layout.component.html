@@ -1,0 +1,33 @@
+<div class="vertical-flex-full-height"> 
+
+    <app-ssnc-params-toolbar
+        [selectedDate]="selectedDate$ | async"
+        [fromDate]="fromDate$ | async"
+        [toDate]="toDate$ | async"
+        [feedData]="feedData$ | async"
+        (dateChanged)="changeDate($event)"
+    >
+    </app-ssnc-params-toolbar>
+    <div class="vertical-flex-full-height">
+        <app-ssnc-summary-viewer 
+            class="vertical-flex-full-height"
+            [summaryData]="summaryData$ | async"
+            [filterText]="filterText$ | async"
+            [additionalFeedData]="additionalFeedData$ | async"
+            (onOrderIdClicked)="handleOrderIdClicked($event)"  
+            (onLoadAdditionalFeedData)="loadAdditionalFeedData($event)"       
+            >
+        </app-ssnc-summary-viewer>
+    
+        <app-ssnc-tab-layout
+            class="vertical-flex-full-height"
+            [summaryData]="summaryData$ | async"
+            [selectedTab]="selectedTab$ | async"
+            [selectedColumn]="selectedColumn$ | async"
+            [feedData]="feedData$ | async"
+            [additionalFeedData]="additionalFeedData$ | async"
+            [selectedOrderId]="selectedOrderId$ | async"
+        ></app-ssnc-tab-layout>
+    </div>
+
+</div>

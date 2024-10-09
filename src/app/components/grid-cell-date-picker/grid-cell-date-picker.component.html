@@ -1,0 +1,7 @@
+
+<mat-form-field style="width: 6.6rem;top: 0.2rem;margin-right: 0.5rem;">
+    <input matInput placeholder="As Of Date" [matDatepicker]="picker1"
+    [(ngModel)]="targetDate">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>

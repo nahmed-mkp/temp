@@ -1,0 +1,131 @@
+<div class="top-tool-bar">
+  <!-- <span class="title"></span> -->
+  <button mat-icon-button disableRipple matTooltip="Run Yieldbook Analysis">
+      <i class="material-icons">slideshow</i>
+    </button>
+  <button mat-icon-button disableRipple matTooltip="Save Results" (click)="savePortfolioAndResult()">
+    <i class="material-icons">save</i>
+  </button>
+
+  <div class="vertical-divider" style="margin: 0.3rem 0"></div>
+
+  <button mat-icon-button disableRipple matTooltip="Layout Configuration" [matMenuTriggerFor]="layout">
+    <i class="material-icons">table_chart</i>
+  </button>
+
+    
+  <!------------------------------------------------- Main Menu -------------------------------------------->
+  <mat-menu #layout="matMenu">
+    <button mat-menu-item><mat-icon>bookmark</mat-icon>Standard</button>
+    <button mat-menu-item [matMenuTriggerFor]="poolViewerLayout"><mat-icon>list_alt</mat-icon>Pool Viewer Layout</button>
+    <button mat-menu-item [matMenuTriggerFor]="mapCalLayout"><mat-icon>insert_chart_outlined</mat-icon>MAP Cal Layout</button>
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item><mat-icon>done_all</mat-icon>All Columns</button>
+    <button mat-menu-item (click)='configurateColumnsLayout()'><mat-icon>tune</mat-icon>Custom Columns</button>
+    <mat-divider></mat-divider>
+    
+    <button mat-menu-item [matMenuTriggerFor]="groupingList"><mat-icon>vertical_split</mat-icon>Switch Grouping</button>
+    <button mat-menu-item (click)='configurateItemsGrouping()'><mat-icon>category</mat-icon>Custom Groups</button>
+  </mat-menu>
+
+
+  <!------------------------------------------------- Sub Menu -------------------------------------------->
+  <mat-menu #poolViewerLayout="matMenu">
+    <div class="vertical-align-center sub-menu-search-box">
+      <small><mat-icon>search</mat-icon></small>
+      <mat-form-field appearance="outline" class="outline-shrink" (click)="$event.stopPropagation();">
+        <mat-label>Layout Name</mat-label>
+        <input matInput placeholder="Search..." [formControl]="poolViewerLayoutSearchControl">
+      </mat-form-field>
+    </div>
+    <button mat-menu-item *ngIf="poolLayoutsLoadingStatus" class="loading-menu-item"><mat-spinner [diameter]="20" ></mat-spinner>Loading ...</button>
+    <button mat-menu-item *ngFor='let layout of filteredPoolViewerLayoutOptions | async' 
+      [ngClass]="{'active-viewing': layout.id === activeViewingLayout, 'non-active': layout.id !== activeViewingLayout}"
+      (click)="changeLayoutSet(layout)">
+      <mat-icon style="margin-right: 5px;">remove_red_eye</mat-icon>{{layout.id}}
+    </button>
+  </mat-menu>
+
+  <mat-menu #mapCalLayout="matMenu">
+    <div class="vertical-align-center sub-menu-search-box">
+      <small><mat-icon>search</mat-icon></small>
+      <mat-form-field appearance="outline" class="outline-shrink" (click)="$event.stopPropagation();">
+        <mat-label>Layout Name</mat-label>
+        <input matInput placeholder="Search..." [formControl]="mapCalLayoutSearchControl">
+      </mat-form-field>
+    </div>
+    <button mat-menu-item *ngIf="poolLayoutsLoadingStatus" class="loading-menu-item"><mat-spinner [diameter]="20" ></mat-spinner>Loading ...</button>
+    <button mat-menu-item *ngFor='let layout of filteredMapCalLayoutOptions | async' 
+      [ngClass]="{'active-viewing': layout.id === activeViewingLayout, 'non-active': layout.id !== activeViewingLayout}"
+      (click)="changeLayoutSet(layout)">
+      <mat-icon style="margin-right: 5px;">remove_red_eye</mat-icon>{{layout.id}}
+    </button>
+  </mat-menu>
+
+  <mat-menu #groupingList="matMenu">
+    <button mat-menu-item *ngIf="poolViewerItemsGroupingsLoadingStatus" class="loading-menu-item"><mat-spinner [diameter]="20" ></mat-spinner>Loading ...</button>
+    <button mat-menu-item *ngFor='let grouping of poolViewerItemsGroupings' 
+      [ngClass]="{'active-viewing': grouping.id === activeGrouping, 'non-active': grouping.id !== activeGrouping}"
+      (click)="changeGrouping(grouping)">
+      <mat-icon style="margin-right: 5px;">remove_red_eye</mat-icon>{{grouping.id}}
+    </button>
+  </mat-menu>
+
+  <button mat-icon-button disableRipple matTooltip="Row Size" [matMenuTriggerFor]="menu">
+    <i class="material-icons">format_line_spacing</i>
+  </button>
+  <mat-menu #menu="matMenu" class="small-menu-dialog" (click)="$event.stopPropagation();">
+    <mat-button-toggle-group>
+      <mat-button-toggle  (click)='changeRowSize("big")' [checked]="gridSize === 'big'">Wide</mat-button-toggle>
+      <mat-button-toggle  (click)='changeRowSize("medium")' [checked]="gridSize === 'medium'" style="font-size: 80%">Medium</mat-button-toggle>
+      <mat-button-toggle  (click)='changeRowSize("small")' [checked]="gridSize === 'small'" style="font-size: 65%">Narrow</mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-menu>
+
+  <button mat-icon-button disableRipple matTooltip="Refresh">
+    <i class="material-icons">refresh</i>
+  </button>
+
+  <div class="vertical-divider"></div>
+
+  <mat-form-field appearance="outline" class="outline-shrink" style="margin-right: 10px">
+    <input type="text" placeholder="Jump to column" matInput [formControl]="columnsFilter" [matAutocomplete]="auto">
+    <mat-icon matSuffix>location_searching</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="columnFocus($event.option.value)" [displayWith]="displayFn">
+      <mat-option *ngFor="let column of filteredColumns$ | async" 
+        [value]="column">
+        {{ column.getColDef().headerName }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- <button mat-button (click)='loadPresetColumnsLayout()'>load Columns Layout</button>
+  <button mat-button (click)='saveColumnsLayout()'>Save Columns Layout</button> -->
+  <mat-form-field appearance="outline" class="outline-shrink">
+    <input type="text" matInput placeholder="Global filter..." [(ngModel)]="filterValue" (ngModelChange)="onGlobalFilterValueDataReady()">
+    <mat-icon matSuffix>filter_list</mat-icon>
+  </mat-form-field>
+
+  <div class="vertical-divider" style="margin-left: 0.6rem"></div>
+
+  <mat-form-field appearance="outline" class="outline-shrink" style="width: 130px" >
+    <input name="timeStamp" matInput [matDatepicker]="myDatepicker"  [(ngModel)]="timeStamp">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker">
+      <mat-icon matDatepickerToggleIcon style="color: black">query_builder</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div *ngIf="loading" class="loading-screen">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid
+  style="flex: 1 0 0"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [gridItems]="securities"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

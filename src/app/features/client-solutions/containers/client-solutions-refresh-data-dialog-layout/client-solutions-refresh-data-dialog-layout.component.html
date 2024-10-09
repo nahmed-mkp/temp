@@ -1,0 +1,42 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small style="color: white; margin-left: 0.5rem;">Refresh Data</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick()">close</i>
+</div>
+
+<div class="vertical-flex" style="flex: 1 0 0; padding: 1.2rem;">
+    <mat-form-field style="flex: 1 0 0;">
+        <mat-label>Mode</mat-label>
+        <mat-select [(ngModel)]="refreshDataReqParameter.mode" (selectionChange)="onModeChange()">
+          <mat-option [value]="'month_end'">Month End</mat-option>
+          <mat-option [value]="'daily'">Daily</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="margin-bottom: 1rem;">
+        <mat-label>As of Date</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="As of Date" 
+            [(ngModel)]="refreshDataReqParameter.as_of_date"
+            [disabled]="refreshDataReqParameter.mode === 'month_end'">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.download_benchmark_returns">Download Benchmark Returns</mat-checkbox>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.run_return_stats">Run Return Stats</mat-checkbox>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.run_net_attribution">Run Net Attribution</mat-checkbox>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.run_non_linear_risks">Run Nonlinear Risks</mat-checkbox>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.run_linear_risks">Run Linear Risks</mat-checkbox>
+
+    <mat-checkbox style="flex: 1 0 0" [(ngModel)]="refreshDataReqParameter.run_leverage">Run Leverage</mat-checkbox>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onRefreshData()">
+        Refresh Data
+    </button>
+    <button mat-button (click)="onCloseClick()">Close</button>
+</div>

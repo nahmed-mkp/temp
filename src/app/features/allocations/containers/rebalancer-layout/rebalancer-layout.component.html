@@ -1,0 +1,40 @@
+<app-tradename-allocation-rebalance 
+    [selectedDate]="selectedDate$ | async"
+    [allocations]="allocations$ | async"
+    [loading]="allocationsLoading$ | async"
+    [loaded]="allocationsLoaded$ | async"
+    [error]="allocationsError$ | async"
+    [strategyAllocation]="strategyAllocation$ | async"
+
+    [clientServicesTradeThemes]="clientServicesTradeThemes$ | async"
+
+    [pms]="pms$ | async"
+    [pmPodDetails]="pmPodDetails$ | async"
+    [pmPodDetailsLoading]="pmPodDetailsLoading$ | async"
+    [pmPodDetailsLoaded]="pmPodDetailsLoaded$ | async"
+    [pmPodDetailsError]="pmPodDetailsError$ | async"
+    [crossPodStratergyMapping]="crossPodStratergyMapping$ | async"
+    
+    [creatingTradeName]="creatingTradeName$ | async"
+    [createdTradeName]="createdTradeName$ | async"
+    [createTradeNameSuccessMessage]="createTradeNameSuccessMessage$ | async"
+    [createTradeNameFailureMessage]="createTradeNameFailureMessage$ | async"
+
+    [multiAllocTradeNames]="multiAllocTradeNames$ | async"
+    [multiAllocTradeNamesLoading]="multiAllocTradeNamesLoading$ | async"
+    [multiAllocTradeNamesLoaded]="multiAllocTradeNamesLoaded$ | async"
+    [multiAllocTradeNamesError]="multiAllocTradeNamesError$ | async"
+
+    [multiAllocationSplit]="multiAllocationSplit$ | async"
+    [multiAllocationSplitLoading]="multiAllocationSplitLoading$ | async"
+    [multiAllocationSplitLoaded]="multiAllocationSplitLoaded$ | async"
+    [multiAllocationSplitError]="multiAllocationSplitError$ | async"
+    [multiAllocationSplitStatus]="multiAllocationSplitStatus$ | async"
+
+    (changeDate)="changeDate($event)" (reset)="reset($event)" (saveChanges)="saveChanges($event)"
+    (loadPMPodDetails)="loadPMPodDetails($event)"
+    (loadMultiAllocTradeNames)="loadMultiAllocTradeNames($event)"
+    (loadMultiAllocTradeName)="loadMultiAllocTradeName($event)"
+    (createTradeName)="createTradeName($event)"
+    (onCreateOrUpdateMultiAllocTradeName)="onCreateOrUpdateMultiAllocTradeName($event)">
+</app-tradename-allocation-rebalance>

@@ -1,0 +1,16 @@
+<div [formGroup]="marketDataForm" style="margin-bottom: -0.5rem">
+    <mat-form-field class="half-width">
+        <mat-label>Market Data Type</mat-label>
+        <input matInput type="text" formControlName="marketDataType" [matAutocomplete]="marketDataType"
+            placeholder="Select Market Data">
+        <mat-autocomplete #marketDataType="matAutocomplete" [displayWith]="displayMarketData" (optionSelected)="selectMarketDataType($event)">
+            <mat-option *ngFor="let marketDataType of filteredTypes$ | async" [value]="marketDataType">
+                {{marketDataType.type}}: <small><i>{{marketDataType.mdid}}</i></small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>    
+</div>
+
+<app-base-grid class="vertical-flex" style="flex: 1 0 0" [gridItems]="[]" [customGridOption]="customGridOption"
+    [extraOption]="extraOption" [customGridCallBack]="customGridCallBack">
+</app-base-grid>

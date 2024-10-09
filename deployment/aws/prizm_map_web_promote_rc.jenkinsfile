@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    environment {
+        region = "us-east-1"
+    }
+    stages {
+        stage('Login to AWS, Build and Push Image to ECR..') {
+            steps{
+                withAWS(credentials: 'jenkins-aws-user') {
+                        sh '''
+                            ACCOUNT=$(aws sts get-caller-identity --query "Account" --output text)
+                            #ACCOUNT_NUM=$(aws ssm get-parameters --region ${region} --name account | jq -r '.Parameters[0].Value')
+                            aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.${region}.amazonaws.com
+                            name=$(aws ecr describe-repositories --region ${region} | jq -r '.repositories[0].repositoryName')
+                            docker build -f client.dockerfile -t $ACCOUNT.dkr.ecr.${region}.amazonaws.com/prizm-map-web-aws:rc .
+                            #docker tag $ACCOUNT.dkr.ecr.${region}.amazonaws.com/prizm-map-web-aws:rc $ACCOUNT.dkr.ecr.${region}.amazonaws.com/${name}:stable.${env.BUILD_NUMBER}
+                            docker image tag $ACCOUNT.dkr.ecr.${region}.amazonaws.com/prizm-map-web-aws:rc $ACCOUNT.dkr.ecr.${region}.amazonaws.com/${name}:prizm-map-web-aws
+                            docker image push $ACCOUNT.dkr.ecr.${region}.amazonaws.com/${name}:prizm-map-web-aws
+                            # If you seen EOF means its updated.....
+                        ''' 
+                }
+            }
+        }
+
+    }
+}

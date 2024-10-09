@@ -1,0 +1,491 @@
+<!-- <mat-toolbar color="primary" class="mat-elevation-z6" style="z-index: 2; background-image: linear-gradient(to bottom right, #3f51b5, #002c77); display: none">
+
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"  class="test-sidenav-toggle">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  
+  <a class="title" href="#" [routerLink]="['/']">
+    <img src="/assets/img/mkp_logo3_sm.png" alt="MKP Capital - Market Analytics Platform">
+  </a>
+
+  <span class="empty-space"></span>
+
+  <span class="circle">
+    <img height="38" width="38" [src]="avatarUrl" alt="">
+  </span>
+
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="size">Ajust Grid Size</button>
+  </mat-menu>
+  <mat-menu #size="matMenu">
+    <button mat-menu-item>Big</button>
+    <button mat-menu-item>Medium</button>
+    <button mat-menu-item>Small</button>
+  </mat-menu>
+  
+  <button type="button" aria-label="Logout"  mat-icon-button (click)="logout()" class="test-logout">
+    <mat-icon aria-label="Logout icon">logout</mat-icon>
+  </button>
+</mat-toolbar> -->
+
+<span id="side-menu-trigger" (click)="handleMenuClick()"  (mousedown)="mousedownListener()" (mousemove)="mousemoveListener()"  *ngIf="sideMenuShown && !isCompaceMode" cdkDrag>
+  <mat-icon>explore</mat-icon>
+</span>
+
+<span id="error-panel-trigger" *ngIf="(errorPanelDisplay$ | async) && sideMenuTriggerShown" (click)="handleErrorMenuClick()"  (mousedown)="errorMenuMousedownListener()" (mousemove)="errorMenuMousemoveListener()"  cdkDrag>
+  <mat-icon [matBadge]="(errorCollection$ | async).length" matBadgeSize="small" matBadgeColor="warn">warning</mat-icon>
+</span>
+
+<mat-sidenav-container class="sidenav-container" autosize>
+
+    <mat-sidenav #drawer2 
+      class="sidenav mat-elevation-z2 app-side-nav"
+      fixedInViewport="true"
+      [mode]="'over'"
+      [opened]="!errorMenuShown"
+      (closedStart)="adjustSideMenuVisibility(true)"
+      style="width: 23rem">
+
+      <app-app-error-report-panel 
+        class="vertical-flex-full-height vertical-align-center" 
+        [errorCollection]="errorCollection$ | async"
+        (clearAll)="clearAll();"
+        (mouseleave)='drawer2.toggle(); adjustErrorMenuVisibility(true)'>
+      </app-app-error-report-panel>
+    </mat-sidenav>
+
+    <mat-sidenav #drawer class="sidenav mat-elevation-z2 app-side-nav" fixedInViewport="true"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="'over'"
+        [opened]="!sideMenuShown"
+        (closedStart)="adjustSideMenuVisibility(true)"
+        (mouseleave)='drawer.toggle()'>
+
+      <a class="title" id="company-logo" href="#" [routerLink]="['/']">
+        <img src="/assets/img/mkp_logo3_sm.png" alt="MKP Capital - Market Analytics Platform">
+      </a>
+
+      <!-- <form class="mat-list-item" style="width: 12rem;;margin-left:28px;margin-top:6px;">
+        <mat-form-field class="white-input">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="e.g. P&L Attribution..." (input)="onSearch($event.target.value)" autocomplete="off">
+        </mat-form-field>
+      </form> -->
+
+      <mat-nav-list style="margin-top:3px;">
+        <!-- <a mat-list-item routerLink='./pool' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">people</i> Pool / Portfolios</a>
+        <a mat-list-item routerLink='./sizing' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">photo_size_select_small</i>Sizing Sheet</a>
+        <a mat-list-item routerLink='./drawdown' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">trending_down</i>Drawdown Analysis</a>
+        <a mat-list-item routerLink='./correlation' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">poll</i>Correlation</a>
+        <a mat-list-item routerLink='./tbareports' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">assignment</i>TBA Report</a>
+        <a mat-list-item routerLink='./portfolio-analysis' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">find_in_page</i>Portfolio Analysis</a>
+        <a mat-list-item routerLink='./timeseries-analysis' routerLinkActive="active"  (click)="drawer.toggle()"><i class="material-icons">timeline</i>Timeseries Analysis</a>
+        <a mat-list-item routerLink='./timeseries-analysis' routerLinkActive="active" class="test-timeseries-analysis-nav" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Timeseries Analysis</a>
+        <a mat-list-item routerLink='./agency-market-color' routerLinkActive="active" class="test-timeseries-analysis-nav" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Agency Market Color</a>
+        <a mat-list-item routerLink='./euro-rates' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Euro Rates</a>
+        <a mat-list-item routerLink='./jbot' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Jbot</a>
+        <a mat-list-item routerLink='./vol-report' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Vol Report</a>
+        <a mat-list-item routerLink='./agency-portfolio' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Agency Portfolio</a>
+        <a mat-list-item routerLink='./daily-tracking' routerLinkActive="active" (click)="drawer.toggle()"><i class="material-icons">timeline</i>Daily Tracking</a> -->
+
+        <mat-accordion displayMode="flat">
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                PORTFOLIO
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./portfolio/position' routerLinkActive="active"><i
+                  class="material-icons">camera_alt</i>Live Positions & Risks</a>
+              <a mat-list-item routerLink='./orderbook' routerLinkActive="active">
+                <i class="material-icons">list</i>Order Book
+              </a>
+              <a mat-list-item routerLink='./factor-exposure' routerLinkActive="active">
+                <i class="material-icons">perm_data_setting</i>Factor Exposure
+              </a>
+              <a mat-list-item routerLink='./attribution' routerLinkActive="active">
+                <i class="material-icons">insights</i>
+                P&L Attribution
+              </a>
+              <a mat-list-item routerLink='./leverage' routerLinkActive="active">
+                <i class="material-icons">perm_data_setting</i>
+                  Leverage
+              </a>
+              <a mat-list-item routerLink='./exposure-ladder' routerLinkActive="active">
+                <i class="material-icons">perm_data_setting</i>
+                Exposure Ladder
+              </a>
+              <a mat-list-item routerLink='./portfolio/shockanalysis' routerLinkActive="active">
+                <i class="material-icons">flash_on</i>
+                Shock Analysis
+              </a>
+              <a mat-list-item routerLink='./scenario-analysis' routerLinkActive="active">
+                <i class="material-icons">analytics</i>
+                Scenario Analysis
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                TRADE BOOKING
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./execution-tagging' routerLinkActive="active"><i class="material-icons">edit</i>Execution Tagging</a>
+              <a mat-list-item routerLink='./benchmarkportfolio/trades' routerLinkActive="active"><i class="material-icons">layers</i>Benchmark Portfolio Trades</a>
+              <a mat-list-item routerLink='./blotter/dividend' routerLinkActive="active"><i class="material-icons">balance</i>Dividends</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                FINANCING
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./financing/rate-card' routerLinkActive="active"><i class="material-icons">layers</i>Rate Card</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                PRICING
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item [routerLink]='["pricing"]' routerLinkActive="active"><i
+                  class="material-icons">dynamic_feed</i>Portfolio Securities</a>
+
+              <a mat-list-item [routerLink]='["pricers"]' routerLinkActive="active"><i
+                  class="material-icons">public</i>Price Calculators</a>
+
+              <a mat-list-item routerLink='./optiondeltas' routerLinkActive="active" class="test-timeseries-analysis-nav"><i 
+                  class="material-icons">waves</i>Option Pricing (per Underlying)</a>
+
+              <a mat-list-item routerLink='./fxoptionsgrid' routerLinkActive="active" class="test-timeseries-analysis-nav"><i
+                  class="material-icons">table_chart</i>Option Pricing (cross Underlying)</a>
+              <!-- <a mat-list-item [routerLink]='["pricing-engine", "swaptions"]' routerLinkActive="active"><i
+                  class="material-icons">dynamic_feed</i>Swaptions</a>
+              <a mat-list-item [routerLink]='["pricing-engine", "synthetics"]' routerLinkActive="active"><i
+                  class="material-icons">dynamic_feed</i>Synthetics</a>
+              <a mat-list-item [routerLink]='["pricing-engine", "treasury"]' routerLinkActive="active"><i
+                  class="material-icons">dynamic_feed</i>Treasuries</a> -->
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                COUNTERPARTIES
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <!-- <a mat-list-item routerLink='./counterparty/exposure' routerLinkActive="active"><i class="material-icons">timeline</i>Counterparty Exposure</a> -->
+              <a mat-list-item routerLink='./counterparty/cdsspreads' routerLinkActive="active"><i class="material-icons">settings_ethernet</i>CDS Spreads</a>
+
+              <a mat-list-item routerLink='./sovereign/cds-spreads' routerLinkActive="active"><i class="material-icons">settings_ethernet</i>Sovereign CDS Spreads</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+                <mat-panel-title>
+                  AGENCY DESK
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./tracking' routerLinkActive="active"><i class="material-icons">stacked_line_chart</i>Daily Tracking</a>
+              <!-- <a mat-list-item routerLink='./pool' routerLinkActive="active"><i class="material-icons">home</i> Agency MBS Analytics</a> -->
+              <a mat-list-item routerLink='./tbareports' routerLinkActive="active" ><i class="material-icons">timeline</i>TBA Report</a>
+              <a mat-list-item routerLink='./agency-portfolio' routerLinkActive="active"><i class="material-icons">apps</i>Agency Portfolio</a>
+              <!-- <a mat-list-item routerLink='./agency-analytics' routerLinkActive="active"><i class="material-icons">apps</i>Agency MBS Analytics</a> -->
+              <!-- <a mat-list-item routerLink='./risk-span' routerLinkActive="active"><i class="material-icons">timeline</i>Risk Span</a> -->
+              <a mat-list-item routerLink='./agency' routerLinkActive="active"><i class="material-icons">apps</i>Agency MBS Analytics [NEW]</a>
+              <a mat-list-item routerLink='./jpm-agency-analytics' routerLinkActive="active"><i class="material-icons">all_inbox</i>JPM Agency Analytics</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                MARKET DATA MONITORS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./market-data-rates' routerLinkActive="active"><i class="material-icons">stacked_line_chart</i>Rates</a>
+              <a mat-list-item routerLink='./dashboards' routerLinkActive="active"><i class="material-icons">monitor</i>Dashboards</a>
+              <a mat-list-item routerLink='./charting' routerLinkActive="active"><i class="material-icons">poll</i>Charting </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                TRADES & ALLOCATIONS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./allocations/agreements' routerLinkActive="active"><i class="material-icons">gavel</i>Trade Agreements</a>
+              <a mat-list-item routerLink='./allocations/eligibility' routerLinkActive="active"><i class="material-icons">thumbs_up_down</i>Fund Eligibilty</a>
+              <a mat-list-item routerLink='./allocations/capitals' routerLinkActive="active"><i class="material-icons">pie_chart</i>Capital Allocation</a>
+              <a mat-list-item routerLink='./allocations/tradenames' routerLinkActive="active"><i class="material-icons">swap_horiz</i>Tradenames &amp; Allocations</a>
+              <a mat-list-item routerLink='./drift' routerLinkActive="active"><i class="material-icons">settings_ethernet</i>Portfolio &amp; Position Drift</a>
+              <a mat-list-item routerLink='./commissions' routerLinkActive="active"><i class="material-icons">attach_money</i>Commissions</a>
+              <a mat-list-item routerLink='./tradenames' routerLinkActive="active"><i class="material-icons">recycling</i>Manage Tradenames</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+<!--   
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+                <mat-panel-title>
+                  RATES DESK
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./euro-rates' routerLinkActive="active"><i class="material-icons">timeline</i>Euro Rates</a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+                <mat-panel-title>
+                  MARKET DATA ANALYSIS
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./timeseries-analysis' routerLinkActive="active" class="test-timeseries-analysis-nav"><i class="material-icons">timeline</i>Timeseries Analysis</a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                MACRO FACTORS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./chart_packs' routerLinkActive="active"><i class="material-icons">camera_alt</i>Chart Packs</a>
+              <a mat-list-item routerLink='./asset_targets' routerLinkActive="active"><i class="material-icons">timeline</i>Asset Targets</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                MACRO ANALYTICS PACKAGE
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./macro/equities' routerLinkActive="active" class="test-timeseries-analysis-nav"><i class="material-icons">timeline</i>Equities</a>
+              <a mat-list-item routerLink='./macro/credit' routerLinkActive="active" class="test-timeseries-analysis-nav"><i class="material-icons">timeline</i>Credit</a>
+              <a mat-list-item routerLink='./macro/commodities' routerLinkActive="active" class="test-timeseries-analysis-nav"><i class="material-icons">timeline</i>Commodities</a>
+              <a mat-list-item routerLink='./macro/inflation' routerLinkActive="active" class="test-timeseries-analysis-nav"><i class="material-icons">timeline</i>Inflation</a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                PORTFOLIO TOOLS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./sizing' routerLinkActive="active" ><i class="material-icons">photo_size_select_small</i>Sizing Sheet</a>
+              <a mat-list-item routerLink='./drawdown' routerLinkActive="active" ><i class="material-icons">trending_down</i>Drawdown Analysis</a>
+              <a mat-list-item routerLink='./correlation' routerLinkActive="active" ><i class="material-icons">poll</i>Correlation</a>
+              <!-- <a mat-list-item routerLink='./vol-report' routerLinkActive="active"><i class="material-icons">timeline</i>Vol Report</a> -->
+              <a mat-list-item routerLink='./portfolio-analysis' routerLinkActive="active" ><i class="material-icons">find_in_page</i>Portfolio Analysis</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                JBOTS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./jbot/summary' routerLinkActive="active"><i class="material-icons">timeline</i>Jbot Summary</a>
+              <a mat-list-item routerLink='./jbot/general' routerLinkActive="active"><i class="material-icons">timeline</i>Jbot</a>
+              <a mat-list-item routerLink='./jbot/tech' routerLinkActive="active"><i class="material-icons">timeline</i>Jbot Tech</a>
+              <a mat-list-item routerLink='./jbot/monitor' routerLinkActive="active"><i class="material-icons">timeline</i>JData Monitor</a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                STRATEGY &amp; RESEARCH
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./snr/macro' routerLinkActive="active"><i
+                  class="material-icons">camera_alt</i>Macro Toolkit
+              </a>
+            </mat-nav-list>
+            
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                CLIENT SOLUTIONS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./clientsolutions' routerLinkActive="active"><i class="material-icons">leaderboard</i>Fund Performance</a>
+
+              <a mat-list-item routerLink='./clientsolutions/snapshots' routerLinkActive="active"><i class="material-icons">leaderboard</i>Report Snapshots</a>
+          
+              <!-- <a mat-list-item routerLink='./clientsolutions/reports' routerLinkActive="active"><i class="material-icons">summarize</i>Reports</a> -->
+          
+              <a mat-list-item routerLink='./clientsolutions/cliffwater' routerLinkActive="active"><i class="material-icons">summarize</i>Cliffwater</a>
+
+              <a mat-list-item routerLink='./clientsolutions/shareclass' routerLinkActive="active"><i class="material-icons">summarize</i>Share Class</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                DATA MANAGEMENT
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./data/secmaster' routerLinkActive="active"><i class="material-icons">dynamic_feed</i>Security Master</a>
+              <a mat-list-item routerLink='./data/timeseries' routerLinkActive="active"><i class="material-icons">stacked_line_chart</i> Timeseries Exporter</a>
+              <a mat-list-item routerLink='./data/tagging' routerLinkActive="active"><i class="material-icons">mode_edit</i> Data Manager</a>
+              <a mat-list-item routerLink='./data/broker-bic-map' routerLinkActive="active"><i class="material-icons">mode_edit</i>Broker BIC Map</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                BENCHMARK MONITOR
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./benchmark-monitor/tba' routerLinkActive="active"><i class="material-icons">timeline</i>TBA</a>
+              <a mat-list-item routerLink='./benchmark-monitor/cdx' routerLinkActive="active"><i class="material-icons">timeline</i>CDX</a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                ADMINISTRATIVE TOOLS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./health' routerLinkActive="active"><i
+                  class="material-icons">health_and_safety</i>System Health</a>
+              <a mat-list-item routerLink='./sockets' routerLinkActive="active"><i
+                class="material-icons">health_and_safety</i>Sockets</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        
+          <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                BLUEPEARL MIGRATION
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./bluepearl/synthetic-trades' routerLinkActive="active">
+                <i class="material-icons">apps</i>
+                Synthetic Trades
+              </a>
+              <a mat-list-item routerLink='./bluepearl/settlement-ladder' routerLinkActive="active">
+                <i class="material-icons">show_chart</i>
+                Settlement Ladder
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel> -->
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>
+                OPERATIONS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+            <mat-nav-list dense>
+              <a mat-list-item routerLink='./recs' routerLinkActive="active">
+                <i class="material-icons">legend_toggle</i>
+                Prizm Recs.
+              </a>
+              <a mat-list-item routerLink='./pnl-adjustments' routerLinkActive="active">
+                <i class="material-icons">edit</i>
+                P/L Adjustments
+              </a>
+
+              <a mat-list-item routerLink='./ssnc-feed' routerLinkActive="active">
+                <i class="material-icons">apps</i>
+                SSNC Feed
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        
+        </mat-accordion>
+        
+      </mat-nav-list>
+
+      <div id="side-nav-footer">
+        <button type="button"  mat-icon-button style="background-color:transparent">
+          <mat-icon>person</mat-icon>
+        </button>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button [matMenuTriggerFor]="menu" style="background-color:transparent">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" style="display:none">
+          <button mat-menu-item [matMenuTriggerFor]="size">Ajust Grid Size</button>
+        </mat-menu>
+        <mat-menu #size="matMenu" style="display:none">
+          <button mat-menu-item>Big</button>
+          <button mat-menu-item>Medium</button>
+          <button mat-menu-item>Small</button>
+        </mat-menu>
+        
+        <button type="button" aria-label="Logout"  mat-icon-button (click)="logout()" class="test-logout" style="background-color:transparent">
+          <mat-icon aria-label="Logout icon">logout</mat-icon>
+        </button>
+      </div>
+      
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <section class="main-content" *ngIf="!(isUserLocked$ | async); else locked;">
+
+          <!-- Main Content -->
+          <router-outlet></router-outlet>
+      </section>
+
+      <ng-template #locked>
+        <app-app-user-lock-condition-check-dialog
+          [unconfirmedTrades]="unconfirmedTrades$ | async"
+          [unconfirmedTradesLoading]="unconfirmedTradesLoading$ | async"
+          [unconfirmedTradesLoaded]="unconfirmedTradesLoaded$ | async"
+          [unconfirmedTradesError]="unconfirmedTradesError$ | async"
+          [userLockedStatus]="isUserLocked$ | async"></app-app-user-lock-condition-check-dialog>
+      </ng-template>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+  

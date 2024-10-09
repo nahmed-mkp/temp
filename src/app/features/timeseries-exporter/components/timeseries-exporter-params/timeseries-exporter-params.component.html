@@ -1,0 +1,65 @@
+<mat-form-field appearance="outline" class="date-form-field" style="margin-left: 1rem;">
+    <mat-label>From Date</mat-label>
+    <!-- <input matInput [matDatepicker]="picker1" placeholder="From Date"
+        [value]="getTimezoneUnawareDate(params?.startDate)" (dateInput)="onDateChanged($event, 'startDate')"
+        (dateChange)="onDateChanged($event, 'startDate')"> -->
+    <div class="mat-form-field-content-wrap">  
+        <input matInput [matDatepicker]="picker1" placeholder="From Date"
+            [value]="startDate" (dateInput)="onDateChanged_debounce($event, 'startDate')"
+            (dateChange)="onDateChanged($event, 'startDate')">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </div>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="date-form-field" style="margin-left: 0.5rem;">
+    <mat-label>To Date</mat-label>
+    <!-- <input matInput [matDatepicker]="picker2" placeholder="To Date" [value]="getTimezoneUnawareDate(params?.endDate)"
+        (dateInput)="onDateChanged($event, 'endDate')" (dateChange)="onDateChanged($event, 'endDate')"> -->
+    <div class="mat-form-field-content-wrap">  
+        <input matInput [matDatepicker]="picker2" placeholder="To Date" [value]="endDate"
+        (dateInput)="onDateChanged_debounce($event, 'endDate')" (dateChange)="onDateChanged($event, 'endDate')">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </div>
+</mat-form-field>
+
+<!-- <mat-form-field style="width:250px" class="outline-shrink" *ngIf="monitors?.length > 0; else listLoading">
+    <mat-label>Timeseries Lists</mat-label>
+    <input type="text" placeholder="Please select" matInput [formControl]="monitorCtrl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayMonitor" (optionSelected)='onMonitorSelected($event.option.value)'>
+        <mat-option *ngFor="let monitor of filteredMonitors$ | async" [value]="monitor">{{monitor.name}}</mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+
+<ng-template #listLoading>
+    <span><small>Loading...</small></span>
+</ng-template> -->
+
+
+<!-- <button mat-icon-button class="mat-button-shrink" color="primary" (click)="addMonitor()" style="margin-left:10px;"
+    matTooltip="Add New List">
+    <mat-icon>post_add</mat-icon>
+</button>
+
+<button mat-icon-button class="mat-button-shrink" color="primary" (click)="editMonitor()" style="margin-left:10px;"
+    matTooltip="Update List">
+    <mat-icon>mode_edit</mat-icon>
+</button> -->
+
+<button mat-icon-button class="toolbar-icon"  (click)="viewModeChanged('table')" style="margin-left:10px;"
+    matTooltip="View Data">
+    <mat-icon >grid_on</mat-icon>
+</button>
+
+<button mat-icon-button class="toolbar-icon"  (click)="viewModeChanged('chart')" style="margin-left:10px;"
+    matTooltip="View Plot">
+    <mat-icon>auto_graph</mat-icon>
+</button>
+
+<button mat-icon-button class="toolbar-icon"  (click)="sidePaneToggled('items')" style="margin-left:10px;"
+    matTooltip="Show Items">
+    <mat-icon>visibility</mat-icon>
+</button>
+
+

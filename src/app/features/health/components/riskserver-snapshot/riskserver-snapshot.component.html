@@ -1,0 +1,96 @@
+<mat-card class="card"  style="margin:5px;font-size:13px;">
+
+    <mat-card-header class="header">
+        <mat-card-title>Risk Server & SimGen</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+        <table style="border:none" spacing=0>
+            <tr class="row-headers">
+                <th>Status</th>
+                <th>AppName</th>
+                <th>Server</th>
+                <th>Timestamp</th>
+                <th></th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let server of riskServerStatus">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning"
+                        style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning"
+                        style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="width:100px;text-align: center;"><strong>RiskServer</strong></td>
+                <td style="width:100px;"><strong>{{ server.MachineName }}</strong></td>
+                <td style="width:150px;">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never
+                            run</i></small>
+                </td>
+                <td style="width:120px;">
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:180px;">
+                    <button mat-icon-button color="primary" [title]="'Restart Risk Server on ' + server.MachineName"
+                        (click)="onRestartRiskServer(server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null"
+                        [title]="'Kill Risk Server [PID:=' + (server.PID !== null ? server.PID : '') + '] on ' + server.MachineName"
+                        (click)="onKillProcess(server, 'RiskServer')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'View Risk Server Run History ' + server.MachineName"
+                        (click)="onViewHistory(server.MachineName, 'RiskServer')">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngFor="let server of simGenStatus">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning"
+                        style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning" style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="text-align:center"><strong>SimGen</strong></td>
+                <td style="width:100px;"><strong>{{ server.MachineName }}</strong></td>
+                <td style="width:150px;border:">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never
+                            run</i></small>
+                </td>
+                <td style="width:120px;">
+                    &nbsp;
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:180px;">
+                    <button mat-icon-button color="primary" [title]="'Restart SimGen on' + server.MachineName"
+                        (click)="onRestartSimGen(server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null"
+                        [title]="'Kill SimGen [PID:=' + (server.PID !== null ? server.PID : '') + '] on ' + server.MachineName"
+                        (click)="onKillProcess(server, 'SimGen')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'View SimGen Run History on ' + server.MachineName "
+                        (click)="onViewHistory(server.MachineName, 'SimGen')">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>

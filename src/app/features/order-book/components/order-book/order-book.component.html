@@ -1,0 +1,23 @@
+<mat-card class="vertical-flex-full-height">
+    <!-- <mat-card-header>
+        <mat-card-title>Show Orders here</mat-card-title>
+    </mat-card-header> -->
+    <!-- <mat-card-content> -->
+
+        <div *ngIf="ordersLoading" class="loading-screen">
+            <mat-spinner></mat-spinner>
+        </div>
+        
+        <app-base-grid
+            style="flex: 1 0 0"
+            [gridItems]="orders"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    <!-- </mat-card-content> -->
+    <!-- <mat-card-actions>
+        <button mat-raised-button color="primary">Ok</button>
+    </mat-card-actions> -->
+
+</mat-card>

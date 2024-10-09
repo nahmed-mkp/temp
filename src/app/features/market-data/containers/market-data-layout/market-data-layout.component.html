@@ -1,0 +1,89 @@
+<!-- <mat-sidenav-container class="vertical-flex-full-height">
+
+    <mat-sidenav #sidenav position="end" class="market-data-form">
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <app-market-data-toolbar
+            [searchCriteria]="searchCriteria$ | async"
+            (searchMarketData)="searchMarketData($event)">
+        </app-market-data-toolbar>
+        
+        <br />
+        {{searchCriteria$ | async | json }}
+
+        <div *ngIf="marketDataSearchLoading" class="loading-screen">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <app-base-grid style="display: block; height:95%" 
+            [gridItems]="[]"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+
+<div class="toolbar" style="margin-right: 0.5rem; margin-top: 0.5rem;">
+
+    <span style="margin-right: 1rem;">Market Data Editor</span>
+
+    <div class="horizontal-flex-center">
+        <app-market-data-enhanced-search-layout 
+            style="width: 20rem;"
+            [placeholder]="'Search By Name or Bloomberg Ticker'"
+            [customClass]="'order-book-security-search-autocomplete'"
+            (onSelectedSecurity)="onSelectedSecurity($event)">
+        </app-market-data-enhanced-search-layout>
+
+        <mat-form-field style="width:10rem;margin-left:0.5rem;">
+            <mat-label>Field Search</mat-label>
+            <mat-select [(ngModel)]="selectedDateType" (ngModelChange)="onSelectedMarketDataType()">
+                <mat-option *ngFor="let marketDateType of marketDataTypes$ | async" [value]="marketDateType">
+                    {{marketDateType.Type}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button color="primary" mat-flat-button color="primary" style="margin:-1rem 0 0 0.5rem;" (click)="onLoadData()">
+            Search
+        </button>
+    </div>
+
+
+</div>
+
+<div class="horizontal-flex" style="flex: 2 0 0; margin-bottom: 0.5rem;margin-top: -0.7rem;">
+    <app-market-data-detail-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 4 0 0"
+        [data]="marketDataDetails$ | async"
+        [loading]="marketDataDetailsLoading$ | async"
+        (loadMarketDataTimeseries)="onLoadMarketDataTimeseries($event)">
+    </app-market-data-detail-viewer>
+    <app-market-data-timeseries-grid-viewer 
+        class="mat-card-lift vertical-flex" 
+        style="flex: 1 0 0"
+        [data]="marketDataTimeseries$ | async"
+        [loading]="marketDataTimeseriesLoading$ | async">
+    </app-market-data-timeseries-grid-viewer>
+</div>
+
+<app-market-data-timeseries-plot-viewer 
+    style="flex: 1 0 0" 
+    class="horizontal-flex mat-card-lift vertical-flex"
+    [rawData]="marketDataTimeseries$ | async"
+    [loading]="marketDataTimeseriesLoading$ | async"
+    [title]="title"
+    [subtitle]="subtitle"
+    [seriesName]="seriesName">
+</app-market-data-timeseries-plot-viewer>
+
+
+<!-- {{marketDataDetails$ | async | json}} -->

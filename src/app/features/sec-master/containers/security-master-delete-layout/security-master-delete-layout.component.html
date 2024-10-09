@@ -1,0 +1,8 @@
+<app-security-master-delete-viewer
+    style="flex: 1 0 0"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    [deletePending]="deletePending$ | async"
+    (loadSecurityForDelete)="onLoadSecurityForDelete($event)"
+    (deleteSecurity)="onDeleteSecurity($event)">
+</app-security-master-delete-viewer>

@@ -1,0 +1,53 @@
+<mat-toolbar>
+    <span class="toolbar-heading">INVESTOR REPORT SNAPSHOTS</span>
+    <span class="toolbar-spacer"></span>
+
+    <mat-form-field class="fund-form-field-large" appearance="outline" floatLabel="always">
+        <mat-label>Fund </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedFund" placeholder="Select ..." (ngModelChange)="onFundChanged()">
+                <mat-option *ngFor="let fund of funds" [value]="fund">
+                    {{fund.description}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 0.5rem;" floatLabel="always">
+        <mat-label>Snapshot Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedDate" placeholder="Select ..." (ngModelChange)="onDateChanged()">
+                <mat-option *ngFor="let monthEndDate of monthEndDates" [value]="monthEndDate">
+                    {{monthEndDate}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width:9.2rem; margin-left: 0.5rem;" floatLabel="always">
+        <mat-label> Period </mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <mat-select [(ngModel)]="selectedPeriod" placeholder="Select ..." (ngModelChange)="onPeriodChanged()">
+                <mat-option *ngFor="let period of periods" [value]="period">
+                    {{period.display}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </mat-form-field>
+
+    <button mat-raised-button 
+        style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;" 
+        (click)="onParamChanged()">
+        Load Snapshot
+        <mat-icon>file_upload</mat-icon>
+    </button> 
+
+    <button mat-raised-button 
+        (click)="onOpenRefreshData()" [disabled]="refreshDataPendingStatus"
+        style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;">
+        Refresh Data
+        <mat-icon [ngClass]="{spinning: refreshDataPendingStatus}" matTooltip="Data Refreshing, please wait till it finish">settings_backup_restore</mat-icon>
+    </button> 
+
+    <!-- </form> -->
+</mat-toolbar>

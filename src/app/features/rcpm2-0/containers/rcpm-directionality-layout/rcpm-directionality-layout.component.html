@@ -1,0 +1,80 @@
+<!-- DataPath: {{dataPath | json}}
+<br />
+Layout: {{layout}}
+<br />
+Inputs: {{ inputs$ | async | json }}
+ -->
+
+<div style="display: flex; border-bottom: 1px solid #80808038">
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple
+        (click)="mode = 'correlation'" [ngStyle]="{'background': mode==='correlation' ? 'white' : '#80808029'}">CORRELATIONS</button>
+    <button mat-flat-button style="flex: 1 0 0; border-radius: 0;" disableRipple [disabled]="layout !== '[static] Directionality'"
+        (click)="mode = 'regression'" [ngStyle]="{'background': mode==='regression' ? 'white' : '#80808029'}">REGRESSION</button>
+</div>
+<!-- [disabled]="layout !== '[static] Directionality'" -->
+
+<div style="flex: 1 0 0;padding: 0.3rem;" *ngIf="mode==='correlation'" class="vertical-flex">
+    <app-rcpm-directionality
+        class="vertical-flex"
+        style="flex: 5 0 0"
+        [input]="inputs$ | async"
+        [dataPath]="dataPath"
+        [data]="directionality$ | async"
+        [loading]="directionalityLoading$ | async"
+        [selectedLookback]="selectedLookback$ | async"
+        [selectedLookbackCollection]="selectedLookbackCollection$ | async"
+        [updateTimestamp]="updateTimestamp$ | async"
+        [isOpen]="isOpen"
+        [currentDate]="currentDate"
+        (loadDirectionality)="loadDirectionality($event)"
+        (lookbackChanged)="onLookbackChanged($event)"
+        (onSelectFactor)="onSelectFactor($event)">
+    </app-rcpm-directionality>
+
+    <mat-tab-group #mattabgroup animationDuration="0ms" style="flex: 4 0 0" headerPosition="below" 
+        (selectedTabChange)="changeSelectedLookback($event)">
+        
+        <mat-tab label="{{lookback1}}">
+            <ng-template matTabContent>
+                <app-rcpm-directionality-plot-grid-viewer
+                    class="vertical-flex"
+                    [dataPath]="dataPath"
+                    [data]="directionlityScatterPlotData_lookback1$ | async"
+                    [loading]="directionlityScatterPlotDataLoading_lookback1$ | async"
+                    [screen]="'lookback1'"
+                    [factor]="selectedFactor"
+                    style="flex: 1 0 0">
+                </app-rcpm-directionality-plot-grid-viewer> 
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="{{lookback2}}">
+            <ng-template matTabContent>
+                <app-rcpm-directionality-plot-grid-viewer
+                    class="vertical-flex"
+                    [dataPath]="dataPath"
+                    [data]="directionlityScatterPlotData_lookback2$ | async"
+                    [loading]="directionlityScatterPlotDataLoading_lookback2$ | async"
+                    [screen]="'lookback2'"
+                    [factor]="selectedFactor"
+                    style="flex: 1 0 0">
+                </app-rcpm-directionality-plot-grid-viewer> 
+            </ng-template>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>
+
+
+<app-rcpm-directionality-regression-viewer
+    class="vertical-flex"
+    style="flex: 1 0 0;padding: 0.3rem;"
+    *ngIf="mode==='regression'"
+    [regressionFactors]="regressionFactors$ | async"
+    [regressionLoading]="regressionLoading$ | async"
+    [displayMode]="displayMode$ | async"
+    (runRegression)="onRunRegression($event)"
+    (setGridClearingStatus)="onSetGridClearingStatus($event)"
+    (setDisplayMode)="onSetDisplayMode($event)">
+</app-rcpm-directionality-regression-viewer>

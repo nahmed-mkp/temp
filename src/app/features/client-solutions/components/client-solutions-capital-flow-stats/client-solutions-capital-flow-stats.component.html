@@ -1,0 +1,87 @@
+<div style="display:flex; justify-content: end">
+    <mat-form-field style="width:200px;">
+        <mat-label>Month/Year</mat-label>
+        <mat-select [formControl]="dateFilter" [(ngModel)]="selectedDates" multiple>
+            <mat-option (onSelectionChange)="changeSelectedDates($event)" *ngFor="let capDate of capitalDates" [value]="capDate">{{capDate.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div style="height:90%;flex-wrap: wrap;" class="horizontal-flex-full-height">
+
+    <div style="flex: 0 0 60%; padding: 0.2rem;height:35%;">
+        <div style="font-size:15px; font-weight:bold; ">Monthly flows by Master/Feeder Funds</div>
+        <app-base-grid 
+            style="width:100%;height:90%"
+            [gridItems]="[]"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBackMonthlyFlowsByFund">
+        </app-base-grid>
+    </div>
+
+    <div style="flex: 0 0 40%; padding: 0.2rem;height:35%">
+        <div style="font-size:15px; font-weight:bold; ">Monthly levered flows by Master Funds</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackMonthlyFlowsByMasterFund">
+        </app-base-grid>
+    </div>
+
+    <div style="flex: 0 0 50%; padding: 0.2rem;height:30%;margin-top:5px;">
+        <div style="font-size:15px; font-weight:bold; ">Monthly flows by Investor Type</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption2"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackFlowsByInvestorType">
+        </app-base-grid>
+    </div>
+    
+    <div style="flex: 0 0 50%; padding: 0.2rem;height:30%;margin-top:5px;">
+        <div style="font-size:15px; font-weight:bold; ">Monthly flows by Relationship</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption2"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackFlowsByRelationship">
+        </app-base-grid>
+    </div>
+
+    <div style="flex: 0 0 33%; padding: 0.2rem;height:28%;margin-top:5px;">
+        <div style="font-size:15px; font-weight:bold; ">Upcoming Flows</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackUpcomingFlows">
+        </app-base-grid>
+    </div>
+    
+    <div style="flex: 0 0 33%; padding: 0.2rem;height:28%;margin-top:5px;">
+        <div style="font-size:15px; font-weight:bold; ">Total Flows By Investor Type</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption2"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackTotalFlowsByInvestorType">
+        </app-base-grid>
+    </div>
+
+    <div style="flex: 0 0 33%; padding: 0.2rem;height:28%;margin-top:5px;">
+        <div style="font-size:15px; font-weight:bold; ">Total Flows By Relationship</div>
+        <app-base-grid 
+            style="width:100%;height:90%" 
+            [gridItems]="[]" 
+            [customGridOption]="customGridOption2"
+            [extraOption]="extraOption" 
+            [customGridCallBack]="customGridCallBackTotalFlowsByRelationship">
+        </app-base-grid>
+    </div>
+</div>

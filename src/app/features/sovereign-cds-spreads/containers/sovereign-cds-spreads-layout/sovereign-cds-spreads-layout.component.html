@@ -1,0 +1,14 @@
+<div class="vertical-flex-full-height"> 
+  <app-soverign-cds-spreads-params-layout
+    [selectedDate]="selectedDate$ | async"
+  > 
+  </app-soverign-cds-spreads-params-layout>
+  <div class="vertical-flex-full-height">
+    <app-sovereign-cds-spread-viewer
+       class="vertical-flex-full-height"
+      [sovereignCdsSpreads]="sovereignCdsSpreads$ | async"
+      [sovereignCdsSpreadsLoading]="sovereignCdsSpreadsLoading$ | async"
+    >
+    </app-sovereign-cds-spread-viewer>
+  </div>
+</div>

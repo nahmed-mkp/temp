@@ -1,0 +1,1 @@
+export * from './benchmark-monitor-tba-viewer/benchmark-monitor-tba-viewer.component';

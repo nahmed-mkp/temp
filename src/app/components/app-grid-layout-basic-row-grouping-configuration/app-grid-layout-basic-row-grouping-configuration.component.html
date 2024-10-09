@@ -1,0 +1,40 @@
+<!-- <p>app-grid-layout-basic-row-grouping-configuration works!</p> -->
+
+<div style="display: flex; height: 100%;">
+
+    <div class="example-container vertical-flex">
+        <h4 class="vertical-align-center" style="opacity: 0.5">Avaliable&nbsp;<i class="material-icons">visibility_off</i></h4>
+        <app-base-grid
+            class="example-list" 
+            [gridItems]="enrichAvailableGroupings"
+            [customGridOption]="customGridOption_avaliable"
+            [customGridCallBack]="customGridCallBack_avaliable"
+            [extraOption]="{}">
+        </app-base-grid>
+    </div>
+
+
+    <div class="button-mover-control">
+        <div>
+            <button mat-mini-fab color="primary" style="margin-right: 0.5rem" (click)="movehorizontally('rightToLeft')">
+            <mat-icon>arrow_left</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="movehorizontally('leftToRight')">
+            <mat-icon>arrow_right</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="example-container vertical-flex">
+        <h4 class="vertical-align-center" style="opacity: 0.5">Shown&nbsp;<i class="material-icons">visibility</i></h4>
+        <app-base-grid
+            class="example-list" 
+            [gridItems]="enrichCurrentGroupings"
+            [customGridOption]="customGridOption_show"
+            [customGridCallBack]="customGridCallBack_visiable"
+            [extraOption]="{}">
+        </app-base-grid>
+    </div>
+
+
+</div>

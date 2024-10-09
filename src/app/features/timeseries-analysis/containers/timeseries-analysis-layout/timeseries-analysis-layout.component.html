@@ -1,0 +1,28 @@
+<div class="vertical-flex-full-height">
+    <mat-toolbar color="primary">
+        Timeseries Analysis
+        <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+            <button mat-icon-button class="mat-button-shrink" (click)="onShowSidePanel('viewWatchlist')"
+                matTooltip="Show Watchlists">
+                <mat-icon>visibility</mat-icon>
+            </button>
+            
+            <button mat-icon-button class="mat-button-shrink" (click)="onSearchTimeseries()"
+                matTooltip="Search Timeseries">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <mat-sidenav-container style="height:100%;">
+        <mat-sidenav #sidenav position="end" class="timeseries-analysis-form">    
+            <div *ngIf="panelType==='viewWatchlist'">
+                <app-timeseries-watchlist-layout></app-timeseries-watchlist-layout>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content>    
+            <app-timeseries-viewer-layout></app-timeseries-viewer-layout>    
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+

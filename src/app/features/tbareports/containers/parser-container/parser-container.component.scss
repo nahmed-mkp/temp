@@ -1,0 +1,27 @@
+.header-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.download-btn {
+    margin-left: 1em; 
+    margin-top: 4px;
+}
+
+.card-padded {
+    padding: 1em;    
+}
+
+h5 {
+    font-family: 'Roboto';
+}
+
+.toolbar { 
+    padding: 5px;
+
+    .link-row { 
+        margin: 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}

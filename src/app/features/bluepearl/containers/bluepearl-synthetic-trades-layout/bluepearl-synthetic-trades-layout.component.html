@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <span class="toolbar-heading"> 
+        SYNTHETIC TRADES
+    </span>
+</mat-toolbar>
+<div class="grid-wrap">
+    <app-bluepearl-synthetic-trades-viewer
+        style="vertical-flex-full-height"
+        [syntheticTradeData]="syntheticTradeData$ | async"
+    >
+    </app-bluepearl-synthetic-trades-viewer>
+</div>

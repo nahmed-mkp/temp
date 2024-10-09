@@ -1,0 +1,29 @@
+.wrapper {
+    background-color: white;
+    height: 250px;
+    width: 600px;
+    border-radius: 5px;
+  }
+  
+  .input-wrapper {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 170px;
+  }
+  
+  .button-wrap {
+    margin-top:5px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .dupe-name-warning{
+    font-size:11px; 
+    color: red;
+    margin-top:-5px;
+  }

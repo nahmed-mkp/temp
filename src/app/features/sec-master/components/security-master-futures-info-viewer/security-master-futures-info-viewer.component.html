@@ -1,0 +1,22 @@
+<div *ngIf="loading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div style="display: flex; justify-content: flex-end;align-items: center;">
+
+    <button color="primary" mat-icon-button class="mat-button-ultra-shrink" style="opacity: 0.5;margin-right: 1rem;" (click)="onAddNewFutureInfo()">
+        <mat-icon>add_box</mat-icon>
+    </button>
+    <mat-form-field style="margin-bottom: -0.5rem; width: 20rem;">
+        <mat-icon matPrefix style="transform: translateY(0.2rem);">search</mat-icon>
+        <input type="text" matInput [(ngModel)]="filterValue" (ngModelChange)="onFilterChange()">
+    </mat-form-field>
+</div>
+
+<app-base-grid
+    style="flex: 1 0 0"
+    [gridItems]="data"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

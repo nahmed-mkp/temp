@@ -1,0 +1,33 @@
+<div class="horizontal-flex-center" style="margin-bottom: -0.4rem; justify-content: space-between;">
+  <span class="horizontal-flex-center" style="margin-top:5px;">
+      <mat-form-field class="date-form-field" floatLabel="always">
+          <mat-label> Date </mat-label>
+          <input matInput placeholder="As Of Date" [matDatepicker]="picker1"
+          [(ngModel)]="selectedPortfolioDate" (ngModelChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-slide-toggle [disabled]="isCurrentDate === false" [checked]="mode==='live'" (change)="onModeChange()">
+          <span class="slide-toggle-label">
+              {{ this.mode === 'live' ? 'Live': 'Close'}}
+          </span>
+      </mat-slide-toggle>
+  </span>
+</div>
+
+<div style="flex: 1 0 0" class="horizontal-flex">
+  <app-pricing-engine-rv-viewer 
+      style="flex: 4 0 0"
+      class="vertical-flex-full-height"
+      [data]="data$ | async"
+      [loading]="loading$ | async"
+      [mode]="mode"
+      (onSecNameSelected)="onSecNameSelected($event)"
+      (onSecDeletionRequested)="onSecDeletionRequested($event)"
+      (onEditing)="onEditing($event)"
+  >
+  </app-pricing-engine-rv-viewer>
+</div>
+
+

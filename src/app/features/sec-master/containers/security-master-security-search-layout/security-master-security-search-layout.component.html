@@ -1,0 +1,27 @@
+
+
+
+<mat-form-field style="width:14rem; margin-right:10px;">
+    <input matInput type="text" placeholder="Search ... " [(ngModel)]="securitySearchReq.secName" (ngModelChange)="onSearch_debounce()" [matAutocomplete]="secName" autocomplete="off"> 
+    <mat-autocomplete #secName="matAutocomplete" [panelWidth]="'25rem'" class="security-search-autocomplete" (optionSelected)="onOptionSelected($event.option.value)" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of (securitySearchResult$ | async)" [value]="option">
+            <span>RCPM Name: </span><strong>{{option.RCPMName}}</strong>
+            <small><i>
+                <span>BBGGlobalId:</span><b>{{option.BBGGlobalId}}</b> | <span>Cusip:</span><b>{{option.Cusip}}</b> | <span>ISIN:</span><b>{{option.ISIN}}</b>
+            </i></small>
+            <small><i>
+                <span>RCPMSID:</span><b>{{option.RCPMSID}}</b> | <span>DWHSecId:</span><b>{{option.DWHSecId}}</b> | <span>CRDSecId:</span><b>{{option.CRDSecId}}</b>
+            </i></small>
+        </mat-option> 
+    </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field style="width:10rem;margin-right:10px;">
+    <mat-select [(ngModel)]="securitySearchReq.secType"  placeholder="Asset Class ..." (ngModelChange)="onSearch_debounce()">
+        <mat-option *ngFor="let supportedAssetClass of (supportedAssetClasses$ | async) " [value]="supportedAssetClass">
+            {{supportedAssetClass}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<button mat-raised-button color="primary" [disabled]="securitySearchReq.secName === null || securitySearchReq.secName === ''" (click)="onLoadSecurityDetail()">Search Security</button>

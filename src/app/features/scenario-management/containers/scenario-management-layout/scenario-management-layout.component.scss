@@ -1,0 +1,57 @@
+::ng-deep .mat-horizontal-content-container {
+    height: 100%;
+}
+
+::ng-deep .mat-horizontal-stepper-wrapper {
+    height: 100%;
+}
+
+::ng-deep .mat-horizontal-stepper-content {
+    height: 100%;
+}
+
+.wrapper{
+    height: 100%;
+    display: flex;  
+    flex-direction: column; 
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 100px;
+}
+
+
+app-scenario-management-country-viewer {
+    margin-top:2rem;
+    height: 97%;
+    width: 50%;
+}
+
+app-scenario-management-econvar-viewer {
+    margin-top:2rem;
+    height: 97%;
+    width: 50%;
+}
+
+app-scenario-management-forecast-period-viewer {
+    margin-top:2rem;
+    height: 97%;
+    width: 50%;
+}
+
+app-scenario-management-scenario-viewer {
+    margin-top:2rem;
+    height: 97%;
+    width: 90%;
+}
+
+app-scenario-management-forecast-viewer {
+    height: 97%;
+}

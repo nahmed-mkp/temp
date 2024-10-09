@@ -1,0 +1,224 @@
+<!-- <p>
+  rcpm-position-layout works!
+</p>
+
+{{ data$ | async}} -->
+<div *ngIf="(userLayoutAndConfigLoading$ | async) || (activateSpinning && (positionloadingStatus$ | async))" class="loading-screen" style="flex-direction: column;">
+  <mat-spinner></mat-spinner><br>
+  <div style="text-align: center;">
+    <p *ngIf="userLayoutAndConfigLoading$ | async">Loading Configuration/layout Style...</p> 
+    <p *ngIf="activateSpinning && (positionloadingStatus$ | async)">Loading Data...</p>
+  </div>
+
+</div>
+
+<div class="vertical-flex-full-height">
+
+  <div class="horizontal-flex-full-height" style="flex: 2 0 0;" [ngStyle]="{'max-height': subScreenOpen ? '64%' : '100%'}">
+    <app-rcpm-position-viewer
+      *ngIf="userLayoutAndConfigLoaded$ | async"
+
+      class="mat-card"
+      style="display: block;height: 100%;"
+      [data]="positionAndGroupingData$ | async"
+      [loadedStatus]="combineDataLoadedStatus$ | async"
+      [targetManager]="targetManager"
+      [lookups]="positionLookups"
+
+      [targetLayout]="selectedUserLayout"
+      [nonlinearData]="nonlinearData$ | async"
+      [nonlinearDataLoadingStatus]="nonlinearDataLoadingStatus$ | async"
+      [nonlinearDataLoadedStatus]="nonlinearDataLoadedStatus$ | async"
+      [nonlinearPnlData]="nonlinearPnlData$ | async"
+      [nonlinearPnlDataLoadingStatus]="nonlinearPnlDataLoadingStatus$ | async"
+      [nonlinearPnlDataLoadedStatus]="nonlinearPnlDataLoadedStatus$ | async"
+      [primaryGroupingNameIdMaping]="primaryGroupingNameIdMaping$ | async"
+
+      [isActive]="isActive"
+      [targetColumn]="targetColumn"
+      [commonGrouping]="targetCommonGrouping$ | async"
+
+      [IsUnsettledClosingTradeStillAccruing]="IsUnsettledClosingTradeStillAccruing"
+      [IsExcludeTestFundEnabled]="IsExcludeTestFundEnabled"
+
+      [userGridConfig]="userGridConfig$ | async"
+      [userGroupingStyle]="userGroupingStyle$ | async"
+      [layoutStyle]="layoutStyle$ | async"
+      [systemStyle]="systemStyle$ | async"
+      [layoutName]="layout"
+
+      [regressionDynamicColumns]="regressionDynamicColumns$ | async"
+      [regressionNonlinearData]="regressionNonlinearData$ | async"
+      [regressionLoading]="regressionLoading$ | async"
+      [gridClearingStatus]="gridClearingStatus$ | async"
+      [displayMode]="displayMode$ | async"
+      [mode]="mode"
+
+      [isOnCurrentDate]="isOnCurrentDate$ | async"
+
+      (updatefilters)="updatefilters($event)"
+      (currentGrouping)="currentGrouping($event)"
+      (updateUserLayoutList)="onUpdateUserLayoutList($event)"
+      (boardcastDisplayColumns)="onboardcastDisplayColumns($event)"
+      (onSelectDataPath)="onSelectDataPath($event)"
+      (onSelectLeafRow)="onSelectLeafRow($event)"
+      (togglePeriodicPullingStatus)="onTogglePeriodicPullingStatus($event)"
+
+      (backupGridSetting)="onBackupGridSetting($event)"
+      (updateUserGridConfig)="onUpdateUserGridConfig($event)"
+      (updateUserGroupingStyle)="onUpdateUserGroupingStyle($event)"
+      (updateUserLayoutStyle)="onUpdateUserLayoutStyle($event)"
+      style="flex: 4 0 0">
+    </app-rcpm-position-viewer>
+    <!-- [activateSpinning]="activateSpinning$ | async" -->
+
+
+    <!-- Side Panel -------------------------------------------------------- -->
+
+    <app-rcpm-position-info-viewer 
+      *ngIf="activeSideScreen==='positionInfo'"
+      class="mat-card vertical-flex-full-height"
+      style="padding: 0.5rem;"
+      [positionData]="selectedRow"
+      [positionDetail]="positionInfo$ | async">
+    </app-rcpm-position-info-viewer>
+
+    <app-rcpm-tradename-creation
+
+      [clientServicesTradeThemes]="clientServicesTradeThemes$ | async"
+
+      [pms]="pms$ | async"
+      [pmPodDetails]="pmPodDetails$ | async"
+      [pmPodDetailsLoading]="pmPodDetailsLoading$ | async"
+      [pmPodDetailsLoaded]="pmPodDetailsLoaded$ | async"
+      [pmPodDetailsError]="pmPodDetailsError$ | async"
+
+      [creatingTradeName]="creatingTradeName$ | async"
+      [createdTradeName]="createdTradeName$ | async"
+      [createTradeNameSuccessMessage]="createTradeNameSuccessMessage$ | async"
+      [createTradeNameFailureMessage]="createTradeNameFailureMessage$ | async"
+
+      (createTradeName)="onCreateTradeName($event)"
+
+      *ngIf="activeSideScreen==='tradeNameCreation'"
+      class="mat-card vertical-flex-full-height"
+      style="padding: 0.5rem;">      
+    </app-rcpm-tradename-creation>
+
+    <app-rcpm-directionality-layout
+      *ngIf="activeSideScreenCollection.includes('directionality')"
+      class="mat-card"
+      style="flex: 2 0 0; display: flex;flex-direction: column;"
+      [grouping]="rowGroupings"
+      [layout]="layout"
+      [currentDate]="currentDate"
+      [isOpen]="activeSideScreen === 'directionality'"
+      [dataPath]="selectedDataPath$ | async"></app-rcpm-directionality-layout>
+
+  </div>
+
+  <span *ngIf="subScreenOpen && activeSubScreen === 'execution'">
+    <mat-form-field appearance="outline" style="width: 9rem;">
+      <div class="mat-form-field-content-wrap">
+        <mat-select placeholder="Trader" style="margin-left:10px;" [(ngModel)]="targetTrader">
+          <mat-option [value]="'all'">All</mat-option>
+          <mat-option *ngFor="let name of tradersName" [value]="name">
+            {{name}}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix style="color: grey;opacity: 0.6; margin-left: 5px">person</mat-icon>
+      </div>
+    </mat-form-field>
+  </span>
+
+  <button style="margin-top:-20px" *ngIf="subScreenOpen && activeSubScreen === 'execution'" id="custom-expand-icon" (click)="onExecutionExpandChange()">
+    <mat-icon *ngIf="!excutionPanelFullyExpansionMode">expand_less</mat-icon>
+    <mat-icon *ngIf="excutionPanelFullyExpansionMode">expand_more</mat-icon>
+  </button>
+  <app-rcpm-position-execution-viewer
+    *ngIf="subScreenOpen && activeSubScreen === 'execution'"
+    class="mat-card"
+    [ngStyle]="{'flex': excutionPanelFullyExpansionMode ? '6 0 0' : '1 0 0'}"
+    [data]="executionData$ | async"
+    [loadingStatus]="executionloadingStatus$ | async"
+    [filters]="filters"
+    [targetTrader]="targetTrader"
+    (setTradersName)="setTradersName($event)">
+  </app-rcpm-position-execution-viewer>
+
+  <span *ngIf="subScreenOpen && activeSubScreen === 'tax'">
+    Tax Lots
+    <mat-icon (click)="subScreenOpen = false">arrow_drop_down</mat-icon>
+  </span>
+  <app-rcpm-position-tax-lots-viewer
+    *ngIf="subScreenOpen && activeSubScreen === 'tax'"
+    class="mat-card"
+    style="flex: 2 0 0">
+  </app-rcpm-position-tax-lots-viewer>
+
+
+  <app-rcpm-simulation-layout
+    *ngIf="subScreenOpen && activeSubScreen === 'simulation'"
+    [currentDate]="currentDate"
+    [dataPath]="selectedDataPath$ | async"
+    [layout]="layout"
+    [isOpen]="subScreenOpen && activeSubScreen === 'simulation'"
+    class="mat-card">
+  </app-rcpm-simulation-layout>
+
+  <app-rcpm-pnl-layout *ngIf="subScreenOpen && activeSubScreen === 'profitLoss'"
+    [dataPath$]="selectedDataPath$"
+    [layout]="layout"
+    [isOpen]="subScreenOpen && activeSubScreen === 'profitLoss'"
+    class="mat-card">
+  </app-rcpm-pnl-layout>
+
+  <div class="bottom-tool-bar">
+    <button mat-flat-button [color]="(subScreenOpen && activeSubScreen === 'execution') ? 'button-active' : '' " 
+      (click)="onChangeSubscreen('execution')">
+      Historical Execution
+    </button>
+  
+    <!-- <button mat-flat-button [color]="(subScreenOpen && activeSubScreen === 'tax') ? 'button-active' : '' " 
+      style="margin-left: 0.5rem;" 
+      (click)="onChangeSubscreen('tax')">
+      Tax Lots
+    </button> -->
+
+    <button mat-flat-button [color]="(subScreenOpen && activeSubScreen === 'simulation') ? 'button-active' : '' " 
+      (click)="onChangeSubscreen('simulation')">
+      Simulated Returns
+    </button>
+
+    <button mat-flat-button [color]="(subScreenOpen && activeSubScreen === 'profitLoss') ? 'button-active' : '' "
+      (click)="onChangeSubscreen('profitLoss')">
+      P&amp;L
+    </button>
+  </div>
+
+    <!-- </mat-tab>
+
+  </mat-tab-group> -->
+</div>
+
+<button mat-flat-button id="position-info-button"
+  class="vertical-write-mode"
+  [color]="(activeSideScreen === 'positionInfo') ? 'button-active' : '' " 
+  (click)="onChangeSideScreen('positionInfo')">
+  Position Info
+</button>
+
+
+<button mat-flat-button id="tradename-creation-button"
+  class="vertical-write-mode"
+  [color]="(activeSideScreen === 'tradeNameCreation') ? 'button-active' : '' " 
+  (click)="showTradeNameCreation($event)">
+  New Tradenames
+</button>
+
+<button mat-flat-button id="directionality-button"
+  class="vertical-write-mode"
+  [color]="(activeSideScreen === 'directionality') ? 'button-active' : '' " 
+  (click)="showDirectionality($event)">
+  Directionality
+</button>

@@ -1,0 +1,11 @@
+<div class="loading-screen" *ngIf="dataLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid
+  class="mat-card vertical-flex-full-height"
+  [gridItems]="[]"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

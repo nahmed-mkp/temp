@@ -1,0 +1,84 @@
+<div id="risk-span-tool-set">
+  <button mat-icon-button class="mat-button-shrink" color="primary" *ngIf="multiPlotViewMode === 'regular'" (click)= "multiPlotViewMode='compact'">
+    <mat-icon>aspect_ratio</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" *ngIf="multiPlotViewMode === 'compact'" (click)= "multiPlotViewMode='regular'">
+    <mat-icon>settings_overscan</mat-icon>
+  </button>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="targetSeries" multiple>
+      <mat-option [value]="'all'">All</mat-option>
+      <mat-option *ngFor="let item of seriesCollection" [value]="item">{{item}}</mat-option>
+    </mat-select>
+    <mat-icon matSuffix>filter_list</mat-icon>
+  </mat-form-field>
+</div>
+
+<mat-sidenav-container class="right-side-popup side-popup">
+  <mat-sidenav #sidenav position="end">
+    <app-risk-span-request-layout (closeSideNav)="sidenav.toggle()"></app-risk-span-request-layout>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <button mat-icon-button class="mat-button-shrink" (click)="sidenav.toggle()"><mat-icon>settings</mat-icon></button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<div class="instruction" *ngIf="(plotResponse$ | async) === undefined && (uiViewMode$ | async) === undefined">
+  <h4>Instruction - For running Risk Span analysis</h4>
+  <ul>
+    <li>Select or upload an risk span report</li>
+    <li>Select available x axis</li>
+    <li>Select available y axis(multiple)</li>
+    <li>Pick series and column for further constraint</li>
+    <li>Click the play button to run the analysis</li>
+  </ul>
+  <mat-icon>timeline</mat-icon>
+</div>
+
+<app-risk-span-multi-plot-layout 
+  *ngIf="(multiPlotMode$ | async) && (plotResponse$ | async) && (uiViewMode$ | async) === 'plot'"
+  [plotResponse]="plotResponse$ | async"
+  [viewMode]="multiPlotViewMode"
+  [targetSeries]="targetSeries">
+</app-risk-span-multi-plot-layout>
+
+<app-risk-span-plot-viewer 
+  *ngIf="!(multiPlotMode$ | async) && (plotResponse$ | async) && (uiViewMode$ | async) === 'plot'" 
+  [plotRawData]="(plotResponse$ | async)?.plots[0]">
+</app-risk-span-plot-viewer>
+
+<app-risk-span-raw-data-viewer
+  *ngIf="(uiViewMode$ | async) === 'raw'"
+  class="mat-card"
+  [rawData]="rawData$ | async"
+  [loading]="requestSubmittingStatus$ | async"
+  [targetColumn]="targetColumn$ | async"
+  [summaryMode]="true"
+  [searchText]="searchText$ | async"
+  (setColumnsColletions)="onSetColumnsCollection($event)"
+  (showDetail)="onShowDetail($event)">
+</app-risk-span-raw-data-viewer>
+
+<app-risk-span-raw-data-viewer
+  class="mat-card"
+  *ngIf="(uiViewMode$ | async) === 'rawDetail'"
+  [rawData]="rawDetailData$ | async"
+  [loading]="requestSubmittingStatus$ | async"
+  [targetColumn]="targetColumn$ | async"
+  [searchText]="searchText$ | async"
+  [summaryMode]="false"
+  (setColumnsColletions)="onSetColumnsCollection($event)">
+</app-risk-span-raw-data-viewer>
+
+<app-risk-span-query-viewer
+  *ngIf="(uiViewMode$ | async) === 'query'">
+</app-risk-span-query-viewer>
+
+<div class="loading-screen" *ngIf="plotLoading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+  

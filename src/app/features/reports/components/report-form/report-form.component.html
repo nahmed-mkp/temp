@@ -1,0 +1,117 @@
+<!-- <structured-layout>
+
+    <div header>
+        <ul class="breadcrumb">
+            <li><a href="#" [routerLink]="['./../../../../']">External Reports</a></li>
+            <li><a href="#" [routerLink]="['./../../../']">{{(project$ | async)?.name }}</a></li>
+            <li><a href="#" [routerLink]="['./../']">{{(workbook$ | async)?.name }}</a></li>
+            <li>
+                <span *ngIf="reportForm.value.name ; else newReport">
+                    {{reportForm.value.name}} - <small>{{reportForm.value.description}}</small></span>
+                <ng-template #newReport>
+                    New Report
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+
+    <div content style="padding: 0.5em;">
+        <div class="alert alert-success" *ngIf="updateStatus">
+            <strong>Success!</strong> - {{ updateStatus }}
+        </div>
+        <div class="alert alert-danger" *ngIf="error">
+            <strong>Failed!</strong> - {{ error }}
+        </div>
+        <form novalidate 
+            [formGroup]="reportForm" 
+            class="form-horizontal">
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Name *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Report Name..." formControlName="name">
+                    <div class="form-error" *ngIf="reportForm.get('name').hasError('required') && reportForm.get('name').touched">
+                        Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Description *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Report Description..." formControlName="description">
+                    <div class="form-error" *ngIf="reportForm.get('description').hasError('required') && reportForm.get('description').touched">
+                        Description is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Short Code *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Short Code..." formControlName="shortCode">
+                    <div class="form-error" *ngIf="reportForm.get('shortCode').hasError('required') && reportForm.get('shortCode').touched">
+                        Short code is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Type *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="SSRS or Tableau or JupyterLab..." formControlName="type">
+                    <div class="form-error" *ngIf="reportForm.get('type').hasError('required') && reportForm.get('type').touched">
+                        Type is required (e.g. SSRS)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">URL *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Report URL..." formControlName="url">
+                    <div class="form-error" *ngIf="reportForm.get('url').hasError('required') && reportForm.get('url').touched">
+                        URL is required (e.g. /Operations/Trade Activity)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Height *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Height (px)..." formControlName="height">
+                    <div class="form-error" *ngIf="reportForm.get('height').hasError('required') && reportForm.get('height').touched">
+                        Height is required (e.g. 800px)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">CSS *: </label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" placeholder="Font Awesome..." formControlName="cssClass">
+                    <div class="form-error" *ngIf="reportForm.get('cssClass').hasError('required') && reportForm.get('cssClass').touched">
+                        CSS Class is required (e.g. fa fa-pencil)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <div class="col-md-3">
+                    <div class="form-check checkbox" style="margin-left:20px;">
+                        <input class="form-check-input" type="checkbox" id="isUserSpecific" formControlName="isUserSpecific">
+                        <label class="form-check-label" for="isUserSpecific">Is User Specific? *</label>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <small><i>* indicates required fields</i></small>
+    </div>
+
+    <div footer style="padding-bottom: 10px;">
+        <div class="link-row">
+            <button type="submit" [disabled]="reportForm.invalid" class="btn btn-sm btn-success" (click)="submitForm(reportForm)"><i class="fa fa-save"></i> Save</button>
+            <button type="submit" class="btn btn-sm btn-danger" (click)="cancel($event)"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+    </div>
+    
+</structured-layout> -->

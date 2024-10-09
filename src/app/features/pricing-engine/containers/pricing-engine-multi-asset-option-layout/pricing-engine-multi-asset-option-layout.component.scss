@@ -1,0 +1,14 @@
+div.left-tool-bar {
+    position: absolute;
+    right: 0rem;
+    top: 4rem;
+    z-index: 1;
+    button.mat-flat-button {
+      min-width: 0;
+      line-height: normal;
+      box-shadow: 2px 2px 8px 1px rgb(0 0 0 / 20%);
+      opacity: 0.8;
+      border-radius: 5px 5px 0 0;
+      padding: 0.5rem 0;
+    }
+}

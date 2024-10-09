@@ -1,0 +1,24 @@
+<div style="padding: 10px; background-color: white; border-radius: 5px;">
+    <div mat-dialog-title>
+        {{data?.action == 'kill' ? 'Kill' : 'Restart' }} {{data?.processName}} on {{data?.serverName}}
+    </div>
+    
+    <div mat-dialog-content>
+        <p>
+            Are you sure you want to {{data?.action}}
+            <strong>
+                <i>{{data?.processName}} 
+                    <small>{{data?.pid !== undefined ? '[PID:' + data?.pid + ']' : ''}}</small>
+                </i>
+            </strong> on <strong><i>{{data?.serverName}}</i></strong> ?
+        </p>
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-raised-button (click)="confirm()" color="primary">Confirm</button>
+        <button mat-raised-button (click)="cancel()">Cancel</button>
+    </div>
+    
+    <span style="font-size:small">{{data?.instructions}}</span>
+    
+</div>

@@ -1,0 +1,8 @@
+<button 
+    mat-raised-button 
+    color="primary" 
+    (click)="onClick()"
+    [ngClass]="{'blue': bgColor==='blue', 'green': bgColor==='green'}" 
+>
+    {{buttonText || 'N/A'}}
+</button>

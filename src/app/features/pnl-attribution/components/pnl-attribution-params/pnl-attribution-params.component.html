@@ -1,0 +1,144 @@
+<mat-slide-toggle [checked]="excludeFundingToggleValue" (change)="onToggleExcludeFunding($event)"> 
+    <span class="slide-toggle-label">
+        Exclude Funding 
+    </span>
+</mat-slide-toggle>
+
+<mat-slide-toggle [checked]="reclassifyRepoToggleValue" (change)="onToggleReclassifyRepo($event)"> 
+    <span class="slide-toggle-label">
+        Reclassify Repo
+    </span>
+</mat-slide-toggle>
+
+<mat-slide-toggle [checked]="includeBetaToggleValue" (change)="onToggleBetaAdjustment($event)">
+    <span class="slide-toggle-label">
+        Include Beta Adj.
+    </span>
+</mat-slide-toggle>
+
+<div class="wrap">
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['P/L($)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('P/L($)')">
+        <mat-icon matToolTip="PL($)">monetization_on</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['% to Fund'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund')">
+        <mat-icon matTooltip="% To Fund" >bar_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['% to Cap'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Cap')">
+        <mat-icon matTooltip="% To Cap">stacked_bar_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon"  [ngStyle]="{'opacity': gridDisplayMode['Fund Cap (k)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('Fund Cap (k)')">
+        <mat-icon matTooltip="Capital (Fund)">pie_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon"[ngStyle]="{'opacity': gridDisplayMode['Cap (k)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('Cap (k)')">
+        <mat-icon matTooltip="Capital">pie_chart_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['σ'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('σ')">
+        <!-- <mat-icon matTooltip="Capital">σ</mat-icon> -->
+        <span style="font-size: 230%; position: relative; top: -0.1rem; line-height: 14px;" matTooltip="Annualized Realized Vol ($)">σ</span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['σ(%)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('σ(%)')">
+        <!-- <mat-icon matTooltip="Capital">σ%</mat-icon> -->
+        <span style="font-size: 230%;position: relative; top: -0.4rem; line-height: 14px;" matTooltip="Annualized Realized Vol (%)">σ<sup><small style="font-size: 50%">%</small></sup>
+        </span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['% to Fund(qr)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund(qr)', 'P/L($)(qr)');">
+        <span matTooltip="Quarter Summary" style="font-size: 150%">Qr</span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [ngStyle]="{'opacity': gridDisplayMode['% to Fund(yr)'] ? 1 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund(yr)', 'P/L($)(yr)');">
+        <span matTooltip="Yearly Summary" style="font-size: 150%">Yr</span>
+    </button>
+</div>
+
+
+<div style="margin-left: 0.5rem;margin-right: 0.5rem;" class="wrap">
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon" [matMenuTriggerFor]="menu" #menuTriggerUser="matMenuTrigger" style="opacity: 1;">
+        <mat-icon matTooltip="Layouts Collection">table_chart</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="sharedmenu">Shared Layout</button>
+        <button mat-menu-item [matMenuTriggerFor]="privatemenu">Private Layout</button>
+    </mat-menu>
+    <mat-menu #sharedmenu="matMenu">
+        <button mat-menu-item *ngFor="let layout of layoutCollection.shared" (click)="onSelectNewlayout($event, layout.layoutName, false);menuTriggerUser.closeMenu()" style="padding-right: 0.5rem;">
+            {{ '[ ' + layout.createdBy + ' ] ' + layout.layoutName}}
+            <button mat-icon-button (click)="onSelectNewlayout($event, layout.layoutName, true);menuTriggerUser.closeMenu()">
+                <mat-icon matTooltip="Open in new tab">add_to_queue</mat-icon>
+            </button>
+        </button>
+    </mat-menu>
+    <mat-menu #privatemenu="matMenu">
+        <button mat-menu-item *ngFor="let layout of layoutCollection.private" (click)="onSelectNewlayout($event, layout.layoutName, false);menuTriggerUser.closeMenu()" style="padding-right: 0.5rem;">
+            {{layout.layoutName}}
+            <button mat-icon-button (click)="onSelectNewlayout($event, layout.layoutName, true);menuTriggerUser.closeMenu()">
+                <mat-icon matTooltip="Open in new tab">add_to_queue</mat-icon>
+            </button>
+        </button>
+    </mat-menu>
+
+    <button mat-icon-button class="mat-button-shrink toolbar-icon"  style="opacity: 1;" [matMenuTriggerFor]="common_grouping" #menuTriggerUser_common="matMenuTrigger">
+        <mat-icon matTooltip="Common Groupings">list_alt</mat-icon>
+    </button>
+    <mat-menu #common_grouping="matMenu">
+        <button mat-menu-item *ngFor="let grouping of commonGroupingsMainCategory"   [matMenuTriggerFor]="sub_common_grouping"  [matMenuTriggerData]="{name: grouping}">
+            {{grouping}}
+        </button>
+    </mat-menu>
+    <mat-menu #sub_common_grouping="matMenu">
+        <ng-template matMenuContent let-name="name">
+            <button mat-menu-item *ngFor="let grouping of (commonGroupingsByCategory[name])"
+                (click)="onApplyCommonGrouping(grouping); menuTriggerUser_common.closeMenu()">
+                {{grouping.slice(1).join(' | ')}}
+            </button>
+        </ng-template>
+    </mat-menu>
+
+</div>
+
+<mat-form-field appearance="outline" class="date-form-field">
+    <mat-label> From </mat-label>
+    <div class="mat-form-field-content-wrap">
+        <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </div>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="date-form-field" style="margin-right:10px;">
+    <mat-label> To </mat-label>
+    <div class="mat-form-field-content-wrap">
+        <input matInput [matDatepicker]="picker2" placeholder="To Date" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </div>
+</mat-form-field>
+
+<button mat-icon-button aria-label="Select a year" style='left: -0.3rem' (click)="openYearSelector()" class="toolbar-icon" title="Select a year">
+    <mat-icon>menu</mat-icon>
+</button>
+
+<button mat-raised-button (click)="onRunAttribution()">Run Attribution
+    <mat-icon>play_arrow</mat-icon>
+</button>
+
+<button mat-raised-button (click)="onOpenReport()">Export
+    <mat-icon>assessment</mat-icon>
+</button>

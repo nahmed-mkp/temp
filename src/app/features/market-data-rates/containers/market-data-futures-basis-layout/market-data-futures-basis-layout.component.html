@@ -1,0 +1,99 @@
+<div *ngIf="futuresBasisMonitorLoading$ | async" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="futuresBasisMonitorError$ | async " class="loading-screen">
+    <h4>Load Data Failed!</h4>
+</div>
+
+<div class="look-back-group-toggle">
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === '1m'}" (click)="onChangePeriod('1m')"><span>1m</span></button>
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === '3m'}" (click)="onChangePeriod('3m')"><span>3m</span></button>
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === '6m'}" (click)="onChangePeriod('6m')"><span>6m</span></button>
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === 'YTD'}" (click)="onChangePeriod('YTD')"><span>YTD</span></button>
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === '1y'}" (click)="onChangePeriod('1y')"><span>1y</span></button>
+    <button mat-mini-fab color="primary" [ngClass]="{'mat-mini-fab-selected': selectedPeriod === 'All'}" (click)="onChangePeriod('All')"><span>All</span></button>
+</div>
+
+
+<div style="display: block;height: 2.5rem;">
+    <h4>Net Basis (in 32nds) <small><i>* Measure for levered investors</i></small> </h4>
+</div>
+<div class="horizontal-flex-full-width">
+    <app-market-data-futures-basis-plot-viewer
+        class="mat-card-lift"
+        *ngFor="let group of (basicGroup$ | async)"
+        [data]="(netEntity$ | async)[group]"
+        [title]="group"
+        [mode]="'scatter'"
+        [selectedPeriod]="selectedPeriod">
+    </app-market-data-futures-basis-plot-viewer>
+</div>
+
+
+
+<div style="display: block;height: 2.5rem;">
+    <h4>Gross Basis (in decimals) <small><i>* Measure for unlevered investors</i></small></h4>
+</div>
+<div class="horizontal-flex-full-width">
+    <app-market-data-futures-basis-plot-viewer
+        class="mat-card-lift"
+        *ngFor="let group of (basicGroup$ | async)"
+        [data]="(basicEntity$ | async)[group]"
+        [title]="group"
+        [mode]="'scatter'"
+        [selectedPeriod]="selectedPeriod">
+    </app-market-data-futures-basis-plot-viewer>
+</div>
+
+
+
+<div style="display: block;height: 2.5rem;">
+    <h4>Check the RepoToDelivery vs GCToDelivery</h4>
+</div>
+<div class="horizontal-flex-full-width">
+    <app-market-data-futures-basis-plot-viewer
+        class="mat-card-lift"
+        *ngFor="let group of (basicGroup$ | async)"
+        [data]="(deliveryEntity$ | async)[group]"
+        [title]="group"
+        [mode]="'line'"
+        [selectedPeriod]="selectedPeriod">
+    </app-market-data-futures-basis-plot-viewer>
+</div>
+
+
+
+<div style="display: block;height: 2.5rem;">
+    <h4>Cash Management Return Comparison</h4>
+</div>
+<div class="horizontal-flex-full-width">
+    <app-market-data-futures-basis-plot-viewer
+        class="mat-card-lift"
+        [data]="cashManagementComparisonEntity$ | async"
+        [title]="'N/A'"
+        [mode]="'line'"
+        [selectedPeriod]="selectedPeriod">
+    </app-market-data-futures-basis-plot-viewer>
+</div>
+
+
+
+
+<div style="display: block;height: 2.5rem;">
+    <h4>Open Interests</h4>
+</div>
+<div class="horizontal-flex-full-width">
+    <app-market-data-futures-basis-plot-viewer
+        class="mat-card-lift"
+        *ngFor="let group of (basicGroup$ | async)"
+        [data]="(openInterestEntity$ | async)[group]"
+        [title]="group"
+        [mode]="'line'"
+        [plotType]="'basic'">
+    </app-market-data-futures-basis-plot-viewer>
+</div>
+
+
+
+
+

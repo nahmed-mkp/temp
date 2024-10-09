@@ -1,0 +1,27 @@
+
+
+<!-- <button mat-icon-button class="mat-button-shrink" color="primary" [matMenuTriggerFor]="seriesMenu">
+  <mat-icon>table_chart</mat-icon>
+</button>
+<mat-menu #seriesMenu="matMenu">
+  <button mat-menu-item><i>all</i></button>
+  <button mat-menu-item *ngFor="let series of seriesCollection" (click)="onSelectColumnLayout(name)">
+    <i class="material-icons" [ngStyle]="{'visibility': name === activeLayoutName ? 'visible' : 'hidden'}">check</i>{{name}}
+  </button>
+</mat-menu> -->
+
+<!-- <mat-form-field>
+  <mat-select [(ngModel)]="targetSeries">
+    <mat-option *ngFor="let item of availableColumns" [value]="all">All</mat-option>
+    <mat-option *ngFor="let item of seriesCollection" [value]="item">{{item}}</mat-option>
+  </mat-select>
+  <mat-icon matSuffix>filter_list</mat-icon>
+</mat-form-field> -->
+
+<app-risk-span-plot-viewer 
+  *ngFor="let plotRawData of plotResponse.plots"
+  [plotRawData]="plotRawData"
+  [ngStyle]="dynamicLayoutStyle"
+  [targetSeries]="targetSeries"
+  [viewMode]="viewMode">
+</app-risk-span-plot-viewer>

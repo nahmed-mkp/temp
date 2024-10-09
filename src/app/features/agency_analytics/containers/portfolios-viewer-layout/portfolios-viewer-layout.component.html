@@ -1,0 +1,117 @@
+
+<div style="height: 100vh;width: 99w;position: relative;display: flex; flex-direction: column;">
+
+    <mat-toolbar>
+
+        <span class="toolbar-heading"> AGENCY MBS ANALYTICS </span>
+    
+        <span class="vertical-toolbar-divider-small"></span>
+    
+        <div class="example-button-row" style="justify-content:start;margin-left:10px;width:80%">
+
+            <mat-slide-toggle id="mode-selector" color="accent" [checked]="(mode$ | async) === 'Live'"
+                (change)="onModeChanged($event)" style="width:80px;">
+                <span class="slide-toggle-label" *ngIf="(mode$ | async) === 'Close'">Close</span>
+                <span class="slide-toggle-label" *ngIf="(mode$ | async) !== 'Close'">Live</span>
+            </mat-slide-toggle>&nbsp;&nbsp;&nbsp;
+            <button mat-button style="margin-right:5px;" (click)="submitPYCalc(mode)">P/Y Calc</button>
+            <button mat-button style="margin-right:5px;" (click)="submitRoR(mode)">Sensitivities</button>
+            <button mat-button style="margin-right:5px;" (click)="submitActVsProj(mode)">Horizon Anlaysis</button>
+            <button mat-button style="margin-right:5px;" (click)="refreshPrices()">Refresh Prices</button>
+            <button mat-button style="margin-right:5px;" (click)="viewDials()">Manage Dials</button>
+        </div>
+    
+        <div style="float:right;">
+            <span class="toolbar-spacer"></span>
+
+            <mat-button-toggle-group name="viewColumns" aria-label="View Columns" multiple style="margin-top:2px;margin-left:10px;" [value]="(activePortfolioGridViews$ | async)?.selectedViews" (change)="onChangeSelectedViews($event)">
+                <mat-button-toggle class="mat-button-shrink" value="indicative" title="View User Inputs"><mat-icon color="primary">input</mat-icon></mat-button-toggle>
+                <mat-button-toggle class="mat-button-shrink" value="indicative" title="View Indicative Data"><mat-icon color="primary">menu_book</mat-icon></mat-button-toggle>
+                <mat-button-toggle class="mat-button-shrink" value="py" title="View PY Results"><mat-icon color="primary">calculate</mat-icon></mat-button-toggle>
+                <mat-button-toggle class="mat-button-shrink" value="ror" title="View Scenario Results"><mat-icon color="primary">ssid_chart</mat-icon></mat-button-toggle>
+                <mat-button-toggle class="mat-button-shrink" value="actvsproj" title="View Actual vs. Projected Results"><mat-icon color="primary">monitoring</mat-icon></mat-button-toggle>
+            </mat-button-toggle-group>
+            
+            <button mat-icon-button class="mat-button-shrink" (click)="onShowSidePanel('CreatePortfolio')" matTooltip="Create Portfolio">
+                <mat-icon style="color:white">note_add</mat-icon>
+            </button>
+            
+            <button mat-icon-button class="mat-button-shrink" (click)="onShowSidePanel('ViewPortfolios')" matTooltip="View Portfolios">
+                <mat-icon style="color:white">tab</mat-icon>
+            </button>
+    
+        </div>
+
+    </mat-toolbar>
+    
+     
+    <mat-sidenav-container style="height: 100%">
+        <div style="height: 100%; display: flex; align-items: center; justify-content: center;" >
+
+        <mat-tab-group #tab 
+            class="vertical-flex-full-height" 
+            style="height:100%;width: 100%;" 
+            *ngIf="(loadedPortfolios$ | async)?.length > 0"
+            [selectedIndex]="selectedIndex"
+            (selectedTabChange)="onActivateTab($event)">
+    
+            <mat-tab *ngFor="let portfolio of loadedPortfolios$ | async; let i = index;" [label]="portfolio.guid">
+                <ng-template mat-tab-label>
+                    {{ portfolio.name }}
+                    <button mat-icon-button (click)="onClosePortfolio(portfolio)"><mat-icon>close</mat-icon></button>
+                </ng-template>
+                <ng-template matTabContent>
+                    <app-portfolio-viewer-layout 
+                        style="height:100%;width:100%;" 
+                        [mode$]="mode$"
+                        [lookups]="lookups$ | async"
+                        [selectedViews]="activePortfolioGridViews$ | async"
+                        [portfolio]="portfolio"
+                        [selectedItems]="selectedItems[portfolio.guid] || []"
+                        (updateSelectedItems)="onUpdateSelectedItems($event)"></app-portfolio-viewer-layout>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+
+            <div class="loading-screen-local" *ngIf="(loadedPortfolios$ | async)?.length === 0">
+                <h3>Click
+                    <span style="cursor:pointer" (click)="onShowSidePanel('CreatePortfolio')"><mat-icon>note_add</mat-icon></span> to create a portfolio or 
+                    <span style="cursor:pointer" (click)="onShowSidePanel('ViewPortfolios')"><mat-icon>tab</mat-icon></span> to load existing portfolios
+                </h3>
+            </div>
+        </div>
+
+
+        <mat-sidenav #sidenav position="end" class="search-form">
+            <app-agency-portfolio-creator *ngIf="sidePane==='CreatePortfolio'"
+                [validSecurities]="validSecurities$ | async"
+                [validatingSecurities]="validatingSecurities$ | async"
+                
+                [newPortfolio]="newPortfolio$ | async"
+                [portfolioCreating]="portfolioCreating$ | async"
+                [portfolioCreated]="portfolioCreated$ | async"
+                [portfolioCreationError]="portfolioCreationError$ | async"
+    
+                (validateSecurities)="onValidateSecurities($event)"
+                (createPortfolio)="onCreatePortfolio($event)"
+                (loadPortfolio)="onLoadPortfolio($event)"
+                (reloadPortfolio)="onReloadPortfolio($event)"
+                (resetCreationState)="onResetCreationState()"></app-agency-portfolio-creator>
+    
+            <app-agency-portfolio-selector *ngIf="sidePane==='ViewPortfolios'"
+                [portfolioTree]="portfolioTree$ | async"
+                [expandedNodePaths]="expandedNodePaths$ | async"
+                [portfolios]="portfolios$ | async"
+                [portfoliosLoading]="portfoliosLoading$ | async"
+                [portfoliosLoaded]="portfoliosLoaded$ | async"
+                [portfoliosError]="portfoliosError$ | async"
+                (loadPortfolio)="onLoadPortfolio($event)"
+                (deletePortfolio)="onDeletePortfolio($event)"
+                (expandNode)="onExpandNode($event)"
+                (collapseNode)="onCollapseNode($event)"></app-agency-portfolio-selector>
+        </mat-sidenav>
+    
+    </mat-sidenav-container>
+  
+
+</div>

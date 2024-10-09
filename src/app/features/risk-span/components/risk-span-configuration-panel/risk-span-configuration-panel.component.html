@@ -1,0 +1,93 @@
+<div class="toolbar">
+
+  <!-- <button mat-icon-button class="mat-button-shrink" color="primary">
+    <mat-icon>open_in_browser</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onOpenRocordsDialog()">
+    <mat-icon>all_inbox</mat-icon>
+  </button> -->
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onSetUiViewMode('plot')" >
+    <mat-icon>timeline</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onSetUiViewMode('raw')">
+    <mat-icon>view_list</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onSetUiViewMode('rawDetail')">
+    <mat-icon>chrome_reader_mode</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onSetUiViewMode('query')" style="margin-right: 0.5rem">
+    SQL
+  </button>
+
+  <!-- <button mat-icon-button class="mat-button-shrink" color="primary">
+    <mat-icon>tune</mat-icon>
+  </button> -->
+
+  <div *ngIf="(uiViewMode$ | async)==='plot'">
+    <mat-form-field appearance="outline" class="outline-shrink" style="padding-left: 0.6rem; border-left: 1px solid #80808029;margin: 0;">
+      <mat-label>X Axis</mat-label>
+      <mat-select placeholder="Pick X Axis" [(ngModel)]="xAxis" (ngModelChange)="onxAxisSelect()">
+        <mat-option [value]="'Age'">Age</mat-option>
+        <mat-option [value]="'MaxLoanSize'">Max Loan Size</mat-option>
+        <mat-option [value]="'RefiIncentive'">RefiIncentive</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Y Axis</mat-label>
+      <mat-select placeholder="Pick Y Axis" multiple [(ngModel)]="yAxis">
+        <mat-option *ngFor="let item of yAxisCollection" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Column</mat-label>
+      <mat-select placeholder="Pick Column" [disabled]="series === undefined" [(ngModel)]="column">
+        <mat-option *ngFor="let item of availableColumns" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Series</mat-label>
+      <mat-select placeholder="Pick Series" [disabled]="xAxis === undefined" [(ngModel)]="series" (ngModelChange)="onSeriesSelect()">
+        <mat-option *ngFor="let item of availableSeries" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" style="margin-left: 0.4rem;" (click)="onResetWorkflow()">
+      <mat-icon>settings_backup_restore</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" (click)="onLoadPlot()">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="(uiViewMode$ | async)==='raw' || (uiViewMode$ | async)==='rawDetail' || (uiViewMode$ | async)==='query'">
+    <mat-form-field appearance="outline" class="outline-shrink" style="padding-left: 0.6rem; border-left: 1px solid #80808029;margin: 0;">
+      <mat-label>Global Search</mat-label>
+      <input type="text" matInput [(ngModel)]="searchText" (ngModelChange)="onSetSearchText()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Target Column</mat-label>
+      <mat-select [(ngModel)]="targetColumn" (ngModelChange)="onSetTargetColumn()">
+        <mat-option *ngFor="let column of (gridColumnsCollection$ | async)" [value]="column">{{column}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+
+
+
+
+
+  <!-- <mat-icon id='toolbar-slider' *ngIf="slideStatus ==='up'" (click)="slideStatus='down'; onSlideUp()">arrow_drop_up</mat-icon>
+  <mat-icon id='toolbar-slider' *ngIf="slideStatus ==='down'" (click)="slideStatus='up'; onSlideDown()">arrow_drop_down</mat-icon> -->
+</div>

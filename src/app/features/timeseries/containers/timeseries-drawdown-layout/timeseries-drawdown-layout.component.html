@@ -1,0 +1,95 @@
+<div *ngIf="!currTab" class="vertical-flex-full-height" style="width:100%;display:flex;align-items: center;justify-content: center;">
+    <div>
+        No data has been selected. Please create a timeseries portfolio or open an existing one. 
+    </div>
+</div>
+
+<as-split [unit]="'percent'" [direction]="'vertical'" *ngIf="currTab.portfolio.timeseries.length > 0">
+    <as-split-area [size]="25" [order]="1">
+        <div class="wrap vertical-flex-full-height">
+            <div class="draopdown-params-wrap">
+            
+                <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                    <mat-label> Window </mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <input matInput type="number" placeholder="..." [value]="window" min="1" max="100">
+                    </div>
+                </mat-form-field>
+            
+                <mat-form-field appearance="outline" class="date-form-field toolbar-field" floatLabel="always">
+                    <mat-label> Observation </mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <input matInput type="number" placeholder="..." [value]="observation" min="1" max="100">
+                    </div>
+                </mat-form-field>
+                
+
+                <mat-form-field appearance="outline" class="date-form-field" floatLabel="always">
+                    <mat-label> Calc Method </mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <mat-select [(value)]="calcMethod" placeholder="...">
+                            <mat-option [value]="'percentage'">
+                                Percentage
+                            </mat-option>
+                            <mat-option [value]="'percentage'">
+                                Difference
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="date-form-field toolbar-field" floatLabel="always">
+                    <mat-label> Direction </mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <mat-select [(value)]="direction" placeholder="...">
+                            <mat-option [value]="'long'">
+                                Long
+                            </mat-option>
+                            <mat-option [value]="'short'">
+                                Short
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </mat-form-field>
+
+            </div>
+            <div class="btn-wrap">
+
+                <!-- <mat-form-field appearance="outline" class="date-form-field toolbar-field" floatLabel="always" style="height: 40px;width: 450px;">
+                    <mat-label> Timeseries </mat-label>
+                    <div class="mat-form-field-content-wrap">
+                        <mat-select [(value)]="selectedTs"  placeholder="..." (selectionChange)="handleSelectedDrawdownTsChange($event)">
+                            <mat-option *ngFor="let ts of timeseriesArr" [value]="ts['label']">
+                                {{ts.label}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </mat-form-field> -->
+
+            
+                <button mat-button (click)="submitDrawdownParams()" class="toolbar-btn" style="margin-left:1rem;"> 
+                    <span> Submit </span>
+                </button>
+            
+                <button mat-button (click)="resetDrawdownParams()" class="toolbar-btn" style="margin-left:3rem;"> 
+                    <span> Reset</span>
+                </button>
+
+            </div>
+        </div>
+    </as-split-area>
+    <as-split-area [size]="75" [order]="2">
+        <div class="vertical-flex-full-height">
+
+            <app-timeseries-drawdown-grid-viewer-component  
+                style="height: 99%"
+                [drawdownData]="drawdownData"
+                [selectedPoint]="selectedPoint"
+                [drawdownDataLoading]="drawdownDataLoading"
+                [selectedDrawdownDataTs]="selectedDrawdownDataTimeseries" 
+                [currTab]="currTab"
+            >
+            </app-timeseries-drawdown-grid-viewer-component>
+        </div>
+    </as-split-area>
+</as-split>

@@ -1,0 +1,20 @@
+
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<app-event-analysis-event-calendar-management-dialog 
+  [eventCalendars]='eventCalendars$ | async'
+  [activeEventCalenderDates]='activeEventCalenderDates$ | async'
+  [selectedCalenderName]='data.selectedCalenderName'
+  [activeConfiguration]='data.activeConfiguration'
+
+  (updateSelectedCalendar)='updateSelectedCalendar($event)'
+  (deleteSelectedCalendar)='deleteSelectedCalendar($event)'
+  (loadSelectedCalenderDate)="loadSelectedCalenderDate($event)"
+  (addNewDate)="addNewDate($event)"
+  (deleteDate)="deleteDate($event)"
+  (updateConfiguration)="updateConfiguration($event)"
+  class="vertical-flex-full-height"
+  style="height: 96%; padding: 0.5rem 1.2rem 1.2rem 1.2rem">
+</app-event-analysis-event-calendar-management-dialog>

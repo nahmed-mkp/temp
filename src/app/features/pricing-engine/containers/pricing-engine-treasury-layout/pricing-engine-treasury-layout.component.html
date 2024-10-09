@@ -1,0 +1,82 @@
+<div class="horizontal-flex-center" style="margin-bottom: -0.4rem; justify-content: space-between;">
+    <span class="horizontal-flex-center" style="margin-top:5px;">
+        <mat-form-field class="date-form-field" floatLabel="always">
+            <mat-label> Date </mat-label>
+            <input matInput placeholder="As Of Date" [matDatepicker]="picker1"
+            [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+     
+        <mat-slide-toggle [disabled]="isCurrentDate === false" [checked]="mode==='live'" (change)="onModeChange()">
+            <span class="slide-toggle-label">
+                {{ this.mode === 'live' ? 'Live': 'Close'}}
+            </span>
+        </mat-slide-toggle>
+    </span>
+
+
+    <div style="opacity: 0.5;">
+
+        <button mat-icon-button [ngClass]="{'spinning': mode === 'live'}" color="primary" matTooltip="5s refresh Cycle">
+            <mat-icon>cached</mat-icon>
+        </button>
+        <span style="margin-right: 1rem;" class="timestamp">
+            LastUpdated : <i>{{(timeStamp$ | async)?.latestPricingTs || 'N/A'}}</i>
+        </span>
+
+    </div>
+
+</div>
+
+<div style="flex: 1 0 0" class="horizontal-flex">
+    <app-pricing-engine-treasury-viewer 
+        style="flex: 4 0 0"
+        class="vertical-flex-full-height"
+        [data]="data$ | async"
+        [asOfDate]="selectedDate"
+        [loading]="loading$ | async"
+        [mode]="mode"
+        (onRowSelected)="onRowSelected($event)"
+        (onTreasuryUpdate)="onTreasuryUpdate($event)"
+        (onBVALProxySelected)="onBVALProxySelected($event)"
+        (onEditing)="onEditing($event)"
+    >
+    </app-pricing-engine-treasury-viewer>
+
+    <div style="flex: 1 0 0; border-top: 1px solid #80808075;" class="vertical-flex-full-height"  *ngIf="displayMode === 'detail'">
+        <app-pricing-engine-security-details-viewer 
+            style="flex: 2 0 0; overflow: auto;"
+            [data]="securityDetail$ | async"
+            [loading]="securityDetailLoading$ | async">
+        </app-pricing-engine-security-details-viewer>
+        <app-pricing-engine-ownwer-viewer 
+            class="vertical-flex"
+            style="flex: 1 0 0"
+            [data]="swapOwnershipData$ | async"
+            [loading]="swapOwnershipDataLoading$ | async">
+        </app-pricing-engine-ownwer-viewer>
+    </div>
+
+    <div style="flex: 2 0 0; border-top: 1px solid #80808075;" class="vertical-flex-full-height"  *ngIf="displayMode === 'auction'">
+        <app-pricing-engine-treasury-auction-viewer 
+            class="vertical-flex"
+            style="flex: 1 0 0"
+            [data]="auctionDates$ | async"
+            [loading]="auctionDatesLoading$ | async"
+            [mode]="mode">
+        </app-pricing-engine-treasury-auction-viewer>
+    </div>
+</div>
+
+<div class="left-tool-bar vertical-flex">
+    <button mat-flat-button [color]="displayMode === 'auction' ? 'button-active' : '' " class="vertical-write-mode" 
+        (click)="onChangeSideScreen('auction')">Upcoming Auctions
+    </button>
+
+    <button mat-flat-button [color]="displayMode === 'detail' ? 'button-active' : '' " class="vertical-write-mode" 
+        style="margin-top: .2rem;" (click)="onChangeSideScreen('detail')">Details
+    </button>
+</div>
+
+

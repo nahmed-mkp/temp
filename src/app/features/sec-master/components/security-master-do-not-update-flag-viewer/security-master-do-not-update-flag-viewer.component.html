@@ -1,0 +1,34 @@
+<div *ngIf="loading || setDoNotUpdateFlagPending || manualSetDoNotUpdateFlagPending" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div style="display: flex; justify-content: space-between;align-items: center;">
+
+    <div style="margin-top: 5px;">
+        <mat-form-field style="width:10rem" floatLabel="always">
+            <mat-label>Cre Sec ID</mat-label> 
+            <input type="number" matInput placeholder="Enter ID ..." [(ngModel)]="crdSecId" autocomplete="off">
+        </mat-form-field>
+        <button color="primary" mat-raised-button style="margin-left: 1rem;" [disabled]="crdSecId === null"
+            class="mat-button-shrink" (click)="onManualSetDoNotUpdateFlag()">
+            Add DoNotUpdate
+        </button>
+    </div>
+
+
+
+    <mat-form-field style="margin-bottom: -0.5rem; width: 20rem;">
+        <div class="mat-form-field-content-wrap">
+            <mat-icon matPrefix style="margin-left: 5px">search</mat-icon>
+            <input type="text" placeholder="Search ..." style="margin-left: 5px;" matInput [(ngModel)]="filterValue" (ngModelChange)="onFilterChange()">
+        </div>
+    </mat-form-field>
+</div>
+
+<app-base-grid
+    style="flex: 1 0 0"
+    [gridItems]="data || []"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

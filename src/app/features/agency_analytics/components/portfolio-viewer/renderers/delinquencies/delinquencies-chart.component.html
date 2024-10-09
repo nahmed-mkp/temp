@@ -1,0 +1,17 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small *ngIf="bond !== null">Mortgage Delinquencies - {{ bond?.name }} [{{bond?.cusip}}]</small>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCloseClick('close')">close</i>
+</div>
+
+<div class="mat-dialog-content">
+    <app-barchart style="height:50%;width:100%;height:100%;padding:0.2rem;"
+        [options]="optionsPlot"
+        [callbackFn]="callbackFn">
+    </app-barchart>
+    <div style="height:40%;padding:0.2rem;">
+        <app-base-grid width="100%" height="100%"
+            [customGridOption]="customGridOption" [extraOption]="extraOption"
+            [gridItems]="[]" [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </div>
+</div>

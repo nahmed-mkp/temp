@@ -1,0 +1,35 @@
+app-sec-master-toolbar {
+    display: block;
+    width: 30rem;
+    margin: 0rem auto;
+    border-radius: 10px;
+    padding: 0.4rem 0;
+    background: white;
+    box-shadow: 1px 1px 9px 0px #80808033;
+}
+
+app-sec-master-search-results {
+    flex: 1 0 0;
+    flex-direction: column;
+}
+
+app-sec-master-market-data {
+    flex: 1 0 0;
+    overflow: auto;
+}
+
+app-sec-master-details {
+    flex: 1 0 0;
+    min-height:500px;    
+    flex-direction: column;
+    overflow: auto;
+}
+
+div.horizontal-flex {
+    flex-wrap: wrap;
+}
+
+.mat-card {
+    padding: 5px;
+    margin: 5px;
+}

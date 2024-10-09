@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+    Please enter new name for <strong>{{tradename.TradeID}}: {{tradename.TradeName}}</strong><br />
+    <form class="tradename-rename-form" [formGroup]="newTradeNameForm">
+        <div fxLayout="column" fxLayoutAlign="space-around" class="form">
+            <div class="input">
+                <mat-form-field style="width: 450px;">
+                    <input matInput placeholder="New TradeName" formControlName="newTradeName"
+                        class="form-control" type="text" autocomplete="off" >
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="confirm()" [disabled]="newTradeNameForm.invalid" color="primary">Rename</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+</div>

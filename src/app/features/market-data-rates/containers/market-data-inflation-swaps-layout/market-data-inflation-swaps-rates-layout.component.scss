@@ -1,0 +1,16 @@
+.wrap{
+    display: flex;
+    flex-direction: row;
+}
+
+.custom-card{
+    max-height: 200px;
+    flex:1;
+}
+
+.custom-plot-viewer{
+    margin-top: 20px;
+    flex: 5;
+    height: 50vh;
+    margin-left: 10px;
+}

@@ -1,0 +1,49 @@
+<div class="" style="overflow-y: auto;min-height: 100%; display:flex; flex-direction: column;position: relative;">
+    <mat-toolbar>
+        <span class="toolbar-heading">HEALTH CHECK </span>
+        <span class="toolbar-spacer"> </span>
+        <span style="color:white">Last Update: {{(healthStatus$ | async)?.lastCheck}}</span>
+    </mat-toolbar>
+
+    <app-health-snapshot 
+        style="flex: 1 0 0;"
+        [healthStatus]="healthStatus$ | async"
+        [healthStatusLoading]="healthStatusLoading$ | async"
+        [healthStatusLoaded]="healthStatusLoaded$ | async"
+        [healthStatusError]="healthStatusError$ | async"
+        (loginAndRestartBloomberg)="loginAndRestartBloombergServer($event)"
+        (restartBloombergRT)="restartBloombergServer($event)"
+        (restartMDServerAndTradewebFeed)="restartMDServerAndTradewebFeed($event)"
+        (restartTradewebFeed)="restartTradewebFeed($event)"
+        (restartJobScheduler)="restartJobScheduler($event)"
+        (restartRiskServer)="restartRiskServer($event)"
+        (restartSimGen)="restartSimGen($event)"
+        (restartCalcServer)="restartCalcServer($event)"
+        (restartAllCalcServers)="restartAllCalcServers($event)"
+        (killProcess)="killProcess($event)">
+    </app-health-snapshot>
+
+    <span *ngIf="subScreenOpen && activeSubScreen === 'processMonitor'" style="padding-left: 5px;padding-top:10px;">
+        <app-process-monitor 
+        style="flex: 1 0 0; position: absolute; bottom: 0;"
+        [data]="processMonitorData$ | async"> 
+    </app-process-monitor>
+    </span>
+
+    <div class="bottom-tool-bar" style="margin-left:5px;">
+        <button mat-flat-button [color]="(subScreenOpen && activeSubScreen === 'processMonitor') ? 'button-active' : '' " 
+        style=" 
+        opacity: 0.8;
+        box-sizing:border-box;
+        margin: 0.2rem 0.2rem 0 0.2rem;
+        min-width: 0;
+        line-height: normal;
+        border-radius: 5px 5px 0 0;
+        box-shadow: 2px 2px 12px 1px rgb(0 0 0 / 20);"
+        (click)="onChangeSubscreen('processMonitor')">
+            Process Monitor
+        </button>
+    </div>
+    
+
+</div>

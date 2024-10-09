@@ -1,0 +1,43 @@
+<mat-toolbar>
+    <span class="toolbar-heading">DATA MANAGEMENT</span>
+    <span class="toolbar-spacer"> </span>
+
+    <mat-form-field class="date-form-field" appearance="outline" style="margin-left:1rem;">
+        <mat-label> From </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker1" placeholder="Start Date" [(ngModel)]="startDate"
+            (dateChange)="onStartDateSelected($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </div>
+    </mat-form-field>
+    
+    <mat-form-field class="date-form-field" appearance="outline" style="margin-left:1rem;">
+        <mat-label> To </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="endDate"
+                (dateChange)="onEndDateSelected($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;"
+        (click)="onRun()">
+        Load Data
+        <mat-icon>play_arrow</mat-icon>
+    </button>
+
+    <!-- <button mat-raised-button color="primary" style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;"
+        (click)="onResetChanges()">
+        Reset Changes
+        <mat-icon>replay</mat-icon>
+    </button>
+
+    <button mat-raised-button color="primary" style="margin-left:0.5rem; top: -0.16rem;padding-right: 0.5rem;"
+        (click)="onSaveChanges()">
+        Save Changes
+        <mat-icon>save</mat-icon>
+    </button> -->
+   
+</mat-toolbar>

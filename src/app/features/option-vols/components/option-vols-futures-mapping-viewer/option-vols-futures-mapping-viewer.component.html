@@ -1,0 +1,11 @@
+<div>Future Mappings
+  <mat-icon color="primary" (click)="onAdd()" matTooltip="Add New Ticker">add</mat-icon>
+</div>
+
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="formatData"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

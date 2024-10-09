@@ -1,0 +1,43 @@
+
+<div [ngClass]="{'horizontal-flex-full-height': true, 'darkTheme': darkTheme}">
+    <div style="flex: 2 0 0; position: relative;">
+
+        <div>
+            <button mat-icon-button class="mat-button-shrink" color="primary" (click)="switchDisplayMode('plot')">
+                <mat-icon matToolTip="Plot">auto_graph</mat-icon>
+            </button>
+            <button mat-icon-button class="mat-button-shrink" color="primary" (click)="switchDisplayMode('grid')">
+                <mat-icon matToolTip="Grid">grid_on</mat-icon>
+            </button>
+            <!-- <button mat-icon-button class="mat-button-shrink" color="primary" (click)="toogleNightMode()">
+                <mat-icon matToolTip="Grid">dark_mode</mat-icon>
+            </button> -->
+        </div>
+    
+        <app-pnl-attribution-timeseries-plot-viewer 
+            *ngIf="displayMode === 'plot'"
+            class="full-strech-block"
+            [darkTheme]="darkTheme"
+            [attributionTimeseriesData]="attributionTimeseriesData$ | async"
+            [loading]="attributionTimeseriesLoading$ | async"
+            [loaded]="attributionTimeseriesLoaded$ | async">
+        </app-pnl-attribution-timeseries-plot-viewer>
+        <app-pnl-attribution-timeseries-grid-viewer 
+            *ngIf="displayMode === 'grid'"
+            class="full-strech-block"
+            [darkTheme]="darkTheme"
+            [attributionTimeseriesData]="attributionTimeseriesData$ | async"
+            [loading]="attributionTimeseriesLoading$ | async"
+            [loaded]="attributionTimeseriesLoaded$ | async">
+        </app-pnl-attribution-timeseries-grid-viewer>
+    </div>
+    
+    <app-pnl-attribution-timeseries-histogram-viewer style="flex: 1 0 0;"
+        [darkTheme]="darkTheme"
+        [attributionTimeseriesData]="attributionTimeseriesData$ | async"
+        [loading]="attributionTimeseriesLoading$ | async"
+        [loaded]="attributionTimeseriesLoaded$ | async">
+    </app-pnl-attribution-timeseries-histogram-viewer>
+</div>
+
+

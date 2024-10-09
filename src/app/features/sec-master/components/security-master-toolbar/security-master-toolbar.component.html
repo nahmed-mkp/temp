@@ -1,0 +1,30 @@
+<div class="toolbar" [formGroup]="toolbarForm" style="margin-bottom: -1rem;">
+
+    <mat-form-field class="search">
+        <mat-label>Search Security Names, CUSIPs or SIDs</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input type="text" matInput autocomplete="off" formControlName="search">
+    </mat-form-field>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <!-- <div class="actions">
+        <button mat-icon-button aria-label="Create Generic Futures" title="Create Generic Futures" color="primary">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+
+        <button mat-icon-button aria-label="Create Security in IVP" title="Create Security in IVP" color="primary">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </div> -->
+
+    <!-- <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (change)="selectSecurityMaster($event)" [value]="'rcpm'">
+        <mat-button-toggle value="global" aria-label="Global Security Master">
+            Global
+        </mat-button-toggle>
+        <mat-button-toggle value="rcpm" aria-label="RCPM Security Master">
+            RCPM
+        </mat-button-toggle>
+    </mat-button-toggle-group> -->
+
+</div>

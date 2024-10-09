@@ -1,0 +1,12 @@
+<app-security-master-create-history-viewer
+    class="vertical-flex-full-height"
+    [startDate]="startDate"
+    [endDate]="endDate"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    [addDoNoteUpdateFlagPending]="addDoNoteUpdateFlagPending$ | async"
+    (onLoadCreationHistory)="onLoadCreationHistory($event)"
+    (addDoNotUpdateFlag)="onAddDoNotUpdateFlag($event)"
+    (deleteSecurity)="onDeleteSecurity($event)"
+    (retryCreateSecurity)="onRetryCreateSecurity($event)">
+</app-security-master-create-history-viewer>

@@ -1,0 +1,28 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>Send Email</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<Form class="vertical-flex" [formGroup]="newForm" style="flex: 1 0 0; padding: 1rem;">
+    <mat-form-field>
+        <mat-label>To</mat-label>
+        <input matInput placeholder="Seperate with ;" formControlName="to">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <input matInput placeholder="Eg: Order Report for Date..." formControlName="subject">
+    </mat-form-field>  
+
+    <mat-form-field>
+        <mat-label>Comments</mat-label>
+        <textarea matInput rows='8' formControlName="comment"></textarea>
+    </mat-form-field>
+</Form>
+
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSend()" [disabled]="!newForm.valid">Send</button>
+    <button mat-button (click)="onClose()">Close</button>
+</div>
+
+

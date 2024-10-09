@@ -1,0 +1,301 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <small>{{isNew ? 'Create' : 'Edit' }} Future Root</small> 
+    <i class="material-icons" style="cursor: pointer;" (click)="close()">close</i>
+</div>
+
+<form class="horizontal-flex" style="flex: 1 0 0; padding: 0rem 1rem 0 1rem;" [formGroup]="futuresInfoForm" autocomplete="off">
+
+        <div class="vertical-flex" style="flex: 1 0 0; padding-top: 1rem;">
+
+            <mat-form-field>
+                <mat-label>Future ID</mat-label>
+                <input matInput type="number" readonly required formControlName="futures_id" name="futures_id">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Root</mat-label>
+                <input matInput type="text" formControlName="root" name="root" required (input)="onUpdateRmLongName();onUpdateCurveName()">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Bloomberg Suffix</mat-label>
+                <mat-select required formControlName="blbg_suffix" name="blbg_suffix">
+                    <mat-option *ngFor="let option of uniqueValueDict['blbg_suffix']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input required matInput type="text" formControlName="name" name="name" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Currency</mat-label>
+                <mat-select required formControlName="currency" name="currency">
+                    <mat-option *ngFor="let option of uniqueValueDict['currency']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="opacity: 0.6;" class="non-clickable">
+                <mat-label>RM Long Name</mat-label>
+                <input matInput type="text" formControlName="rm_long_name" name="rm_long_name"  autocomplete="off" readonly>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Benchmark Cusip</mat-label>
+                <mat-select formControlName="benchmark_cusip" name="benchmark_cusip">
+                    <mat-option *ngFor="let option of uniqueValueDict['benchmark_cusip']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div style="margin-top: -0.5rem;margin-bottom: 1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Get Deliverables</small></span>
+                <br>
+                <mat-radio-group formControlName="get_deliverables" name="get_deliverables">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <mat-form-field>
+                <mat-label>Deliverable Prefix</mat-label>
+                <input matInput type="text" formControlName="deliverable_prefix" name="deliverable_prefix"  autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Opt EOD Price Method</mat-label>
+                <mat-select required formControlName="opt_eod_price_method" name="opt_eod_price_method">
+                    <mat-option *ngFor="let option of uniqueValueDict['opt_eod_price_method']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Opt Intraday Price Method</mat-label>
+                <mat-select required formControlName="opt_intraday_price_method" name="opt_intraday_price_method">
+                    <mat-option *ngFor="let option of uniqueValueDict['opt_intraday_price_method']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Exposure Type</mat-label>
+                <mat-select required formControlName="exposure_type" name="exposure_type">
+                    <mat-option *ngFor="let option of uniqueValueDict['exposure_type']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Generic Contract Frequency</mat-label>
+                <mat-select required formControlName="generic_contract_frequency">
+                    <mat-option [value]="12">Monthly</mat-option>
+                    <mat-option [value]="4">Quarterly</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-divider [vertical]="true" style="margin: 0 1rem;"></mat-divider>
+
+        <div class="vertical-flex" style="flex: 1 0 0; padding-top: 1rem;">
+            <mat-form-field>
+                <mat-label>Exchange</mat-label>
+                <mat-select required formControlName="exchange" name="exchange" (selectionChange)="onUpdateRmLongName()">
+                    <mat-option *ngFor="let option of uniqueValueDict['exchange']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select required formControlName="category" name="category">
+                    <mat-option *ngFor="let option of uniqueValueDict['category']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select required formControlName="country_id" name="country_id">
+                    <mat-option *ngFor="let country of uniqueValueDict['countries']" [value]="country.RCPM_CountryID">
+                        {{country.Description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Region</mat-label>
+                <mat-select required formControlName="region" name="region">
+                    <mat-option *ngFor="let option of uniqueValueDict['region']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Num units</mat-label>
+                <input required matInput type="number" formControlName="num_units" name="num_units" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Option Num Units</mat-label>
+                <input matInput type="number" formControlName="option_num_units" name="option_num_units" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Round To</mat-label>
+                <input matInput type="number" formControlName="round_to" name="round_to" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>OnTheRun Und Security</mat-label>
+                <mat-select formControlName="otr_underlying_security" name="otr_underlying_security">
+                    <mat-option *ngFor="let option of uniqueValueDict['otr_underlying_security']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="opacity: 0.6;" >
+                <mat-label>MKP Curve Name</mat-label>
+                <input required matInput type="text" formControlName="mkp_curve_name" name="mkp_curve_name" autocomplete="off" >
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Deposit Days</mat-label>
+                <input matInput type="text" formControlName="deposit_days" name="deposit_days" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Blbg Job Name</mat-label>
+                <input matInput type="text" formControlName="blbg_job_name" name="blbg_job_name" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Form PF Sub Asset Class</mat-label>
+                <mat-select required formControlName="form_pf_sub_asset_class" name="form_pf_sub_asset_class">
+                    <mat-option *ngFor="let option of uniqueValueDict['form_pf_sub_asset_class']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>CPO PQR Sub Asset Class</mat-label>
+                <mat-select required formControlName="cpo_pqr_sub_asset_class" name="cpo_pqr_sub_asset_class">
+                    <mat-option *ngFor="let option of uniqueValueDict['cpo_pqr_sub_asset_class']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>AIFM Position Sub Asset Type</mat-label>
+                <mat-select required formControlName="aifm_position_sub_asset_type" name="aifm_position_sub_asset_type">
+                    <mat-option *ngFor="let option of uniqueValueDict['aifm_position_sub_asset_type']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>AIFM Transaction Sub Asset Type</mat-label>
+                <mat-select required formControlName="aifm_transaction_sub_asset_type" name="aifm_transaction_sub_asset_type">
+                    <mat-option *ngFor="let option of uniqueValueDict['aifm_transaction_sub_asset_type']" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-divider [vertical]="true" style="margin: 0 1rem;"></mat-divider>
+
+        <div class="vertical-flex" style="flex: 1 0 0; padding-top: 1rem;">
+            <mat-form-field>
+                <mat-label>Term</mat-label>
+                <input matInput type="number" formControlName="term" name="term">
+            </mat-form-field>
+
+
+            <div style="margin-top: -0.5rem;margin-bottom: 1.1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Is Bond Future</small></span>
+                <br>
+                <mat-radio-group formControlName="is_bond_future" name="is_bond_future">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div style="margin-top: -0.5rem;margin-bottom: 1.1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Is Rate Future</small></span>
+                <br>
+                <mat-radio-group formControlName="is_rate_future" name="is_rate_future">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <mat-form-field>
+                <mat-label>Index SID</mat-label>
+                <input matInput type="text" formControlName="index_sid" name="index_sid" autocomplete="off">
+            </mat-form-field>
+            
+            <div style="margin-top: -0.5rem;margin-bottom: 1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Use Index Price</small></span>
+                <br>
+                <mat-radio-group formControlName="use_index_price" name="use_index_price">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <mat-form-field>
+                <mat-label>Strike Step</mat-label>
+                <input matInput type="number" formControlName="strike_step" name="strike_step" autocomplete="off">
+            </mat-form-field>
+
+            <div style="margin-top: -0.5rem;margin-bottom: 1.1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Is Mid Curve</small></span>
+                <br>
+                <mat-radio-group formControlName="is_mid_curve" name="is_mid_curve">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div style="margin-top: -0.5rem;margin-bottom: 1.1rem;">
+                <span style="font-size: 66%;opacity: 0.7;"><small>Is Weekly</small></span>
+                <br>
+                <mat-radio-group formControlName="is_weekly" name="is_weekly">
+                    <mat-radio-button [value]="true">True</mat-radio-button>
+                    <mat-radio-button [value]="false">False</mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field>
+                    <mat-label>Weekly Underlier</mat-label>
+                    <!-- <input matInput type="text" formControlName="weekly_underlier_id" name="weekly_underlier_id" autocomplete="off"> -->
+                    <mat-select formControlName="weekly_underlier_id" name="weekly_underlier_id">
+                        <mat-option *ngFor="let underlier of uniqueValueDict['weekly_underlier']" [value]="underlier.id">
+                            {{underlier.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>           
+        </div>
+</form>
+
+<div class="horizontal-flex" style="justify-content: flex-end;padding: 1rem; border-top: 1px solid #80808036;">    
+    <button mat-raised-button color="primary" style="width:10rem;margin-right: 1rem;" [disabled]="!futuresInfoForm.valid" (click)="save()">Save</button>
+    <button mat-raised-button style="width:10rem;" (click)="close()">Cancel</button>
+</div>

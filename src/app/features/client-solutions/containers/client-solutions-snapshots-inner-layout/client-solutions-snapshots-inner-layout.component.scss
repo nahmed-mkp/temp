@@ -1,0 +1,19 @@
+.mat-card-lift {
+    background-color: white;
+    margin: 0.3rem;
+    border-radius: 0.5rem;
+}
+
+app-cs-snapshot {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+app-cs-snapshots-summarystats {
+    position: relative;
+}
+
+app-cs-snapshots-correlmatrix {
+    position: relative;
+}

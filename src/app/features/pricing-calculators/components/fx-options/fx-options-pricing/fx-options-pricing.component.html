@@ -1,0 +1,472 @@
+<div class="top-wrapper">
+  <form> 
+    <mat-form-field class="date-form-field">
+      <mat-label>Valuation Date</mat-label>
+      <input
+        matInput
+        [min]="minDate"
+        [max]="maxDate"
+        [matDatepicker]="pickerAlt"
+        [formControl]="initValuationDate"
+        autocomplete="off"
+        (dateChange)="onValuationDateSelect($event)"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerAlt"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerAlt></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div class="wrapper">
+  <div class="left-wrapper">
+    <form class="my-form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="input-wrap">
+
+        <mat-form-field class="left-input">
+          <mat-label> Option Type </mat-label>
+          <mat-select (selectionChange)="onOptionTypeSelect($event)" required>
+            <mat-option *ngFor="let type of typeArr" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label> Underlying </mat-label>
+          <mat-select #underlying (selectionChange)="onCurrSelect($event)" required>
+            <input (keyup)="filterUnderlying($event.target.value)" matInput autocomplete="off"  style="height:2rem;border:1px solid rgb(189, 186, 186)" /> 
+            <mat-option
+              *ngFor="let curr of filteredCurrencies"
+              [value]="curr"
+              >{{ curr }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label> Notional </mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            (change)="onNotionalInput($event)"
+            [(value)]="_notional"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label> Notional Currency </mat-label>
+          <mat-select
+            #notionalCurr
+            (selectionChange)="onNotionalSelect($event)"
+            [(value)]="_notionalCurr"
+            [disabled]=" optionChoice === 'Barrier' || optionChoice === 'Vanilla' "
+            required
+          >
+            <mat-option *ngFor="let curr of currArr" [value]="curr">
+              {{ curr }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label> Quote Currency </mat-label>
+          <mat-select
+            #quoteCurr
+            (selectionChange)="onQuoteSelect($event)"
+            [(value)]="_quoteCurr"
+            required
+          >
+            <mat-option *ngFor="let curr of currArr" [value]="curr">
+              {{ curr }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+          [class.hidden]="optionChoice === 'Touch'"
+          [class.left-input]="optionChoice !== 'Touch'"
+        >
+          <mat-label> Call/Put </mat-label>
+          <mat-select #callPut (selectionChange)="onCallTypeSelect($event)" required>
+            <mat-option [value]="'C'"> Call </mat-option>
+            <mat-option [value]="'P'"> Put </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label>Maturity Date</mat-label>
+          <input
+            #maturityDate
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            (dateChange)="onMaturityDateSelect($event)"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field          
+          [class.hidden]="optionChoice !== 'Vanilla'"
+          [class.left-input]="optionChoice === 'Vanilla'"
+        >
+          <mat-label> Input VV Delta (%)</mat-label>
+          <input
+            matInput
+            type="number"
+            autocomplete="off"
+            [formControl]="_inputDelta"
+            (change)="onDeltaInput($event)"
+            [disabled]="mutuallyExclusive[0] && mutuallyExclusive[1] !== 'inputDelta'"
+          />
+        </mat-form-field>
+
+        <mat-form-field 
+          [class.hidden]="optionChoice === 'Touch'"
+          [class.left-input]="optionChoice !== 'Touch'"
+        >
+          <mat-label> Input Price (%) </mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="_inputPrice"
+            autocomplete="off"
+            (change)="onPriceInput($event)"
+            [disabled]="mutuallyExclusive[0] && mutuallyExclusive[1] !== 'inputPrice'"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="left-input">
+          <mat-label>Input Vol (%)</mat-label>
+          <input
+            matInput
+            type="number"
+            autocomplete="off"
+            [(value)]="_inputVol"
+            (change)="onVolumeInput($event)"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="left-input"
+          [class.hidden]="optionChoice === 'Touch'"
+          [class.left-input]="optionChoice !== 'Touch'"
+        >
+          <mat-label>Strike</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            [(value)]="_strike"
+            (change)="onStrikeInput($event)"
+            [disabled]="mutuallyExclusive[0] && mutuallyExclusive[1] !== 'strike'"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          [class.hidden]="optionChoice !== 'Barrier' && optionChoice !== 'Touch'"
+          [class.left-input]="optionChoice === 'Barrier' || optionChoice === 'Touch'"
+        >
+          <mat-label>Barrier</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            [formControl]="_barrier"
+            (change)="onBarrierInput($event)"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          [class.hidden]="optionChoice !== 'Barrier' && optionChoice !== 'Touch'"
+          [class.left-input]="optionChoice === 'Barrier' || optionChoice === 'Touch'"
+        >
+          <mat-label> Up Down </mat-label>
+          <mat-select #upDown (selectionChange)="onUpDownSelect($event)" required>
+            <mat-option [value]="'Up'"> Up </mat-option>
+            <mat-option [value]="'Down'"> Down </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          [class.hidden]="optionChoice !== 'Barrier' && optionChoice !== 'Touch'"
+          [class.left-input]="optionChoice === 'Barrier' || optionChoice === 'Touch'"
+        >
+          <mat-label [class.hidden]="optionChoice === 'Touch'"> In Out </mat-label>
+          <mat-label [class.hidden]="optionChoice !== 'Touch'"> One Touch / No Touch </mat-label>
+          <mat-select #inOut (selectionChange)="onInOutSelect($event)" required>
+            <mat-option [value]="'In'" [class.hidden]="optionChoice === 'Touch'"> In </mat-option>
+            <mat-option [value]="'Out'" [class.hidden]="optionChoice === 'Touch'"> Out </mat-option>
+            <mat-option [value]="'OneTouch'" [class.hidden]="optionChoice !== 'Touch'"> One Touch </mat-option>
+            <mat-option [value]="'NoTouch'" [class.hidden]="optionChoice !== 'Touch'"> No Touch </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br />
+
+        <button
+          *ngIf="!calculating"
+          color="primary"
+          mat-raised-button
+          style="margin-top: 2rem; width: 15rem"
+        >
+          Calculate
+        </button>
+        <button
+          *ngIf="calculating"
+          mat-raised-button
+          disabled
+          style="margin-top: 2rem; width: 15rem"
+        >
+          Calculating
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ========================  RESULTS GRIDS ========================  -->
+
+  <div class="right-wrapper">
+    <div class="section-wrapper">
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Underlying</mat-label>
+        <input type="text" 
+          matInput 
+          value="{{ fxOutput.data?.underlying }}" 
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Option Type</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.optionType }}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Call / Put</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.callType }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper">
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Maturity</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.maturity }}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Strike</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.strike === '0' ? 'N/A' : fxOutput.data?.strike.toFixed(6)}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Vol (%)</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.vol.toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper">
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Spot</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.spot.toFixed(4) }}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Forward</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.forward.toFixed(4) }}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="right-input">
+        <mat-label>Pct OTM (%)</mat-label>
+        <input
+          type="text"
+          class="dark-label"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.pct_otm }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field appearance="fill" x class="right-input">
+        <mat-label>Intrinsic Value</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.intrinsic_value }}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" x class="right-input">
+        <mat-label>Breakeven</mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.break_even === '0' ? 'N/A' : fxOutput.data?.break_even }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.price | keyvalue"
+        class="right-input"
+      >
+        <mat-label>Price (%) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.price[item.key] }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.premium | keyvalue"
+        class="right-input"
+      >
+        <mat-label>Premium ($) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.premium[item.key] }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.delta | keyvalue"
+        class="right-input"
+      >
+        <mat-label>VV Delta (%) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.delta[item.key].toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.delta01 | keyvalue"
+        class="right-input"
+      >
+        <mat-label>VV Delta01 ($) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.delta01[item.key].toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.gamma01 | keyvalue"
+        class="right-input"
+      >
+        <mat-label>Gamma01 ($) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.gamma01[item.key].toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.vega01 | keyvalue"
+        class="right-input"
+      >
+        <mat-label>Vega01 ($) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.vega01[item.key].toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="section-wrapper" id="two-item-row">
+      <mat-form-field
+        appearance="fill"
+        x
+        *ngFor="let item of fxOutput.data?.theta1d | keyvalue"
+        class="right-input"
+      >
+        <mat-label>Theta1D ($) {{ item.key }} </mat-label>
+        <input
+          type="text"
+          matInput
+          readonly
+          value="{{ fxOutput.data?.theta1d[item.key].toFixed(4) }}"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

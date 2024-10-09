@@ -1,0 +1,12 @@
+<div style="flex:1 0 0">
+    <div class="pane-header">
+        <span class="catalog-level"> {{paneData[0].catalogLevel}} </span>
+    </div>
+    <div class="pane-item" *ngFor="let item of paneData" >
+        <div class="pane-item-wrap" (click)="onClick(item)" [class.activePane]="checkIfActive(item)">
+            <span style="padding-left:5px;"> {{item.catalogName}} </span>  
+            <mat-icon *ngIf="!checkIsLeaf(item)">chevron_right</mat-icon>     
+            <mat-checkbox [checked]="isSelected(item)" *ngIf="isMarketData(item)" (change)="onSelect($event, item)"> </mat-checkbox>
+        </div>
+    </div>
+</div>

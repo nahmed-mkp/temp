@@ -1,0 +1,17 @@
+<app-benchmark-trades-params
+    [selectedTradeDate]="selectedTradeDate$ | async"
+    [tradeDates]="tradeDates$ | async"
+    [activeTab]="activeTab"
+    (tradeDateChanged)="changeTradeDate($event)"
+    (fxTradesLoaded)="loadFXTrades($event)"
+    (sendFxTrades)="onSendFxTrades()"></app-benchmark-trades-params>
+
+
+<app-benchmark-trades
+    class="mat-card-component"
+    [fxTrades]="fxTrades$ | async"
+    [fxTradesLoading]="fxTradesLoading$ | async"
+    [fxTradesLoaded]="fxTradesLoaded$ | async"
+    [fxTradesError]="fxTradesError$ | async"
+    (activeTabChange)="onActiveTabChange($event)"
+    (onSelectedBatchId)="onSelectedBatchId($event)"></app-benchmark-trades>

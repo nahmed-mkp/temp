@@ -1,0 +1,25 @@
+<!-- <p>
+  event-analysis-result-popup works!
+</p> -->
+
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+
+<div [ngSwitch]="data" style="height: 95%; padding: 0.5rem 1rem">
+  <app-event-analysis-rawdata-viewer 
+    *ngSwitchCase="'rawData'" 
+    class="vertical-flex-full-height"
+    [popUpMode]="true"
+    [data]="activeMarketDataGridFormated$ | async"
+    [activeConfiguration]="activeConfiguration$ | async">
+  </app-event-analysis-rawdata-viewer>
+
+  <app-event-analysis-statistic-viewer 
+    *ngSwitchCase="'statistics'" 
+    class="vertical-flex-full-height" 
+    [popUpMode]="true"
+    [data]="activeEventAnalysisStatisticData$ | async"
+    [activeConfiguration]="activeConfiguration$ | async">
+  </app-event-analysis-statistic-viewer>
+</div>

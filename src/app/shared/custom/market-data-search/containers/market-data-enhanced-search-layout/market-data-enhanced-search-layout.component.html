@@ -1,0 +1,10 @@
+<app-market-data-enhanced-search-inner
+    [searchResults]="enhancedSearchResult$ | async"
+    [searching]="enhancedSearchLoading$ | async"
+    [customClass]="customClass"
+    [placeholder]="placeholder"
+    
+    (searchSecurities)="onSearchSecurities($event)"
+    (selectSecurity)="selectSecurity($event)">
+
+</app-market-data-enhanced-search-inner>

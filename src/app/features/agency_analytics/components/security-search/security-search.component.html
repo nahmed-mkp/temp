@@ -1,0 +1,20 @@
+<mat-tab-group class="vertical-flex-full-height">
+    <mat-tab label="quick">
+        <ng-template mat-tab-label>
+            Quick Search
+        </ng-template>        
+        <div class="tab-content" style="display:flex;justify-content:center;">
+            <form class="search-form" [formGroup]="quickSearchForm">
+                <mat-form-field class="search-full-width">
+                    <input matInput type="text" placeholder="Search Ticker, Issuer, Description..." 
+                        formControlName="searchText" (keyup)="handleKeyUpEvent_debounce($event)" autocomplete="off">
+                </mat-form-field>
+            </form>   
+        </div>
+    </mat-tab>
+    <mat-tab label="advanced">
+        <ng-template mat-tab-label>
+            Advanced Search
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

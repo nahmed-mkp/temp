@@ -1,0 +1,33 @@
+<!-- <p>
+  pool-configuration-viewer works!
+</p> -->
+<!-- <div>
+    <button mat-flat-button color="primary" style="margin-right: 1rem">Load Personal</button>
+    <button mat-flat-button color="primary" style="margin-right: 1rem">Save Personal</button>
+    <button mat-stroked-button style="margin-right: 1rem">Load Defaults</button>
+    <button mat-stroked-button>Save Defaults</button>
+</div> -->
+
+<i>Global Settings</i>
+<app-base-grid
+  style="flex: 2 0 0"
+  [gridItems]="globalSettings"
+  [customGridOption]="customGridOption"
+  [extraOption]="{}">
+</app-base-grid>
+
+<i>Severity Settings</i>
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="severitySettings"
+  [customGridOption]="customGridOption"
+  [extraOption]="{}">
+</app-base-grid>
+
+<i>Calibration Settings</i>
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="calibrationSettings"
+  [customGridOption]="customGridOption"
+  [extraOption]="{}">
+</app-base-grid>

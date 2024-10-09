@@ -1,0 +1,25 @@
+<!-- <div class="card card-shadow" style="width:20rem;margin:10px;">
+    <div class="card-block">
+        <h5 class="card-title report-header">
+            <a *ngIf="!editMode" class="navlink" href="#" [routerLink]="['./workbooks/', workbook.shortCode]">{{workbook.name}}</a>
+            <i class="fa fa-pencil" style="cursor:pointer" (click)="toggleEditMode()" *ngIf="workbook.editable"></i>
+        </h5>
+        <p class="card-text report-subheader"><i>{{workbook.description}}</i></p>
+    </div>
+    <div class="card-footer link-row">
+        <span class="d-flex justify-content-between">
+            <a href="#" (click)="toggleFavorite($event)">
+                <i class="fa"  [ngClass]="{'fa-star-o': !workbook.favorited, 'fa-star fa-yellow-bordered': workbook.favorited}"></i> {{workbook.numFavorited}}
+            </a>
+            <a href="#" (click)="$event.preventDefault()" title="Reports">
+                <i class="fa fa-file-text-o"></i> {{workbook.numReports}}
+            </a>
+            <a href="#" (click)="$event.preventDefault()" title="Views">
+                <i class="fa fa-eye"></i> {{workbook.numViews}}
+            </a>
+
+            <a href="#" (click)="deleteWorkbook($event)" *ngIf="workbook.editable"><i class="fa fa-ban"></i> Delete</a>
+        </span>
+    </div>
+</div>
+     -->

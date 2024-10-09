@@ -1,0 +1,11 @@
+<mat-form-field 
+    class="mat-select-no-line">
+    <mat-select [value]="value" (selectionChange)="selectMarketData($event);"  #mySelect>
+        <mat-option *ngIf="(marketDataTypesLoading$ | async)">Loading...</mat-option>
+        <ng-container *ngIf="!(marketDataTypesLoading$ | async)">
+            <mat-option *ngFor="let marketData of marketData$ | async" [value]="marketData['type']">
+                {{marketData.type}}
+            </mat-option>
+        </ng-container>
+    </mat-select>
+</mat-form-field>

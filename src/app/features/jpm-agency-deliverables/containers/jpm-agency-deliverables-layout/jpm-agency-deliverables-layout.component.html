@@ -1,0 +1,73 @@
+<div class="vertical-flex-full-height">
+
+  <mat-toolbar>
+    <span class="toolbar-heading"> JPM AGENCY ANALYTICS </span>
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <span class="toolbar-spacer"></span>
+  
+    <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 1rem;">
+      <mat-label> Date </mat-label>
+      <div class="mat-form-field-content-wrap">
+          <mat-select (selectionChange)="onDateChanged($event)" [value]="(latestPortfolioDate$ | async)">
+              <mat-option *ngFor="let date of (portfolioDates$ | async)" [value]="date" style="margin-top:10px;">
+                {{date}}
+              </mat-option>
+          </mat-select>
+      </div>
+    </mat-form-field>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="vertical-flex-full-height">
+
+    <mat-sidenav-content>
+      <div class="vertical-flex-full-height" style="display:flex;flex-direction:row;">
+        <mat-tab-group class="vertical-flex-full-height" style="flex:1;">
+          <mat-tab label="quick">
+            <ng-template mat-tab-label> Deliverables </ng-template>
+            <div class="vertical-flex-full-height">
+              <app-jpm-agency-data-grid-viewer
+                class="vertical-flex-full-height"
+                [data]="deliverableData$ | async"
+                [dataLoading]="deliverableDataLoading$ | async"
+              >
+              </app-jpm-agency-data-grid-viewer>
+            </div>
+          </mat-tab>
+          <mat-tab label="advanced">
+            <ng-template mat-tab-label> Cash </ng-template>
+            <div class="vertical-flex-full-height">
+              <app-jpm-agency-data-grid-viewer
+                class="vertical-flex-full-height"
+                [data]="cashData$ | async"
+                [dataLoading]="cashDataLoading$ | async"
+              >
+              </app-jpm-agency-data-grid-viewer>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <button mat-flat-button id="flows-button" class="vertical-write-mode" (click)="onOpenSideNav()">
+        Deliverables Configuration
+      </button>
+    </mat-sidenav-content>
+
+
+    <mat-sidenav #sidenav position="end" class="capital-form">
+      <div class="vertical-flex-full-height" style="width:400px">
+        <div style="height: 30px; padding-left: 1rem;padding-top:10px">
+          Deliverable Configuration
+        </div>
+        <app-jpm-agency-config-grid-viewer
+          class="vertical-flex-full-height"
+          [configData]="deliverableConfigData$ | async"
+        >
+      </app-jpm-agency-config-grid-viewer> 
+      </div>
+    </mat-sidenav>  
+
+  </mat-sidenav-container>
+  
+
+
+</div>

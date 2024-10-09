@@ -1,0 +1,104 @@
+.selector-container {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    height: 50px;
+    
+    > mat-form-field, > div {
+        margin-right: 1.5rem;
+        flex: 1 0 0
+    }
+
+    mat-form-field {
+        max-width: 11rem;
+    }
+
+    // > div {
+    //     flex-direction: column;
+    //     display: flex;
+    //     height: 3.9rem;
+    //     overflow: hidden;
+    // }
+}
+
+
+.series-list {
+    margin-left: 1em;
+}
+
+.oas-choice {
+    margin-left: 4em;
+}
+
+// Animation
+.metric {
+    #plot-type {
+        animation: fadeOutUp 1s;
+        animation-fill-mode: both;
+    } 
+    #metric-plot-type {
+        animation: fadeInUp 1s;
+        animation-fill-mode: both;
+    }
+}
+
+.regular {
+    #plot-type {
+        animation: fadeInDown 1s;
+        animation-fill-mode: both;
+
+    } 
+    #metric-plot-type {
+        animation: fadeOutDown 1s;
+        animation-fill-mode: both;
+    }
+}
+
+
+
+
+@keyframes fadeInDown {
+    0% {
+       opacity: 0;
+       transform: translateY(-3.9rem);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0px);
+    }
+}
+
+@keyframes fadeOutDown {
+    0% {
+       opacity: 1;
+       transform: translateY(-3.9rem);
+    }
+    100% {
+       opacity: 0;
+       transform: translateY(0px);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-3.9rem);
+    }
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-3.9rem);
+    }
+}
+
+

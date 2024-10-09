@@ -1,0 +1,62 @@
+h5 {
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+div.horizontal-flex-center {
+    span {
+        //font-weight: bold;
+        color: grey;
+        opacity: 0.9;
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
+
+        > i {
+            color: red;
+            font-size: medium;
+        }
+    }
+
+    mat-form-field, app-market-data-enhanced-search-layout {
+        width: 18rem;
+    }
+
+    justify-content: space-between;
+}
+
+mat-tab-group {
+    div.horizontal-flex-center {
+        padding: 0 0.5rem;
+    }
+}
+
+.mat-mdc-form-field {
+    margin-bottom: -0.4rem;
+    height: 2.6rem;
+}
+
+mat-tab-group {
+    flex: 1 0 0;
+    margin: 1rem 0;
+    border: 1px solid #8080801a;
+}
+
+button {
+    margin: 0 1rem 1rem 1rem
+}
+
+.manual-disable-field {
+    pointer-events: none;
+    opacity: 0.7;
+    .mat-form-field-underline {
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.42) 0,
+        rgba(0, 0, 0, 0.42) 33%,
+        transparent 0
+      );
+      background-size: 4px 100%;
+      background-repeat: repeat-x;
+      background-color: transparent;
+    }
+  }

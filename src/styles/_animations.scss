@@ -1,0 +1,87 @@
+// ================== ANIMATIONS ===================== //
+
+.bounce {
+    position: relative;
+    -moz-animation: bounce 0.5s infinite linear;
+    -o-animation: bounce 0.5s infinite linear;
+    -webkit-animation: bounce 0.5s infinite linear;
+    animation: bounce 0.5s infinite linear;
+  }
+  
+  @keyframes bounce {
+    0% {
+      top: 0;
+    }
+    50% {
+      top: -0.2em;
+    }
+    70% {
+      top: -0.3em;
+    }
+    100% {
+      top: 0;
+    }
+  }
+  
+  @keyframes fade {
+    0% {
+      opacity: 0.2;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  
+  @keyframes light-on-off-fading {
+    0% {
+      opacity: 0.2;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  
+  @keyframes x-scale {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+  
+  .spinning {
+    animation: spin-animation 3s linear infinite forwards;
+  }
+  
+  .non-spinning {
+    opacity: 0.4;
+  }
+  
+  @keyframes spin-animation {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+  

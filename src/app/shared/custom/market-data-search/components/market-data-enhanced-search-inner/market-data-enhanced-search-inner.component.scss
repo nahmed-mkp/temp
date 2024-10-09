@@ -1,0 +1,38 @@
+.auto-complete-grid-header {
+    background: #e1e1e1;
+    height: 1.5rem !important;
+}
+
+.auto-complete-header-grid-cell {
+    border-right: 1px solid #aaaaaa;
+    border-bottom: 1px solid #aaaaaa;
+    line-height: 1.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.auto-complete-grid-cell {
+    border-right: 1px dotted #aaaaaa;
+    border-bottom: 1px dotted #aaaaaa;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mat-mdc-option {
+    line-height: initial;
+}
+
+app-base-grid {
+    width: 50rem;
+    height: 21rem;
+    position: absolute;
+    z-index: 10;
+    left: -14rem;
+    top: 3rem
+}
+
+mat-spinner {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+}

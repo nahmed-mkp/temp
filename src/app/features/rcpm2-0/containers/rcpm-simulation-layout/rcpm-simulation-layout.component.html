@@ -1,0 +1,74 @@
+<div class="vertical-flex-full-height" style="position: relative;">
+
+  <div id="simulate-return-toolbar">
+    <span class="horizontal-flex-full-width" *ngIf="showToolBar">
+      <mat-checkbox style="margin-right: 0.5rem;margin-left: auto;" [(ngModel)]="showIsSymmetric">Symmetrized</mat-checkbox>
+      <mat-button-toggle-group style="margin-right: 0.3rem;" [(ngModel)]="mode">
+        <mat-button-toggle value="timeseries" [checked]="mode==='timeseries'" class="outline-shrink">Chart</mat-button-toggle>
+        <mat-button-toggle value="raw" [checked]="mode==='raw'" class="outline-shrink">Raw</mat-button-toggle>
+      </mat-button-toggle-group>
+  
+      <mat-form-field appearance="outline" class="outline-shrink" style="width: 10rem; margin-right: 0.3rem;margin-top:20px;">
+          <div class="mat-form-field-content-wrap">
+            <mat-icon matPrefix style="color: grey;opacity: 0.6">functions</mat-icon>
+            <mat-select placeholder="Duration" [(ngModel)]="calculationMode">
+              <mat-option [value]="'$'">$ Basic (work pending)</mat-option>
+              <mat-option [value]="'BpsToFund'">BpsToFund (work pending)</mat-option>
+              <mat-option [value]="'BpsToPod'">BpsToPod (work pending)</mat-option>
+            </mat-select>
+          </div>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="outline-shrink" style="width: 10rem; margin-right: 0.3rem;margin-top:20px;">
+        <div class="mat-form-field-content-wrap">
+        <mat-icon matPrefix style="color: grey;opacity: 0.6; margin-left:5px;width: 30px;">timelapse</mat-icon>
+          <mat-select placeholder="Duration" [(ngModel)]="duration" (ngModelChange)="onDurationChange()" style="margin-left:5px;">
+              <mat-option [value]="'Daily'">Daily</mat-option>
+              <mat-option [value]="'Monthly'">Monthly</mat-option>
+              <mat-option [value]="'Quarterly'">Quarterly</mat-option>
+            </mat-select>
+          </div>
+      </mat-form-field>
+  
+      <button mat-icon-button color="primary" (click)="copyUrl()" title="Copy URL">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+
+    </span>
+    <div id="toolbar-collapse-handle"(click)="onToggleToolbar()">
+      <mat-icon>more_horiz</mat-icon>
+      <mat-icon *ngIf="!showToolBar">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="showToolBar">keyboard_arrow_up</mat-icon>
+      <mat-icon>more_horiz</mat-icon>
+    </div>
+  </div>
+
+
+  <div style="flex: 1 0 0" class="horizontal-flex">
+    <app-rcpm-simulation-viewer
+      *ngIf="mode==='raw'"
+      style="flex: 2 0 0"
+      [showIsSymmetric]="showIsSymmetric"
+      [data]="simulationData$ | async"
+      [loading]="simulationLoading$ | async">
+    </app-rcpm-simulation-viewer>
+
+    <app-rcpm-simulation-plot-viewer
+      *ngIf="mode==='timeseries'"
+      style="flex: 2 0 0"
+      [showIsSymmetric]="showIsSymmetric"
+      [dataPath]="dataPath"
+      [data]="simulationData$ | async"
+      [loading]="simulationLoading$ | async">
+    </app-rcpm-simulation-plot-viewer>
+
+    <app-rcpm-simulation-histogram-viewer
+      style="flex: 1 0 0"
+      [showIsSymmetric]="showIsSymmetric"
+      [data]="simulationData$ | async"
+      [loading]="simulationLoading$ | async">
+    </app-rcpm-simulation-histogram-viewer>
+  </div>
+
+</div>
+

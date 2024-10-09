@@ -1,0 +1,1280 @@
+app-pool-portfolios-items-layout {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    mat-ink-bar {
+      display: none !important;
+    }
+  
+    mat-tab-header.mat-tab-header {
+      // display: inline-block;
+      max-width: calc(100vw - 5.3rem);
+      transform: translateX(5.3rem);
+    }
+  }
+  
+  app-pool-portfolios-items-viewer {
+    display: block;
+    position: relative;
+  
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      line-height: 30px;
+      font-size: 0.8rem;
+    }
+    #global-filter {
+      margin-right: 0.5rem;
+      width: 15rem;
+      line-height: 1.2rem;
+    }
+  }
+  
+  app-create-new-portfolio-popup {
+    td.mat-cell,
+    td.mat-footer-cell,
+    th.mat-header-cell {
+      padding: 0 1rem;
+    }
+  }
+  
+  app-add-cusips-to-portfolio {
+    table {
+      width: 100%;
+      display: block;
+      flex-grow: 25;
+      overflow-y: auto;
+  
+      thead {
+        th.mat-header-cell {
+          padding: 0 2rem;
+        }
+      }
+    }
+  }
+  
+  app-drawdown-analysis-layout {
+    // display: flex;
+    // flex-direction: row;
+    // align-items: stretch;
+    height: 100%;
+  
+    app-drawdown-analysis-timeseries-viewer {
+      flex-grow: 6;
+      width: 0%;
+      background: white;
+      margin: 0.5rem 0;
+      box-shadow: 1px 1px 11px 0px #8080806b;
+    }
+  
+    .feature-content-section {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-start;
+      align-items: stretch;
+  
+      .feature-control-section {
+        background: white;
+        box-shadow: 1px 1px 11px 0px #8080806b;
+        margin: 0.5rem 0 0 0.5rem;
+        padding: 0.8rem 0.8rem 0 0.8rem;
+        > div:not(:last-child) {
+          display: flex;
+          justify-content: space-between;
+        }
+        > div:last-child {
+          float: right;
+        }
+        mat-form-field {
+          width: 30%;
+        }
+      }
+  
+      app-drawdown-analysis-list-viewer {
+        position: relative;
+        flex-grow: 1;
+        height: 0%;
+        margin: 0.5rem 0 0.5rem 0.5rem;
+        background: white;
+        box-shadow: 1px 1px 11px 0px #8080806b;
+        .ag-theme-balham .ag-root {
+          border: none;
+        }
+      }
+    }
+  }
+  
+  app-drawdown-analysis-timeseries-viewer {
+    padding: 1rem 1rem 0 0;
+  }
+  
+  app-tbareports-timeseries-selector {
+    .mat-form-field-appearance-outline div.mat-form-field-infix {
+      padding: 0.5em 0 0.5em 0;
+    }
+  
+    .mat-form-field-appearance-outline div.mat-form-field-outline {
+      background: white;
+    }
+  
+    .mat-slide-toggle {
+      font-size: 0.8rem;
+      padding-bottom: 1.34375em;
+      padding-right: 2rem;
+      height: initial;
+  
+      &.disactive-toggle {
+        .mat-slide-toggle-content {
+          opacity: 0.5;
+        }
+      }
+      &.active-toggle {
+        .mat-slide-toggle-content {
+          opacity: 1;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+  
+  app-tbareports-timeseries-container {
+    #tba-tracker-timestamp {
+      display: inline-block;
+      cursor: not-allowed;
+  
+      i {
+        padding-left: 0.5rem;
+        border-left: 1px solid #8080807d;
+        opacity: 0.5;
+      }
+      span {
+        font-size: 0.9rem;
+        display: inline-block;
+        transform: translateY(-7px);
+        padding-left: 0.4rem;
+        font-weight: bolder;
+      }
+    }
+  }
+  
+  app-tbareports-timeseries-plots {
+    .ag-cell {
+      display: inline;
+    }
+    .ng-star-inserted {
+      width: 100%;
+    }
+  }
+  
+  app-correlation-layout,
+  app-portfolio-analysis-layout {
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    height: 100%;
+    // align-items: stretch;
+    // max-width: 1500px;
+    // margin: 0 auto;
+  
+    .content-section {
+      flex: 5 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .input-section {
+      flex: 1 0 0;
+      margin-right: 0;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      position: relative;
+      .mat-list-item {
+        height: 35px;
+        input {
+          padding: 0.2rem;
+          max-width: 5rem;
+        }
+        input:hover {
+          background: #80808024;
+        }
+      }
+      .mat-list-item-content {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #80808036;
+        font-size: 12px;
+        height: 2rem !important;
+        padding-right: 0 !important;
+        mat-icon {
+          font-size: 1.2rem;
+          vertical-align: baseline;
+        }
+        button {
+          visibility: hidden;
+          width: 30px;
+          height: 30px;
+        }
+        &:hover {
+          button {
+            visibility: visible;
+            opacity: 0.5;
+          }
+          button:hover {
+            opacity: 1;
+          }
+        }
+      }
+  
+      > button {
+        position: absolute;
+        width: 86%;
+        bottom: 18px;
+      }
+    }
+  }
+  
+  app-portfolio-analysis-layout {
+    app-portfolio-analysis-timeseries-viewer {
+      flex: 3 0 0;
+      margin-left: 0;
+      overflow: auto;
+    }
+    .flex-row {
+      flex: 2 0 0;
+      margin-left: 0;
+      overflow: auto;
+  
+      app-portfolio-analysis-stats-viewer {
+        flex: 2 0 0;
+        overflow: auto;
+      }
+      app-portfolio-analysis-corr-matrix-viewer {
+        flex: 3 0 0;
+        overflow: auto;
+      }
+    }
+  }
+  
+  snack-bar-container.pool-toolbar {
+    margin: 0;
+  }
+  
+  app-scenario-generator-layout {
+    mat-tab-header.mat-tab-header {
+      transform: none;
+    }
+  
+    app-scenario-generator-viewer {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 0;
+      .mat-tab-body-wrapper {
+        height: 100%;
+      }
+  
+      .mat-form-field {
+        height: 100%;
+        .mat-form-field-wrapper {
+          height: 100%;
+          .mat-form-field-flex {
+            height: 100%;
+            border: 1px solid #8080808c;
+            padding: 0.5rem;
+            .mat-form-field-infix {
+              height: 100%;
+              textarea {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  app-pool-configuration-viewer,
+  app-pool-scenario-picker-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    app-base-grid {
+      flex: 1 0 0;
+    }
+    i {
+      opacity: 0.4;
+      font-weight: bolder;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+  
+  app-yieldbook-queue-monitor-viewer {
+    display: flex;
+    width: 75rem;
+    height: 20rem;
+    flex-direction: column;
+    app-base-grid {
+      flex: 1 0 0;
+    }
+  }
+  
+  app-timeseries-analysis-layout {
+    div {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      .mat-card {
+        margin: 0.5rem;
+      }
+    }
+  
+    div.archive-focus-mode {
+      app-timeseries-analysis-archive-records-viewer {
+        flex: 3 0 0;
+      }
+      app-timeseries-analysis-configuration-layout {
+        flex: 2 0 0;
+      }
+      app-timeseries-analysis-result-layout {
+        flex: 1 0 0;
+      }
+    }
+  
+    div.analysis-result-focus-mode {
+      app-timeseries-analysis-archive-records-viewer {
+        flex: 1 0 0;
+      }
+      app-timeseries-analysis-configuration-layout {
+        flex: 2 0 0;
+      }
+      app-timeseries-analysis-result-layout {
+        flex: 3 0 0;
+      }
+    }
+    div.analysis-result-solo-focus-mode {
+      app-timeseries-analysis-archive-records-viewer {
+        flex: 1 0 0;
+      }
+      app-timeseries-analysis-configuration-layout {
+        flex: 1 0 0;
+      }
+      app-timeseries-analysis-result-layout {
+        flex: 3 0 0;
+      }
+    }
+  }
+  
+  app-event-analysis-layout {
+    display: flex;
+    height: 100%;
+    margin: 0 auto;
+    ag-grid-angular {
+      height: 100% !important;
+    }
+  
+    .mat-card,
+    .mat-expansion-panel {
+      box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0.05),
+        0px 12px 20px 0 rgba(0, 0, 0, 0.05) !important;
+    }
+  
+    > div {
+      display: flex;
+      flex-direction: column;
+      flex: 6 0 0;
+      margin: 0.5rem;
+      padding-bottom: 0.5rem;
+  
+      mat-tab-group {
+        flex: 2 0 0;
+        margin-bottom: 0.5rem;
+        div.mat-tab-labels {
+          border-radius: 5px 5px 0 0;
+        }
+        .mat-tab-body-wrapper {
+          padding: 0.5rem 1rem 1rem 1rem;
+        }
+        .new-window-viewing {
+          opacity: 0.1;
+          pointer-events: none;
+        }
+      }
+      app-event-analysis-formula-timeseries-setting {
+        flex: 1 0 0;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        app-market-data-search {
+          .mat-form-field-underline {
+            display: none;
+          }
+        }
+      }
+    }
+  
+    app-event-analysis-configuration-panel {
+      flex: 1 0 0;
+      .mat-card {
+        height: 100%;
+        margin: 0.5rem 0.5rem 0.5rem 0;
+        padding: 0.5rem 0.3rem 1rem 0.3rem;
+        background: #f8f8f8;
+        box-shadow: none !important;
+      }
+  
+      h5 {
+        opacity: 0.6;
+      }
+    }
+  
+    app-event-analysis-rawdata-viewer,
+    app-event-analysis-statistic-viewer {
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
+        bottom: initial;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      .tool-bar-section h4 {
+        margin: 0;
+      }
+    }
+  }
+  
+  snack-bar-container.unauthorized {
+    min-width: 0;
+    height: 80px;
+    width: 400px;
+    border-left: 6px solid #de3d74;
+    background: #323232f0;
+    overflow: auto;
+  
+    .mat-simple-snackbar {
+      align-items: start;
+    }
+  
+    .mat-simple-snackbar-action button {
+      position: absolute;
+      bottom: 4px;
+      right: 0;
+    }
+  }
+  
+  snack-bar-container.network-notification {
+    min-width: 0;
+    height: 121px;
+    width: 287px;
+    border-left: 6px solid #de3d74;
+    background: #323232f0;
+    overflow: auto;
+  
+    .mat-simple-snackbar {
+      align-items: start;
+    }
+  
+    .mat-simple-snackbar-action button {
+      position: absolute;
+      bottom: 4px;
+      right: 0;
+    }
+  }
+  
+  snack-bar-container.network-notification-green {
+    min-width: 0;
+    height: 121px;
+    width: 287px;
+    border-left: 6px solid #47bf4f;
+    background: #323232f0;
+    overflow: auto;
+  
+    .mat-simple-snackbar {
+      align-items: start;
+    }
+  
+    .mat-simple-snackbar-action button {
+      position: absolute;
+      bottom: 4px;
+      right: 0;
+    }
+  }
+  
+  snack-bar-container.network-notification-green.center-notification,
+  snack-bar-container.network-notification.center-notification {
+    transform: translate(-50%, -80%) !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+  app-event-analysis-event-plot-viewer {
+    .mat-list-base[dense] {
+      position: relative;
+      padding-top: 0;
+      .mat-list-option:nth-child(2) {
+        margin-top: 0.5rem;
+      }
+      h4 {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        box-shadow: 1px 1px 11px 0px #8080805e;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #3f51b51a;
+        visibility: hidden;
+      }
+      &:hover::-webkit-scrollbar-thumb {
+        visibility: visible;
+      }
+      .mat-pseudo-checkbox-checked {
+        background: #3f51b5a3;
+      }
+    }
+  }
+  
+  app-event-analysis-custom-functions-dialog {
+    table {
+      padding: 0 0.5rem 0.5rem 0.5rem;
+  
+      tbody tr:last-child {
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  
+  app-euro-rates-layout {
+    display: block;
+    height: 100%;
+  }
+  
+  app-euro-rates-viewer {
+    .cdk-drag-placeholder {
+      opacity: 0;
+    }
+  }
+  
+  app-vol-report-layout,
+  app-jbot-layout,
+  app-agency-portfolio-layout,
+  app-jbot-tech-layout,
+  app-jbot-monitor-layout,
+  app-jbot-summary-layout,
+  app-benchmark-portfolio-trades-layout {
+    display: flex;
+    flex-direction: column;
+    height: 99%;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+  
+    ag-grid-angular {
+      height: 100% !important;
+    }
+  
+    .ag-theme-balham .ag-header-cell {
+      border-right: 1px solid #80808045;
+    }
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    .mat-checkbox-inner-container {
+      opacity: 0.7;
+    }
+  
+    .mat-card {
+      padding: 0;
+    }
+  }
+  
+  app-pool-portfolios-items-viewer {
+    .ag-theme-balham .ag-header-cell-label .ag-header-cell-text {
+      overflow: hidden;
+      text-overflow: initial;
+      word-wrap: break-word;
+      white-space: normal;
+      line-height: 15px;
+    }
+  }
+  
+  app-agency-portfolio-layout {
+    div.mat-tab-label:last-child {
+      position: absolute;
+      right: 0;
+      width: 40rem;
+      background: #062f7d99;
+      color: white !important;
+      border-radius: 0 0 5px 0 !important;
+      .mat-tab-label-content {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+  
+  app-agency-portfolio-layout,
+  app-rcpm-position-layout,
+  app-pool-portfolios-viewer,
+  app-pool-portfolios-items-viewer,
+  app-pnl-attribution-viewer {
+    .ag-theme-balham .ag-header-cell,
+    .ag-theme-balham .ag-header-group-cell {
+      line-height: 21px;
+      .ag-floating-filter-button {
+        margin-top: 4px;
+      }
+      .ag-floating-filter-body input {
+        margin-top: 2px;
+      }
+    }
+    .ag-theme-balham .ag-cell {
+      border-right: 1px dotted #80808059 !important;
+    }
+  
+    .ag-value-change-delta {
+      display: none;
+    }
+  
+    .ag-value-change-delta-down + span.ag-value-change-value-highlight {
+      background-color: transparent !important;
+      color: red;
+    }
+  
+    .ag-value-change-delta-up + span.ag-value-change-value-highlight {
+      background-color: transparent !important;
+      color: green;
+    }
+  
+    span.ag-value-change-value-highlight {
+      background-color: transparent !important;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-1 {
+      padding-left: 14px;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-2 {
+      padding-left: 28px;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-3 {
+      padding-left: 42px;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-4 {
+      padding-left: 56px;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-5 {
+      padding-left: 70px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-6 {
+      padding-left: 84px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-7 {
+      padding-left: 98px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-8 {
+      padding-left: 112px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-9 {
+      padding-left: 126px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-10 {
+      padding-left: 140px;
+    }
+
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-11 {
+      padding-left: 154px;
+    }
+  }
+  
+  app-daily-tracking-layout {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    height: 99%;
+  
+    ag-grid-angular {
+      height: 100% !important;
+    }
+    .ag-root.ag-font-style.ag-layout-normal {
+      border-bottom: none;
+    }
+  
+    .ag-theme-balham .ag-header-cell,
+    .ag-theme-balham .ag-header-group-cell {
+      padding-left: 4px;
+      line-height: initial;
+      padding-right: 4px;
+    }
+  
+    .ag-header-group-text,
+    .ag-header-cell-text {
+      font-size: 11px;
+    }
+  
+    .ag-theme-balham .ag-cell {
+      border-right: 1px dotted #80808059 !important;
+    }
+  
+    .ag-value-change-delta {
+      display: none;
+    }
+  
+    .ag-value-change-delta-down + span.ag-value-change-value-highlight {
+      background-color: rgba(255, 0, 0, 0.328) !important;
+    }
+  
+    .ag-header-group-text {
+      display: flex;
+      align-items: center;
+      .material-icons {
+        font-size: 15px;
+        margin-left: 0.2rem;
+      }
+    }
+  
+    .ag-theme-balham .ag-header-cell-label {
+      width: 100%;
+    }
+    .ag-header-cell-menu-button {
+      display: none;
+    }
+  
+    .ag-theme-balham .ag-row:not(.ag-row-first) {
+      border-width: 0;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-leaf-indent {
+      margin-left: 0;
+    }
+  
+    .ag-theme-balham .ag-ltr .ag-row-group-indent-1 {
+      padding-left: 0;
+    }
+  
+    .ag-theme-balham .ag-group-expanded span {
+      margin-right: 0;
+    }
+  
+    app-mbs-risk-viewer {
+      .ag-group-expanded {
+        display: none;
+      }
+    }
+  }
+  
+  app-risk-span-layout {
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    padding-top: 4rem;
+    position: relative;
+  }
+  
+  app-risk-span-layout {
+    .mat-drawer-container.side-popup.right-side-popup {
+      mat-sidenav.mat-drawer {
+        height: 100vh;
+        width: 23rem;
+      }
+    }
+  }
+  
+  app-equities-column-range-cell-viewer {
+    width: 100%;
+    height: 100%;
+  }
+  
+  app-risk-span-layout {
+    ag-grid-angular {
+      height: 100% !important;
+    }
+  }
+  
+  app-pool-portfolio-curve-comparison-viewer {
+    app-linechart highcharts-chart {
+      height: 100% !important;
+    }
+  }
+  
+  app-app-grid-layout-management {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  
+    .mat-tab-labels {
+      background: #1a2f5c0a;
+    }
+  
+    .mat-tab-label {
+      color: grey;
+    }
+  }
+  
+  app-option-vols-equity-result-viewer,
+  app-option-vols-commodity-result-viewer {
+    .ag-header-group-cell-label {
+      justify-content: center;
+    }
+  
+    .ag-theme-balham .ag-header-cell,
+    .ag-theme-balham .ag-header-group-cell {
+      line-height: 25px;
+      padding: 0 5px;
+    }
+  
+    .ag-header-cell {
+      font-weight: bold;
+    }
+  
+    .mat-radio-label-content {
+      padding-left: 0;
+    }
+  
+    .ag-theme-balham .ag-header-cell-label {
+      width: calc(100% - 0px);
+    }
+  }
+  
+  app-option-vols-fx-surface-result-viewer {
+    .ag-pivot-on .ag-header-group-cell-label .ag-header-group-text {
+      writing-mode: inherit;
+      transform: none;
+    }
+  }
+  
+  app-rcpm-position-info-viewer {
+    .mat-input-element:disabled {
+      color: black;
+    }
+  }
+  
+  app-rcpm-position-execution-viewer {
+    .ag-pivot-on .ag-header-group-cell-label .ag-header-group-text {
+      writing-mode: initial;
+      transform: none;
+    }
+  }
+  
+  color-sketch .sketch-picker {
+    box-shadow: none !important;
+  }
+  
+  app-grid-grouping-background-configuration {
+    .mat-list-item-content {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  
+  app-app-grid-custom-status-bar-cell-value,
+  app-app-grid-custom-status-bar-cell-ranges-statistic {
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    border-left: 1px solid #80808047;
+    > span {
+      display: inline-block;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
+  
+  app-rcpm-pnl-rec-viewer {
+    .ag-pivot-on .ag-header-group-cell-label .ag-header-group-text {
+      transform: none;
+      writing-mode: initial;
+    }
+  }
+  
+  app-rcpm-directionality-layout {
+    div.mat-tab-labels {
+      background: white;
+    }
+  
+    div.mat-tab-label {
+      color: #adadad;
+    }
+  }
+  
+  app-rcpm-directionality-regression-viewer {
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    mat-checkbox label {
+      padding: 0.1rem 0;
+    }
+    .mat-radio-label-content {
+      padding-left: 2px;
+    }
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    .mat-checkbox-inner-container {
+      margin-right: 0px;
+    }
+  }
+  
+  app-pnl-attribution-viewer {
+    .ag-pivot-on .ag-header-group-cell-label .ag-header-group-text {
+      writing-mode: initial;
+      transform: none;
+    }
+  
+    .ag-column-panel div.ag-unselectable:last-child .ag-column-drop-list {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  
+    .ag-column-drop-cell {
+      pointer-events: none;
+    }
+  
+    .ag-theme-balham .ag-header-row {
+      color: black;
+    }
+  }
+  
+  app-pnl-attribution-detail-grid-viewer {
+    .ag-root-wrapper {
+      *::-webkit-scrollbar {
+        height: 0px;
+      }
+    }
+  
+    .ag-theme-balham .ag-header {
+      background: #00000014;
+    }
+  
+    .ag-theme-balham .ag-header-row {
+      color: black;
+    }
+  }
+  
+  app-pnl-attribution-viewer {
+    .ag-theme-balham .ag-header {
+      background: #00000014;
+    }
+  }
+  
+  app-pnl-attribution-layout {
+    .mat-tab-header {
+      margin-left: 1.3rem;
+      border-bottom: none;
+    }
+    #tab-add-button {
+      top: 3.4rem;
+      left: 0.53rem;
+      border-radius: 30% 0 0 0;
+    }
+  }
+  
+  app-pnl-attribution-detail-viewer {
+    .ag-theme-balham .ag-ltr .ag-row-level-1 .ag-row-group-leaf-indent {
+      margin-left: 0;
+    }
+  }
+  
+  app-pnl-attribution-timeseries-layout {
+    div.darkTheme {
+      .highcharts-plot-background {
+        fill: #0c1b44;
+      }
+      .highcharts-background {
+        fill: transparent;
+      }
+  
+      background-image: url(../assets/img/chart-background.png),
+        linear-gradient(-45deg, #2752c7 0%, #15244d 100%);
+      background-size: cover 100%;
+      background-repeat: no-repeat, repeat;
+      background-position: right top, left top;
+  
+      .highcharts-grid-line {
+        opacity: 0.2;
+      }
+  
+      .highcharts-button {
+        rect {
+          fill: #0c1b44;
+        }
+      }
+  
+      button.mat-button-shrink {
+        color: white !important;
+      }
+    }
+  }
+  
+  app-pnl-attribution-viewer {
+    .ag-theme-balham .ag-row-selected {
+      background-color: transparent;
+    }
+  }
+  
+  app-pnl-attribution-detail-grid-viewer {
+    .ag-theme-balham .ag-row.ag-row-selected {
+      background-color: #b7e4ff !important;
+    }
+  
+    .ag-theme-balham .ag-row-focus {
+      background-color: transparent !important;
+    }
+  }
+  
+  app-cs-fund-performance-layout {
+    h5 {
+      margin: 0.5rem;
+      font-size: 0.8rem;
+      color: #848484;
+      font-weight: 500;
+    }
+  }
+  
+  app-cs-snapshots-inner-layout {
+    h5 {
+      margin: 0.5rem;
+      font-size: 0.8rem;
+      color: #848484;
+      font-weight: 500;
+    }
+  }
+  
+  app-market-data-rates-tab-layout {
+    .ag-header-cell-text {
+      white-space: pre-wrap;
+    }
+  
+    .mat-mini-fab .mat-button-wrapper {
+      padding: 0;
+    }
+  
+    .mat-mini-fab {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+  
+    .mat-mini-fab.mat-primary.mat-mini-fab-selected {
+      background-color: #3f51b5;
+      color: white;
+    }
+    .mat-mini-fab.mat-primary {
+      background-color: white;
+      color: #3f51b5;
+    }
+  }
+  
+  app-order-book-layout .mat-drawer-content {
+    display: flex;
+  }
+  
+  app-pnl-attribution-layout {
+    .ag-sort-ascending-icon,
+    .ag-sort-descending-icon {
+      display: none;
+    }
+  }
+  
+  app-security-master-reconciliation-detail-grid-viewer {
+    ag-grid-angular {
+      // border: 2px solid #000000ba;
+      .ag-body-horizontal-scroll {
+        display: none;
+      }
+    }
+  
+    app-security-master-reconciliation-detail-grid-deep-viewer {
+      ag-grid-angular {
+        // border: initial;
+        .ag-body-horizontal-scroll {
+          display: inherit;
+        }
+      }
+    }
+  }
+  
+  app-security-master-security-viewer-tab-layout {
+    div.mat-tab-label {
+      color: grey;
+      background: lightgray;
+      border: none;
+      position: relative;
+      height: 2rem;
+      border-radius: 0;
+    }
+  
+    div.mat-tab-labels {
+      background: transparent;
+    }
+  
+    .ngx-json-viewer {
+      padding: 0 10rem;
+    }
+  }
+  
+  app-security-master-user-activity-progress-bar {
+    .mat-progress-bar-fill::after {
+      background-color: #00bcd4;
+    }
+    .mat-progress-bar {
+      height: 0.8rem;
+      opacity: 0.7;
+    }
+  
+    .mat-progress-bar.mat-accent .mat-progress-bar-fill::after {
+      background-color: #ff000082;
+    }
+  }
+  
+  app-pnl-attribution-report-layout {
+    div.mat-tab-labels {
+      background: #1a2f5b47;
+    }
+  }
+  
+  app-custom-grid-cell-checkbox {
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    .mat-checkbox-ripple.mat-ripple {
+      display: none;
+    }
+  }
+  
+  app-order-book {
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    .mat-checkbox-inner-container {
+      height: 13px;
+      width: 13px;
+    }
+  }
+  
+  app-order-book-layout {
+    mat-sidenav.mat-drawer {
+      overflow: visible;
+      .mat-drawer-inner-container {
+        overflow: visible;
+        .mat-tab-body-wrapper {
+          overflow: visible;
+          mat-tab-body {
+            overflow: visible;
+          }
+        }
+      }
+    }
+  
+    app-market-data-enhanced-search-inner {
+      app-base-grid.mat-card-lift {
+        left: -32rem;
+        top: 2.5rem;
+      }
+    }
+  }
+
+  mat-sidenav.app-side-nav {
+    background-color: #000a42bd;
+    .mat-list-base .mat-list-item {
+      color: white;
+      position: relative;
+    }
+    .mat-list-base .mat-list-item.active {
+      background-image: linear-gradient(to right, #ffffff3d, transparent);
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 1.5%;
+        top: 0;
+        left: 0;
+        background-color: white;
+      }
+    }
+  }
+
+  .ag-pinned-left-cols-container {
+    app-pnl-attribution-detail-grid-viewer {
+      app-base-grid ag-grid-angular {
+        border-left: 5px solid #3f51b5bd;
+      }
+    }
+  }
+  
+
+// ================== HIGHCHARTS OVERWRITE ===================== //
+
+.highcharts-tooltip span {
+  background-color: white;
+  border: 1 px solid green;
+  opacity: 1;
+  z-index: 9999 !important;
+}
+
+.highcharts-label {
+  z-index: 1;
+}
+
+.myDiv {
+  z-index: -100;
+}
+
+.highcharts-button-pressed-force {
+  rect {
+    fill: rgb(230, 235, 245);
+  }
+  text {
+    font-weight: bold !important;
+  }
+}
+
+app-timeseries-grid-viewer-component{
+  .mat-badge-medium .mat-badge-content {
+    width: 13px;
+    height: 13px;
+    margin-top:10px;
+    line-height: 12px;
+    font-size:10px;
+    background-color:red;
+  }
+  .mat-badge-medium.mat-badge-above .mat-badge-content {
+    top: -9px;
+  }
+  .mat-badge-medium.mat-badge-after .mat-badge-content {
+    right: -18px;
+}
+}
+
+app-timeseries-chart-viewer{
+  .highcharts-markers{
+    path{
+      display: none;
+    }
+  }
+  .highcharts-point-hover{
+    display: block !important;
+  }
+}
+
+app-pnl-attribution-params{
+  .mat-mdc-slide-toggle{
+    margin-left:0.5rem;
+    margin-right: 1rem;
+  }
+}
+
+app-pnl-adjustments-btn-cell-renderer{
+  width: 80px;
+}
+
+app-execution-tagging-reason-cell-renderer{
+  .mat-mdc-select-arrow-wrapper{
+    margin-left: 1rem
+  }
+
+  .mat-mdc-select-value{
+    width: 80px !important;
+  }
+}

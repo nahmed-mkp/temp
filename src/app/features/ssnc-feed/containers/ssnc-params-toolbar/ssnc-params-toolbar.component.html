@@ -1,0 +1,48 @@
+<mat-toolbar>
+    <span class="toolbar-heading"> SS&C Feed</span>
+
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <mat-form-field appearance="outline" floatLabel="always" style="margin-left:1rem">
+        <mat-label>Text Filter</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput placeholder="Search..." (input)="onTextFilterChange($event.target.value)" autocomplete="off">
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always" style="margin-left:1rem">
+        <mat-label>Column Filter</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <mat-icon>my_location</mat-icon>
+            <input type="text" matInput [matAutocomplete]="auto" placeholder="Search..." autocomplete="off" [(ngModel)]="colFilterText" (ngModelChange)="onColumnFilterTextChange($event)" style="margin-left:10px;flex: 8;">
+            <mat-autocomplete #auto="matAutocomplete" [panelWidth]="200" >
+                <mat-option *ngFor="let column of cols" [value]="column" (click)="onColumnFilterChange(column)">
+                    {{column}}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+    </mat-form-field>
+
+    <span class="toolbar-spacer"></span>
+
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" >
+        <mat-label>From</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerFrom" placeholder="From" [(ngModel)]="formattedFromDate" (ngModelChange)="onFromDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+
+    <mat-form-field class="date-form-field outline-shrink" appearance="outline" >
+        <mat-label>To</mat-label> 
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="pickerTo" placeholder="To" [(ngModel)]="formattedToDate" (ngModelChange)="onToDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+</mat-toolbar>

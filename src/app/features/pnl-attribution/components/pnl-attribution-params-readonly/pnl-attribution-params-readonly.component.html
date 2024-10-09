@@ -1,0 +1,73 @@
+<div class="group-icon-buttons">
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['P/L($)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('P/L($)')">
+        <mat-icon matToolTip="PL($)">monetization_on</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['% to Fund'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund')">
+        <mat-icon matTooltip="% To Fund" >bar_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['% to Cap'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Cap')">
+        <mat-icon matTooltip="% To Cap">stacked_bar_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['Fund Cap (k)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('Fund Cap (k)')">
+        <mat-icon matTooltip="Capital (Fund)">pie_chart</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['Cap (k)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('Cap (k)')">
+        <mat-icon matTooltip="Capital">pie_chart_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['σ'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('σ')">
+        <!-- <mat-icon matTooltip="Capital">σ</mat-icon> -->
+        <span style="font-size: 230%; position: relative; top: -0.1rem; line-height: 14px;" matTooltip="Annualized Realized Vol ($)">σ</span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['σ(%)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('σ(%)')">
+        <!-- <mat-icon matTooltip="Capital">σ%</mat-icon> -->
+        <span style="font-size: 230%;position: relative; top: -0.4rem; line-height: 14px;" matTooltip="Annualized Realized Vol (%)">σ<sup><small style="font-size: 50%">%</small></sup>
+        </span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['% to Fund(qr)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund(qr)', 'P/L($)(qr)');">
+        <span matTooltip="Quarter Summary" style="font-size: 150%">Qr</span>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" [ngStyle]="{'opacity': gridDisplayMode['% to Fund(yr)'] ? 0.7 : 0.3}"
+        (click)="onChangeDisplayCopy('% to Fund(yr)', 'P/L($)(yr)');">
+        <span matTooltip="Yearly Summary" style="font-size: 150%">Yr</span>
+    </button>
+</div>
+
+<!-- <div class="group-icon-buttons" style="margin-left: 0.5rem;">
+    <button mat-icon-button class="mat-button-shrink" [matMenuTriggerFor]="menu" color="primary" #menuTriggerUser="matMenuTrigger" style="opacity: 0.7;">
+        <mat-icon matTooltip="Recent Layouts">table_chart</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let layoutName of layoutNames" (click)="onSelectNewlayout($event, layoutName, false);menuTriggerUser.closeMenu()" style="padding-right: 0.5rem;">
+            {{layoutName}}
+            <span>
+                <button mat-icon-button (click)="onSelectNewlayout($event, layoutName, true);menuTriggerUser.closeMenu()">
+                    <mat-icon matTooltip="Open in new tab" style="margin-left: 0.7rem;">add_to_queue</mat-icon>
+                </button>
+            </span>
+        </button>
+    </mat-menu>
+</div> -->
+
+<mat-form-field appearance="outline" class="outline-shrink" style="width:8.2rem; margin-left: 0.5rem;padding-top:5px;">
+    <input matInput placeholder="From Date" [value]="request.startDate" disabled>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="outline-shrink" style="width:8.2rem; margin-left: 0.5rem;padding-top:5px;margin-right:10px;">
+    <input matInput placeholder="To Date" [value]="request.endDate" disabled>
+</mat-form-field>

@@ -1,0 +1,77 @@
+<div class="vertical-flex-full-height timeseries-exporter-form">
+
+    <!-- <h3>Timeseries Exporter Configuration</h3> -->
+    <div style="color:#8d8d8d;font-weight:bold; display: flex; justify-content: space-between; align-items: center;">
+       <span>Timeseries Exporter List Configuration</span> 
+       <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Reset Panel" style="opacity: 0.7;" (click)="onResetPanel()">
+           <mat-icon>restart_alt</mat-icon>
+       </button>
+    </div>
+
+    <!-- <form [formGroup]="timeseriesListForm" style="height:70%;"> -->
+        <!-- <mat-form-field style="width:350px;">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [disabled]="mode==='edit'" placeholder="List name" [(ngModel)]="monitorName" (ngModelChange)="onMonitorNameChange()">
+        </mat-form-field> -->
+
+    <div class="horizontal-flex-full-width" style="align-items: baseline;">
+        <mat-form-field style="flex: 1 0 0;" class="outline-shrink" *ngIf="monitors?.length > 0; else listLoading">
+            <mat-label>Monitor List</mat-label>
+            <input type="text" placeholder="Please select" matInput [formControl]="monitorCtrl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayMonitor" (optionSelected)='onMonitorSelected($event.option.value)'>
+                <mat-option *ngFor="let monitor of filteredMonitors$ | async" [value]="monitor">{{monitor.name}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <ng-template #listLoading>
+            <span><small>Loading...</small></span>
+        </ng-template>
+
+        <!-- <button mat-stroked-button color="primary" matTooltip="Save list">New List</button> -->
+        <!-- <button mat-stroked-button color="primary" matTooltip="Save into a new List">Save As</button>
+        <button mat-stroked-button color="warn" matTooltip="Delete list" (click)="onDeleteList()">Delete</button> -->
+    </div>
+
+    
+    <small>Market Data
+        <button mat-icon-button class="mat-button-ultra-shrink" style="float: right;" color="primary" (click)="removeRow()"matTooltip="Remove row">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>         
+        <button mat-icon-button class="mat-button-ultra-shrink" style="float: right;"  color="primary" (click)="addRow()" matTooltip="Add row">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </small>
+
+    <app-base-grid
+        style="height: 800px;"
+        [gridItems]="marketDataList$ | async"
+        [customGridOption]="customGridOption"
+        [extraOption]="extraOption"
+        [customGridCallBack]="customGridCallBack">
+    </app-base-grid><br />
+
+    <div class="error">
+        <p *ngIf="(marketDataList$ | async).length === 0">Please select at least one timeseries to export</p> 
+        <p *ngIf="duplicationAlertMessage.visiable">{{duplicationAlertMessage.text}}</p>
+        <p *ngIf="monitorNameAlertMessage.visiable">{{monitorNameAlertMessage.text}}</p>
+    </div><br />
+
+    <div class="actions">
+        <!-- <button mat-raised-button color="primary" [disabled]="!timeseriesListForm.valid" (click)="applyChanges()">Apply</button> -->
+        <button mat-raised-button color="primary" (click)="onRunTempList()" style="margin-bottom: 0.7rem;"
+            [disabled]="duplicationAlertMessage.visiable || monitorNameAlertMessage.visiable || marketDataListCurrent.length === 0">Run</button>
+        <button mat-raised-button color="primary" (click)="onApplyAndSaveChanges()" style="margin-left:5px;"
+            [disabled]="duplicationAlertMessage.visiable || monitorNameAlertMessage.visiable || marketDataListCurrent.length === 0">Run and Save</button>
+        <span style="margin-left:5px;">
+            <button mat-raised-button color="primary" (click)="onResetList()" *ngIf="this.monitor">Undo Changes</button>
+        </span>
+        <button mat-raised-button color="accent" disabled style="margin-left:5px;">Back Fill</button>
+        <!-- <span style="margin-left:5px;">
+            <button mat-raised-button (click)="onCancel()">Cancel</button>
+        </span> -->
+        <div style="display:flex;justify-content:flex-end;margin-top:-39px;" *ngIf="mode==='edit'">
+            <button style="display:flex;justify-content:flex-start;"  mat-raised-button color="warn" [disabled]="!this.monitor"
+                (click)="onDeleteList()">Delete List</button>
+        </div>
+    </div>
+    <!-- </form> -->
+</div>

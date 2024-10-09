@@ -1,0 +1,128 @@
+<mat-toolbar class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <span class="toolbar-heading"> Fund/Pod Performance Report </span>
+
+
+    <span class="toolbar-spacer"></span>
+
+
+    <div style="height: 100%;display:flex; align-items: center;justify-content:center;padding-top:0.5rem;">
+        <mat-form-field appearance="outline" class="outline-shrink" style="width:12rem; margin-left: 0.2rem;margin-right:10px;">
+            <mat-label>Pods</mat-label>
+            <div class="mat-form-field-content-wrap">
+              <mat-select multiple [(ngModel)]="selectedPods">
+                  <mat-option *ngFor="let option of (pods$ | async)" [value]="option">{{option}}</mat-option>
+              </mat-select>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="outline-shrink" style="width:12rem; margin-left: 0.2rem;margin-right:10px;">
+            <mat-label>Funds</mat-label>
+            <div class="mat-form-field-content-wrap">
+              <mat-select multiple  [(ngModel)]="selectedFunds">
+                  <mat-option *ngFor="let option of (funds$ | async)" [value]="option">{{option}}</mat-option>
+              </mat-select>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="outline-shrink" style="width:8rem; margin-left: 0.2rem;margin-right:10px;">
+            <mat-label> From </mat-label>
+            <div class="mat-form-field-content-wrap">
+              <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="startDate" (ngModelChange)="onDateChange()">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="outline-shrink" style="width:8rem; margin-left: 0.2rem;margin-right:10px;">
+            <mat-label> To </mat-label>
+            <div class="mat-form-field-content-wrap">
+              <input matInput [matDatepicker]="picker2" placeholder="To Date" [(ngModel)]="endDate" (ngModelChange)="onDateChange()">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+        </mat-form-field>
+    
+    </div>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Run Report" style="width: 2rem;margin-right: 5px;" (click)="onRunReport()">
+      <mat-icon style="color:white">play_arrow</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Export" style="width: 2rem;margin-right: 5px;" (click)="onDownloadReport()">
+      <mat-icon style="color:white">download</mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary" matTooltip="Export" style="width: 2rem;margin-right: 5px;" (click)="onClose()">
+      <mat-icon style="color:white">close</mat-icon>
+    </button>
+
+</mat-toolbar>
+
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" [animationDuration]="0" style="flex: 1 0 0;">
+
+    <mat-tab label="P&L">
+        <ng-template matTabContent>
+            <app-pnl-attribution-report-viewer
+                class="vertical-flex-full-height" style="flex: 1 0 0"
+                [reportData]="reportData$ | async"
+                [pods]="pods$ | async"
+                [funds]="funds$ | async"
+                [loading]="loading$ | async"
+                [selectedPods]="selectedPods"
+                [selectedFunds]="selectedFunds"
+                (sendGridApi)="onReceiveGridApi($event)">
+            </app-pnl-attribution-report-viewer>
+        </ng-template>
+    </mat-tab>
+ 
+    <mat-tab label="CrossPod Capitals (SOM)">
+        <ng-template matTabContent>
+            <app-pnl-attribution-capital-report-viewer 
+                class="vertical-flex-full-height" style="flex: 1 0 0"
+                [data]="capitalReportData$ | async"
+                [loading]="capitalReportDataLoading$ | async"
+                (sendGridApi)="onReceiveCapitalGridApi($event)">
+            </app-pnl-attribution-capital-report-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Fund/Pod Capitals (SOM)">
+        <ng-template matTabContent>
+            <app-pnl-attribution-pod-capitals-report-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="podCapitalReportData$ | async"
+                [loading]="podCapitalReportDataLoading$ | async"
+                (sendGridApi)="onReceivePodCapitalGridApi($event)">
+            </app-pnl-attribution-pod-capitals-report-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="CrossPod Capitals (EOM)">
+        <ng-template matTabContent>
+            <app-pnl-attribution-capitals-eom-report-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="capitalEomReportData$ | async"
+                [loading]="capitalEomReportDataLoading$ | async"
+                (sendGridApi)="onReceiveCapitalGridApi($event)">
+            </app-pnl-attribution-capitals-eom-report-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Fund/Pod Capitals (EOM)">
+        <ng-template matTabContent>
+            <app-pnl-attribution-pod-capitals-eom-report-viewer
+                class="vertical-flex-full-height" 
+                style="flex: 1 0 0"
+                [data]="podCapitalEomReportData$ | async"
+                [loading]="podCapitalEomReportDataLoading$ | async"
+                (sendGridApi)="onReceivePodCapitalGridApi($event)">
+            </app-pnl-attribution-pod-capitals-eom-report-viewer>
+        </ng-template>
+    </mat-tab>
+
+
+
+</mat-tab-group>

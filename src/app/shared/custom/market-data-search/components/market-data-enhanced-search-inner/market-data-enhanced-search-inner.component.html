@@ -1,0 +1,38 @@
+<mat-form-field>
+    <mat-spinner [diameter]="20" *ngIf="searching"></mat-spinner>
+    <input #search matInput type="text" placeholder="{{placeholder}}"  [value]="value" (keyup)="handleKeyUpEvent_debounce($event)" autocomplete="off" (focusout)="onFocusout()" (focus)="onFocus()">
+
+    <!-- [matAutocomplete]="auto" -->
+    <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="securitySelected($event)"  [displayWith]="displayFn"  
+        panelWidth="50rem" [class]="customClass">
+        <mat-option *ngIf="searching" class="loading">Loading...</mat-option>
+        <ng-container *ngIf="!searching">
+            <mat-option disabled class="auto-complete-grid-header" *ngIf="searchResults.length > 0">
+                <span style="flex: 7 0 0;" class="auto-complete-header-grid-cell">SecurityName</span>
+                <span style="flex: 3 0 0;" class="auto-complete-header-grid-cell">SecurityType</span>
+                <span style="flex: 3 0 0;" class="auto-complete-header-grid-cell">Description</span>
+                <span style="flex: 4 0 0;" class="auto-complete-header-grid-cell">BlbgName</span>
+                <span style="flex: 2 0 0;" class="auto-complete-header-grid-cell">Cusip</span>
+                <span style="flex: 2 0 0;" class="auto-complete-header-grid-cell">SID</span>
+            </mat-option>
+            <mat-option *ngFor="let searchResult of searchResults" [value]="searchResult">
+                <span style="flex: 7 0 0;" class="auto-complete-grid-cell">{{searchResult.SecurityName}}</span>
+                <span style="flex: 3 0 0;" class="auto-complete-grid-cell">{{searchResult.SecurityType}}</span>
+                <span style="flex: 3 0 0;" class="auto-complete-grid-cell">{{searchResult.Description}}</span>
+                <span style="flex: 4 0 0;" class="auto-complete-grid-cell">{{searchResult.BlbgName}}</span>
+                <span style="flex: 2 0 0;" class="auto-complete-grid-cell">{{searchResult.Cusip}}</span>
+                <span style="flex: 2 0 0;" class="auto-complete-grid-cell">{{searchResult.SID}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete> -->
+</mat-form-field>
+
+
+<app-base-grid
+    *ngIf="showGrid$ | async"
+    class="mat-card-lift"
+    [gridItems]="searchResults || []"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>

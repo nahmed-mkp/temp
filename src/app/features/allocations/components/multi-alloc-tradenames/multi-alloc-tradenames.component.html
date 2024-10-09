@@ -1,0 +1,55 @@
+<div class="vertical-flex-full-height allocation-form">
+
+    <h3>Trade name allocation splits</h3>
+
+    <form [formGroup]="allocationForm" *ngIf="multiAllocTradeNames && multiAllocTradeNames.length > 0; else loading;">
+
+        <mat-form-field class="half-width">
+            <mat-label>TradeName</mat-label>
+            <input matInput type="text" formControlName="tradeName" [matAutocomplete]="multiTradeName"
+                placeholder="TradeName">
+            <mat-autocomplete #multiTradeName="matAutocomplete" [displayWith]="displayMultiTradeName"
+                (optionSelected)="tradeNameSelected($event)">
+                <mat-option *ngFor="let tradeName of multiAllocTradeNames" [value]="tradeName">
+                    <small><i>{{tradeName.tradeID}}</i></small>: {{tradeName.tradeName}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <button mat-icon-button color="primary" title="Add allocation split" aria-label="Add allocation split" (click)="addNewTradeNameSplit($event)">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" title="Remove allocation split" aria-label="Remove allocation split" (click)="removeTradeNameSplit($event)">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" title="Reset allocation split" aria-label="Reset allocation split" (click)="resetTradeNameSplit($event)">
+            <mat-icon>replay</mat-icon>
+        </button>
+        <br />
+
+        <small>Allocations:</small> <br />
+        <span class="error" *ngIf="allocationForm.touched && allocationForm.dirty && !(isValid$ | async)">Allocations don't add up to 100%</span>
+        
+        <span class="error" *ngIf="multiAllocationSplitError">{{multiAllocationSplitError}}</span>
+        <span class="success" *ngIf="multiAllocationSplitStatus">{{multiAllocationSplitStatus}}</span>
+
+        <div style="height:400px;">
+            <app-base-grid [gridItems]="[]" [customGridOption]="customGridOption" [extraOption]="extraOption"
+                [customGridCallBack]="customGridCallBack">
+            </app-base-grid>
+        </div><br /><br />
+
+        <div class="actions">
+            <button mat-raised-button color="primary" [disabled]="!allocationForm.valid || !(isValid$ | async)" (click)="submitForm()">Submit</button>
+            <span style="margin-left:5px;">
+                <button mat-raised-button [disabled]="!allocationForm.touched" (click)="resetForm()">Reset</button>
+            </span>
+        </div>
+    </form>
+
+    <ng-template #loading>
+        <mat-spinner style="display: block; justify-content: center;"></mat-spinner>
+    </ng-template>
+</div>
+
+

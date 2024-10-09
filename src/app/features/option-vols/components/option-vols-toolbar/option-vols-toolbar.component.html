@@ -1,0 +1,315 @@
+<mat-toolbar>
+
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="max-width: 4rem;">
+        <mat-label>Set</mat-label>
+        <mat-select [(ngModel)]="targetSet" (ngModelChange)="onSetChange()">
+            <mat-option [value]="1">1</mat-option>
+            <mat-option [value]="2">2</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+    <!-- {{sizingCapitals | json}} -->
+
+    <span class="toolbar-heading"> OPTION PRICING </span>
+
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <div style="margin-left:1rem"> 
+        <button mat-icon-button matTooltip="Toggle Pricing Parameters" class="toolbar-icon" (click)="changeParameterVisibility()">
+            <mat-icon>create</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" class="mat-button-shrink" (click)="onSubmit(false)">
+            <mat-icon class="toolbar-icon">play_circle_outline</mat-icon>
+        </button>
+    
+        <button mat-icon-button color="primary" class="mat-button-shrink" (click)="onSubmit(true)">
+            <mat-icon class="toolbar-icon">play_circle_outline</mat-icon>
+            <mat-icon class="bottom-right-shrink-icon toolbar-icon">add</mat-icon>
+        </button>
+    
+        <button mat-icon-button matTooltip="Toggle Settings" color="primary" class="mat-button-shrink" (click)="openSetting()">
+            <mat-icon class="toolbar-icon">settings</mat-icon>
+        </button>
+    </div>
+
+
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="margin-left:1rem; width: 100px;">
+        <mat-label>Ticker</mat-label>
+        <input type="text" matInput placeholder="Eg. SPX Index" [matAutocomplete]="auto" [formControl]="tickerFormControl"  [(ngModel)]="optionVolsParametersTemp.ticker">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let ticker of filteredTickers$ | async" [value]="ticker">
+              {{ticker}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="width: 140px;">
+        <mat-label>Template Type</mat-label>
+        <mat-select [(ngModel)]="optionVolsParametersTemp.templateType">
+            <mat-option *ngFor="let template of templates" [value]="template.templateType">{{template.displayName}}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+    
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="width: 175px;">
+        <mat-label>Pricing Method</mat-label>
+        <mat-select [(ngModel)]="pricingMethod" (selectionChange)="handlePricingMethodChange($event)">
+            <mat-option [value]="'delta'">Delta</mat-option>
+            <mat-option [value]="'strike'">Strike</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+<!-- 
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" title="Select expiries" style="margin-left:0.5rem;">
+        <mat-icon class="toolbar-icon">calendar_today</mat-icon>
+    </button>
+    <mat-menu #appMenu class="drop-calendar">
+        <div (click)="$event.stopPropagation()">
+            <mat-calendar #calendar (selectedChange)="selectDate($event, calendar)" [dateClass]="isDateSelected">
+            </mat-calendar>
+        </div>
+    </mat-menu>
+
+    <div *ngIf="selectedExpiries?.length > 0" style="margin-left:0.5rem;">
+        <button mat-icon-button [matMenuTriggerFor]="dateMenu" title="View selected expiries">
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <mat-menu #dateMenu class="drop-dates" [overlapTrigger]="true">
+            <div mat-menu-item *ngFor="let expiry of sortedDates(selectedExpiries)" (click)="$event.stopPropagation()">
+                <span>{{ expiry }}</span>
+            </div>
+        </mat-menu>
+    </div> -->
+
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="flex: 3 0 0" *ngIf="pricingMethod === 'strike'" style="margin-left:0.5rem;">
+        <mat-label>Strikes</mat-label>
+        <mat-chip-list #strikeChipList>
+          <mat-chip *ngFor="let value of optionVolsParametersTemp.strikes" [selectable]="true"
+                   [removable]="true" (removed)="remove(value, 'strike')" class="shrink-chip">
+            {{value}}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <input 
+                 [matChipInputFor]="strikeChipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="add($event, 'strike')">
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="flex: 2 0 0" *ngIf="pricingMethod === 'delta'" style="width: 300px; margin-left:0.5rem;">
+        <mat-label>Deltas</mat-label>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let value of optionVolsParametersTemp.deltas" [selectable]="true"
+                   [removable]="true" (removed)="remove(value, 'delta')" class="shrink-chip">
+            {{value}}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <input 
+                 style="color:black !important; margin-top:-3px;"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="add($event, 'delta')">
+        </mat-chip-list>
+    </mat-form-field> -->
+<!-- 
+    <mat-button-toggle-group [(ngModel)]="notionalOrSize" style="margin-left:0.4rem;width: 150px;">
+        <mat-button-toggle value="size" ngDefaultControl style="font-size: 12px">Size</mat-button-toggle>
+        <mat-button-toggle value="notional" ngDefaultControl style="font-size: 12px" >Notional</mat-button-toggle>
+    </mat-button-toggle-group>    
+
+    <mat-form-field *ngIf="notionalOrSize==='size'" appearance="outline" class="outline-shrink" style="width: 140px;">
+        <mat-label>Target Size (bps)</mat-label>
+        <input matInput placeholder="Eg. 100" [(ngModel)]="optionVolsParametersTemp.target" (focus)="removeCommas_general($event, 'target')" (blur)="addCommas_general($event, 'target')">
+    </mat-form-field>
+    <mat-form-field *ngIf="notionalOrSize==='notional'" appearance="outline" class="outline-shrink" style="width: 140px;">
+        <mat-label>Target Notional</mat-label>
+        <input matInput placeholder="Eg. 100" [(ngModel)]="optionVolsParametersTemp.targetNotional" (focus)="removeCommas_general($event, 'targetNotional')" (blur)="addCommas_general($event, 'targetNotional')">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="outline-shrink" style="flex: 1 0 0" style="width: 140px;">
+        <mat-label>numExpiries</mat-label>
+        <input type="number" matInput placeholder="Eg. 5" [(ngModel)]="optionVolsParametersTemp.numExpiries">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="outline-shrink" style="width: 140px;">
+        <mat-label>Capital</mat-label>
+        <input type="text" matInput placeholder="Eg. 1000000000" [formControl]="capitalFormControl" [(ngModel)]="optionVolsParametersTemp.capital" (focus)="removeCommas()" (blur)="addCommas()"
+        [matAutocomplete]="auto2" >
+        <mat-autocomplete #auto2="matAutocomplete" panelWidth="500">
+            <mat-option *ngFor="let capital of filteredCapitals$ | async" [value]="capital.capital">
+              <i>{{capital.cross_pod_name}}</i> {{format(capital.capital)}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field> -->
+<!-- 
+    <mat-button-toggle-group [(ngModel)]="optionVolsParametersTemp.volType" style="margin-left: 1rem;width: 260px;">
+        <mat-button-toggle value="daily" ngDefaultControl style="font-size: 12px">Daily &#963;</mat-button-toggle>
+        <mat-button-toggle value="monthly" ngDefaultControl style="font-size: 12px">Monthly &#963;</mat-button-toggle>
+        <mat-button-toggle value="quarterly" ngDefaultControl style="font-size: 12px">Quarterly &#963;</mat-button-toggle>
+    </mat-button-toggle-group>    
+    <mat-checkbox class="example-margin" [(ngModel)]="optionVolsParametersTemp.useCache" style="font-size: 12px">useCache</mat-checkbox> -->
+    <!-- <mat-checkbox class="example-margin" [(ngModel)]="optionVolsParametersTemp.includeOTMOptions">includeOTMOptions</mat-checkbox>  -->
+<!--    
+    <span class="toolbar-spacer"></span>
+
+
+    <button mat-icon-button color="primary" class="mat-button-shrink" (click)="onSubmit(false)">
+        <mat-icon class="toolbar-icon">play_circle_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button color="primary" class="mat-button-shrink" (click)="onSubmit(true)">
+        <mat-icon class="toolbar-icon">play_circle_outline</mat-icon>
+        <mat-icon class="bottom-right-shrink-icon toolbar-icon">add</mat-icon>
+    </button>
+
+    <button mat-icon-button color="primary" class="mat-button-shrink" (click)="openSetting()">
+        <mat-icon class="toolbar-icon">settings</mat-icon>
+    </button> -->
+
+</mat-toolbar>
+
+<div style="width: 550px;height: 550px;position:absolute; right: 0;left:0; margin-left:auto; margin-right: auto;" [@fade]="parameterVisibility" [ngClass]="{
+    'active': parameterVisibility === 'active',
+    'inactive': parameterVisibility === 'inactive'
+ }"> 
+    <mat-card style="height: 100%; width: 100%; padding: 5px;">
+
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center;margin-top:1rem"> 
+            Option Pricing Parameters
+        </div>
+
+        <div style="display:flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+
+            <mat-form-field appearance="outline" class="outline-shrink" style="margin-top: 2rem;width: 200px;">
+                <mat-label>Ticker</mat-label>
+                <input type="text" matInput placeholder="Eg. SPX Index" [matAutocomplete]="auto" [formControl]="tickerFormControl"  [(ngModel)]="optionVolsParametersTemp.ticker">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let ticker of filteredTickers$ | async" [value]="ticker">
+                      {{ticker}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 200px;">
+                <mat-label>Template Type</mat-label>
+                <mat-select [(ngModel)]="optionVolsParametersTemp.templateType">
+                    <mat-option *ngFor="let template of templates" [value]="template.templateType">{{template.displayName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+    
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 175px;">
+                <mat-label>Pricing Method</mat-label>
+                <mat-select [(ngModel)]="pricingMethod" (selectionChange)="handlePricingMethodChange($event)">
+                    <mat-option [value]="'delta'">Delta</mat-option>
+                    <mat-option [value]="'strike'">Strike</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 450px" *ngIf="pricingMethod === 'strike'">
+                <mat-label>Strikes</mat-label>
+                <mat-chip-list #strikeChipList>
+                  <mat-chip *ngFor="let value of optionVolsParametersTemp.strikes" [selectable]="true"
+                           [removable]="true" (removed)="remove(value, 'strike')" class="shrink-chip">
+                    {{value}}
+                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                  </mat-chip>
+                  <input 
+                         [matChipInputFor]="strikeChipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="true"
+                         (matChipInputTokenEnd)="add($event, 'strike')">
+                </mat-chip-list>
+            </mat-form-field>
+        
+
+            <mat-form-field appearance="outline" class="outline-shrink" *ngIf="pricingMethod === 'delta'" style="width: 450px">
+                <mat-label>Deltas</mat-label>
+                <mat-chip-list #chipList >
+                  <mat-chip *ngFor="let value of optionVolsParametersTemp.deltas" [selectable]="true"
+                           [removable]="true" (removed)="remove(value, 'delta')" class="shrink-chip">
+                    {{value}}
+                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                  </mat-chip>
+                  <input 
+                         style="border:1px solid black;color:black !important;"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="true"
+                         (matChipInputTokenEnd)="add($event, 'delta')">
+                </mat-chip-list>
+            </mat-form-field>
+
+        </div>
+        
+        <mat-button-toggle-group [(ngModel)]="notionalOrSize" style="margin-left:1rem;width: 150px;">
+            <mat-button-toggle value="size" ngDefaultControl style="font-size: 12px">Size</mat-button-toggle>
+            <mat-button-toggle value="notional" ngDefaultControl style="font-size: 12px" >Notional</mat-button-toggle>
+        </mat-button-toggle-group>    
+
+        <div style="width: 100%;display:flex;flex-direction:row; align-items: center; padding-top:1.5rem">
+            <mat-form-field *ngIf="notionalOrSize==='size'" appearance="outline" class="outline-shrink" style="width: 140px;">
+                <mat-label>Target Size (bps)</mat-label>
+                <input matInput placeholder="Eg. 100" [(ngModel)]="optionVolsParametersTemp.target" (focus)="removeCommas_general($event, 'target')" (blur)="addCommas_general($event, 'target')">
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="notionalOrSize==='notional'" appearance="outline" class="outline-shrink" style="width: 140px;">
+                <mat-label>Target Notional</mat-label>
+                <input matInput placeholder="Eg. 100" [(ngModel)]="optionVolsParametersTemp.targetNotional" (focus)="removeCommas_general($event, 'targetNotional')" (blur)="addCommas_general($event, 'targetNotional')">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="outline-shrink" style="flex: 1 0 0" style="width: 110px;">
+                <mat-label>numExpiries</mat-label>
+                <input type="number" matInput placeholder="Eg. 5" [(ngModel)]="optionVolsParametersTemp.numExpiries">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="outline-shrink" style="width: 140px;">
+                <mat-label>Capital</mat-label>
+                <input type="text" matInput placeholder="Eg. 1000000000" [formControl]="capitalFormControl" [(ngModel)]="optionVolsParametersTemp.capital" (focus)="removeCommas()" (blur)="addCommas()"
+                [matAutocomplete]="auto2" >
+                <mat-autocomplete #auto2="matAutocomplete" panelWidth="500">
+                    <mat-option *ngFor="let capital of filteredCapitals$ | async" [value]="capital.capital">
+                    <i>{{capital.cross_pod_name}}</i> {{format(capital.capital)}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+            
+        <mat-button-toggle-group [(ngModel)]="optionVolsParametersTemp.volType" style="margin-left: 1rem;width: 300px;">
+            <mat-button-toggle value="daily" ngDefaultControl style="font-size: 12px">Daily &#963;</mat-button-toggle>
+            <mat-button-toggle value="monthly" ngDefaultControl style="font-size: 12px">Monthly &#963;</mat-button-toggle>
+            <mat-button-toggle value="quarterly" ngDefaultControl style="font-size: 12px">Quarterly &#963;</mat-button-toggle>
+        </mat-button-toggle-group>    
+
+        <div style="display:flex;flex-direction:row; align-items:flex-start;margin-top:1rem;">
+
+            <mat-checkbox class="example-margin" [(ngModel)]="optionVolsParametersTemp.useCache" style="font-size: 12px;">useCache</mat-checkbox>
+
+        
+            <button mat-icon-button [matMenuTriggerFor]="appMenu" title="Select expiries" style="margin-left:1rem;">
+                <mat-icon class="toolbar-icon">calendar_today</mat-icon>
+            </button>
+            <mat-menu #appMenu class="drop-calendar">
+                <div (click)="$event.stopPropagation()">
+                    <mat-calendar #calendar (selectedChange)="selectDate($event, calendar)" [dateClass]="isDateSelected">
+                    </mat-calendar>
+                </div>
+            </mat-menu>
+    
+        </div>
+
+    <div *ngIf="selectedExpiries?.length > 0" style="margin-left:0.5rem;">
+        <button mat-icon-button [matMenuTriggerFor]="dateMenu" title="View selected expiries">
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <mat-menu #dateMenu class="drop-dates" [overlapTrigger]="true">
+            <div mat-menu-item *ngFor="let expiry of sortedDates(selectedExpiries)" (click)="$event.stopPropagation()">
+                <span>{{ expiry }}</span>
+            </div>
+        </mat-menu>
+    </div>
+    </mat-card>
+</div>

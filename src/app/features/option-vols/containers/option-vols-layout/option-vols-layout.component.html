@@ -1,0 +1,23 @@
+<app-option-vols-toolbar 
+    [tickers]="supportedTickers$ | async"
+    [optionVolsParameters]="activeRequest$ | async"
+    [pricingMethod]="optionPricingMethod"
+    (changePricingMethod)="handlePricingMethodChange($event)"
+    (submitOptionVolsParameters)="submitOptionVolsParameters($event)"
+    [sizingCapitals]="sizingCapitals$ | async">
+</app-option-vols-toolbar>
+
+
+<!-- <div class="mat-card" *ngFor="let guid of (optionVolRequestIds$ | async)">{{guid}}</div> -->
+
+<div class="horizontal-flex">
+    <app-option-vols-analysis-result-layout 
+        class="mat-card mat-card-shadow-adjust"
+        *ngFor="let guid of (selectedOptionVolRequestIds$ | async); let i = index"
+        [guid]="guid"
+        [onFocus]="(activeIndex$ | async) === i"
+        (removeSelectedRequestId)="removeSelectedRequestId($event)"
+        (click)="setActiveIndex(i)">
+    </app-option-vols-analysis-result-layout>
+</div>
+

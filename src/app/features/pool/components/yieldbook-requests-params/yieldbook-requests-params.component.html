@@ -1,0 +1,14 @@
+<div class="toolbar">
+    <span>
+        Yieldbook Request Logs
+        <mat-form-field class="date-picker">
+            <input matInput [matDatepicker]="datePicker" placeholder="Choose a date" [value]="date.value"
+                (dateChange)="dateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+    </span>
+    <span style="padding-left:20px;">
+        <button mat-raised-button color="primary" (click)="reset()">Reset Session</button>
+    </span>
+</div>

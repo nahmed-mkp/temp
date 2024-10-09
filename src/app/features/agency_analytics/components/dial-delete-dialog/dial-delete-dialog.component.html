@@ -1,0 +1,12 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <span style="margin-left:10px;color:white;">Delete Dial {{dialName}}</span>
+    <i class="material-icons" style="cursor: pointer;" (click)="onCancel()">close</i>
+</div>
+
+<div class="dialog-padding">
+    Are you sure you want to delete Dial {{ dialName }}
+    <div mat-dialog-actions class="dialog-action">
+        <button mat-button color="primary" (click)="onSubmit()" style="cursor:pointer">Yes</button>
+        <button mat-button color="primary" (click)="onCancel()" style="cursor:pointer">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<!-- <p>
+  event-analysis-timesereies-viewer works!
+</p> -->
+
+<!-- <div class="instruction">
+  <h4>Instruction - For running Event analysis</h4>
+  <ul>
+    <li>Select an timeseries from Market data search bar then start the configuration for event analysis</li> 
+    <li>Or select an existing timeseries analyses record (top right icon button)</li>
+    <li>Add one or more time series and/or formula for the event analysis in the bottom panel</li>
+    <li>Then analysis will be triggered if the configuration is changed</li>
+    <li>Review the result on each of the tab section</li>
+  </ul>
+</div> -->
+
+<div class="instruction" *ngIf="!activeConfiguration">
+  <h4>Instruction - For running Event analysis</h4>
+  <ul>
+    <li>Select an existing analysis record from the top right in the configuration section</li>
+    <li>Or start a new analysis by adding timeseries and/or formula in the bottom configuration pannel</li>
+    <li>Setup or adjust the analysis configuration using the panel on the right</li>
+    <li>Review the event analysis result on event analysis and event statistics section</li>
+  </ul>
+</div>
+
+<div class="horizontal-flex-full-height" *ngIf="activeConfiguration && show">
+
+  <span style="position: absolute; right: 0; right: 3rem; z-index: 10;" mat-stroked-button color="primary" (click)="onToggleAverage()">
+    {{averageMode ? 'ALL': 'AVG'}}
+  </span>
+
+  <mat-selection-list dense role="list" style="flex: 1 0 0; overflow-y: scroll; max-width: 130px;height: 100%;overflow: scroll;" 
+    (selectionChange)="dateSelectionChange($event)">
+    <h4 mat-subheader>Event Dates</h4>
+    <mat-list-option role="listitem" *ngFor="let date of data?.calendarDates"
+      [ngStyle]="{'color': datesColorCodes && datesColorCodes[date]}"
+      [value]="date" 
+      [selected]="selectedDates && selectedDates.indexOf(date) !== -1"
+      (mouseenter)="onHoverEnterDate(date)"
+      (mouseleave)="onHoverLeaveDate(date)">
+      {{date.slice(0, 6) + date.slice(8)}}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <highcharts-chart style="display: flex; flex: 1 0 0;" 
+    [Highcharts]="Highcharts"
+    [options]="optionsPlot || {}"
+    [callbackFunction]="callbackFn">
+  </highcharts-chart>
+
+  <div class="loading-screen" *ngIf="processRendering || activeEventAnalysisLoadingStatus">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+
+</div>
+  

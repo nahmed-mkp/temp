@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <mat-toolbar class="mat-toolbar-dialog">
+        <span class="toolbar-heading"> Rename Portfolio </span>
+    </mat-toolbar>
+    <div mat-dialog-actions class="input-wrapper">
+
+    <mat-form-field>
+        <input matInput placeholder="New Name..." required type="text" class="test-username" [(ngModel)]="portfolioName">
+    </mat-form-field>
+      
+      <div class="btn-wrap">
+        <button mat-button (click)="save()" style="background-color:lightskyblue" [disabled]="portfolioName === ''">Save</button>
+        <button mat-button (click)="cancel()" style="background-color:#f1807e">Cancel</button>
+      </div>
+
+    </div>
+</div>

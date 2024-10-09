@@ -1,0 +1,19 @@
+<!-- <p>
+  pool-portfolios-items-note-popup works!
+</p> -->
+<h1 mat-dialog-title>Notes</h1>
+
+<div mat-dialog-content>
+  {{data | json}}
+  <form>
+    <mat-form-field>
+      <textarea matInput rows='10'></textarea>
+    </mat-form-field>
+  </form>
+  
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseClick()">Close</button>
+  <button mat-button (click)="onCloseClick()">Save</button>
+</div>

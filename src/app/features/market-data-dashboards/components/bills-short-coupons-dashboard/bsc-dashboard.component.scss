@@ -1,0 +1,13 @@
+.right-border{
+    border-right:1px solid black;
+}
+
+.row-group-styles{
+    border-right: 1px solid black;
+}
+
+::ng-deep{
+    .bsc-dashboard-card-content .ag-row-group-indent-0{
+        border:2px solid black !important;
+    }
+}

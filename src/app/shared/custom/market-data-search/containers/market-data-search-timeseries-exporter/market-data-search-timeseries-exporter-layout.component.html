@@ -1,0 +1,6 @@
+<app-market-data-search-general
+    [value]='value'
+    [searchResults]="searchResults$ | async"
+    (marketDataSelected)="onMarketDataSelected($event)"
+    (onSearchMarketData)="onSearchMarketData($event)">
+</app-market-data-search-general>

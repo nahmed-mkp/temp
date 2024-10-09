@@ -1,0 +1,52 @@
+<mat-card class="card"  style="margin:5px;font-size: 13px;">
+
+    <mat-card-header class="header">
+        <mat-card-title>Job Schedulers</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content class="content">
+        <table style="border:none" spacing=0 style="width: 100%">
+            <tr class="row-headers">
+                <th>Status</th>
+                <th>Server</th>
+                <th>Timestamp</th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let server of jobSchedulers">
+                <td style="width:30px;">
+                    <mat-icon class="material-icons color_green" *ngIf="server.IsRunning"
+                        style="margin-left:2px; margin-right:2px;">
+                        cloud_upload</mat-icon>
+                    <mat-icon class="material-icons color_red" *ngIf="!server.IsRunning"
+                        style="margin-left:2px;margin-right:2px;">
+                        cloud_download</mat-icon>
+                </td>
+                <td style="width:200px;text-align: center;"><strong>{{server.MachineName}}</strong></td>
+                <td style="width:150px;text-align: center;">
+                    <small style="color:gray" *ngIf="server.IsRunning"><i>Started
+                            {{getTimezoneUnawareDate(server.StartupTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs !== null"><i>Stopped
+                            {{getTimezoneUnawareDate(server.LastShutdownTs) | amTimeAgo}}</i></small>
+                    <small style="color:gray" *ngIf="!server.IsRunning && server.LastShutdownTs === null"><i>Never
+                            run</i></small>
+                </td>
+                <td style="width:10px;"></td>
+                <td style="width:100%;display:flex;flex-direction:row;align-items: center;justify-content: center;" *ngIf="isJobSchedulerAvailable(server.MachineName)">
+                    <button mat-icon-button color="primary" [title]="'Restart Job Scheduler on' + server.MachineName"
+                        (click)="onRestartJobScheduler(server.MachineName)">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [disabled]="server.PID === null"
+                        [title]="'Kill ' + (server.PID !== null ? server.PID : 'RT')" (click)="onKillProcess(server)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" [title]="'View ' + server.MachineName + ' History'"
+                        (click)="onViewHistory(server.MachineName)">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>

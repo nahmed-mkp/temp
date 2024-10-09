@@ -1,0 +1,15 @@
+<mat-form-field>
+    <input #search
+        matInput 
+        type="text"
+        [matAutocomplete]="auto"
+        [value]="value"
+        (keyup)="handleKeyUpEvent($event)"
+        (keydown)="onKeyDown($event)">
+    <!-- <mat-icon matSuffix>search</mat-icon> -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)" panelWidth="500">
+        <mat-option *ngFor="let searchResult of searchResults" [value]="searchResult">
+            <span><strong>{{searchResult.name}}</strong></span> | <small><i>{{searchResult.priceSource}}</i></small>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

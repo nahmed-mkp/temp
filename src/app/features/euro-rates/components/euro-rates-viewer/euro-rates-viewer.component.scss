@@ -1,0 +1,147 @@
+h3 {
+    position: relative;
+    span {opacity: 0.5;}
+    #euro-rates-action-button {
+        // width: 16rem;
+        // bottom: 20px;
+    
+        // left: 50%;
+        // transform: translateX(-50%);
+        opacity: 1;
+        right: 4rem;
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        mat-slide-toggle {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-right: 1rem;
+        }
+    }
+}
+
+.card-container {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        .euro-rate-file-action {animation: fade-in 0.5s linear forwards;}
+    }
+}
+
+.mat-card {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 1.5rem 30px;
+    box-shadow: 0px 3px 10px 0px #8080803b;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    flex: 11 0 0;
+}
+
+.mat-icon-button {
+    width: inherit;
+    height: inherit;
+    line-height: normal;
+}
+
+.mat-card{
+    &.complete-progress::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        top: 0;
+        left: 0;
+        background-color: #4CAF50;
+        border-radius: 10px 0 0 10px;
+        opacity: 0.6;
+    }
+    &.pending-progress::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        top: 0;
+        left: 0;
+        background-color: #3f51b5;
+        border-radius: 10px 0 0 10px;
+        opacity: 0.6;
+    }
+    &.error-progress::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        top: 0;
+        left: 0;
+        background-color: #f44336;
+        border-radius: 10px 0 0 10px;
+        opacity: 0.6;
+    }
+}
+
+div.header-card {
+    display: flex;
+    opacity: 0.2;
+    font-weight: bold;
+    font-size: 14px;
+    > div {
+        padding: 16px 30px 0 30px;
+    }
+
+}
+
+.fade {
+    animation: fade 3s linear infinite alternate;
+}
+
+
+
+.euro-rate-file-action {
+    opacity: 0;
+    // margin-left: 1rem;
+    flex: 1 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.euro-rata-file-divider {
+    flex: 0.2 0 0;
+    display: flex;
+    justify-content: center;
+    span {
+        border: 1px solid #80808017;
+    }
+}
+
+#euro-rate-file-backlog-section {
+    display: flex;
+    flex-direction: column;
+    flex: 3 0 0;
+    .cdk-drop-list {flex: 1 0 0}
+}
+
+#euro-rate-download-section {
+    display: flex;
+    flex-direction: column;
+    flex: 6 0 0;
+    .cdk-drop-list {flex: 1 0 0}
+}
+
+
+@keyframes fade {
+    0% {opacity: 0.2;}
+    25% {opacity: 0.5;}
+    50% {opacity: 1;}
+    75% {opacity: 0.5;}
+    100% {opacity: 0.2;}
+}
+
+@keyframes fade-in {
+    0% {opacity: 0;}
+    100% {opacity: 0.4;}
+}

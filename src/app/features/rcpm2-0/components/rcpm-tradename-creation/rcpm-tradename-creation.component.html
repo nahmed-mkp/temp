@@ -1,0 +1,129 @@
+<div class="vertical-flex-full-height tradename-form">
+
+    <mat-toolbar>
+        <span class="toolbar-heading">
+            Create New TradeName
+        </span>
+    </mat-toolbar>
+    
+    <form [formGroup]="tradenameForm" *ngIf="pms && pms.length > 0; else loading;" style="margin-top:2rem;">
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width">
+            <mat-label>Portfolio Manager</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput type="text" formControlName="primaryPM" [matAutocomplete]="pmlist" placeholder="...">
+            </div>
+            <mat-autocomplete #pmlist="matAutocomplete" [displayWith]="displayPM" (optionSelected)="selectPM($event)">
+                <mat-option *ngFor="let pm of filteredPMs$ | async" [value]="pm">
+                    {{pm.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field><br />
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width">
+            <mat-label>TradeName</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput type="text" formControlName="tradeName" placeholder="..." (change)="onTradeNameChange()">
+            </div>
+        </mat-form-field>
+        <button style="margin-left: 5px"  mat-mini-fab disabled>{{selectedPM?.crdTradeIDPrefix}}</button>
+        <br />
+
+        <mat-slide-toggle [color]="primary" formControlName="isFXHedged">
+            <span style="font-size:.85em;" class="slide-toggle-label">Is FX Hedged?</span>
+        </mat-slide-toggle><br />
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width" style="margin-top:2rem">
+            <mat-label>Allocation Strategy</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput formControlName="allocStrategy" placeholder="..." [matAutocomplete]="strategies">
+            </div>
+            <mat-autocomplete #strategies="matAutocomplete" (optionSelected)="onSelectStrategy($event)">
+                <mat-option *ngFor="let strategy of selectedPM?.strategies" [value]="strategy">
+                    {{strategy}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <button mat-icon-button color="primary" title="Reset allocations" aria-label="Reset allocations" (click)="resetAllocationGrid($event)">
+            <mat-icon>replay</mat-icon>
+        </button>
+        <br />
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width"  *ngIf="isCustomStrategy">
+            <mat-label>Custom Allocation Reason?</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput formControlName="customAllocationReason" autocomplete="off" placeholder="...">
+            </div>
+        </mat-form-field>
+        <div *ngIf="customAllocationReason?.invalid" class="error">
+            Reason is <strong>required</strong> for Custom allocations
+        </div><br *ngIf="isCustomStrategy" />
+
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width">
+            <mat-label>Macro Theme</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput formControlName="macroTheme" placeholder="..." [matAutocomplete]="macroThemes">
+            </div>
+            <mat-autocomplete #macroThemes="matAutocomplete">
+                <mat-option *ngFor="let macroTheme of (filteredMacroThemes$ | async)" [value]="macroTheme">
+                    {{macroTheme}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field> <br/>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width">
+            <mat-label>Trade Group</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput formControlName="userSortTag3" placeholder="..." [matAutocomplete]="userSortTags">
+            </div>
+            <mat-autocomplete #userSortTags="matAutocomplete">
+                <mat-option *ngFor="let sortTag of (filteredUserSortTags$ | async)" [value]="sortTag">
+                    {{sortTag}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field><br/>
+
+
+        <mat-form-field appearance="outline" floatLabel="always" class="half-width">
+            <mat-label>Theme</mat-label>
+            <mat-select formControlName="clientTheme" placeholder="...">
+                <mat-option *ngFor="let theme of clientServicesTradeThemes" [value]="theme.Code">
+                    {{theme.Code}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <span class="error" *ngIf="!(isValid$ | async)">Allocations don't add up to 100%</span>
+        <span class="success" *ngIf="creatingTradeName">Creating TradeName, please wait...</span>
+        <span class="success" *ngIf="createTradeNameSuccessMessage">{{createTradeNameSuccessMessage}}</span>
+        <span class="error" *ngIf="createTradeNameFailureMessage">{{createTradeNameFailureMessage}}</span>
+
+        <app-base-grid         
+            [gridItems]="selectedAllocations"
+            [customGridOption]="customGridOption"
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid><br />
+
+        <mat-radio-group [(ngModel)]="podDisplayMode" [disabled]="!isCustomStrategy" [ngModelOptions]="{standalone: true}" (ngModelChange)="onPodDisplayModeChange()">
+            <mat-radio-button value="showAllPmPods">Show All PM Pods</mat-radio-button>
+            <mat-radio-button value="showAllPods">Show All Pods</mat-radio-button>
+        </mat-radio-group>
+        <br>
+
+        <div class="actions" *ngIf="!creatingTradeName" style="margin-top: 1rem;">
+            <button mat-raised-button color="primary" [disabled]="!tradenameForm.valid || !(isValid$ | async)" (click)="submitForm()">Submit</button>
+            <span style="margin-left:5px;"><button mat-raised-button [disabled]="!tradenameForm.touched" (click)="resetForm()">Reset</button></span>
+        </div>
+
+    </form>
+ 
+    <ng-template #loading>
+        <mat-spinner style="display: block;justify-content: center;"></mat-spinner>
+    </ng-template>
+
+
+
+</div> 

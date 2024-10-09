@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <mat-toolbar class="mat-toolbar-dialog">
+      <span class="toolbar-heading"> Upload Supporting Adjustment Documents </span>
+  </mat-toolbar>
+  <div class="vertical-flex-full-height" style="padding: 2rem">
+    <app-uploader
+        [url]="'http://prizm-map.mkpcap.com/api/v1/adjustments/upload'"
+        [additionalInputData]="selectedRowIds"
+        [showQueue]="true" 
+        [allowMultiple]="true"
+        [allowSingle]="false"
+        (onFailedItem)="uploadFailure($event)"
+        (onSuccessItem)="uploadSuccess($event)">
+      </app-uploader>
+  </div>
+</div>

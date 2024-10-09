@@ -1,0 +1,15 @@
+[
+    {
+        "context": "/api",
+        "target": "http://localhost:5005",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    {
+        "context": "/pricing/api",
+        "target": "http://localhost:5015",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+]

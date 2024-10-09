@@ -1,0 +1,23 @@
+<app-linechart 
+  style="width: 100%; flex: 3 0 0; min-height: 0; display: block;" 
+  [options]="optionsPlot"
+  [callbackFn]="callbackFn">
+</app-linechart>
+
+<small>Details</small>
+<app-base-grid
+  style="flex: 3 0 0"
+  [customGridOption]="customGridOption_details"
+  [extraOption]="extraOption"
+  [gridItems]="detail"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<small>Summary</small>
+<app-base-grid
+  style="flex: 2 0 0"
+  [customGridOption]="customGridOption_summaries"
+  [extraOption]="extraOption"
+  [gridItems]="summary"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

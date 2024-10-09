@@ -1,0 +1,134 @@
+<mat-toolbar>
+    <span class="toolbar-heading">SHARE CLASSES</span>
+    <span class="toolbar-spacer"></span>
+
+        <mat-form-field appearance="outline" *ngIf="(selectedTab$ | async)?.toLowerCase() !== 'capitalflows' && (selectedTab$ | async)?.toLowerCase() !== 'statements'">
+            <mat-label>Month/Year</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput [matDatepicker]="dp" [formControl]="date">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)" panelClass="example-month-picker">
+                </mat-datepicker>
+            </div>
+        </mat-form-field>
+
+    <div *ngIf="(selectedTab$ | async)?.toLowerCase() === 'capitalflows' || (selectedTab$ | async)?.toLowerCase() === 'statements'  ">
+        <form [formGroup]="capitalFlow" spellcheck="false" autocomplete="off">
+            <mat-form-field appearance="outline" style="width:150px;margin-right:20px;">
+                <mat-label>Start</mat-label>
+                <input matInput [matDatepicker]="cpStart" [value]="capitalFlowStartDate" autocomplete="off" (dateChange)="changeDateRange('start', $event)">
+                <mat-datepicker-toggle matSuffix [for]="cpStart"></mat-datepicker-toggle>
+                <mat-datepicker #cpStart (dateChange)="changeDateRange('start', $event)"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width:150px;">
+                <mat-label>End</mat-label>
+                <input matInput [matDatepicker]="cpEnd" [value]="capitalFlowEndDate" autocomplete="off" (dateChange)="changeDateRange('end', $event)">
+                <mat-datepicker-toggle matSuffix [for]="cpEnd"></mat-datepicker-toggle>
+                <mat-datepicker #cpEnd></mat-datepicker>
+            </mat-form-field>
+        </form>
+    </div>
+
+</mat-toolbar>
+
+<mat-tab-group id="wrapper" (selectedTabChange)="changeTab($event)"  #tabs *ngIf="(tabsLoaded$ | async) === true;" style="height: 94%;">
+    <mat-tab label="Investors">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Investors
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <div style="display:flex;flex-direction:column; height: 99%;width: 99%;">
+                <div style="font-size:15px;font-weight:bold;margin-left:1rem;"> Investors </div>
+                <div class="vertical-flex-full-height">
+                    <app-cs-investors 
+                        class="horizontal-flex-full-height mat-card"
+                        [canEditInvestorDetails]="canEditInvestorDetails$ | async"
+                        [investorList]="investors$ | async"
+                        [formData]="formData$ | async"
+                        (editInvestor)="editInvestor($event)"
+                        (deleteInvestor)="deleteInvestor($event)"
+                    >
+                    </app-cs-investors>
+                </div>
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="CapitalFlows">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Capital Flows
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <app-cs-capital-flows-layout 
+                [dateRange$]="selectedDateRange$"
+                #capitalFlows
+            >
+            </app-cs-capital-flows-layout>            
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Statements">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Statements
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+           <app-cs-statements
+                [statements]="statements$ | async"
+                [statementsLoading]="statementsLoading$ | async"
+                [statementsLoaded]="statementsLoaded$ | async"
+                [statementsError]="statementsError$ | async"
+                class="horizontal-flex-full-height">
+            </app-cs-statements>
+        </ng-template>
+    </mat-tab>
+    <mat-tab *ngFor="let tab of (tabs$ | async)" label="{{tab.MasterFundName}}">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                {{tab.MasterFundName}}
+            </span>
+        </ng-template> 
+        <ng-template matTabContent>
+            <app-client-solutions-investor-relations-firm-layout
+                *ngIf="tab.MasterFundName === 'Firm'"
+                class="horizontal-flex-full-height"
+                style="height:98%"
+                [firmAumBalances]="firmAumBalances$ | async"
+                [firmTop10List]="firmTop10List$ | async"
+                [firmRelationshipList]="firmRelationshipList$ | async"
+                [firmInvestorTypes]="firmInvestorTypes$ | async"
+                [firmRegions]="firmRegions$ | async"
+            >
+            </app-client-solutions-investor-relations-firm-layout>
+            <app-client-solutions-investor-relations-fund-layout
+                *ngIf="tab.MasterFundName !== 'Firm'"
+                class="horizontal-flex-full-height"
+                style="height:98%"
+                [fundAumBalances]="fundAumBalances$ | async"
+                [fundTop10List]="fundTop10List$ | async"
+                [fundInvestorTypes]="fundInvestorTypes$ | async"
+                [fundRegions]="fundRegions$ | async"
+            >
+            </app-client-solutions-investor-relations-fund-layout>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Exceptions">
+        <ng-template mat-tab-label>
+            <span class="vertical-align-center">
+                Exceptions
+            </span>
+        </ng-template>
+        <ng-template matTabContent>
+            <app-cs-exceptions
+                [exceptions]="exceptions$ | async" 
+                [exceptionsLoading]="exceptionsLoading$ | async"
+                [exceptionsLoaded]="exceptionsLoaded$ | async" 
+                [exceptionsError]="exceptionsError$ | async"
+                class="horizontal-flex-full-height">
+            </app-cs-exceptions>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

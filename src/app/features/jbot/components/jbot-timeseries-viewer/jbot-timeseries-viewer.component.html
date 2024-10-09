@@ -1,0 +1,8 @@
+<div class="loading-screen" *ngIf="loadingStatus">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-linechart style="width: 100%; height: 100%; display: flex;" 
+  [options]="optionsPlot"
+  [callbackFn]="callbackFn">
+</app-linechart>

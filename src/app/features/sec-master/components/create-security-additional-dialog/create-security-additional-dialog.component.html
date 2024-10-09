@@ -1,0 +1,25 @@
+<div mat-dialog-title>
+    Setup OTC Option?
+</div>
+
+<div mat-dialog-content>
+    <form [formGroup]="otcForm">
+        <!-- <mat-checkbox matInput formControlName="isOTC">Is OTC?</mat-checkbox><br /><br /> -->
+        <mat-form-field style="width:50%;">
+            <mat-select formControlName="counterparty" placeholder="Counterparty*">
+                <mat-option *ngFor="let counterparty of counterparties" [value]="counterparty">
+                    {{counterparty}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br />
+        <mat-form-field style="width:50%;">
+            <input type="number" matInput placeholder="Contract Size*" formControlName="contractSize" autocomplete="off">
+        </mat-form-field>        
+    </form>
+</div>
+
+<div mat-dialog-actions class="dialog-action" style="padding:5px;">
+    <button mat-raised-button color="primary" (click)="onApply()"
+        [disabled]="otcForm.touched && otcForm.invalid">Apply</button>
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+</div>

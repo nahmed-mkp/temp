@@ -1,0 +1,23 @@
+<div *ngIf="inflationSwapsLoading$ | async" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="inflationSwapsError$ | async" class="loading-screen">
+    <h4>Load Data Failed!</h4>
+</div>
+
+<div *ngIf="(inflationSwapsLoaded$ | async) === true && (inflationSwaps$ | async).length === 0 " class="loading-screen">
+    <h4>No Inflation Swap Data!</h4>
+</div>
+
+<div class="wrap">
+    <app-rates-inflation-swaps-viewer
+        class="custom-card"
+        [data]="(inflationSwaps$ | async)">
+    </app-rates-inflation-swaps-viewer> 
+
+    <app-rates-inflation-swap-plot-viewer
+        class="mat-card-lift custom-plot-viewer"    
+        [data]="inflationSwapsDataPoints$ | async">
+    </app-rates-inflation-swap-plot-viewer>
+</div>

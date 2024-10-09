@@ -1,0 +1,22 @@
+<mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="outline-shrink" style="margin-left: 1rem"> -->
+    <!-- <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu" matPrefix
+        style="top: -4px;position: relative;left: -9px;padding-right: 0rem;">
+        {{getSelectedProviderName()}}<i class="material-icons">arrow_drop_down</i>
+    </button> -->
+    <!-- <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let provider of providers" (click)="selectProvider(provider)">{{provider.name}}</button>
+    </mat-menu> -->
+    <input #search
+        matInput 
+        type="text"
+        [matAutocomplete]="auto"
+        (keyup)="handleKeyUpEvent($event)"
+        (keydown)="onKeyDown($event)">
+    <!-- <mat-icon matSuffix>search</mat-icon> -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)" [displayWith]="displayFn" panelWidth="500">
+        <mat-option *ngFor="let searchResult of searchResults" [value]="searchResult">
+            <span><strong>{{searchResult.displayName}}</strong></span> | <small><i>{{searchResult.provider}}</i></small>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

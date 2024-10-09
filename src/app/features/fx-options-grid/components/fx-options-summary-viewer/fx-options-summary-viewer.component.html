@@ -1,0 +1,16 @@
+<br />
+<mat-card style="height:500px;">
+    <mat-card-title *ngIf="data && data.length > 0">
+        <span style="font-size:medium">{{data[0].expiry}}</span> - &nbsp;
+        <span style="font-size:small;color:gray"><i>All numbers denoted below are expressed as a % of the price of the first currency in the pair.</i></span>
+    </mat-card-title>
+    <mat-card-subtitle style="height:95%;">
+        <app-base-grid
+            style="flex: 1 0 0"
+            [gridItems]="data" 
+            [customGridOption]="customGridOption" 
+            [extraOption]="extraOption"
+            [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </mat-card-subtitle>
+</mat-card>

@@ -1,0 +1,55 @@
+<app-market-data-rates-params-toolbar 
+    [selectedDate]="selectedDate$ | async"
+    (sendNewSelectedDate)="sendNewSelectedDate($event)"
+    (setLayoutMode)="onSetLayoutMode($event)"
+    [devMode]="devMode$ | async"
+    (changeMode)="changeMode($event)">
+</app-market-data-rates-params-toolbar>
+
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" [animationDuration]="0">
+    
+    <mat-tab [label]="'Forward Rates'">
+        <ng-template matTabContent>
+            <app-market-data-forward-rates-layout class="mat-card vertical-flex-full-height" style="flex: 1 0 0" [selectedDate]="selectedDate$ | async">
+            </app-market-data-forward-rates-layout>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab [label]="'Inflation Swaps'">
+        <!-- <ng-template matTabContent> -->
+            <app-market-data-inflation-swaps-rates-layout class="mat-card vertical-flex-full-height" style="flex: 1 0 0;">
+            </app-market-data-inflation-swaps-rates-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <!-- <mat-tab [label]="'Par Rates'">
+            <app-market-data-par-rate-layout class="mat-card vertical-flex-full-height" style="flex: 1 0 0;">
+            </app-market-data-par-rate-layout>
+    </mat-tab> -->
+
+    <mat-tab [label]="'Futures Basis'">
+        <ng-template matTabContent>
+            <app-market-data-futures-basis-layout layout class="vertical-flex-full-height"
+                style="flex: 1 0 0; flex-wrap: wrap;">
+            </app-market-data-futures-basis-layout>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab [label]="'Curves'">
+        <!-- <ng-template matTabContent> -->
+        <app-market-data-curves-layout class="horizontal-flex-full-height" style="flex: 1 0 0; flex-wrap: wrap;">
+        </app-market-data-curves-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab [label]="'Q/E Forecasts'">
+        <ng-template matTabContent>
+            <app-market-data-qe-forecast-layout layout class="vertical-flex-full-height" style="flex: 1 0 0; flex-wrap: wrap;">
+            </app-market-data-qe-forecast-layout>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+
+
+

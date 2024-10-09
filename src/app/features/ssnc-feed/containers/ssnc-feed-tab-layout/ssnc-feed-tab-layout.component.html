@@ -1,0 +1,13 @@
+<mat-tab-group [selectedIndex]="tabMapping()" (selectedTabChange)="changeTab($event)" class="vertical-flex-full-height">
+    <mat-tab *ngFor="let assetClass of assetClasses;" [label]="assetClass">
+        <app-ssnc-feed-viewer 
+            *ngIf="feedData" 
+            [feedData]="feedData" 
+            [selectedOrderId]="selectedOrderId"
+            [selectedColumn]="selectedColumn"
+            [additionalFeedData]="additionalFeedData"  
+            (onLoadAdditionalFeedData)="loadAdditionalFeedData($event)" 
+        >
+        </app-ssnc-feed-viewer>
+    </mat-tab>
+</mat-tab-group>

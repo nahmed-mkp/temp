@@ -1,0 +1,5 @@
+<p style="padding:5px;">
+    <mat-button-toggle-group name="year" aria-label="Year">
+        <mat-button-toggle *ngFor="let year of getYears()" [value]="year" (click)="onYearSelected(year)">{{year}}</mat-button-toggle>
+    </mat-button-toggle-group>
+</p>

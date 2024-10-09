@@ -1,0 +1,36 @@
+<!-- <p>
+  prepay-rate-custom-cell-editor works!
+</p> -->
+
+<div class="top-edge">
+  Prepayment Rate - {{title}}
+</div>
+
+<div style="flex: 1 0 0; display: flex;">
+  <highcharts-chart
+    [Highcharts]="Highcharts"
+    [options]="optionsPlot"
+    [callbackFunction]="callbackFn">
+  </highcharts-chart>
+
+  <div class="vertical-flex-full-height">
+
+    <mat-form-field appearance="outline" class="outline-shrink">
+      <mat-label>Multiplier</mat-label>
+      <input matInput required type="number" [(ngModel)]="multiplier">
+    </mat-form-field>
+
+    <app-base-grid
+      [customGridOption]="customGridOption"
+      [extraOption]="extraOption"
+      [gridItems]="gridData"
+      [customGridCallBack]="customGridCallBack">
+    </app-base-grid>
+  </div>
+</div>
+
+
+
+
+
+<!-- {{value | json}} -->

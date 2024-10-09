@@ -1,0 +1,28 @@
+<app-sec-master-create-security
+    style="margin-top: 1rem;"
+    [supportedAssetClasses] = "supportedAssetClasses$ | async"
+    [identifiers]="identifiers$ | async"
+    [activeBrokers]="activeBrokers$ | async"
+    (createNewSecurity)="createNewSecurity($event)"
+></app-sec-master-create-security>
+
+<app-security-master-security-viewer-tab-layout 
+    style="flex: 1 0 0; margin-top: 1rem; position: relative;" 
+    class="vertical-flex"
+    [displayMode]="'create'">
+</app-security-master-security-viewer-tab-layout>
+
+<app-security-master-user-activity-viewer 
+    *ngIf="showUserActivity$ | async"
+    [data]="userActivity$ | async"
+    [loading]="userActivityLoading$ | async"
+    (selectActiveUserActivity)="onSelectActiveUserActivity($event)"
+    (deleteSecurity)="onDeleteSecurity($event)"
+    (retryCreateSecurity)="onRetryCreateSecurity($event)">
+</app-security-master-user-activity-viewer>
+
+<div class="bottom-tool-bar">
+    <button mat-flat-button [color]="(showUserActivity$ | async) ? 'button-active' : '' " (click)="onToggleUserActivityViewer()">
+        User Activity
+    </button>
+</div>

@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <mat-toolbar class="mat-toolbar-dialog">
+      <span class="toolbar-heading"> Download Supporting Adjustment Documents </span>
+  </mat-toolbar>
+  <div class="vertical-flex-full-height data-wrapper">
+    <div class="data-item"> 
+      <div> <b> File </b> </div>
+      <div> <b> Download </b> </div>
+    </div>
+    <div *ngFor="let attachment of attachmentsArr" class="data-item" style="font-size:12px;"> 
+      <div> {{getFileName(attachment)}} </div>
+      <div style="cursor:pointer" (click)="onDownload(attachment)"><mat-icon class="download-icon">download</mat-icon></div>
+    </div>
+  </div>
+</div>

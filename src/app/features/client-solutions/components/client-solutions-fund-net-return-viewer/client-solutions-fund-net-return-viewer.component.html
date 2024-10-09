@@ -1,0 +1,33 @@
+<h5>
+    {{title}} - Monthly Net Performance
+
+    <span>
+        <!-- <button mat-icon-button class="mat-button-ultra-shrink" color="primary" matTooltip="Download Rounded Monthly Net Returns" (click)="onDownloadPivotedData()">
+            <mat-icon>download_for_offline</mat-icon>
+        </button> -->
+        <button mat-icon-button class="mat-button-ultra-shrink" color="primary" matTooltip="Download Unrounded Monthly Net Returns" (click)="onDownloadData()" style="margin-left: 0.5rem;">
+            <mat-icon>download</mat-icon>
+        </button>
+    </span>
+</h5>
+
+<div *ngIf="loading" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+
+<app-base-grid
+    style="flex: 1 0 0; margin: 0.3rem"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack">
+</app-base-grid>
+
+<app-base-grid
+    style="flex: 0 0 0; margin: 0"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption_export"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack_export">
+</app-base-grid>

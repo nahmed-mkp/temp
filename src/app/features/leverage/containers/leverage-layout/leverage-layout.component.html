@@ -1,0 +1,27 @@
+<app-leverage-params
+    [activeDate]="activeDate$ | async"
+    [selectedGrouping]="selectedGrouping$ | async"
+    [isLive]="isLive$ | async"
+    [supportedGroupings]="supportedGroupings$ | async"
+    [supportedGroupingsLoading]="supportedGroupingsLoading$ | async"
+    [supportedGroupingsLoaded]="supportedGroupingsLoaded$ | async"
+    [supportedGroupingsError]="supportedGroupingsError$ | async"
+
+    [leverageDates]="leverageDates$ | async"
+    [leverageDatesLoading]="leverageDatesLoading$ | async"
+    [leverageDatesLoaded]="leverageDatesLoaded$ | async"
+    [leverageDatesError]="leverageDatesError$ | async"
+
+    [maxTimeStamp]="maxTimeStamp"
+    (changeParameter)="changeParameter($event)">
+</app-leverage-params>
+
+<app-leverage
+    class="mat-card"
+    style="flex: 1 0 0"
+    [leverage]="leverage$ | async"
+    [leverageLoading]="leverageLoading$ | async"
+    [leverageLoaded]="leverageLoaded$ | async"
+    [leverageError]="leverageError$ | async"
+    (sendTimeStamp)="onReceiveTimeStamp($event)">
+</app-leverage>

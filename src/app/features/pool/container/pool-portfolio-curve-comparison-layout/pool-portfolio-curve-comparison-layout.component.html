@@ -1,0 +1,10 @@
+<h4 class="pool-sidenav-card-title">Curve Comparison</h4>
+<div class="card-action">
+    <i class="material-icons" (click)="onclose()">arrow_right</i>
+</div>
+
+<app-pool-portfolio-curve-comparison-viewer
+  [selectedCusip]="selectedCusip"
+  [detail]="modelValidationDetail$ | async"
+  [summary]="modelValidationSummary$ | async">
+</app-pool-portfolio-curve-comparison-viewer>

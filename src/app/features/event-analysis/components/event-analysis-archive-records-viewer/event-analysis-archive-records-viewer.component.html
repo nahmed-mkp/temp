@@ -1,0 +1,61 @@
+<!-- <p>
+  event-analysis-archive-records-viewer works!
+</p> -->
+<div class="tool-bar-section">
+  <h4>Analyses Archive</h4>
+  <div class="action-section">
+    <button mat-icon-button class="mat-button-shrink test-load-analysis-button" 
+      color="primary" matTooltip="Play Analysis" (click)="onTriggerAnalysis()">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
+
+    <!-- <button mat-icon-button class="mat-button-shrink" 
+      color="accent" matTooltip="Create New Analysis" 
+      [matMenuTriggerFor]="menu" (click)="beginCreateNewAnalysis()">
+      <mat-icon>add_box</mat-icon>
+    </button> -->
+    <mat-menu #menu="matMenu" class="menu-dialog">
+      <div class="menu-dialog-title" (click)="$event.stopPropagation();">
+        <h5><i>Create New Analysis</i></h5>
+      </div>
+      
+      <div class="menu-dialog-content" (click)="$event.stopPropagation();">
+        <mat-form-field appearance="outline" class="outline-shrink">
+          <mat-label>New Analysis Name</mat-label>
+          <input matInput placeholder="Name" [(ngModel)]="newAnalysis.name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="outline-shrink">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Name" [(ngModel)]="newAnalysis.description">
+        </mat-form-field>
+      </div>
+      
+      <div class="menu-dialog-action" (click)="$event.stopPropagation();">
+        <button mat-button color="primary" (click)="onSaveNewAnalysis()">Save</button>
+        <button mat-button (click)="onCloseNewDialsSetMenu()">Close</button>
+      </div>
+    </mat-menu>
+
+    <button mat-icon-button class="mat-button-shrink" color="primary">
+      <mat-icon>save_alt</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" class="outline-shrink" style="margin-left: 1rem">
+      <input matInput placeholder="Search" 
+        [(ngModel)]="quickFilterValue" 
+        (ngModelChange)="onQuickFiltering()" 
+        class="test-analysis-record-search">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+</div>
+
+
+<app-base-grid
+  style="flex: 1 0 0"
+  [gridItems]="analysesRecords"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

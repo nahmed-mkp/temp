@@ -1,0 +1,23 @@
+<!-- <div class="card card-shadow" style="width: 20rem; margin:10px;">
+    <div class="card-block">
+        <h5 class="card-title report-header"> 
+            <a *ngIf="!editMode" class="navlink" href="#" [routerLink]="['./', project.shortCode]">{{project.name}}</a> 
+            <i class="fa fa-pencil" (click)="toggleEditMode()" *ngIf="project.editable"></i> 
+        </h5> 
+        <p class="card-text report-subheader"> 
+            <i>{{project.description}}</i> 
+        </p> 
+    </div>
+    
+    <div class="card-footer link-row">
+        <span class="d-flex justify-content-between">
+            <a href="#" (click)="toggleFavorite($event)" title="Favorites">
+                <i class="fa"  [ngClass]="{'fa-star-o': !project.favorited, 'fa-star fa-yellow-bordered': project.favorited}"></i> {{project.numFavorited}}
+            </a>
+            <a href="#" (click)="$event.preventDefault()" title="Workbooks"><i class="fa fa-folder-open-o"></i> {{project.numWorkbooks}}</a>
+            <a href="#" (click)="$event.preventDefault()" title="Reports"><i class="fa fa-file-text-o"></i> {{project.numReports}}</a>
+            <a href="#" (click)="$event.preventDefault()" title="Views"><i class="fa fa-eye"></i> {{project.numViews}}</a>
+            <a href="#" (click)="deleteProject($event)" *ngIf="project.editable"><i class="fa fa-ban"></i> Delete</a>
+        </span>
+    </div>
+</div> -->

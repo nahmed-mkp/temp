@@ -1,0 +1,51 @@
+<div *ngIf="loading || deletePending" class="loading-screen">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="top-wrap" style="display: flex; justify-content: center; height: 2.2rem;margin-top: 1rem;">
+    <mat-form-field style="width:20rem">
+        <input type="number" matInput placeholder="Cre Sec ID ..." [(ngModel)]="crdSecId" autocomplete="off">
+    </mat-form-field>
+
+    <button color="primary" mat-raised-button style="margin-left: 1rem;" [disabled]="crdSecId === null"
+        class="mat-button-shrink" (click)="onLoadSecurityForDelete()">
+        Search
+    </button>
+
+    <button color="warn" mat-raised-button [disabled]="crdSecId === null" style="margin-left: 1rem;"
+        class="mat-button-shrink" (click)="onDeleteSecurity()">
+        Delete
+    </button>
+</div>
+
+<mat-divider style="margin-top: 1rem;"></mat-divider>
+
+<div style="max-width: 63rem;margin: 2rem auto;">
+    <mat-form-field>
+        <input type="text" matInput placeholder="Security Name" [value]="data?.SecName" disabled>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" matInput placeholder="Security Type" [value]="data?.SecType" disabled>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="CRD Sec Id" [value]="data?.CRDSecId" disabled>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="RCPM SID" [value]="data?.RCPMSID" disabled>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="DW Sec Id" [value]="data?.DWSecId" disabled>
+    </mat-form-field>
+</div>
+<!-- 
+<button color="warn" mat-raised-button [disabled]="crdSecId === null" style="display: block;width: 10rem;margin: 0 auto;"
+    class="mat-button-shrink" (click)="onDeleteSecurity()">
+    Delete
+</button> -->
+

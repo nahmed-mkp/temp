@@ -1,0 +1,92 @@
+<!-- <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start start">
+  <div>
+    <mat-form-field style="width:50%">
+        <input type="text" placeholder="Select a Dials Set" matInput [formControl]="searchFilter" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+          <mat-option *ngFor="let dialsSet of filteredDialsSets$ | async" 
+            [value]="dialsSet" 
+            (onSelectionChange)="changeDialsSet($event.source.value)">
+            {{ dialsSet.yieldbookDialsName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" (click)="addClicked()"> New</button>
+  </div>
+  <div>
+    <button mat-raised-button color="warn" (click)="disableClicked()"> Disable</button>
+  </div>
+</div> -->
+
+<div class="vertical-align-center">
+  <mat-form-field appearance="outline" class="outline-shrink" style="margin-right: 10px">
+    <input type="text" placeholder="Select a Dials Set" matInput [formControl]="searchFilter" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn" (optionSelected)="changeDialsSet($event.option.value)">
+      <mat-option *ngFor="let dialsSet of filteredDialsSets$ | async" 
+        [value]="dialsSet">
+        {{ dialsSet.yieldbookDialsName }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-button class="mat-button-shrink" color="primary" (click)="onUpdateDial()" matTooltip="Update Dial" [disabled]="!saveAllow">
+    <i class="material-icons">save</i>
+  </button>
+
+  <button mat-button class="mat-button-shrink" color="accent" matTooltip="New" [matMenuTriggerFor]="menu">
+    <i class="material-icons">create_new_folder</i>
+  </button>
+  <mat-menu #menu="matMenu" class="menu-dialog">
+    <div class="menu-dialog-title" (click)="$event.stopPropagation();">
+      <h5><i>Create New Dials Set</i></h5>
+    </div>
+    
+    <div class="menu-dialog-content" (click)="$event.stopPropagation();">
+      <mat-form-field appearance="outline" class="outline-shrink">
+        <mat-label>Dials Set Name</mat-label>
+        <input matInput placeholder="Save As" [(ngModel)]="newDialsSetName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="outline-shrink">
+        <mat-label>Clone From (Optional)</mat-label>
+        <input type="text" placeholder="Select a Dials Set" matInput [formControl]="searchCloneFilter" [matAutocomplete]="auto1">
+        <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let dialsSet of fitleredCloneDialsSets$ | async" [value]="dialsSet">
+            {{ dialsSet.yieldbookDialsName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    
+    <div class="menu-dialog-action" (click)="$event.stopPropagation();">
+      <button mat-button color="primary" (click)="onAddDialsSet()">Save</button>
+      <button mat-button (click)="onCloseNewDialsSetMenu()">Close</button>
+    </div>
+  </mat-menu>
+
+  <button mat-button class="mat-button-shrink" color="warn" (click)="disableClicked()"  matTooltip="Disable">
+    <i class="material-icons">highlight_off</i>
+  </button>
+
+  <button mat-button class="mat-button-shrink" color="warn"  matTooltip="Delete Dialset" [matMenuTriggerFor]="menuDelete" #triggerDelete="matMenuTrigger">
+    <i class="material-icons">delete</i>
+  </button>
+  <mat-menu #menuDelete="matMenu" class="menu-dialog">
+    <div class="menu-dialog-title" (click)="$event.stopPropagation();">
+      <h5><i>Delete Dials Set</i></h5>
+    </div>
+    
+    <div class="menu-dialog-content" (click)="$event.stopPropagation();" 
+      style="font-size: 0.8rem;font-weight: bold;color: #ff00008f;">
+      Permanently delete the selected dials set ? Action can not be reversed.
+      <br><br>
+    </div>
+    
+    <div class="menu-dialog-action" (click)="$event.stopPropagation();">
+      <button mat-button color="warn" (click)="onDeleteDialset()">Delete</button>
+      <button mat-button (click)="onCloseDeleteDialsSetMenu()">Cancel</button>
+    </div>
+  </mat-menu>
+
+</div>
+

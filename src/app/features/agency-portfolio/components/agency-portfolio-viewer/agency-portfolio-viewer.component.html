@@ -1,0 +1,13 @@
+<div class="loading-screen" *ngIf="loadingStatus && allowLoadingDisplay">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid
+    class="vertical-flex-full-height" 
+    style="flex: 1 0 0"
+    [gridItems]="[]"
+    [customGridOption]="customGridOption"
+    [extraOption]="extraOption"
+    [customGridCallBack]="customGridCallBack"
+    (saveColumnState)="onSaveColumnState($event)">
+</app-base-grid>

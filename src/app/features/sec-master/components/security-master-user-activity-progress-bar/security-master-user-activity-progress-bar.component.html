@@ -1,0 +1,4 @@
+<mat-progress-bar *ngIf="isProcessing && !isErrored" mode="buffer" [value]="currentProgress"></mat-progress-bar>
+<mat-progress-bar *ngIf="!isProcessing && isErrored" mode="determinate" color="accent" [value]="currentProgress"></mat-progress-bar>
+
+<span><i>{{currentProgress}}%</i></span>

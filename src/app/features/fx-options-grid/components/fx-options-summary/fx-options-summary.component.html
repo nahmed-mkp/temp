@@ -1,0 +1,5 @@
+<div class="horizontal-flex-full-width" style="width:100%;" *ngFor="let expiry of getExpiries(grid)">
+    <app-fx-options-summary-viewer style="margin:5px; flex: 1 0 0" [snapTimes]="snapTimes"
+        [data]="getSurface(grid.option_pricing, expiry)">
+    </app-fx-options-summary-viewer>
+</div>

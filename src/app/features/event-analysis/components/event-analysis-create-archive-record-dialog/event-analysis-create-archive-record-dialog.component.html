@@ -1,0 +1,30 @@
+<div class="event-analysis-top-edge" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <i class="material-icons" style="cursor: pointer;" (click)="onClose()">close</i>
+</div>
+<!-- <p>
+  event-analysis-create-archive-record-dialog works!
+</p> -->
+
+
+<div style="padding: 0.5rem 1rem">
+  <div class="tool-bar-section">
+    <h4>New Analysis</h4>
+  </div>
+
+  <mat-form-field appearance="outline" class="outline-shrink" style="margin-bottom: 0.5rem">
+    <mat-label>New Analysis Name</mat-label>
+    <input matInput placeholder="Name" [(ngModel)]="newTimeseriesAnalysis.name">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="outline" class="outline-shrink">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Description" [(ngModel)]="newTimeseriesAnalysis.description">
+  </mat-form-field>
+
+  <div class="mat-dialog-actions">
+    <button mat-button color="primary" (click)="onSave()">Save</button>
+  </div>
+
+</div>
+

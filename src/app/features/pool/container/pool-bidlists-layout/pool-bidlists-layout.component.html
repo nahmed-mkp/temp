@@ -1,0 +1,59 @@
+<!-- <p>
+  pool-bidlists-layout works!
+</p> -->
+
+<!-- {{firstPanelData$ | async | json}}
+{{secondPanelData$ | async | json}}
+{{thirdPanelData$ | async | json}} -->
+
+<div class="top-tool-bar">
+  <button mat-icon-button class="mat-button-shrink" color="primary" style="margin-right: 0.5rem; position: relative;" (click)="onRetFilters()"
+    matTooltip="Reset Filters">
+    <mat-icon>filter_alt</mat-icon>
+    <mat-icon id="filter-refresh">refresh</mat-icon>
+  </button>
+
+  <button mat-icon-button class="mat-button-shrink" color="primary" style="margin-right: 0.5rem;" (click)="TriggerperiodicDataLoading()"
+    matTooltip="Refresh Data">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
+  <mat-form-field appearance="outline" class="outline-shrink" style="width: 130px; margin-right:0.5rem;" >
+    <mat-label>Start Date</mat-label>
+    <input name="timeStamp" matInput [matDatepicker]="myDatepicker_start" [(ngModel)]="startDate" (ngModelChange)="onDateChange()" disabled>
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker_start">
+      <mat-icon matDatepickerToggleIcon style="color: black">today</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker_start></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="outline-shrink" style="width: 130px">
+    <mat-label>End Date</mat-label>
+    <input name="timeStamp" matInput [matDatepicker]="myDatepicker_end" [(ngModel)]="endDate" (ngModelChange)="onDateChange()" disabled>
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker_end">
+      <mat-icon matDatepickerToggleIcon style="color: black">event</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker_end></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div class="horizontal-flex" style="flex: 1 0 0">
+  <app-pool-bidlist-viewer 
+    [customGridOption]="firstPanel_GridOptions" 
+    [data]="firstPanelData$ | async" 
+    [loading]="firstPanelLoading$ | async" style="flex: 2 0 0" 
+    (resetFilterFunction)="resetFilterFunction($event)"></app-pool-bidlist-viewer>
+  <app-pool-bidlist-viewer 
+    [customGridOption]="fourthPanel_GridOptions" 
+    [data]="fourthPanelData$ | async" 
+    [loading]="fourthPanelData$ | async" 
+    style="flex: 1 0 0" class="ag-grid-special-style" 
+    (resetFilterFunction)="resetFilterFunction($event)"></app-pool-bidlist-viewer>
+</div>
+
+<!-- <app-pool-bidlist-viewer [customGridOption]="secondPanel_GridOptions" [data]="secondPanelData$ | async" [loading]="secondPanelLoading$ | async"></app-pool-bidlist-viewer> -->
+<app-pool-bidlist-viewer 
+  [customGridOption]="thirdPanel_GridOptions" 
+  [data]="thirdPanelDataFilterdData$ | async" 
+  [loading]="thirdPanelLoading$ | async" 
+  (resetFilterFunction)="resetFilterFunction($event)"></app-pool-bidlist-viewer>

@@ -1,0 +1,62 @@
+<div class="horizontal-flex-center" style="margin-bottom: -0.4rem; justify-content: space-between;">
+    <span class="horizontal-flex-center" style="margin-top:5px;">
+        <mat-form-field class="date-form-field" floatLabel="always">
+            <mat-label> Date </mat-label>
+            <input matInput placeholder="As Of Date" [matDatepicker]="picker1"
+            [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+     
+        <mat-slide-toggle [disabled]="isCurrentDate === false" [checked]="mode==='live'" (change)="onModeChange()">
+            <span class="slide-toggle-label">
+                {{ this.mode === 'live' ? 'Live': 'Close'}}
+            </span>
+        </mat-slide-toggle>
+    </span>
+
+    <div style="opacity: 0.5;">
+        <button mat-icon-button [ngClass]="{'spinning': mode === 'live'}" color="primary" matTooltip="5s refresh Cycle">
+            <mat-icon>cached</mat-icon>
+        </button>
+        <span class="timestamp" style="margin-right: 1rem;">
+            Last Updated : <i>{{(timeStamp$ | async)?.latestPricingTs || 'N/A'}}</i>
+        </span>
+    </div>
+
+</div>
+
+<div style="flex: 1 0 0" class="horizontal-flex">
+    <app-pricing-engine-swaps-viewer 
+        style="flex: 4 0 0"
+        class="vertical-flex-full-height"
+        [data]="data$ | async"
+        [loading]="loading$ | async"
+        [mode]="mode"
+        (onSwapSelected)="onSwapSelected($event)"
+        (onSwapUpdate)="onSwapUpdate($event)"
+        (onEditing)="onEditing($event)">
+    </app-pricing-engine-swaps-viewer>
+
+    <div style="flex: 1 0 0; border-top: 1px solid #80808075;" class="vertical-flex-full-height"  *ngIf="showDetailInfo">
+        <app-pricing-engine-security-details-viewer 
+            style="flex: 2 0 0; overflow: auto;"
+            [data]="securityDetail$ | async"
+            [loading]="securityDetailLoading$ | async">
+        </app-pricing-engine-security-details-viewer>
+        <app-pricing-engine-ownwer-viewer 
+            class="vertical-flex"
+            style="flex: 1 0 0"
+            [data]="swapOwnershipData$ | async"
+            [loading]="swapOwnershipDataLoading$ | async">
+        </app-pricing-engine-ownwer-viewer>
+    </div>
+</div>
+
+<div class="left-tool-bar">
+    <button mat-flat-button [color]="showDetailInfo ? 'button-active' : '' " class="vertical-write-mode" (click)="onChangeSideScreen()">
+        Detail Info
+    </button>
+</div>
+
+

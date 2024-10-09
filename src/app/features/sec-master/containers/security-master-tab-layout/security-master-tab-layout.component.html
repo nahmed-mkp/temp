@@ -1,0 +1,93 @@
+
+<mat-toolbar>
+    <span class="toolbar-heading">SECURITY MASTER</span>
+</mat-toolbar>
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" [animationDuration]="0">
+
+    <mat-tab label="Create Security">
+        <!-- <ng-template matTabContent> -->
+            <app-sec-master-create-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-sec-master-create-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Edit Security">
+        <!-- <ng-template matTabContent> -->
+            <app-sec-master-edit-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-sec-master-edit-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Delete Security">
+        <app-security-master-delete-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+        </app-security-master-delete-layout>
+    </mat-tab>
+
+    <mat-tab label="Bloomberg Data Mapping">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-bbg-data-map-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-bbg-data-map-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Setup Market Data Groups">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-market-data-defaults-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-market-data-defaults-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Configure Downstream Mappings">
+        <!-- <ng-template matTabContent> -->
+            <!-- <app-global-sec-master class="vertical-flex-full-height" style="flex: 1 0 0"
+                [assetClassFieldMap]="assetClassFieldMap$ | async"
+                [assetClassFieldMapLoading]="assetClassFieldMapLoading$ | async"
+                [assetClassFieldMapLoaded]="assetClassFieldMapLoaded$ | async"
+                [assetClassFieldMapError]="assetClassFieldMapError$ | async"></app-global-sec-master> -->
+
+            <app-sec-master-config-downstream-mapping-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-sec-master-config-downstream-mapping-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Manage Future Roots">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-futures-info-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-futures-info-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+<!-- 
+    <mat-tab label="Reconciliations">
+            <app-security-master-reconciliation-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-reconciliation-layout>
+    </mat-tab> -->
+
+    <mat-tab label="Creation History">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-create-history-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-create-history-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+
+    <mat-tab label="Update History">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-update-history-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-update-history-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <mat-tab label="Do Not Update Flag Security List">
+        <!-- <ng-template matTabContent> -->
+            <app-security-master-do-not-update-flag-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+            </app-security-master-do-not-update-flag-layout>
+        <!-- </ng-template> -->
+    </mat-tab>
+
+    <!-- <mat-tab label="Security Editor">
+        <app-rcpm-sec-master-layout class="vertical-flex-full-height" style="flex: 1 0 0">
+        </app-rcpm-sec-master-layout>
+    </mat-tab> -->
+
+</mat-tab-group>

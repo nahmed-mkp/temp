@@ -1,0 +1,10 @@
+<input type="text" matInput autocomplete="off" [matAutocomplete]="auto" [ngModel]="userInput"
+  (ngModelChange)="onInputChange($event)" panelOpen="true" class="user-input" (click)="onClick($event)"
+  (focus)="onFocus($event)" (blur)="onBlur($event)">
+
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event)" [displayWith]="displayFn.bind(this)">
+  <mat-option *ngFor="let security of filteredSecPrompt$ | async" [value]="security">{{security['name']}} </mat-option>
+</mat-autocomplete>
+<mat-icon aria-hidden="false" *ngIf="userInput && userInput.length > 0" fontIcon="clear" 
+  (click)="clearInput($event)"
+  style="position:absolute;right:-10px;top:5px;font-size:12px;cursor:pointer;"></mat-icon>

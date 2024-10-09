@@ -1,0 +1,82 @@
+<mat-tab-group [animationDuration]="0" class="vertical-flex-full-height" #tabs>
+
+    <mat-tab label="Plot">
+        <ng-template matTabContent>
+            <app-timeseries-chart-viewer
+                [axisConfig]="axisArr"
+                [currTab]="currTab"
+                (onChartConfigChanged)="handleChartConfigChanged($event)"
+            >
+            </app-timeseries-chart-viewer>
+        </ng-template>
+    </mat-tab> 
+
+    <mat-tab label="Data">
+        <ng-template matTabContent>
+            <app-timeseries-data-viewer
+                [currTab]="currTab">
+            </app-timeseries-data-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Statistics">
+        <ng-template matTabContent>
+            <app-timeseries-statistics-viewer
+                [statData]="currTab.statData">
+            </app-timeseries-statistics-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Regression">
+        <ng-template matTabContent>
+            <app-timeseries-regression-viewer
+                [currTab]="currTab"
+                (onRegressionViewChanged)="handleRegressionViewChanged($event)"
+            >
+            </app-timeseries-regression-viewer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Drawdown">
+        <ng-template matTabContent>
+            <div class="vertical-flex-full-height">
+                <as-split [unit]="'percent'" [direction]="'horizontal'">
+                    <as-split-area [size]="60" [order]="1">
+                        <app-timeseries-drawdown-chart-viewer
+                            [axisConfig]="axisArr"
+                            [currTab]="currTab"
+                            [drawdownData]="drawdownData"
+                            [selectedDrawdownDataTimeseries]="selectedDrawdownDataTimeseries"
+                            [selectedDrawdownDataTimeseriesRow]="selectedDrawdownDataTimeseriesRow"
+                            (onChartConfigChanged)="handleChartConfigChanged($event)"
+                            (pointSelected)="handlePointSelected($event)"
+                        >   
+                        </app-timeseries-drawdown-chart-viewer>
+                    </as-split-area>
+                    <as-split-area [size]="40" [order]="2">
+                        <app-timeseries-drawdown-layout
+                            [currTab]="currTab"
+                            [drawdownData]="drawdownData"
+                            [selectedPoint]="selectedPoint"
+                            [drawdownDataLoading]="drawdownDataLoading"
+                            [selectedDrawdownDataTimeseries]="selectedDrawdownDataTimeseries"
+                            (onSelectedDrawdownTimeseriesChanged)="handleSelectedDrawdownTsChanged($event)"
+                        >
+                        </app-timeseries-drawdown-layout>   
+                    </as-split-area>
+                </as-split>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Technical Analysis">
+        <ng-template matTabContent>
+            <app-timeseries-tech-indicator-layout
+                [currTab]="currTab"
+                [startDate]="startDate"
+                [endDate]="endDate"
+            >
+            </app-timeseries-tech-indicator-layout>  
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

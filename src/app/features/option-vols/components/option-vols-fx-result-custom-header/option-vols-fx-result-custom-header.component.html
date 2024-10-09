@@ -1,0 +1,27 @@
+<!-- <p>option-vols-commodity-result-custom-header.component works!</p> -->
+<div class="horizontal-flex">
+    <span style="flex: 1 0 0">Spot: <i>{{result && result.spot}}</i></span>
+    <span style="flex: 1 0 0">
+        2w: <i>{{result && result.additionalData && (result.additionalData['2w_realizedVol'] | number) || 'N/A'}}</i>, 
+        1m: <i>{{result && result.additionalData && (result.additionalData['1m_realizedVol'] | number) || 'N/A'}}</i>,
+        3m: <i>{{result && result.additionalData && (result.additionalData['3m_realizedVol'] | number) || 'N/A'}}</i>
+    </span>
+</div>
+
+<div class="horizontal-flex" style="align-items: center;">
+    <mat-form-field class="outline-shrink" style="flex: 1 0 0;">
+        <span matPrefix style="font-size: 12px;">Exp</span>
+        <mat-select [(ngModel)]="targetExpiry" (ngModelChange)="onTargetExpiryChange()">
+            <mat-option *ngFor="let date of uniqueExpiry" [value]="date" style="font-size: 0.7rem">
+              {{date}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <span style="flex: 1 0 0">1m: <i>{{result && result.additionalData && (result.additionalData['1m_realizedVol'] | number) || 'N/A'}}</i></span> -->
+
+    <mat-radio-group [(ngModel)]="columnDisplayMode" (ngModelChange)="onColumnDisplayMode()">
+        <mat-radio-button value="all">All</mat-radio-button>
+        <mat-radio-button value="bs">BS</mat-radio-button>
+        <mat-radio-button value="vv">VV</mat-radio-button>
+    </mat-radio-group>
+</div>

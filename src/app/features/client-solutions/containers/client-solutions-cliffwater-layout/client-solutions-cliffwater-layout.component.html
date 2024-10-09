@@ -1,0 +1,37 @@
+<mat-toolbar>
+    <span class="toolbar-heading">CLIFFWATER REPORT</span>
+    <span class="toolbar-spacer"></span>
+
+    <div style="margin-right: 0.5rem;">
+        <mat-form-field appearance="outline" class="fund-form-field-large" style="margin-left: 0.5rem;">
+            <mat-label>Fund</mat-label>
+            <div class="mat-form-field-content-wrap">
+                <mat-select [(ngModel)]="selectedFund" (ngModelChange)="onSelectedFundChange">
+                    <mat-option [value]="'MKP Opportunity'">MKP Opportunity</mat-option>
+                </mat-select>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="date-form-field" style="margin-left: 0.5rem;" floatLabel="always">
+            <mat-label> Date </mat-label>
+            <div class="mat-form-field-content-wrap">
+                <input matInput [matDatepicker]="picker1" placeholder="Select ..." [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </div>
+        </mat-form-field>
+
+        <button mat-icon-button class="toolbar-icon" (click)="onDownload()">
+            <mat-icon matTooltip="Download Data" >file_download</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<app-client-solutions-cliffwater-viewer 
+    style="flex: 1 0 0; padding: 0 0.5rem 0.5rem;"
+    [data]="data$ | async"
+    [loading]="loading$ | async"
+    [asOfDate]="selectedDate"
+    
+    (downloadFile)="downloadFile($event)">
+</app-client-solutions-cliffwater-viewer>

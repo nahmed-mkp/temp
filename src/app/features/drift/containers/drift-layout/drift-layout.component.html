@@ -1,0 +1,38 @@
+<mat-drawer-container class="vertical-flex-full-height" (backdropClick)="hideSidePane()" [hasBackdrop]="true">
+    <mat-drawer #sidenav [ngClass]="{'drift-form': sidePane==='FundAlloc', 'drift-form-wide': sidePane==='TradeNameDrift'}" [mode]='mode'>
+
+        <app-fund-allocs
+            *ngIf="sidePane==='FundAlloc'"
+            [request]="portfolioDriftRequest$ | async"
+            [drifts]="fundDrifts$ | async">
+        </app-fund-allocs>
+
+        <app-tradename-drift 
+            *ngIf="sidePane==='TradeNameDrift'"
+            [drifts]="tradeNameDrifts$ | async">            
+        </app-tradename-drift>
+        
+    </mat-drawer>
+    <mat-drawer-content>
+        
+        <mat-toolbar>
+            <span class="toolbar-heading">PORTFOLIO & POSITIONS DRIFT REPORT </span>
+            <span class="vertical-toolbar-divider-small"></span>
+            <app-drift-params style="flex: 1 0 0" class="horizontal-flex-center" [request]="portfolioDriftRequest$ | async"
+                (paramChanged)="changePortfolioDriftRequest($event)"
+                (clientParameterChanged)="changeClientSideParameter($event)" (searchGrid)="searchPositionsGrid($event)"
+                (showSidePane)="showSidePane($event)">
+            </app-drift-params>
+
+        </mat-toolbar>
+
+        <app-position-drift [request]="portfolioDriftRequest$ | async" [drifts]="positionDrifts$ | async"
+            [driftsLoading]="positionDriftLoading$ | async" [driftsLoaded]="positionDriftLoaded$ | async"
+            [driftsError]="positionDriftError$ | async" [searchCriteria$]="searchTerm$"
+            (positionSelected)="positionSelected($event)"></app-position-drift>
+        <br />
+        <app-execution-drift [request]="positionDriftRequest$ | async" [drifts]="executionDrifts$ | async"
+            [driftsLoading]="executionDriftLoading$ | async" [driftsLoaded]="executionDriftLoaded$ | async"
+            [driftsError]="executionDriftError$ | async"></app-execution-drift>
+    </mat-drawer-content>
+</mat-drawer-container>

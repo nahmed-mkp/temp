@@ -1,0 +1,27 @@
+<br />
+Please select a series and metric type: <br />
+<form [formGroup]="inputForm">
+    <mat-form-field>
+        <mat-label>Ticker*</mat-label>
+        <mat-select formControlName="selectedTicker">
+            <mat-option *ngFor="let ticker of data.tickers" [value]="ticker">
+                {{ticker}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Metric*</mat-label>
+        <mat-select formControlName="selectedMetric">
+            <mat-option *ngFor="let metric of data.metrics" [value]="metric">
+                {{metric}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+<button mat-raised-button color="primary" [disabled]="inputForm.touched && inputForm.invalid"
+    (click)="applyParams($event)">Apply</button>
+&nbsp;
+<button mat-raised-button (click)="cancel($event)">Cancel</button>
+<br />
+<br />

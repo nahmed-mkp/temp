@@ -1,0 +1,134 @@
+<div cdkDropListGroup style="display: flex; height: 100%; flex-direction: row;">
+
+  <div class="vertical-flex example-container" style="flex: 1 0 0; margin-top:-20px;">
+    <h4 class="vertical-align-center">Column Group&nbsp;<i class="material-icons">group_work</i></h4>
+    <div
+      cdkDropList
+      #rowGroupList="cdkDropList"
+      id="row-group-list"
+      class="example-list"
+      [cdkDropListData]="groupNames"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of groupNames" cdkDrag (click)="onSelectedGroupChange(item)" [ngClass]="{'selectedGroup': selectedGroup === item}" [cdkDragDisabled]="true">
+        <!-- <small><mat-icon cdkDragHandle>more_vert</mat-icon></small> -->
+        {{item}}
+      </div>
+      <div *ngIf="groupNames.length === 0" class="example-box-placeholder centralize-single">Select Column Grouping</div>
+    </div>
+  </div>
+
+  <mat-divider [vertical]="true"></mat-divider>
+
+  <div class="vertical-flex example-container" style="margin-top:-20px;">
+    <h4 class="vertical-align-center" style="opacity: 0.5">Hidden (Available)&nbsp;<i class="material-icons">visibility_off</i></h4>
+    <!-- <div
+      cdkDropList
+      #hideList="cdkDropList"
+      [cdkDropListConnectedTo]="[showList, LeftPinList, RightPinList]"
+      [cdkDropListData]="hide"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box example-box-section">
+        <mat-form-field class="search">
+          <mat-label>Search Columns</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="text" matInput autocomplete="off" formControlName="searchHiddenColumns">
+        </mat-form-field>
+      </div>
+      <div class="example-box" *ngFor="let item of hiddenColumns$ | async" cdkDrag>
+        {{item && columnApi.getColumn(item.colId).colDef.headerName}}
+      </div>
+      <div *ngIf="hide.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div> -->
+    <app-base-grid
+      class="example-list" 
+      [gridItems]="hide"
+      [customGridOption]="customGridOption"
+      [customGridCallBack]="customGridCallBack_avaliable"
+      [extraOption]="extraOption">
+    </app-base-grid>
+  </div>
+
+  <div class="button-mover-control">
+    <!-- <button mat-mini-fab color="primary">
+      <mat-icon>arrow_drop_up</mat-icon>
+    </button> -->
+    <div>
+      <button mat-mini-fab color="primary" style="margin-right: 0.5rem" (click)="movehorizontally('rightToLeft')">
+        <mat-icon>arrow_left</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="movehorizontally('leftToRight')">
+        <mat-icon>arrow_right</mat-icon>
+      </button>
+    </div>
+    <!-- <button mat-mini-fab color="primary">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button> -->
+  </div>
+
+  <div class="example-container vertical-flex" style="margin-top:-20px;">
+    <h4 class="vertical-align-center">Visible&nbsp;<i class="material-icons">visibility</i></h4>
+    <!-- <div
+      cdkDropList
+      #showList="cdkDropList"
+      [cdkDropListConnectedTo]="[hideList, LeftPinList, RightPinList]"
+      [cdkDropListData]="show"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box example-box-section">
+
+        TODO: Enable this once Yechao approves the Search functionality
+          <mat-form-field class="search">
+          <mat-label>Search Columns</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="text" matInput autocomplete="off" formControlName="searchVisibleColumns">
+        </mat-form-field>
+      </div>
+      <div class="example-box" *ngFor="let item of show" cdkDrag>
+        {{item && columnApi.getColumn(item.colId).colDef.headerName}}
+      </div>
+      <div *ngIf="show.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div> -->
+    <app-base-grid
+      class="example-list" 
+      [gridItems]="show"
+      [customGridOption]="customGridOption_show"
+      [customGridCallBack]="customGridCallBack_visiable"
+      [extraOption]="extraOption">
+    </app-base-grid>
+  </div>
+
+  <!-- <mat-divider [vertical]="true" style="border-right-style: dashed"></mat-divider> -->
+
+  <!-- <div class="example-container vertical-flex">
+    <h4 class="vertical-align-center">Pinned&nbsp;<i class="material-icons">gps_fixed</i></h4>
+    <div
+      cdkDropList
+      #LeftPinList="cdkDropList"
+      [cdkDropListConnectedTo]="[hideList, showList, RightPinList]"
+      [cdkDropListData]="pinLeft"
+      class="example-list example-list-pinned"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box example-box-section">Left Pinned</div>
+      <div class="example-box" *ngFor="let item of pinLeft" cdkDrag>
+        {{item && columnApi.getColumn(item.colId).colDef.headerName}}
+      </div>
+      <div *ngIf="pinLeft.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div>
+
+    <div
+      cdkDropList
+      #RightPinList="cdkDropList"
+      [cdkDropListConnectedTo]="[hideList, showList, LeftPinList]"
+      [cdkDropListData]="pinRight"
+      class="example-list example-list-unpinned"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box example-box-section">Right Pinned</div>
+      <div class="example-box" *ngFor="let item of pinRight" cdkDrag>
+        {{item && columnApi.getColumn(item.colId).colDef.headerName}}
+      </div>
+      <div *ngIf="pinRight.length === 0" class="example-box-placeholder centralize-single">Drag and Drop Items here</div>
+    </div>
+  </div> -->
+
+</div>

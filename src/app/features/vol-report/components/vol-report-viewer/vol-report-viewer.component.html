@@ -1,0 +1,12 @@
+<div class="loading-screen" *ngIf="volReportLoadingStatus || dataRendering">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-base-grid
+  style="flex: 1 0 0"
+  class="vertical-flex-full-height"
+  [gridItems]="data"
+  [customGridOption]="customGridOption"
+  [extraOption]="extraOption"
+  [customGridCallBack]="customGridCallBack">
+</app-base-grid>

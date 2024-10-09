@@ -1,0 +1,7 @@
+
+<mat-form-field style="flex: 1 0 0;">
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" #target autocomplete="off">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn" (optionSelected)='onOptionSelected($event.option.value)'>
+        <mat-option *ngFor="let option of (filteredOptions$ | async)" [value]="option">{{option[displayField]}}</mat-option>
+    </mat-autocomplete>
+</mat-form-field>

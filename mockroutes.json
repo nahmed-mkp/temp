@@ -1,0 +1,7 @@
+{
+    "/api/v1/auth/login": "/login",
+    "/api/v1/portfolios": "/portfolios",    
+    "/api/v1/portfolios/:id": "/poolViewerInfo?portfolioId=:id",
+    "/api/v1/portfolios/:id/items": "/poolItems?portfolioId=:id",
+    "/api/v1/columnConfigurations": "/columnConfigurations"
+}

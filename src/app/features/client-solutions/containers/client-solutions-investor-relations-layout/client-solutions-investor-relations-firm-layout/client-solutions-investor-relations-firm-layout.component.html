@@ -1,0 +1,34 @@
+<div style="height: 100%; flex-wrap: wrap;" class="horizontal-flex-full-height">
+    
+    <div  style="flex: 0 0 25%; padding: 0.2rem; height: 50%">
+        <app-cs-investor-relations-firm-aum-balances
+        [aumBalances]="firmAumBalances"
+        >
+        </app-cs-investor-relations-firm-aum-balances>
+    </div>
+
+    <div  style="flex: 0 0 50%; padding: 0.2rem;  height: 50%">
+        <app-cs-investor-firm-top-10-list 
+            [top10List]="firmTop10List"
+        >
+        </app-cs-investor-firm-top-10-list>
+    </div>
+
+    <div  style="flex: 0 0 25%; padding: 0.2rem;  height: 50%">
+        <app-cs-investor-relations-firm-investor-type
+            [investorTypes]="firmInvestorTypes">
+        </app-cs-investor-relations-firm-investor-type>
+    </div>
+
+    <div style="flex: 0 0 25%; padding: 0.2rem; height: 45%">
+        <app-cs-investor-relations-firm-region
+            [regionList]="firmRegions">
+        </app-cs-investor-relations-firm-region>
+    </div>
+
+    <div style="flex: 0 0 75%; padding: 0.2rem;  height: 45%">
+        <app-cs-investor-relations-firm-list
+            [relationshipList]="firmRelationshipList">  
+        </app-cs-investor-relations-firm-list>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div style="height: 100%; background-color: white; border-radius: 5px 5px 5px 5px">
+    <div style="height: 25%;width: 100%; background-color: #3F51B5; color: white; font-size: 14px;padding: 2px;display:flex; align-items: center;justify-content: center;"> Confirm Value Retention </div> 
+    <div style="display:flex;flex-direction: column; align-items:center;justify-content:space-evenly; height: 75%; width: 100%;">
+        <mat-checkbox [checked]="true" (change)="handlePopupCheck($event)" class="example-margin">Carry Close Values to Live</mat-checkbox>        
+        <button mat-raised-button color="primary" (click)="handlePopupBtnClick($event)"> Submit </button>    
+    </div>
+</div>

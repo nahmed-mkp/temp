@@ -1,0 +1,6 @@
+<app-market-date-search-aggrid-cell-editor-inner
+  [value]="value"
+  [searching]="searchLoading$ | async"
+  [searchResults]="searchResult$ | async"
+  (searchSecurities)="searchSecurities($event)"
+  (selectSecurity)="selectSecurity($event)"></app-market-date-search-aggrid-cell-editor-inner>

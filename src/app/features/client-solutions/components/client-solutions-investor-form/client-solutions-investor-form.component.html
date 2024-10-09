@@ -1,0 +1,292 @@
+<div class="horizontal-flex-full-height">
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper style="margin:auto;width:90%;justify-content:center;margin-top:10px;">
+
+        <mat-step *ngIf="mode === 'Edit'">
+            <form [formGroup]="fundFormGroup" autocomplete="off" style="display:block;margin:auto;width:80%;"
+                autocomplete="off">
+                <ng-template matStepLabel>Select a Fund</ng-template>
+                <mat-form-field>
+                    <mat-label>Master Fund*</mat-label>
+                    <mat-select formControlName="masterFund">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let mf of getMasterFunds()" [value]="mf"
+                            (onSelectionChange)="changeMasterFund($event)">
+                            {{mf}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!fundFormGroup.controls['masterFund'].valid && fundFormGroup.controls['masterFund'].touched">
+                        {{ 'Master Fund is a required field' }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field *ngIf="hasFeederFund()">
+                    <mat-label>Feeder Fund*</mat-label>
+                    <mat-select formControlName="feederFund">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let ff of getFeederFunds()" [value]="ff"
+                            (onSelectionChange)="changeFeederFund($event)">
+                            {{ff}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!fundFormGroup.controls['feederFund'].valid && fundFormGroup.controls['feederFund'].touched">
+                        {{ 'Feeder Fund is a required field' }}
+                    </mat-error>
+                </mat-form-field>
+        
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                <button mat-raised-button color="accent" (click)="resetForm('fundFormGroup')"
+                    style="margin-left:10px;">Reset</button>
+            </form>
+        </mat-step>
+        
+        <mat-step *ngIf="mode === 'Edit'">           
+            <form [formGroup]="existingInvestorFormGroup" style="display:block;margin:auto;width:80%;" autocomplete="off">
+                
+                <ng-template matStepLabel>Enter Investor Details</ng-template><br />
+
+                <mat-form-field>
+                    <mat-label>Investor *</mat-label>
+                    <input matInput placeholder="Investor Name" formControlName="investorName">
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['investor'].valid && existingInvestorFormGroup.controls['investor'].touched">
+                        {{ 'Investor is required' }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>FundId *</mat-label>
+                    <input matInput placeholder="FundId" formControlName="fundId">
+                    <mat-hint align="end">For GMMK, enter GMMKSerA. For other funds, refer to SEI's FundId</mat-hint>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['fundId'].valid && existingInvestorFormGroup.controls['fundId'].touched">
+                        {{ 'Fund Id is required' }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>InvestorId *</mat-label>
+                    <input matInput placeholder="InvestorId" formControlName="investorId">
+                    <mat-hint align="end">For GMMK, enter GMMKSerA. For other funds, refer to SEI's FundId</mat-hint>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['investorId'].valid && existingInvestorFormGroup.controls['investorId'].touched">
+                        {{ 'InvestorId is required' }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Investor Type *</mat-label>
+                    <input type="text" matInput formControlName="investorType" [matAutocomplete]="investorTypeAuto">
+                    <mat-autocomplete #investorTypeAuto="matAutocomplete">
+                        <mat-option *ngFor="let it of getInvestorTypes()" [value]="it">{{it}}</mat-option>
+                    </mat-autocomplete>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['investorType'].valid && existingInvestorFormGroup.controls['investorType'].touched">
+                        {{ 'Investor Type is required' }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Relationship *</mat-label>
+                    <input type="text" matInput formControlName="relationship" [matAutocomplete]="relationshipAuto">
+                    <mat-autocomplete #relationshipAuto="matAutocomplete">
+                        <mat-option *ngFor="let rel of getRelationships()" [value]="rel">
+                            {{rel}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['relationship'].valid && existingInvestorFormGroup.controls['relationship'].touched">
+                        {{ 'Relationship is required' }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Region *</mat-label>
+                    <input type="text" matInput formControlName="region" [matAutocomplete]="regionAuto">
+                    <mat-autocomplete #regionAuto="matAutocomplete">
+                        <mat-option *ngFor="let reg of getRegions()" [value]="reg">
+                            {{reg}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['region'].valid && existingInvestorFormGroup.controls['region'].touched">
+                        {{ 'Region is required' }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Consultant *</mat-label>
+                    <input type="text" matInput formControlName="consultant" [matAutocomplete]="consultantAuto">
+                    <mat-autocomplete #consultantAuto="matAutocomplete">
+                        <mat-option *ngFor="let con of getConsultants()" [value]="con">
+                            {{con}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['consultant'].valid && existingInvestorFormGroup.controls['consultant'].touched">
+                        {{ 'Consultant is required' }}
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Management Fee (%) *</mat-label>
+                    <input type="number" matInput formControlName="managementFee">
+                    <mat-hint align="end">"Enter decimal value (e.g. .015 for 1.5%)</mat-hint>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['managementFee'].valid && existingInvestorFormGroup.controls['managementFee'].touched">
+                        {{ 'Management Fee is required' }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Incentive Fee (%) *</mat-label>
+                    <input type="number" matInput formControlName="incentiveFee">
+                    <mat-hint align="end">"Enter decimal value (e.g. .3 for 30%)</mat-hint>
+                    <mat-error
+                        *ngIf="!existingInvestorFormGroup.controls['incentiveFee'].valid && existingInvestorFormGroup.controls['incentiveFee'].touched">
+                        {{ 'Incentive Fee (%) is required' }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Fee Notes *</mat-label>
+                    <input type="text" matInput formControlName="feeNotes">
+                </mat-form-field>
+
+                <br /><br />
+                <button mat-raised-button matStepperPrevious *ngIf="mode !== 'Delete'">Back</button>
+                <button mat-raised-button color="primary" style="margin-left:10px;" matStepperNext>Next</button>
+                <button mat-raised-button color="accent" (click)="resetForm('existingInvestorFormGroup')"
+                    style="margin-left:10px;">Reset</button>
+            </form>
+        </mat-step>
+        
+        <mat-step>
+
+            <ng-template matStepLabel>{{ mode !== 'Delete' ? 'Confirm Details': 'Delete Investor' }}</ng-template><br />
+            
+            <div>
+
+                <div style="display:flex;font-size:smaller;justify-content:center;color:#3700B3;margin-bottom:5px;">Fund Details</div>
+                
+                <!-- Master and Feeder Fund -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Master Fund</mat-label>
+                            <input matInput [readonly]="true" [value]="fundFormGroup.controls['masterFund'].value"
+                                placeholder="Master Fund" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field *ngIf="hasFeederFund()">
+                            <mat-label>Feeder Fund</mat-label>
+                            <input matInput [readonly]="true" [value]="fundFormGroup.controls['feederFund'].value"
+                                placeholder="Feeder Fund" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div style="display:flex;font-size:smaller;justify-content:center;color:#3700B3;margin-bottom:5px;">Investor Details</div>
+
+                <!-- InvestorName and FundId -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Investor Name</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['investorName'].value"
+                                placeholder="Investor Name" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>FundId</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['fundId'].value" placeholder="Fund Id" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- InvestorId and Investor Type -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>InvestorId</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['investorId'].value || ''"
+                                placeholder="Investor Id" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Investor Type</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['investorType'].value"
+                                placeholder="Investor Type" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Relationship and Region -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Relationship</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['relationship'].value"
+                                placeholder="Relationship" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Region</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['region'].value" placeholder="Region" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Consultant -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Consultant</mat-label>
+                            <input matInput [readonly]="true" [value]="existingInvestorFormGroup.controls['consultant'].value"
+                                placeholder="Consultant" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                       <!-- Intentionally left blank-->
+                    </div>
+                </div>
+
+                <div style="display:flex;font-size:smaller;justify-content:center;color:#3700B3;margin-bottom:5px;">Investment Details</div>
+
+                <!-- Management and Incentive Fee -->
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Management Fee</mat-label>
+                            <input matInput [readonly]="true" [value]="displayManagementFee()"
+                                placeholder="Management Fee" />
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field>
+                            <mat-label>Incentive Fee</mat-label>
+                            <input matInput [readonly]="true" [value]="displayIncentiveFee()"
+                                placeholder="Incentive Fee" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <button mat-raised-button matStepperPrevious *ngIf="mode !== 'Delete'">Back</button>                
+                <button mat-raised-button [disabled]="!areFormsValid()" color="primary" style="margin-left:10px;" 
+                    *ngIf="mode !== 'Delete'" (click)="submitForm()">Submit</button>
+                <button mat-raised-button color="accent" style="margin-left:10px;" *ngIf="mode !== 'Delete'"
+                    (click)="resetAll()" >Reset All</button>
+                <button mat-raised-button color="warn" *ngIf="mode === 'Delete'" 
+                    (click)="deleteInvestor()" style="margin-left:10px;">Delete</button>
+            </div>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</div>

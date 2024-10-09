@@ -1,0 +1,10 @@
+<div class="progress">
+
+    Uploading {{fileName}}
+
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress"></mat-progress-bar>
+    <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+
+    <br /><br />
+    <button mat-raised-button color="primary" style="justify-content: end;" (click)="cancelUpload()">Cancel</button>
+</div>

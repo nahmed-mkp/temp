@@ -1,0 +1,64 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { AgGridModule } from 'ag-grid-angular';
+import 'ag-grid-enterprise';
+import { HighchartsChartModule } from 'highcharts-angular';
+
+import * as fromSharedModules from './../../shared';
+
+import * as fromContainers from './containers';
+import * as fromComponents from './components';
+import * as fromServices from './services';
+// import * as fromGuards from './guards';
+import { effects, reducers } from './store';
+import { AgencyPortfolioRoutingModule } from './agency-portfolio-routing.module';
+
+const FEATURE_CONTAINERS = [
+    fromContainers.AgencyPortfolioLayoutComponent,
+    fromContainers.AgencyPortfolioToolbarLayoutComponent
+];
+
+const FEATURE_COMPONENTS = [
+    fromComponents.AgencyPortfolioViewerComponent,
+    fromComponents.AgencyPortfolioBarChartComponent,
+    fromComponents.AgencyPortfolioGridLayoutDialogComponent,
+    fromComponents.AgencyPortfolioRollsViewerComponent,
+];
+
+const FEATURE_PROVIDERS = [
+    fromServices.AgencyPortfolioService,
+    fromServices.AgencyUtilityService
+];
+
+// const FEATURE_GUARDS = [
+//     fromGuards.AgencyPortfolioGuard,
+// ];
+
+
+@NgModule({
+    declarations: [
+        ...FEATURE_CONTAINERS,
+        ...FEATURE_COMPONENTS,
+    ],
+    imports: [
+        CommonModule,
+        AgGridModule.withComponents([]),
+        HighchartsChartModule,
+        fromSharedModules.NativeModule,
+        fromSharedModules.MaterialModule,
+        fromSharedModules.VendorModule,
+        fromSharedModules.CustomModule,
+        AgencyPortfolioRoutingModule,
+        StoreModule.forFeature('agencyPortfolio', reducers),
+        EffectsModule.forFeature(effects)
+    ],
+    providers: [
+        ...FEATURE_PROVIDERS,
+        // ...FEATURE_GUARDS
+    ],
+    exports: []
+})
+export class AgencyPortfolioModule { }

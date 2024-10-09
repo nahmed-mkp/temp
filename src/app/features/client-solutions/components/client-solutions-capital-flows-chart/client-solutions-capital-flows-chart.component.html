@@ -1,0 +1,19 @@
+<mat-card style="height:98%;margin:0.3rem">    
+
+    <div style="height:100%;flex-wrap:wrap;flex-direction:column;" class="horizontal-flex-full-height">
+
+        <app-piechart
+            style="flex: 0 0 48%; padding: 0.2rem;"
+            [options]="optionsPlotTotalSubsReds"
+            [callbackFn]="callbackFnTotalSubsReds">
+        </app-piechart>    
+
+        <app-barchart 
+            style="flex: 0 0 48%; padding: 0.2rem;" 
+            [options]="optionsPlotTotalSubsRedsByFund"
+            [callbackFn]="callbackFnTotalSubsRedsByFund">
+        </app-barchart>
+        
+    </div>
+    
+</mat-card>

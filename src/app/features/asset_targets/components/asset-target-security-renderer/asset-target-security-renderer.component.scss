@@ -1,0 +1,11 @@
+.chart-icon{
+    transform: scale(0.75);
+    cursor: pointer;    
+}
+
+.cell-wrap {
+    display:flex;
+    flex-direction:row; 
+    align-items: centers;
+    justify-content: center;
+}

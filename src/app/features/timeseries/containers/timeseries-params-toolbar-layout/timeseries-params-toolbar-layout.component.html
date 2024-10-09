@@ -1,0 +1,45 @@
+<mat-toolbar>
+
+    <span class="toolbar-heading"> Timeseries Charts</span>
+
+    <span class="vertical-toolbar-divider-small"></span>
+
+    <button mat-button (click)="importPortfolio()" class="toolbar-btn" matTooltip="Open existing portfolio"> 
+        <mat-icon fontIcon="cloud_download"></mat-icon>
+        <span> Open </span>
+    </button>
+
+    <button mat-button (click)="createPortfolioAlt()" class="toolbar-btn" matTooltip="Create a new portfolio"> 
+        <mat-icon fontIcon="add_circle_outline"></mat-icon>
+        <span> Create New </span>
+    </button>
+
+    <button mat-button (click)="showDataSource($event)" class="toolbar-btn" matTooltip="View data source"> 
+        <span> View Data Source </span>
+    </button>
+    
+    <button mat-button (click)="onClearScratchpad($event)" class="toolbar-btn" matTooltip="Clear Scratchpad" *ngIf="isScratchpad()">
+        <span> Clear Scratchpad </span>
+    </button>
+    
+    <span class="toolbar-spacer"></span>
+    
+    <mat-form-field appearance="outline" class="date-form-field" >
+        <mat-label> Start Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker1" placeholder="Select a Date" [(ngModel)]="startDate" (ngModelChange)="onStartDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="date-form-field toolbar-field">
+        <mat-label> End Date </mat-label>
+        <div class="mat-form-field-content-wrap">
+            <input matInput [matDatepicker]="picker2" placeholder="Select a Date" [(ngModel)]="endDate" (ngModelChange)="onEndDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </div>
+    </mat-form-field>
+
+</mat-toolbar>

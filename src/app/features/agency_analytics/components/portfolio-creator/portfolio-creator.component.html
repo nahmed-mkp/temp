@@ -1,0 +1,60 @@
+<div class="form-container">
+    <form [formGroup]="portfolioForm">
+        <mat-form-field style="width:100%">
+            <mat-label>Portfolio Name</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Name" autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field style="width:100%">
+            <mat-label>Bonds</mat-label>
+            <textarea matInput formControlName="securities" cdkTextareaAutosize rows="10"
+                placeholder="Add CUSIPs, ISINs, SEDOLs or Bloomberg Names" #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30" (blur)="onValidateSecurities()"></textarea>            
+            <mat-icon matSuffix (click)="onShowSearch()" style="cursor:pointer">search</mat-icon>
+        </mat-form-field>
+    </form>
+    
+    <div style="height:500px;width:100%;margin-bottom:10px;">
+        <app-base-grid width="100%" height="100%" [customGridOption]="customGridOption" [extraOption]="extraOption"
+            [gridItems]="[]" [customGridCallBack]="customGridCallBack">
+        </app-base-grid>
+    </div>
+
+    <div class="actions" style="justify-content:flex-end;" *ngIf="!portfolioCreated && !portfolioCreationError; else loadPortfolio">
+
+        <button mat-raised-button color="primary"
+            [disabled]="!canValidateSecurities() || validatingSecurities || portfolioCreating" (click)="onValidateSecurities()">
+            {{ validatingSecurities ? 'Validating...' : 'Validate' }}</button>
+        
+        <span style="margin-left:5px;">
+            <button mat-raised-button color="primary"
+                [disabled]="!canCreatePortfolio() || validatingSecurities || portfolioCreating" (click)="onSubmitForm()">
+                {{ portfolioCreating ? 'Creating...' : 'Create'}}</button>
+        </span>
+        
+        <span style="margin-left:5px;">
+            <button mat-raised-button [disabled]="!portfolioForm.touched || validatingSecurities || portfolioCreating"
+                (click)="onResetForm()">Reset</button>
+        </span>
+        
+    </div>
+    
+    <ng-template #loadPortfolio>
+        <div class="actions" style="justify-content:flex-end;">
+          
+            <button mat-raised-button color="primary" (click)="onLoadPortfolio()" *ngIf="portfolioCreated">Load Portfolio</button>
+            <button mat-raised-button color="primary" (click)="onReloadPortfolio()" *ngIf="portfolioCreated">Reload Portfolio</button>
+            <span style="margin-left:5px;" *ngIf="portfolioCreated">
+                <button mat-raised-button (click)="onResetForm()">Reset</button>
+            </span><br *ngIf="portfolioCreated"/>
+            <span style="color:green;font-size:x-small" *ngIf="portfolioCreated">Portfolio successfully saved</span>
+
+            <button mat-raised-button color="primary" (click)="onSubmitForm()" *ngIf="portfolioCreationError">Retry</button>
+            <span style="margin-left:5px;" *ngIf="portfolioCreationError">
+                <button mat-raised-button (click)="onResetForm()">Reset</button>
+            </span><br />
+            <span style="color:red;font-size:x-small" *ngIf="portfolioCreationError">{{portfolioCreationError}}</span>
+
+        </div>        
+    </ng-template>
+</div>

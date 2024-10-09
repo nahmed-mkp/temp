@@ -1,0 +1,14 @@
+<button mat-icon-button class="mat-button-shrink" color="primary" id="sort-mode-button"
+  matTooltip="Sort Mode" [matMenuTriggerFor]="menu">
+  <mat-icon>sort</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onSortBy('long')">Long<mat-icon *ngIf="sortMode==='long'">check</mat-icon></button>
+  <button mat-menu-item (click)="onSortBy('short')">Short<mat-icon *ngIf="sortMode==='short'">check</mat-icon></button>
+</mat-menu>
+<highcharts-chart
+  style="height: 100%; display: block;"
+  [Highcharts]="Highcharts"
+  [options]="optionsPlot || {}"
+  [callbackFunction]="callbackFn">
+</highcharts-chart>

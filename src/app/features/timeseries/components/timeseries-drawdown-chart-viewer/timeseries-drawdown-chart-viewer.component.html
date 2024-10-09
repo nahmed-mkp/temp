@@ -1,0 +1,20 @@
+<div class="vertical-flex-full-height" >
+
+    <div *ngIf="!showChart()" class="warning-panel" style="width:100%;">
+        <div>
+            No data has been selected. Please create a timeseries portfolio or open an existing one. 
+        </div>
+    </div>
+
+    <highcharts-chart 
+        style="display: flex; flex: 1 0 0;" 
+        [Highcharts]="Highcharts"
+        [constructorType]="'chart'"
+        [options]="chartConfig || {}"
+        [callbackFunction]="callbackFn"
+    >
+    </highcharts-chart>
+
+</div>
+
+

@@ -1,0 +1,17 @@
+<div class="vertical-flex-full-height">
+  <app-pnl-adjustments-params-toolbar
+    [startDate]="startDate$ | async"
+    [endDate]="endDate$ | async"
+    (onStartDateChanged)="onStartDateChanged($event)"
+    (onEndDateChanged)="onEndDateChanged($event)"
+  >
+  </app-pnl-adjustments-params-toolbar>
+  <div class="vertical-flex-full-height">
+    <app-pnl-adjustments-grid-viewer
+      class="vertical-flex-full-height"
+      [adjustmentsData]="adjustmentsData$ | async"
+      [adjustmentsDataLoading]="adjustmentsDataLoading$ | async"
+    >
+    </app-pnl-adjustments-grid-viewer>
+  </div>
+</div>
